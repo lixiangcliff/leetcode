@@ -28,6 +28,7 @@ public class Question {
 			head2 = head2.next;
 		}
 	}
+	
 	//my way;
 /*    public static ListNode reverseKGroup(ListNode head, int k) {
     	if (k==1){

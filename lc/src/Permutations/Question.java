@@ -21,9 +21,9 @@ public class Question {
 			System.out.print(num[m]);
 		}*/
 		q.permute(num);
-		for (int m=0;m<num.length;m++){
+		/*for (int m=0;m<num.length;m++){
 			System.out.print(num[m]);
-		}
+		}*/
 
 	}
 	
@@ -103,7 +103,7 @@ public class Question {
 	// variable must stay the same after entering and before leaving current function body
 	//http://blog.csdn.net/linhuanmars/article/details/21569031
 	//recursive
-	/*public ArrayList<ArrayList<Integer>> permute(int[] num) {
+	public ArrayList<ArrayList<Integer>> permute(int[] num) {
 		ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
 		if (num == null || num.length == 0){
 			return result;
@@ -131,10 +131,10 @@ public class Question {
 				used[i] = false; // recover to its original statuts
 			}
 		}
-	}*/
+	}
 	
 	//iterative
-	public ArrayList<ArrayList<Integer>> permute(int[] num) {
+/*	public ArrayList<ArrayList<Integer>> permute(int[] num) {
 		ArrayList<ArrayList<Integer>> result= new ArrayList<ArrayList<Integer>>();
 		if (num== null || num.length == 0){
 			return result;
@@ -156,6 +156,6 @@ public class Question {
 			result = newResult;
 		}
 		return result;
-	}
+	}*/
 
 }

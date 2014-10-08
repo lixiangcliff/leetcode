@@ -12,7 +12,8 @@ public class Question {
 		System.out.println(longestPalindrome(s));
 	}
 	
-    public static String longestPalindrome(String s) {
+	//my way
+/*   public static String longestPalindrome(String s) {
         if(s == null){
         	return null;
         }
@@ -51,6 +52,29 @@ public class Question {
         	}
         }
         return result;
-    }
+    }*/
 
+	//http://blog.csdn.net/linhuanmars/article/details/20888595
+	//method 2 using DP
+	 public static String longestPalindrome(String s) {
+		 if( s== null || s.length() == 0){
+			 return "";
+		 }
+		 String result = "";
+		 int maxLen = 0;
+		 int len = s.length();
+		 boolean[][] isPalindromeEnd2End = new boolean[len][len];
+		 for(int i=len-1;i>=0;i--){
+			 for(int j=i;j<len;j++){
+				 if(s.charAt(i) == s.charAt(j) && (j-i<=2 || isPalindromeEnd2End[i+1][j-1])){
+					 isPalindromeEnd2End[i][j] = true;
+					 if(j-i+1 > maxLen){
+						 maxLen = j-i+1;
+						 result = s.substring(i,j+1);
+					 }
+				 }
+			 }
+		 }
+		 return result;
+	 }
 }

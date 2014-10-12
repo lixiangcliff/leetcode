@@ -42,7 +42,7 @@ public class Question {
 	
 	//divide and conquer
 	//http://www.geeksforgeeks.org/divide-and-conquer-maximum-sum-subarray/
-	public static int maxSubArray(int[] A) {
+/*	public static int maxSubArray(int[] A) {
 		return maxSubArraySum(A, 0, A.length-1);		
 	}
 	
@@ -55,10 +55,10 @@ public class Question {
 	   // Find middle point
 	   int m = (l + h)/2;
 	 
-	   /* Return maximum of following three possible cases
+	    Return maximum of following three possible cases
 	      a) Maximum subarray sum in left half
 	      b) Maximum subarray sum in right half
-	      c) Maximum subarray sum such that the subarray crosses the midpoint */
+	      c) Maximum subarray sum such that the subarray crosses the midpoint 
 	   return Math.max(Math.max(maxSubArraySum(arr, l, m),
 	              maxSubArraySum(arr, m+1, h)),
 	              maxCrossingSum(arr, l, m, h));
@@ -89,7 +89,19 @@ public class Question {
 	 
 	    // Return sum of elements on left and right of mid
 	    return left_sum + right_sum;
+	}*/
+	
+	//http://blog.csdn.net/linhuanmars/article/details/21314059
+	public static int maxSubArray(int[] A) {  
+	    if(A==null || A.length==0)  
+	        return 0;  
+	    int local = A[0];// local means, when include current A[i], what the max sum is; 
+	    int global = A[0]; // global means, until current A[i](may not include A[i]), what the max sum is; i.e. it is the result we need
+	    for (int i=1; i<A.length;i++){
+	    	local = Math.max(A[i], A[i] + local); // if "previous local" > 0, we will add it and make it "current local", otherwise we'd rather abandon it
+	    	global = Math.max(global, local);//if current local > global, make it "current global", otherwise keep "previous global"
+	    }
+	    return global;
 	}
-
 
 }

@@ -25,8 +25,6 @@ public class Question {
 		String[] strs = {s1,s2,s3,s4,s5,s6,s7,s8};
 
 		anagrams(strs);
-
-		
 	}
 	
 	//Question is asking to return all strings that has anagrams from the String[] 

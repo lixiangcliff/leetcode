@@ -8,6 +8,7 @@ public class Question {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		System.out.println(convert("PAYPALISHIRING",3));
+		
 	}
 	
 	//http://blog.csdn.net/linhuanmars/article/details/21145039

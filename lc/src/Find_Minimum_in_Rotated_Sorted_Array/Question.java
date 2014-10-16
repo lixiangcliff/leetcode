@@ -10,11 +10,7 @@ public class Question {
 		//int[] A = {4, 5, 6, 7, 0, 1, 2};
 		//int[] A = {0, 1, 2,4, 5, 6, 7, };
 		int[] A = {2,1 };
-		System.out.println(findMin(A));
-		
-		
-		
-		
+		System.out.println(findMin(A));		
 	}
 	
     public static int findMin(int[] num) {

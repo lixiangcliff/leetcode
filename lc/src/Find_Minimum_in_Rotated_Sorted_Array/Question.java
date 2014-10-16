@@ -13,6 +13,7 @@ public class Question {
 		System.out.println(findMin(A));
 		
 		
+		
 	}
 	
     public static int findMin(int[] num) {

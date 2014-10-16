@@ -14,6 +14,7 @@ public class Question {
 		
 		
 		
+		
 	}
 	
     public static int findMin(int[] num) {

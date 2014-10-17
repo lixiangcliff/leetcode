@@ -39,7 +39,7 @@ public class Question {
 		return min;
 	}
 */
-	public static int maxProfit(int[] prices) {
+/*	public static int maxProfit(int[] prices) {
 	    if (prices.length <=1){
 	        return 0;
 	    }
@@ -50,5 +50,21 @@ public class Question {
 	        minPrice = Math.min(minPrice, prices[i]);
 	    }
 	    return maxProfit;
+	}*/
+	
+	//http://blog.csdn.net/linhuanmars/article/details/23162793
+	public static int maxProfit(int[] prices) {  
+	    if(prices==null || prices.length==0)  
+	        return 0;  
+	    int local = 0;  
+	    int global = 0;  
+	    for(int i=0;i<prices.length-1;i++)  
+	    {   
+	        //local means: if sell at current i, what is the biggest profit it can make
+	    	local = Math.max(local+prices[i+1]-prices[i],0); 
+	    	//global means: until current i, what is the biggest profit ever made
+	        global = Math.max(local, global);  
+	    }  
+	    return global;  
 	}
 }

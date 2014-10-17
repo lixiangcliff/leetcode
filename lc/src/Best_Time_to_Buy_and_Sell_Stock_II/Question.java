@@ -62,6 +62,11 @@ public class Question {
 		}
 		return k;
 	}*/
+	
+	//explanation 
+	//buy first and sell second(n-1 transaction at the most); 
+	//as long as today is higher than yesterday, sell it!
+	//http://blog.csdn.net/linhuanmars/article/details/23164149
 	public static int maxProfit(int[] prices) {
 	    if (prices.length <=1){
 	        return 0;

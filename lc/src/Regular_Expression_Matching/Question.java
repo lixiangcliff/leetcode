@@ -12,7 +12,7 @@ public class Question {
 		System.out.println(isMatch("aaa","aa"));
 		System.out.println(isMatch("aa", "a*"));
 		System.out.println(isMatch("aa", ".*"));
-		System.out.println(isMatch("ab", ".*"));
+		System.out.println(isMatch("abcdefg", ".*"));
 		System.out.println(isMatch("aab", "c*a*b"));
 
 				
@@ -60,5 +60,7 @@ public class Question {
     private static boolean isEqual(String s, String p, int i, int j){
     	return s.charAt(i)==p.charAt(j) || p.charAt(j)=='.';
     }
+    
+    //for DP, will enhance later when have a better understanding
 
 }

@@ -10,7 +10,6 @@ public class Question {
 		String s1 = "aabcc";
 		String s2 = "dbbca";
 		String s3 = "aadbbcbcac";
-		
 /*		String s1 = "abc";
 		String s2 = "def";
 		String s3 = "abcdef";*/

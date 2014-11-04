@@ -7,7 +7,7 @@ public class Question {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int[] A = {1,3,5,7, 0 , 0 , 0 , 0};
+		int[] A = {1,3,5,7,0,0,0};
 		int[] B = {2,6,8};
 		//int[] B = {};
 		int aLen = 4;
@@ -17,54 +17,28 @@ public class Question {
 		}
 
 	}
- /*   public static void merge(int A[], int m, int B[], int n) {
-    	if (m==0 && n==0){
-    		return;
-    	}
-    	if (m==0){
-    		for (int i=0;i<n;i++){
-    			A[i] = B[i];
-    		}
-    		return;
-    	}
-    	if(n==0){
-    		return;
-    	}
-    	m--;
-    	n--;
-        for (int end = m+n+1;end >=0;end--){
-        	if(m>=0 && n>=0){
-        		if(A[m] <= B[n]){
-        			A[end] = B[n--];
-        		}else{
-        			A[end] = A[m--];
-        		}
-        	}else if(n>=0){
-        		A[end] = B[n--];
-        	}else{
-        		return;
-        	}
-        	
-        }
-        return;
-    }*/
-    
-    //simpler code
-    //http://answer.ninechapter.com/solutions/merge-sorted-array/
-    public static void merge(int A[], int m, int B[], int n) {
-    	//dont need extra code to take care of when m==0 or n==0 because code below will deal with it; 
-    	int end = m + n;
-		while(m>0 && n>0){
-			if(A[m-1] <= B[n-1]){ // now only compare, so do not decrement!
-				A[--end] = B[--n];
+	public static void merge(int A[], int m, int B[], int n){
+		//【注】“ A.length == 0 || B.length == 0” 的条件不能加在这里，
+		//因为，如果A为空，我们仍然要把B merge到A里，而不是什么都不做就return
+		if(A == null || B == null){
+			return;
+		}
+		//从后往前扫，以避免覆盖还未做比较的元素
+		int aEnd = m-1;
+		int bEnd = n-1;
+		int end = m+n-1;
+		//终止条件：A和B任何一个处理完了就跳出循环
+		while(aEnd >= 0 && bEnd >= 0){ //【注】 aEnd和bEnd都可以为0， 因为这里aEnd和bEnd都是index，而不是长度。
+			if (A[aEnd] > B[bEnd]){
+				A[end--] = A[aEnd--];
 			}else{
-				A[--end] = A[--m];
+				A[end--] = B[bEnd--];
 			}
 		}
-		while(n>0){//i.e B[] still has element to process
-			A[--end] = B[--n];
+		//如果B中还有剩余未比较的元素【注】注意此处边界条件，bEnd==0时还剩一个元素仍要处理！
+		while(bEnd >= 0){
+			A[end--] = B[bEnd--];
 		}
-		//we do need to consider while(m>0), because the rest of A[] will be ok to leave it there
-    	return;
-    }
+		//【注】 无需考虑(处理)A中是否还有未比较的元素，因为如果有，就把它放在那里就好了（因为A已经有序）
+	}
 }

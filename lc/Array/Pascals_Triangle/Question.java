@@ -11,21 +11,16 @@ public class Question {
 		// TODO Auto-generated method stub
 		
 	}
-	
-/*    public ArrayList<ArrayList<Integer>> generate(int numRows) {
-    	ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
-		for(int i =0;i<numRows;i++) {
-            int number = 1;
-            ArrayList<Integer> line = new ArrayList<Integer>();
-            for(int j=0;j<=i;j++) {
-                 line.add(number);
-                 number = number * (i - j) / (j + 1);                
-            }
-            result.add(line);
-        }
-		return result;
-    }*/
-	
+	/*
+	 * when numRows = 5,
+		[
+		     [1],
+		    [1,1],
+		   [1,2,1],
+		  [1,3,3,1],
+		 [1,4,6,4,1]
+		]
+	 */
 	//easier to understand
 	//http://www.cnblogs.com/huntfor/p/3859522.html
 	public ArrayList<ArrayList<Integer>> generate(int numRows){
@@ -37,20 +32,22 @@ public class Question {
 		firstRow.add(1);
 		result.add(firstRow);
 		ArrayList<Integer> preRow = firstRow;
-		for(int i=1; i< numRows ;i++){
+		for(int i=1; i< numRows ;i++){//还剩numRows-1行要处理
 			ArrayList<Integer> newRow = getRow(preRow);
 			result.add(newRow);
-			preRow = newRow;
+			preRow = newRow;//更新preRow
 		}
 		return result;
 	}
 	
+	//通过上一行，来得到当前行
 	private ArrayList<Integer> getRow(ArrayList<Integer> preRow){
-		int count = preRow.size();
+		int last = preRow.size()-1;
 		ArrayList<Integer> newRow = new ArrayList<Integer>();
 		newRow.add(1);
-		for(int i=1;i<count;i++){
-			newRow.add(preRow.get(i-1) + preRow.get(i));
+		//上一行相邻两个相加，产生的新元素加入到list里
+		for(int i=0;i<=last-1;i++){
+			newRow.add(preRow.get(i) + preRow.get(i+1));
 		}
 		newRow.add(1);
 		return newRow;

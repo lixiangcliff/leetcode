@@ -1,3 +1,4 @@
 useful links:
 1. leetcode category: 
 http://www.danielbit.com/blog/puzzle/leetcode/leetcode-summary
+http://www.douban.com/note/330562764/

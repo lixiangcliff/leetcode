@@ -24,7 +24,7 @@ public class Question {
     	for(int i=0;i<A.length;i++){
     		/*
     		 * 我们针对每一位做处理（swap），直到这位彻底处理完（或者已经不满足swap条件）了才再往右挪一位
-    		 * 处理每位时，只有满足以下三种情况才做swap，否则
+    		 * 处理每位时，只有满足以下三种情况才做swap，否则continue
     		 * 1.A[i] > 0(负数不处理)
     		 * 2.A[i] <= A.length(长度为A.length的array中，最后一位A[A.length-1]能符合题意的数值为A.length，所以一旦A[i]>A.length，则不合我们的中心思想)
     		 * 3.A[i] != A[A[i]-1]（swap的意图就是把A[i]的值找到他该去的地方（index ==A[i]-1），所以如果A[i]==A[A[i]-1]我们就不需要也不能交换，否则下面i-- 之后，i停留，会陷入死循环 ）

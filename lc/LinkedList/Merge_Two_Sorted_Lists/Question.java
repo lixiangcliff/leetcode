@@ -29,72 +29,28 @@ public class Question {
 			l3current = l3current.next;
 		}
 	}
-    public static ListNode mergeTwoLists(ListNode l1, ListNode l2) {    	
-    	if(l1 == null && l2 == null){
-    		return null;
-    	}else if(l1 == null){
-    		return l2;
-    	} else if(l2 == null){
-    		return l1;
-    	} 
-    	ListNode l1current =  l1;
-    	ListNode l2current =  l2;
-    	ListNode l3;
-    	if (l1current.val <= l2current.val){
-    		l3 = new ListNode(l1current.val);
-    		l1current = l1current.next;
-    	}else{
-    		l3 = new ListNode(l2current.val);
-    		l2current = l2current.next;
-    	}
-    	ListNode l3current = l3;
-    	while(l1current != null && l2current != null){
-    		if (l1current.val <= l2current.val){
-    			l3current.next = new ListNode(l1current.val);
-    			l3current = l3current.next;
-        		l1current = l1current.next;
-        	}else{
-        		l3current.next = new ListNode(l2current.val);
-        		l3current = l3current.next;
-        		l2current = l2current.next;
-        	}
-    	}    	
-    	if (l1current == null && l2current == null){
-    		return l3;
-    	}else if(l1current == null){
-    		l3current.next = l2current; 
-    		return l3;
-    	}else if(l2current == null){
-    		l3current.next = l1current; 
-    		return l3;
-    	}else{
-    		return null;
-    	}
-    }
     
-  //simpler code; dummy ListNode reduce the redundancy!  
+	//simpler code; dummy ListNode reduce the redundancy!  
     //http://answer.ninechapter.com/solutions/merge-two-sorted-lists/
-    public static ListNode mergeTwoLists2(ListNode l1, ListNode l2) {
+    public static ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         ListNode dummy = new ListNode(0);
-        ListNode lastNode = dummy;
-        
+        ListNode pre = dummy;
+      //只有l1 l2同时不等于null时，循环才能继续，这是因为循环体里有l1=l1.next以及l2=l2.next操作
         while (l1 != null && l2 != null) {
             if (l1.val < l2.val) {
-                lastNode.next = l1;
+                pre.next = l1;
                 l1 = l1.next;
             } else {
-                lastNode.next = l2;
+                pre.next = l2;
                 l2 = l2.next;
             }
-            lastNode = lastNode.next;
+            pre = pre.next;
         }
-        
-        if (l1 != null) {
-            lastNode.next = l1;
-        } else {
-            lastNode.next = l2;
+        if (l1 != null) {//l1的list上还有剩余node
+            pre.next = l1;
+        } else {		//l2的list上还有剩余node
+            pre.next = l2;
         }
-        
         return dummy.next;
     }
 

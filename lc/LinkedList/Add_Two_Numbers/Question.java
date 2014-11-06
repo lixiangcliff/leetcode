@@ -7,7 +7,7 @@ public class Question {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-/*		ListNode l1 = new ListNode(2);
+		ListNode l1 = new ListNode(2);
 		ListNode l1b = new ListNode(4);
 		ListNode l1c = new ListNode(3);
 		l1.next = l1b;
@@ -17,13 +17,13 @@ public class Question {
 		ListNode l2b = new ListNode(6);
 		ListNode l2c = new ListNode(4);
 		l2.next = l2b;
-		l2b.next = l2c;*/
+		l2b.next = l2c;
 		
-		ListNode l1 = new ListNode(0);
+		//ListNode l1 = new ListNode(0);
 		//ListNode l1b = new ListNode(8);
 		//l1.next = l1b;
 		
-		ListNode l2 = new ListNode(0);
+		//ListNode l2 = new ListNode(0);
 		
 		ListNode result = addTwoNumbers(l1, l2);
 		while(result != null){
@@ -36,21 +36,28 @@ public class Question {
 	}
 	
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-    	if (l1 == null && l2 == null){
+    	/*
+    	 * 本题链表表示数字的规则如下：
+    	 * 表头为最低位，表尾为最高位
+    	 */
+        if (l1 == null && l2 == null){
     		return null;
     	}
     	int carry = 0;
-    	ListNode result = new ListNode(0);
-    	ListNode runner = result;
+    	//【注】技巧：设置一个dummy的node，令dummy.next为结果的head，返回的时候只需返回dummy.next即可
+    	//不这样做直接用pre来表示head，的坏处是：要先给pre设好初值(即整个循环体部分)，然后再进入循环体（相当于循环体被写了两遍）
+    	ListNode dummy = new ListNode(0);
+    	ListNode pre = dummy;
         while(l1 != null || l2 != null){
         	int l1Value = l1 == null ? 0 : l1.val;
         	int l2Value = l2 == null ? 0 : l2.val;
         	int value = l1Value + l2Value + carry;
         	int digit = value % 10;
         	carry = value / 10;
-        	ListNode current = new ListNode(digit);
-        	runner.next = current;
-        	runner = current;
+        	ListNode cur = new ListNode(digit);
+        	pre.next = cur;
+        	pre = cur;
+        	//【注】need check null condition
         	if(l1 != null){
         		l1 = l1.next;
         	}
@@ -58,11 +65,13 @@ public class Question {
         		l2 = l2.next;
         	}
         }
+        //如果到此时carry仍为1，说明加和比两个数中位数多的那个还要多一位。则再链表结尾加一个val==1的noe（即数字开头加1）
         if (carry == 1){
-        	runner.next = new ListNode(1);
+        	pre.next = new ListNode(1);
         }
-        return result.next;
+        return dummy.next;
     }
+	
 
 }
 

@@ -25,16 +25,16 @@ public class Question {
 		}
 		ListNode dummy = new ListNode(0);
 		dummy.next = head;
-		ListNode preNode = dummy;
+		ListNode pre = dummy;
 		int i=1;//i从始至终作为标记走到哪里，对于确定m和n的位置很方便
-		while(preNode.next != null && i<m){
-			preNode = preNode.next;
+		while(pre.next != null && i<m){
+			pre = pre.next;
 			i++;
 		}
 		if(i<m){ //表长度小于m
 			return head;
 		}
-		ListNode mNode = preNode.next;
+		ListNode mNode = pre.next;
 		ListNode cur = mNode.next;
 		/*
 		 * 思想是：依次从m后面直到n，拿来node塞在preNode的后边（preNode.next = cur）
@@ -42,8 +42,8 @@ public class Question {
 		 */
 		while(cur != null && i<n){
 			ListNode next = cur.next;
-			cur.next = preNode.next;
-			preNode.next = cur;
+			cur.next = pre.next;
+			pre.next = cur;
 			mNode.next = next;
 			cur = next;
 			i++;

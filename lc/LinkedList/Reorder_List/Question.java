@@ -50,17 +50,16 @@ public class Question {
     		runner = runner.next.next;
     		walker = walker.next;
     	}
-    	ListNode head2 = walker.next;
-    	walker.next = null;
-    	ListNode cur1 = head;
-    	ListNode cur2 = reverse(head2);
-    	while(cur1!=null && cur2 != null){
-    		ListNode next1= cur1.next;
-    		ListNode next2= cur2.next;
-    		cur1.next = cur2;
-    		cur2.next = next1;
-    		cur1 = next1;
-    		cur2 = next2;
+    	ListNode head2 = walker.next;//head2为后半段的表头
+    	walker.next = null;//把前半段和后半段分开
+    	head2 = reverse(head2);
+    	while(head!=null && head2 != null){
+    		ListNode next1= head.next;
+    		ListNode next2= head2.next;
+    		head.next = head2;
+    		head2.next = next1;
+    		head = next1;
+    		head2 = next2;
     	}
     }
     

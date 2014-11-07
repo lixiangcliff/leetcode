@@ -1,7 +1,5 @@
 package Remove_Duplicates_from_Sorted_List_II;
 
-
-
 public class Question {
 
 	/**
@@ -45,21 +43,21 @@ public class Question {
         }
         ListNode dummy = new ListNode(0);
         dummy.next = head;
-        ListNode pre = dummy;//pre will track the node that will be kept; i.e pre.next is the starting node to be removed
-        ListNode cur = head;
-        int count = 1;
+        ListNode pre = dummy;
+        ListNode cur = head;//
         while(cur!=null){
-        	if (cur.next != null && cur.next.val == pre.next.val){
-        		count++;
-        	}else{
-        		if(count>1){
-        			//romove node from "pre.next ~ cur"
-        			pre.next = cur.next;
-        		}else{
-        			//means keep "cur" in result
-        			pre = cur;
-        		}
-        		count=1;
+        	/*
+        	 * 可以理解为：如果当前node(pre.next)值和下一个node(cur.next)值相等
+        	 * 跳出循环的条件之一是pre.next.val!=cur.next.val
+        	 * 即cur.next.val为一个不重复的值(不同于pre.next.val), 换言之cur.val仍然是重复的值(仍为pre.next.val)
+        	 */
+        	while(cur.next != null && pre.next.val == cur.next.val){
+        		cur = cur.next;
+        	}
+        	if(pre.next == cur){//即从pre.next到当前cur没有出现重复元素，则平pre前进一个
+        		pre = pre.next;
+        	}else{//有重复元素出现，删除从pre.next到当前cur(包括cur，因为上面分析了，cur.val也是重复的值)的所有元素
+        		pre.next = cur.next;
         	}
         	cur = cur.next;
         }

@@ -15,21 +15,24 @@ public class Question {
         if (head == null || head.next==null){
         	return null;
         }
-        ListNode slow = head;
-        ListNode fast = head;
+        ListNode walker = head;
+        ListNode runner = head;
+        //找到w和r的相遇点（如果不相遇，说明没有cycle，则返回null）
         while(true){
-        	if (slow == fast){
-        		break;
-        	}
-        	if (fast.next == null || fast.next.next == null){
+            //【注】要先检查runner.next和runner.next.next是否为null。然后才能move
+            if(runner.next == null || runner.next.next == null){
         		return null;
         	}
-        	slow = slow.next;
-        	fast = fast.next.next;
+        	walker = walker.next;
+        	runner = runner.next.next;
+        	if (walker == runner){
+        		break;
+        	}
         }
-        
-        while(slow != head){
-        	slow = slow.next;
+        //让head从头，walker从刚才w&r相遇点，同时出发。当head和walker再相遇时候的node，即为cycle的起点
+        //具体解释看图
+        while(walker != head){
+        	walker = walker.next;
         	head = head.next;
         }
         return head;

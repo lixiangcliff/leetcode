@@ -21,8 +21,8 @@ public class Question {
 		l3.next = l4;
 		l4.next = l5;
 		l5.next = l6;
-		l6.next = l7;
-		l7.next = l8;
+		//l6.next = l7;
+		//l7.next = l8;
 		ListNode head = l1;
 		
 		while (head != null){
@@ -50,15 +50,22 @@ public class Question {
     		runner = runner.next.next;
     		walker = walker.next;
     	}
+    	/*【注】
+    	 * e.g原始链表为1->2->3->4->5->6
+    	 * 上面操作之后
+    	 * head1:1->2->3->4
+    	 * head2:5->6
+    	 */
+    	ListNode head1 = head;//不要真正地移动head，因为如果移动head，函数执行完之后就找不到表头了
     	ListNode head2 = walker.next;//head2为后半段的表头
     	walker.next = null;//把前半段和后半段分开
     	head2 = reverse(head2);
-    	while(head!=null && head2 != null){
-    		ListNode next1= head.next;
+    	while(head1!=null && head2 != null){
+    		ListNode next1= head1.next;
     		ListNode next2= head2.next;
-    		head.next = head2;
+    		head1.next = head2;
     		head2.next = next1;
-    		head = next1;
+    		head1 = next1;
     		head2 = next2;
     	}
     }

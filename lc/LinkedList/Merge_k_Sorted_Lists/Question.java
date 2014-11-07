@@ -22,7 +22,10 @@ public class Question {
     
     private ListNode helper(ArrayList<ListNode> lists, int left, int right){
     	if (left < right){
-    		int mid = (left+right)/2;
+    		//关于边界，向上向下取整问题。需要解答。
+    		/*int mid = (left+right+1)/2;//向上取整
+    		return mergeTwoLists(helper(lists, left, mid-1) , helper(lists, mid, right));*/
+    		int mid = (left+right)/2;//向下取整
     		return mergeTwoLists(helper(lists, left, mid) , helper(lists, mid+1, right));
     	}
     	return lists.get(left);// or return lists.get(right);

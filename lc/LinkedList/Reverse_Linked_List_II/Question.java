@@ -37,7 +37,7 @@ public class Question {
 		ListNode mNode = preNode.next;
 		ListNode cur = mNode.next;
 		/*
-		 * 思想是：依次从m面直到n，拿来node塞在preNode的后边（preNode.next = cur）
+		 * 思想是：依次从m后面直到n，拿来node塞在preNode的后边（preNode.next = cur）
 		 * 一共拿来n-m次（如果链表长度足够n的话），所以边界条件是i<n
 		 */
 		while(cur != null && i<n){

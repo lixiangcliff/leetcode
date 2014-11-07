@@ -16,7 +16,6 @@ public class Question {
 		l1b.next = l1c;
 		l1c.next = l1d;
 		l1d.next = l1e;
-		
 	}
 	
 	//http://blog.csdn.net/linhuanmars/article/details/24613781
@@ -27,23 +26,25 @@ public class Question {
 		ListNode dummy = new ListNode(0);
 		dummy.next = head;
 		ListNode preNode = dummy;
-		int i=1;
+		int i=1;//i从始至终作为标记走到哪里，对于确定m和n的位置很方便
 		while(preNode.next != null && i<m){
 			preNode = preNode.next;
 			i++;
 		}
-		if(i<m){ //means (i<m) is true; means (preNode.next != null) is false; means preNode.next==null; means list ends before reach m
+		if(i<m){ //表长度小于m
 			return head;
 		}
-		// if the code can reach here, then now we can confirm preNode.next != null, so mNode.next will not casue problem!
 		ListNode mNode = preNode.next;
-		ListNode cur = mNode.next;// 
+		ListNode cur = mNode.next;
+		/*
+		 * 思想是：依次从m面直到n，拿来node塞在preNode的后边（preNode.next = cur）
+		 * 一共拿来n-m次（如果链表长度足够n的话），所以边界条件是i<n
+		 */
 		while(cur != null && i<n){
 			ListNode next = cur.next;
 			cur.next = preNode.next;
 			preNode.next = cur;
 			mNode.next = next;
-			//cur = cur.next; // Wrong!! currently cur.next is mNode!!!
 			cur = next;
 			i++;
 		}

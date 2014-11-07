@@ -29,47 +29,6 @@ public class Question {
 		}
 	}
 	
-	//my way;
-/*    public static ListNode reverseKGroup(ListNode head, int k) {
-    	if (k==1){
-    		return head;
-    	}
-    	ListNode dummy = new ListNode(0);
-    	dummy.next = head;
-    	ListNode cur = head;
-    	ListNode tail = dummy;
-    	while(cur != null){
-    		ListNode groupDummy = new ListNode(0);
-    		ListNode groupTail = cur;
-    		int i = 0;
-    		ListNode runner = cur;
-    		while(runner != null && i<k){
-    			runner = runner.next; // cannnot be missed
-    			i++;
-    		}
-    		boolean enoughK = i == k? true : false;
-    		i=0;
-    		if (enoughK){
-				while(cur != null && i<k){
-					ListNode next = cur.next; // cur.next must be kept before doing manipulation on cur, otherwise cur.next will change 
-					cur.next = groupDummy.next;
-					groupDummy.next = cur;
-					if (i==0){
-						groupTail = cur;
-					}
-					cur = next;
-					i++;
-				}
-					tail.next = groupDummy.next;
-					tail = groupTail;
-    		}else{
-    			tail.next = cur;
-    			break;
-    		}
-    	}
-    	return dummy.next;
-    }*/
-    
     //http://blog.csdn.net/linhuanmars/article/details/19957455
     //need to understand "reverse" function well
 	public static ListNode reverseKGroup(ListNode head, int k) {  

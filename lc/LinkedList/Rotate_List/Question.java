@@ -35,46 +35,12 @@ public class Question {
 			head = head.next;
 		}
 	}
-/*    public static ListNode rotateRight(ListNode head, int n) {
-    	if (head == null){
-    		return null;
-    	}
-    	ListNode walker = new ListNode(0);
-    	walker.next = head;
-    	ListNode pre = walker;
-    	ListNode runner = head;
-    	int count = 0;
-    	for(int i=0;i<n;i++){
-    		if(runner.next != null){
-    			pre = pre.next;
-    			runner = runner.next;
-    			count++;
-    		}else{
-    			break;
-    		}
-    	}
-    	if(count == n){
-	    	while(runner.next != null){
-	    		runner = runner.next;
-	    		walker = walker.next;
-	    	}
-	    	runner.next = head;
-	    	head = walker.next.next;
-	    	walker.next.next = null;
-    	}else{
-    		runner.next =  head;
-    		head = runner;
-    		pre.next = null;
-    		
-    	}
-    	return head;
-    	
-    }*/
 	
 	public static ListNode rotateRight(ListNode head, int n){
 		if (head == null){
     		return null;
     	}
+		//先计算链表长度
 		ListNode walker = head;
 		ListNode runner = head;
 		int count = 0;
@@ -83,60 +49,29 @@ public class Question {
 			count++;
 		}
 		//n is possibly bigger than linklist's size
+		//如果n大于链表长度，则取余
 		n %= count;
-		runner = head;
+		runner = head;//重新把runner放回表头
+		//画图理解为什么走n次，而不是n-1次
+		//这样做是为了方便walker用walker.next处理表尾
     	for(int i=0;i<n;i++){
     		if(runner.next != null){
     			runner = runner.next;
-    			count++;
     		}else{
     			break;
     		}
     	}
+    	//这样保证跳出循环时，runner停在最后一位，walker的下一位 就是要放在新链表最前面一位的
     	while(runner.next != null){
     		runner = runner.next;
     		walker = walker.next;
     	}
-    	runner.next = head;
-    	head = walker.next;
-    	walker.next= null;
+    	runner.next = head; //表尾接表头
+    	head = walker.next; //更新head
+    	walker.next= null; //使新表尾指向null
     	return head;
 	}
 	
-	/*public static ListNode rotateRight(ListNode head, int n) {
-	    if(head == null)
-	    {
-	        return null;
-	    }
-	    ListNode walker = head;
-	    ListNode runner = head;
-	    int idx = 0;
-	    while(runner!=null && idx<n)
-	    {
-	        runner = runner.next;
-	        idx++;
-	    }
-	    if(runner == null)
-	    {
-	        n %= idx;
-	        runner = head;
-	        idx=0;
-	        while(runner!=null && idx<n)
-	        {
-	            runner = runner.next;
-	            idx++;
-	        }
-	    }
-	    while(runner.next!=null)
-	    {
-	        walker = walker.next;
-	        runner = runner.next;
-	    }
-	    runner.next = head;
-	    ListNode newHead = walker.next;
-	    walker.next = null;
-	    return newHead;
-	}*/
 }
 
 class ListNode {

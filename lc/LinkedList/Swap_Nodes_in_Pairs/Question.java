@@ -37,6 +37,11 @@ public class Question {
         ListNode cur = head;
         while(cur!=null &&cur.next!=null){
         	ListNode next = cur.next;
+        	/*
+        	 * pre.next= next;这行很重要
+        	 * 在第一次循环的时候相当于dummy.next=next（即dummy.next指向第二个元素）
+        	 * 在此之后pre被更新，以后dummy再也不会跟随pre的变化而变化
+        	 */
         	pre.next= next;
         	cur.next = next.next;
         	next.next = cur;

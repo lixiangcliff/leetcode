@@ -21,8 +21,8 @@ public class Question {
 		l3.next = l4;
 		l4.next = l5;
 		l5.next = l6;
-		//l6.next = l7;
-		//l7.next = l8;
+		l6.next = l7;
+		l7.next = l8;
 		ListNode head = l1;
 		
 		while (head != null){

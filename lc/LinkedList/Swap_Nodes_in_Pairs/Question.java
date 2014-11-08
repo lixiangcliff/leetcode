@@ -1,5 +1,6 @@
 package Swap_Nodes_in_Pairs;
 
+
 public class Question {
 
 	/**
@@ -7,25 +8,42 @@ public class Question {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		ListNode l1 = new ListNode(1);
+		ListNode l2 = new ListNode(2);
+		ListNode l3 = new ListNode(3);
+		ListNode l4 = new ListNode(4);
+		ListNode l5 = new ListNode(5);
+		l1.next = l2;
+		l2.next = l3;
+		l3.next = l4;
+		l4.next = l5;
+		ListNode head = l1;
+		while(head != null){
+			System.out.print(head.val + ",");
+			head = head.next;
+		}
+		System.out.println("");
+		ListNode head2 = swapPairs(l1);
+		while(head2 != null){
+			System.out.print(head2.val + ",");
+			head2 = head2.next;
+		}
 	}
 	
 	public static ListNode swapPairs(ListNode head) {
-        if(head == null || head.next == null){ // 0 or 1 node
-        	return head;
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode pre = dummy;
+        ListNode cur = head;
+        while(cur!=null &&cur.next!=null){
+        	ListNode next = cur.next;
+        	pre.next= next;
+        	cur.next = next.next;
+        	next.next = cur;
+        	pre = cur;
+        	cur = cur.next;
         }
-        ListNode left = head;
-        ListNode right = head.next;
-        while(true){
-        	int temp = left.val;
-        	left.val = right.val;
-        	right.val = temp;
-        	if(right.next == null ||right.next.next ==null){
-        		return head;
-        	}
-        	left = right.next;
-        	right = left.next;
-        }
+        return dummy.next;
     }
 	
 

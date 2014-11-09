@@ -25,7 +25,7 @@ public class Question {
     		char curChar = s.charAt(i);
     		if(left.indexOf(curChar) > -1){//如果是左括号就入栈
     			stack.push(curChar);
-    		}else if(right.indexOf(curChar) > -1){//如果是右括号就来试着匹配栈顶的左括号
+    		}else if(right.indexOf(curChar) > -1){//如果是右括号，就来试着匹配栈顶的左括号
     			if (stack.isEmpty()){//如果栈已经为空，则异常
     				return false;
     			}else{
@@ -34,7 +34,7 @@ public class Question {
     					return false;
     				}
     			}
-    		}else{//当前char既不是左括号 也不是右括号， 则false
+    		}else{//当前char既不是左括号， 也不是右括号， 则false
     			return false;
     		}
     	}

@@ -59,7 +59,7 @@ public class Question {
         }
         if(stack.isEmpty()){
         	return result;
-        }else{
+        }else{//如果栈内还剩元素，则异常
         	return Integer.MAX_VALUE;
         }
     }

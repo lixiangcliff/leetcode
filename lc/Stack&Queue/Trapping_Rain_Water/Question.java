@@ -12,75 +12,42 @@ public class Question {
 
 	}
 	
-	//http://obcerver.com/post/view/p/21
- /*   public static int trap(int[] A) {
-    	if(A == null || A.length == 0){
-    		return 0;
-    	}
-    	int n = A.length;
-    	int[] highestLeft = new int[n];
-    	int[] highestRight = new int[n];
-    	
-    	int max = 0;
-    	highestLeft[0] = 0;
-    	for(int i=1;i<n;i++){
-    		if(A[i-1] > max){
-    			max = A[i-1];
-    		}
-    		highestLeft[i] = max;
-    	}
-    	
-    	max = 0;
-    	highestRight[n-1] = 0;
-    	for(int i=n-2;i>=0;i--){
-    		if(A[i+1] > max){
-    			max = A[i+1];
-    		}
-    		highestRight[i] = max;
-    	}
-    	int water = 0;
-    	for(int i = 0;i<n;i++){
-    		int current = Math.min(highestLeft[i], highestRight[i]) - A[i];
-    		if(current > 0){
-    			water += current;
-    		}
-    	}
-    	
-        return water;
-    }*/
-	
+
 	//enhancement use 2*O(n) instead of 3*O(n)
 	//http://blog.unieagle.net/2012/10/31/leetcode%E9%A2%98%E7%9B%AE%EF%BC%9Atrapping-rain-water/
+	//O(n)的 需要进一步研究：http://blog.csdn.net/linhuanmars/article/details/20888505
     public static int trap(int[] A) {
     	if(A == null || A.length == 0){
     		return 0;
     	}
     	int n = A.length;
-    	int[] highestLeft = new int[n];
-    	int[] highestRight = new int[n];
+    	//从左往右以及从右往左扫描的这两次，总共只需要一个数组即可
+    	int[] highest = new int[n];
+    	/*
+    	 * max，当从左往右时，表示的是当扫描到i时，i左边遇到过的最大值(不包括此时的i)；从右往左类似。
+    	 * 而highest[i]里面存的就是在第i位对应的max
+    	 */
     	
+    	//从左往右
     	int max = 0;
-    	highestLeft[0] = 0;
-    	for(int i=1;i<n;i++){
-    		if(A[i-1] > max){
-    			max = A[i-1];
-    		}
-    		highestLeft[i] = max;
+    	for(int i=0;i<n;i++){
+    		highest[i] = max;//把之前累计的max放入highest[i]
+    		max = Math.max(A[i], max);//如果当前值比max大，则更新max，以备下一个i使用
     	}
     	
-    	max = A[n-1];
-    	highestRight[n-1] = 0;
-
+    	//从右往左扫，与上面类似
+    	max = 0;
     	int water = 0;
-    	for(int i=n-2;i>=0;i--){
-    		highestRight[i] = max;
-    		int current = Math.min(highestLeft[i], highestRight[i]) - A[i];
-    		if(current > 0){
-    			water += current;
+    	//从倒数第二个开始
+    	for(int i=n-1;i>=0;i--){
+    		int leftHigh = highest[i];//先把从左往右扫时候计算出的左边最大值存起来，以备后面计算面积用
+    		highest[i] = max;
+    		//即 只有左边最高和右边最高两者之间较小的那个，让然别当前高度大，对当前的bar才有面积累加
+    		int lower = Math.min(leftHigh, highest[i]);
+    		if( lower > A[i]){
+    			water += lower - A[i];
     		}
-    		if(A[i] > max){
-    			max = A[i];
-    		}   		
+    		max = Math.max(A[i], max);  		
     	}
     	
         return water;

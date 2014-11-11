@@ -1,6 +1,6 @@
 package Two_Sum;
 
-import java.util.Arrays;
+import java.util.HashMap;
 
 public class Question {
 
@@ -14,43 +14,27 @@ public class Question {
 		System.out.println(result[0]);
 		System.out.println(result[1]);
 	}
+	
+	//http://blog.csdn.net/linhuanmars/article/details/19711387
     public static int[] twoSum(int[] numbers, int target) {
     	if(numbers == null || numbers.length < 2){
     		return null;
     	}
-    	int[] sortedNumbers = numbers.clone();
-    	Arrays.sort(sortedNumbers);
-        int[] result = new int[2];
-        for(int i=0; i<sortedNumbers.length-1;i++){
-        	int rest = target - sortedNumbers[i];
-        	int left = i+1;
-        	int right = sortedNumbers.length -1;
-        	while(left<=right){
-        		int mid = (left+right)/2;
-        		if(sortedNumbers[mid] == rest){
-        			boolean firstDone = false;
-        			for(int j=0;j<numbers.length;j++){
-        				if (!firstDone && (numbers[j] == sortedNumbers[i] || numbers[j] == sortedNumbers[mid])){
-        					result[0] = j+1;
-        					firstDone = true;
-        					continue;
-        				}
-        				if (firstDone && (numbers[j] == sortedNumbers[i] || numbers[j] == sortedNumbers[mid])){
-        					result[1] = j+1;
-        					return result;
-        				}
-        				
-        			}
-        		}
-        		if(sortedNumbers[mid] < rest){
-        			left = mid+1;
-        		}
-        		if(sortedNumbers[mid] > rest){
-        			right = mid-1;
-        		}
-        	}
-        }
-        return result;
+    	int[] result = new int[2];
+    	//结构为：HashMap<value, index>
+    	//【注】之所以不设计成<index, value>，是因为之后map只能通过key来找val，反之不行
+    	HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+    	for(int i = 0; i < numbers.length; i++){
+    		//find them!
+    		if(map.containsKey(target - numbers[i])){
+    			//之前已经放入map的value为target - numbers[i]
+    			result[0] = map.get(target - numbers[i])+1; //通过value作为map中的key，找map中的value也就是index
+    			result[1] = i+1;
+    			return result;
+    		}
+    		map.put(numbers[i], i);
+    	}
+        return null;
     }
 
 }

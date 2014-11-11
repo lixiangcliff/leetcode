@@ -10,28 +10,31 @@ public class Question {
 
 	}
 	
-    public ListNode sortList(ListNode head) {
+	//http://blog.csdn.net/linhuanmars/article/details/21133949
+	public ListNode sortList(ListNode head){
+		return mergeSort(head);
+	}
+	
+	//之所以要单独写一个mergeSort的方法而不是把这个写在sortList里的目的，是为了显性地说明这个sort用的是merge sort
+    private ListNode mergeSort(ListNode head) {
         if(head == null || head.next == null){
         	return head;
         }
+        //找list中点
         ListNode walker = head;
         ListNode runner = head;
-        
         while(runner.next != null && runner.next.next != null){
         	walker = walker.next;
         	runner = runner.next.next;
         }
+        //将list一分为二
         ListNode head2 = walker.next;
-        walker.next = null; //split "left part" from the whole list
-        /*ListNode left = sortList(head);
-        ListNode right = sortList(head2);
-        return mergeTwoLists(left, right);*/
-        //simpler code:
+        walker.next = null; 
+        //对两半儿list递归sort
         ListNode head1 = head;
-        head1 = sortList(head1);
-        head2 = sortList(head2);
+        head1 = mergeSort(head1);
+        head2 = mergeSort(head2);
         return mergeTwoLists(head1, head2);
-        
     }
     
     //https://oj.leetcode.com/problems/merge-two-sorted-lists/

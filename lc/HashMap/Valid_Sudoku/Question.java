@@ -1,8 +1,5 @@
 package Valid_Sudoku;
 
-import java.util.Arrays;
-import java.util.HashMap;
-
 public class Question {
 
 	/**
@@ -30,65 +27,62 @@ public class Question {
 
 	}
 	
+	//http://blog.csdn.net/linhuanmars/article/details/20748171
+	//【注】boolean[] visited = new boolean[9]的位置不同，原则是没处理9个元素就出reset(new)一次visited
     public static boolean isValidSudoku(char[][] board) {
     	if(board == null || board.length != 9 || board[0].length != 9){
     		return false;
     	}
     	
-    	boolean[] visited = new boolean[board.length]; 
+    	
     	//rows
-    	for(int i=0; i<board.length; i++){
-    		Arrays.fill(visited, false);
-    		if (!isValidArray(visited, board[i])){
-    			return false;
+    	for(int i = 0; i < 9; i++){
+    		boolean[] visited = new boolean[9]; 
+    		for (int j = 0; j < 9; j++ ){
+    			if (board[i][j] != '.'){
+		    		if (visited[(int)(board[i][j]-'1')]){//已经曾经被访问过了
+		    			return false;
+		    		}
+		    		visited[(int)(board[i][j]-'1')] = true;
+    			}//如果board[i][j] == '.' 什么也不需要做。因为'.'有几个，位置在哪里都无所谓
     		}
     	}
     	
     	//columns
-    	for(int i=0; i<board[0].length; i++){
-    		char[] line = new char[board.length];
-    		for (int j=0;j<board.length;j++){
-    			line[j] = board[j][i];
-    		}
-    		Arrays.fill(visited, false);
-    		if (!isValidArray(visited, line)){
-    			return false;
+    	for(int j = 0; j < 9; j++){
+    		boolean[] visited = new boolean[9]; 
+    		for (int i = 0; i < 9; i++ ){
+    			if (board[i][j] != '.'){
+		    		if (visited[(int)(board[i][j]-'1')]){
+		    			return false;
+		    		}
+		    		visited[(int)(board[i][j]-'1')] = true;
+    			}
     		}
     	}
     	
     	//for each 3*3 square
-    	for (int i=0;i < board.length;i=i+3){
-    		for (int j=0;j < board[0].length;j=j+3){
-    			char[] line = new char[board.length];
-    			int index = 0;
-    			for (int k=i;k<i+3;k++){
-    				for (int m=j;m<j+3;m++){
-    					line[index++] = board[k][m]; 
-    				}
-    			}
-    			
-    			Arrays.fill(visited, false);
-    			if (!isValidArray(visited, line)){
-        			return false;
-        		}
-    		}
+    	//看图！block示意图如下
+    	//0  1  2
+    	//3  4  5
+    	//6  7  8
+    	for (int block = 0; block <9 ;block++){//block 从0到9 对应了九个3*3的小block
+    		boolean[] visited = new boolean[9]; 
+	    	for (int i=block/3*3;i < block/3*3+3 ;i++){//block取0,1,2时，i要取0,1,2
+	    		//【注】j和i的取值方式不同！
+	    		for (int j=block%3*3; j < block%3*3+3 ;j++){//block取0,3,6时，j要取0,1,2
+	    			if (board[i][j] != '.'){
+			    		if (visited[(int)(board[i][j]-'1')]){
+			    			return false;
+			    		}
+			    		visited[(int)(board[i][j]-'1')] = true;
+	    			}
+	    		}
+	    	}
     	}
-    	
     	return true;
     }
     
-    public static boolean isValidArray(boolean[] visited , char[] line){
-    	for(int i=0;i<line.length;i++){
-    		if (line[i] == '.'){
-    			continue;
-    		}
-    		int dig = Character.getNumericValue(line[i]);
-    		if(visited[dig-1]){
-    			return false;
-    		}
-    		visited[dig-1] = true;
-    	}   	
-    	return true;
-    }
+    
 
 }

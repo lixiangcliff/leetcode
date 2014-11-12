@@ -23,16 +23,17 @@ public class Question {
        RandomListNode newRunner = newHead;
        map.put(head, newHead);// key is the original node, value is the copied(new) node
        while(node!=null){
-    	   RandomListNode newNode = new RandomListNode(node.label);
-    	   map.put(node, newNode);
-    	   newRunner.next = newNode;
+    	   RandomListNode newNode = new RandomListNode(node.label);//根据node的label，复制出一个内容一样的新的newnode
+    	   map.put(node, newNode);//pair存入map
+    	   newRunner.next = newNode;//newList接上newNode
     	   newRunner = newNode;
     	   node = node.next;
        }
        node = head;
        RandomListNode newRandom = newHead;
+       //之所以要第二次遍历，因为第一次做newNode时，newNode.random的那个node可能还不存在呢
        while(node!=null){
-    	   newRandom.random = map.get(node.random);//node.random is key;
+    	   newRandom.random = map.get(node.random);//node.random is key 画图便知;
     	   node = node.next;
     	   newRandom = newRandom.next;
        }

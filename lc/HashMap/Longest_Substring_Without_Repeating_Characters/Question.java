@@ -32,7 +32,7 @@ public class Question {
         		max = Math.max(runner-walker, max);//更新max
         		//walker持续右移，直到找到和runner当前值相等的那一个
         		while(s.charAt(walker)!=s.charAt(runner)){
-        			set.remove(s.charAt(walker));
+        			set.remove(s.charAt(walker));//更新set
         			walker++;
         		}
         		walker++;//相当于剔除和runner当前值相等的那一个

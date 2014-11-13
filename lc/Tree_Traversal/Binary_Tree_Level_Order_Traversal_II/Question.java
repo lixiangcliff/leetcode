@@ -1,8 +1,9 @@
 package Binary_Tree_Level_Order_Traversal_II;
 
-import java.util.ArrayDeque;
+
 import java.util.ArrayList;
-import java.util.Stack;
+import java.util.Collections;
+import java.util.LinkedList;
 
 
 public class Question {
@@ -14,33 +15,40 @@ public class Question {
 		// TODO Auto-generated method stub
 
 	}
-	public ArrayList<ArrayList<Integer>> levelOrder(TreeNode root) {
-        ArrayList result = new ArrayList();
-        if(root == null){
-        	return result;
-        }
-        ArrayDeque<TreeNode> queue = new ArrayDeque<TreeNode>();
-        Stack stack = new Stack();
-        queue.add(root);
-        while(!queue.isEmpty()){
-        	ArrayList<Integer> level = new ArrayList<Integer>();
-        	int size = queue.size();
-        	for(int i=0; i< size; i++){
-        		TreeNode node = queue.remove();
-            	level.add(node.val);
-            	if( node.left != null){
-            		queue.push(node);
-            	}
-            	if( node.right != null){
-            		queue.push(node);
-            	}            	
-        	}
-        	stack.push(level);        	
-        }
-        while(!stack.isEmpty()){
-        	result.add(stack.pop());
-        }
-        return result;
+	
+	//http://blog.csdn.net/linhuanmars/article/details/23414711
+	//类似：https://oj.leetcode.com/problems/binary-tree-level-order-traversal/
+	public ArrayList<ArrayList<Integer>> levelOrderBottom(TreeNode root) {
+		ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+		if (root == null){
+			return result;
+		}
+		LinkedList<TreeNode> queue = new LinkedList<TreeNode>();
+		ArrayList<Integer> item = new ArrayList<Integer>();
+		int curNum = 1;
+		int nextNum = 0;
+		queue.offer(root);
+		while(!queue.isEmpty()){
+			TreeNode node = queue.poll();
+			item.add(node.val);
+			curNum--;
+			if (node.left != null){
+				queue.offer(node.left);
+				nextNum++;
+			}
+			if (node.right != null){
+				queue.offer(node.right);
+				nextNum++;
+			}
+			if (curNum == 0){
+				curNum = nextNum;
+				nextNum = 0;
+				result.add(item);
+				item = new ArrayList<Integer>();
+			}
+		}
+		Collections.reverse(result);
+		return result;
 	}
 }
 

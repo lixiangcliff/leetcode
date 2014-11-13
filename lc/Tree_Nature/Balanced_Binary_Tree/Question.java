@@ -9,20 +9,30 @@ public class Question {
 		// TODO Auto-generated method stub
 
 	}
-	//from cracking code 5th edition Quesetion 4.1
-	public int getHeight(TreeNode root){
-		if (root==null){
-			return 0;
-		}
-		return Math.max(getHeight(root.left), getHeight(root.right))+1;
-	}
+	//http://blog.csdn.net/linhuanmars/article/details/23731355
     public boolean isBalanced(TreeNode root) {
     	if(root==null){
     		return true;
     	}
-    	int heightDiff = Math.abs(getHeight(root.left)-getHeight(root.right));
-    	return heightDiff<=1 && isBalanced(root.left) && isBalanced(root.right);
+    	return helper(root)>=0;
     }
+    
+    private int helper(TreeNode root){
+		if (root==null){
+			return 0;
+		}
+		int leftH = helper(root.left);//左子树高度
+		int rightH = helper(root.right);//右子树高度
+		if (leftH < 0 || rightH < 0){//任何一个子树<0，则返回-1（-1表示已经失去平衡）
+			return -1;
+		}
+		if(Math.abs(leftH-rightH) > 1){//表示左右子树高度相差>1
+			return -1;
+		}
+		//返回树的高度（左右子树高的那个+1）
+		return (Math.max(leftH, rightH) + 1);
+	}
+	
 
 }
 

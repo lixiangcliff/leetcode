@@ -52,6 +52,10 @@ public class Question {
 		return result;
 	}
 	
+	//Morris Traversal下一轮再说...
+	//http://blog.csdn.net/linhuanmars/article/details/20187257
+	//http://www.cnblogs.com/AnnieKim/archive/2013/06/15/MorrisTraversal.html
+	
 
 }
 

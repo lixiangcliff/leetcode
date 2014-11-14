@@ -21,29 +21,30 @@ public class Question {
     	if (root == null){
     		return result;
     	}
-    	ArrayList<Integer> onePath = new ArrayList<Integer>();
-    	onePath.add(root.val);
-    	helper(root, sum-root.val, onePath, result);
+    	ArrayList<Integer> item = new ArrayList<Integer>();
+    	//helper(root, sum-root.val, item, result);
+    	item.add(root.val);//为什么要先把root加进去？为什么上面的只一行的方法不行？
+    	helper(root, sum-root.val, item, result);
     	return result;
     }
     
-    private void helper(TreeNode root, int sum, ArrayList<Integer> onePath, ArrayList<ArrayList<Integer>> result) {
+    private void helper(TreeNode root, int sum, ArrayList<Integer> item, ArrayList<ArrayList<Integer>> result) {
         if(root == null){
      	   return;
         }
         if(root.left == null && root.right == null && sum == 0){
-            result.add(new ArrayList<Integer>(onePath));
+            result.add(new ArrayList<Integer>(item));
      	    return;
         }
         if (root.left != null){
-        	onePath.add(root.left.val);
-        	helper(root.left, sum-root.left.val, onePath, result);
-        	onePath.remove(onePath.size()-1);
+        	item.add(root.left.val);
+        	helper(root.left, sum-root.left.val, item, result);
+        	item.remove(item.size()-1);//恢复recursion之前的state
         }
         if (root.right != null){
-        	onePath.add(root.right.val);
-        	helper(root.right, sum-root.right.val, onePath, result);
-        	onePath.remove(onePath.size()-1);
+        	item.add(root.right.val);
+        	helper(root.right, sum-root.right.val, item, result);
+        	item.remove(item.size()-1);
         }        
     }
     

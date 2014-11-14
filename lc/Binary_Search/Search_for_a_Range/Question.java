@@ -15,47 +15,39 @@ public class Question {
 	}
 
 	//http://blog.csdn.net/linhuanmars/article/details/20593391
+	//看图！
     public static int[] searchRange(int[] A, int target) {
-    	int l = 0;
-    	int r = A.length -1;
     	int[] result = {-1, -1};
-        while(l<=r){
-        	int mid = (l+r)/2;
-        	if (A[mid] == target){ // find it
-        		int ll = 0;
-        		int rr = A.length -1;
-        		int mm = mid;
-        		int k = 0;
-        		while(ll<=mm){ // process left part of found target
-        			k = (ll+mm)/2;
-        			if(target == A[k]){
-        				mm = k-1; // start of "target" is on left side of k
-        			}else{
-        				//ll is the first value of target;mm is last value of non-target
-        				ll = k+1; // start of "target" is on right side of k; 
-        			}
-        		}
-
-        		result[0] = ll;
-        		mm = mid;
-        		while(mm<=rr){ // process right part of found target
-        			k = (mm+rr)/2;
-        			if(target == A[k]){
-        				mm = k+1; // end of "target" is on right side of k
-        			}else{
-        				//rr is the last value of target;mm is first value of non-target
-        				rr = k-1; // end of "target" is on left side of k
-        			}
-        		}
-        		result[1] = rr;
-        		return result;
-        		
-        	}else if(A[mid] < target){
-        		l = mid+1;
+    	if(A == null || A.length == 0){
+    		return result;
+    	}
+    	int ll = 0;
+    	int lr = A.length -1;
+        while (ll <= lr){
+        	int m = (ll + lr)/2;
+        	if (A[m] < target){
+        		ll = m + 1;
         	}else{
-        		r = mid-1;
+        		lr = m - 1;
         	}
         }
+        
+    	int rl = 0;
+    	int rr = A.length -1; 
+        while (rl <= rr){
+        	int m = (rl + rr)/2;
+        	if (A[m] > target){
+        		rr = m - 1;
+        	}else{
+        		rl = m + 1;
+        	}
+        }
+        
+        if (ll <= rr){
+        	result[0] = ll;
+        	result[1] = rr;
+        }
+        
         return result;   
     }
 }

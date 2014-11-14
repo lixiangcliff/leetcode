@@ -11,22 +11,23 @@ public class Question {
 		
 
 	}
-	//http://answer.ninechapter.com/solutions/convert-sorted-array-to-binary-search-tree/
+	//http://blog.csdn.net/linhuanmars/article/details/23904883
 	public TreeNode sortedArrayToBST(int[] num) {
-		if(num ==null){
+		if(num ==null || num.length == 0){
 			return null;
 		}
-		return buildTree(num, 0, num.length-1);
+		return helper(num, 0, num.length-1);
     }
 	
-	private TreeNode buildTree(int[] num, int start, int end) {
-		if(start > end){
+	private TreeNode helper(int[] num, int l, int r) {
+		if(l > r){
 			return null;
 		}
-		TreeNode node = new TreeNode(num[(start+end)/2]);
-		node.left = buildTree(num, start, (start+end)/2-1);
-		node.right = buildTree(num, (start+end)/2+1,end);
-		return node;
+		int m = (l + r)/2;
+		TreeNode root = new TreeNode(num[m]);//以当前数组的中间值，来create根节点
+		root.left = helper(num, l, m-1); //当前root的左孩子为左半边数组的递归返回值
+		root.right = helper(num, m+1, r);//右孩子类似
+		return root;
 	}
 }
 

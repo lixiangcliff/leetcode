@@ -40,6 +40,7 @@ public class Question {
         return helper(sortedlist, 0, count-1);
     }
     
+    //helper里，左根右，关于根的处理，没看懂
     private TreeNode helper(ArrayList<ListNode> sortedlist, int l, int r){
     	if(l > r){
     		return null;

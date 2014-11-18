@@ -1,5 +1,6 @@
 package Search_a_2D_Matrix;
 
+
 public class Question {
 
 	/**
@@ -7,54 +8,77 @@ public class Question {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int n = 6;
-		int[][] matrix = new int[n][n];
-		for (int i=0;i<n;i++){
-			for (int j=0; j<n;j++){
-				matrix[i][j] = i*n + j+1;
+/*		int n = 6;
+		int[][] matrix = new int[n][n];*/
+		int[][] matrix = {{1},{3}};
+		//int[][] matrix = {{1,2,3},{4,5,6},{7,8,9},{10,11,12}};
+		
+		for (int i=0;i<matrix.length;i++){
+			for (int j=0; j<matrix[0].length;j++){
+				//matrix[i][j] = i*n + j+1;
 				System.out.print(matrix[i][j] + ",");
 			}
 			System.out.println( "");
 		}
 		System.out.println( "==========");
-		System.out.println( searchMatrix(matrix, 36));
+		System.out.println( searchMatrix(matrix, 3));
 		
 
 	}
-	//http://blog.csdn.net/linhuanmars/article/details/24216235
+	
+	//BST模板。看【注】！
     public static boolean searchMatrix(int[][] matrix, int target) {
     	if(matrix == null || matrix.length==0 || matrix[0].length==0)  
             return false; 
     	//处理所有行的第0个元素
-    	int l= 0;
-    	int r = matrix.length-1;
-    	while(l <= r){
-    		int mid = (l+r)/2;
-    		if (target == matrix[mid][0]){
+    	int start= 0;
+    	int end = matrix.length-1;
+    	
+    	//用模板。即求第0列中，等于target值的，或者比target小的最大值   	
+    	while ( start + 1 < end) {
+    		int mid = start + (end - start) / 2;
+    		if (matrix[mid][0] == target) {//求比target小的最大值，所以窗口尽量左移
     			return true;
-    		}else if(target > matrix[mid][0]){//target在右半边，所以重置左窗口
-    			l = mid+1;
-    		}else{
-    			r = mid-1; //找的是比target小的最大值
+    		} else if (matrix[mid][0] < target){
+    			start = mid;
+    		} else {
+    			end = mid;
     		}
     	}
-    	int row = r;
-    	if (r < 0){//r越界，代表target比matrix[0][0]还要小，所以matrix里不包含target
+    	
+    	int row;
+    	//【注】BST的模板的核心就在这里了！要找的是等于target或者比target小的里面最大的，两个候选start和end，end肯定比start的值大，所以先试end
+    	if (matrix[end][0] <= target){//【注】不能写成matrix[end][0] <= target！！
+    		row = end;
+    	}else {
+    		row = start;
+    	}
+    	
+    	if (target < matrix[row][0]){//【注】由上面可知，matrix[row][0]本来是要比target小的。即使这样如果仍有target < matrix[row][0]，则说明matrix里不包含target
     		return false;
     	}
+    	
     	//处理这一行(row)的所有列
-    	l = 0;
-    	r = matrix[0].length-1;
-    	while(l <= r){
-    		int mid = (l+r)/2;
-    		if (target == matrix[row][mid]){
+    	start = 0;
+    	end = matrix[0].length-1;
+    	//用模板。
+    	while(start + 1 < end){
+    		int mid = start + (end - start) / 2;
+    		if (matrix[row][mid] == target) {
     			return true;
-    		}else if(target > matrix[row][mid]){
-    			l = mid+1;
+    		}else if(matrix[row][mid] < target){
+    			start = mid;
     		}else{
-    			r = mid-1;
+    			end = mid;
     		}
     	}
+    	
+    	if (matrix[row][start] == target || matrix[row][end] == target){
+    		return true;
+    	}
+    	
     	return false;
     }
+	
+	
 }

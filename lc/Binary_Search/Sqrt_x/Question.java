@@ -11,6 +11,7 @@ public class Question {
 
 	}
 	
+	//using BST template
 	//http://blog.csdn.net/linhuanmars/article/details/20089131
     public static int sqrt(int x) {
     	if(x<0){
@@ -19,46 +20,25 @@ public class Question {
     	if(x<=1){
     		return x;
     	}
-    	int l = 1;
-    	int r = x/2;
-    	int m = 1;
-    	while(1<=r){
-    		m = (l+r)/2;
-    		//if(m*m<=x && x<(m+1)*(m+1)){ // wrong!! because if x is too big e.g "9999999" m*m will overflow. So must use division instead of multiplication 
-    		if(m<=x/m && x/(m+1)<m+1){
-    			return m;
-    		}
-    		//if (x>m*m){ // wrong! same reason as above!
-    		if (x/m>m){
-    			l = m+1;
-    		}else{
-    			r = m-1;
+    	int start = 1;
+    	//【注】 当x>=2时， 有x/2 >= sqrt(x) 恒成立。所以可以取end = x/2作为 sqrt(x)的上界
+    	int end = x / 2;
+    	while (start + 1 < end) {
+    		int mid = start + (end - start) / 2;
+    		//下面条件即是 mid^2 <= x < (mid+1)^2 但是需要除法代替乘法。道理和上面mid=start+(end-start)/2一样，都是为了避免overflow
+    		if (mid <= x / mid && (mid + 1) > x / (mid + 1)) { //夹逼找到所求值
+    			return mid;
+    		} else if (mid < x / mid) { //mid^2 < x
+    			start = mid;
+    		} else {
+    			end = mid;
     		}
     	}
-        return m;
+    	if (start <= x / start && (start + 1) > x / (start + 1)){
+    		return start;
+    	} else {
+    		return end;
+    	}
     }
 	
-	//testing
-/*	public static int sqrt(int x) {  
-	    if(x<0) return -1;  
-	    if(x==0) return 0;  
-	    int l=1;  
-	    int r=x/2+1;  
-	    while(l<=r)  
-	    {  
-	        int m = (l+r)/2;  
-	        if(m<=x/m && x/(m+1)<m+1)  
-	            return m;  
-	        if(x/m<m)  
-	        {  
-	            r = m-1;  
-	        }  
-	        else  
-	        {  
-	            l = m+1;  
-	        }  
-	    }  
-	    return 0;  
-	} */
-
 }

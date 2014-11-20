@@ -10,16 +10,22 @@ public class Question {
 
 	}
 	
+	//Using Binary Search template
     public int findMin(int[] num) {
         if(num == null || num.length == 0){
         	return Integer.MAX_VALUE;
         }
-        for(int i=1;i<num.length;i++){
-        	if(num[i]<num[0]){
-        		return num[i];
+        int start = 0;
+        int end = num.length - 1;
+        while (start + 1 < end) {
+        	int mid = start + (end - start) / 2;
+        	if (num[mid] < num[end]) { //右边有序，所以min一定在左边
+        		end = mid;
+        	} else {
+        		start = mid;
         	}
         }
-        return num[0];
+        return Math.min(num[start], num[end]);
     }
 
 }

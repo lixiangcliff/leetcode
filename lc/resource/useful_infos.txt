@@ -2,3 +2,4 @@ useful links:
 1. leetcode category: 
 http://www.danielbit.com/blog/puzzle/leetcode/leetcode-summary
 http://www.douban.com/note/330562764/
+115 java interview http://www.javacodegeeks.com/2014/04/java-interview-questions-and-answers.html

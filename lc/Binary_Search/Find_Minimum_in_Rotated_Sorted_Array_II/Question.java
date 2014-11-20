@@ -10,12 +10,36 @@ public class Question {
 		//int[] num = {4, 5, 6, 7, 0, 1, 2};
 		//int[] num = {3,3,3,3,3,1,2};
 		//int[] num = {3,1,2,3,3,3,3};
-		int[] num = {1,1,2,0,0,1};
+		int[] num = {1,1,2,-1,0,1};
 		System.out.println(findMin(num));
 	}
 	
+	//binary search template
+	public static int findMin(int[] num) {
+		if(num == null || num.length ==0){
+        	return Integer.MAX_VALUE;
+        }
+		int start = 0;
+		int end = num.length - 1;
+		int min = Integer.MAX_VALUE;
+		while (start + 1 < end) {
+			int mid = start + (end - start) / 2;
+			if (num[mid] < num [end]) {
+				end = mid;
+				min = Math.min(num[mid], min);
+			} else if (num[mid] > num [end]) {
+				start = mid;
+				min = Math.min(num[end], min);
+			} else {
+				end--;
+			}
+		}
+		return Math.min(Math.min(num[start], num[end]), min);
+	}
+	
+	
 	//http://blog.csdn.net/linhuanmars/article/details/40449299
-    public static int findMin(int[] num) {
+/*    public static int findMin(int[] num) {
         if(num == null || num.length ==0){
         	return 0;
         }
@@ -40,5 +64,5 @@ public class Question {
         }
         return Math.min(Math.min(min, num[l]), num[r]);
     }
-
+*/
 }

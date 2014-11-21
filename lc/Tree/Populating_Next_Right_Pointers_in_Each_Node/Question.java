@@ -10,6 +10,7 @@ public class Question {
 
 	}
 	
+	//看图！
 	//https://github.com/zsxwing/leetcode-java/blob/master/src/main/java/populating_next_right_pointers_in_each_node/PopulatingNextRightPointersinEachNode.java
 	 public static void connect(TreeLinkNode root) {
          TreeLinkNode leftMost = root;
@@ -27,27 +28,8 @@ public class Question {
              leftMost = leftMost.left;
          }
      }
-	//my way is wrong
-	/*public static void connect(TreeLinkNode root) {
-		if(root == null){
-			return;
-		}
-        TreeLinkNode leftMost = root;
-        while(leftMost != null){ // increment by layer
-        	TreeLinkNode p = leftMost;
-        	while(p!=null){ //move to its right neighbor //wrong here. p needs to reach bottom layer
-        		if (p.next == null){
-        			p.left.next = p.right;
-        		}else{
-        			p.left.next = p.right;
-        			p.right.next = p.next.left; 
-        		}
-        		p = p.next;        		
-        	}
-        	leftMost =  leftMost.left;
-        }
-        
-    }*/
+
+
 
 }
 

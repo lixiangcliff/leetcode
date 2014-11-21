@@ -17,7 +17,7 @@ public class Solution {
      * @return: Return all keys that k1<=key<=k2 in ascending order.
      */
 	
-    public ArrayList<Integer> searchRange(TreeNode root, int k1, int k2) {
+/*    public ArrayList<Integer> searchRange(TreeNode root, int k1, int k2) {
     	ArrayList<Integer> result = new ArrayList<Integer>();
     	if (root == null) {
     		return result;
@@ -40,6 +40,33 @@ public class Solution {
     	if (root.val < k2) {
     		helper(result, root.right, k1, k2);
     	}
+    }*/
+    
+    
+    //divide and conquer
+    public ArrayList<Integer> searchRange(TreeNode root, int k1, int k2) {
+       // write your code here
+       ArrayList<Integer> res = new ArrayList<Integer>();
+       ArrayList<Integer> left = new ArrayList<Integer>();
+       ArrayList<Integer> right = new ArrayList<Integer>();
+
+       if (root == null)
+           return res;
+       //divide 
+       if (root.val > k1) {
+           left = searchRange(root.left, k1, k2);
+       }
+       if (root.val < k2) {
+           right = searchRange(root.right, k1, k2);
+       }
+       //conquer
+       res.addAll(left);//【左】
+       if (root.val >= k1 && root.val <= k2) { //【根】
+           res.add(root.val);
+       }
+        res.addAll(right); //【右】
+
+       return res;
     }
 
 }

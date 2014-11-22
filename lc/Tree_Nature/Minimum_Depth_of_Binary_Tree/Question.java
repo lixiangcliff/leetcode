@@ -35,37 +35,32 @@ public class Question {
     	}
     }
     
+    //using BFS template
     //iterative way
-    //以下三个【注】，主要是要考虑边界情况，比如输入是{0},
+    //以下2个【注】，主要是要考虑边界情况，比如输入是{0},
     public int minDepthBSF(TreeNode root) {
     	if (root == null){
     		return 0;
     	}
-    	int lastNum = 1;
-    	int curNum = 0;
     	int level = 1;//【注】关于level的初始值(如果只有一个root， level是1)
     	LinkedList<TreeNode> queue = new LinkedList<TreeNode>();
     	queue.offer(root);
     	while(!queue.isEmpty()){
-    		TreeNode node = queue.poll();
-    		//【注意】当前node有任何一个孩子是叶子节点（左右孩子都是null），就可以返回当前level了
-    		if (node.left == null && node.right == null){
-    			return level;
+    		int size = queue.size();
+    		for (int i = 0; i< size; i++) {
+    			TreeNode node = queue.poll();
+	    		//【注意】当前node有任何一个孩子是叶子节点（左右孩子都是null），就可以返回当前level了
+	    		if (node.left == null && node.right == null){
+	    			return level;
+	    		}
+	    		if (node.left != null){
+	    			queue.offer(node.left);
+	    		}
+	    		if (node.right != null){
+	    			queue.offer(node.right);
+	    		}
     		}
-    		lastNum--;//【注】关于lastNum--放置的位置
-    		if (node.left != null){
-    			queue.offer(node.left);
-    			curNum++;
-    		}
-    		if (node.right != null){
-    			queue.offer(node.right);
-    			curNum++;
-    		}
-    		if (lastNum == 0){
-    			lastNum = curNum;
-    			curNum = 0;
-    			level++;
-    		}
+    		level++;
     	}
     	return level;//【注】关于return的value
     }

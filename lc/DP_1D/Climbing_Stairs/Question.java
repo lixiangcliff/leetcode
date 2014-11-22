@@ -49,15 +49,15 @@ public class Question {
 		if (n == 2) {
 			return 2;
 		}
-		int pre = 1; //上一个值
-		int cur = 2; //当前值
-		int next; //下一个值
+		int pre2 = 1; //前2个值
+		int pre1 = 2; //前一个值
+		int cur = 3; //当前值
 		for (int i = 3; i <= n; i++) {
-			next = cur + pre; //更新next；
-			pre = cur; //要先更新pre
-			cur = next;//然后更新 cur，因为上一步要用到cur的值来更新pre，如果先更新cur，则给pre的值就是错的。
+			cur = pre1 + pre2; //更新next；
+			pre2 = pre1; //要先更新pre2
+			pre1 = cur;//然后更新 pre，因为上一步要用到pre1的值来更新pre2，如果先更新pre1，则之后给pre2的值就是错的。
 		}
-		return cur;
+		return pre1;
 	}
 
 }

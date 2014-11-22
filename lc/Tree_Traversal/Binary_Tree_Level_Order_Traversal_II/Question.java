@@ -16,6 +16,7 @@ public class Question {
 
 	}
 	
+	//using BFS template
 	//http://blog.csdn.net/linhuanmars/article/details/23414711
 	//类似：https://oj.leetcode.com/problems/binary-tree-level-order-traversal/
 	public ArrayList<ArrayList<Integer>> levelOrderBottom(TreeNode root) {
@@ -24,28 +25,21 @@ public class Question {
 			return result;
 		}
 		LinkedList<TreeNode> queue = new LinkedList<TreeNode>();
-		ArrayList<Integer> item = new ArrayList<Integer>();
-		int curNum = 1;
-		int nextNum = 0;
 		queue.offer(root);
 		while(!queue.isEmpty()){
-			TreeNode node = queue.poll();
-			item.add(node.val);
-			curNum--;
-			if (node.left != null){
-				queue.offer(node.left);
-				nextNum++;
+			ArrayList<Integer> item = new ArrayList<Integer>();
+			int size = queue.size();
+			for (int i = 0; i < size; i++) {
+				TreeNode node = queue.poll();
+				item.add(node.val);
+				if (node.left != null){
+					queue.offer(node.left);
+				}
+				if (node.right != null){
+					queue.offer(node.right);
+				}
 			}
-			if (node.right != null){
-				queue.offer(node.right);
-				nextNum++;
-			}
-			if (curNum == 0){
-				curNum = nextNum;
-				nextNum = 0;
-				result.add(item);
-				item = new ArrayList<Integer>();
-			}
+			result.add(item);
 		}
 		Collections.reverse(result);
 		return result;

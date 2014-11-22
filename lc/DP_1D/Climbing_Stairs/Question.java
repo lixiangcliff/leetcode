@@ -12,6 +12,7 @@ public class Question {
 	}
 	
 	//naive recursive way
+	//will NOT pass leetcodde because of "Time Limit Exceeded"
 	/*
 	 * for last climb you have and only have 2 way: 1 step or 2 step to finish;
 	 * so to finish n stairs, we can group all methods into two groups
@@ -40,16 +41,23 @@ public class Question {
 	
 	//DP 1D
 	//http://blog.csdn.net/linhuanmars/article/details/23976963
+	//等同于Fibonacci
 	public static int climbStairsDP(int n){
-		int[] map = new int[n+1];
-		map[0] = 0;
-		map[1] = 1;
-		map[2] = 2;
-		for(int i=3; i<=n; i++){
-			map[i] =  map[i-1] + map[i-2];
+		if (n <= 1) {
+			return 1;
 		}
-		return map[n];
-		
+		if (n == 2) {
+			return 2;
+		}
+		int pre = 1; //上一个值
+		int cur = 2; //当前值
+		int next; //下一个值
+		for (int i = 3; i <= n; i++) {
+			next = cur + pre; //更新next；
+			pre = cur; //要先更新pre
+			cur = next;//然后更新 cur，因为上一步要用到cur的值来更新pre，如果先更新cur，则给pre的值就是错的。
+		}
+		return cur;
 	}
 
 }

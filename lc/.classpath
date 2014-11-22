@@ -15,6 +15,7 @@
 	<classpathentry kind="src" path="Binary_Search"/>
 	<classpathentry kind="src" path="Sort"/>
 	<classpathentry kind="src" path="Divide&amp;Conquer"/>
+	<classpathentry kind="src" path="DP"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

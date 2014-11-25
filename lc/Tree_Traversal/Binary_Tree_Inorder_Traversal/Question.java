@@ -55,6 +55,7 @@ public class Question {
 	//interative from Mo
 	//之所以和preorder不同（preorder不需要保存保存node是否被访问过），是因为inorder时候，第一次经过某node时候不能当时就处理它，要等待会回来时候才能处理。
 	//所以需要标记它是否被访问过。即我们需要NodeStatusPair这个class
+	//【注】之所以这个算法有效，是因为我们压栈的顺序和inorder正好还是相反的，所以出栈（存入结果）时，就刚好是inorder的顺序了
 	//左根右。看图（看步骤！）看【注】
 	public ArrayList<Integer> inorderTraversal(TreeNode root) {
 		ArrayList<Integer> result = new ArrayList<Integer>();

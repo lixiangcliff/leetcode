@@ -60,10 +60,10 @@ public class Question {
 			TreeNode node = stack.pop(); 
 			result.add(node.val);//处理【根】
 			if (node.right != null) {
-				stack.push(node.right); //先把【右】压入栈。（为的是之后，先把【右】弹出栈来处理）
+				stack.push(node.right); //先把【右】压入栈。（为的是之后，先把【左】弹出栈来处理）
 			}
 			if (node.left != null) {
-				stack.push(node.left); //后把【左】压入栈。（为的是之后，后把【左】弹出栈来处理）
+				stack.push(node.left); 
 			}
 		}
 		return result;

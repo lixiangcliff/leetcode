@@ -17,7 +17,7 @@ public class Question {
 	
 	//http://blog.csdn.net/linhuanmars/article/details/22009351
 	//recursive
-    public ArrayList<Integer> postorderTraversal(TreeNode root) {
+    public ArrayList<Integer> postorderTraversalRecursive(TreeNode root) {
     	ArrayList<Integer> result = new ArrayList<Integer>();
     	helper(root, result);
     	return result;
@@ -57,6 +57,44 @@ public class Question {
 			}
 		}
 		return result;
+	}
+	
+	//iterative from Mo
+	//类似 inorder，具体解释参考: https://oj.leetcode.com/problems/binary-tree-inorder-traversal/
+	//左右根。
+	public ArrayList<Integer> postorderTraversal(TreeNode root) {
+		ArrayList<Integer> result = new ArrayList<Integer>();
+		if (root == null) {
+			return result;
+		}
+		LinkedList<NodeStatusPair> stack = new LinkedList<NodeStatusPair>(); //保存node的访问状态 
+		stack.push(new NodeStatusPair(root, false));//赋初值是not ready，因为现在是第一次访问，我们要按[左右根]的顺序，要一直往左找下去。等再次回来时，再把root改为ready
+		while (!stack.isEmpty()) {
+			TreeNode node = stack.peek().node;
+			boolean ready = stack.peek().ready;
+			stack.pop();
+			if (ready) {
+				result.add(node.val);
+			} else {
+				stack.push(new NodeStatusPair(node, true)); //先压入【根】
+				if (node.right != null) {
+					stack.push(new NodeStatusPair(node.right, false));//再压入【右】
+				}
+				if (node.left != null) {
+					stack.push(new NodeStatusPair(node.left, false)); //最后压入【左】 (于是弹出的顺序就是【左右根】)
+				}
+			}
+		}
+		return result;
+	}
+	
+	private class NodeStatusPair {
+		TreeNode node;
+		boolean ready;
+		NodeStatusPair(TreeNode node, boolean ready) {
+			this.node = node;
+			this.ready = ready;
+		}
 	}
 
 }

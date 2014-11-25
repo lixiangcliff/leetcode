@@ -12,6 +12,7 @@ public class Question {
 
 	}
 	
+	//看图！
 	//http://blog.csdn.net/linhuanmars/article/details/22238433
     public ArrayList<Interval> insert(ArrayList<Interval> intervals, Interval newInterval) {
     	ArrayList<Interval> result = new ArrayList<Interval>();
@@ -21,23 +22,23 @@ public class Question {
     		return result;
     	}
     	int i=0;
-        for(; i<size; i++){
-        	if (intervals.get(i).end<newInterval.start){ //compare new's start and array's end
-        		result.add(intervals.get(i));
-        	}else{
-        		break;
-        	}
+        //只要interval.end < newInterval.start；即newInterval和interval【注】没有【注】overlap
+        while (i < size && intervals.get(i).end < newInterval.start) {
+        	result.add(intervals.get(i));
+        	i++;
         }
         if (i<size){
-        	//final new's start is leftmost one between new's start and array's start
+        	//确定最终的newInterval.start为: min(newInterval.start, intervals.start)
         	newInterval.start = Math.min(newInterval.start, intervals.get(i).start); 
         }
+        //只要interval.start <= newInterval.end；即newInterval和interval【注】仍有【注】overlap
         while(i<size && intervals.get(i).start <= newInterval.end){//compare new's end and array's start
-        	//final new's end is rightmost one between new's end and array's end
+        	//每次更新newInterval.right为最新的: max(newInterval.end, intervals.end)。
         	newInterval.end = Math.max(intervals.get(i).end, newInterval.end);
         	i++;
         }
-        result.add(newInterval);
+        result.add(newInterval);//处理完newInterval的所有overlap，把newInterval加入结果集
+        //把原来list里的interval都加到结果集
         while(i<size){
         	result.add(intervals.get(i));
         	i++;

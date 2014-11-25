@@ -9,13 +9,14 @@ public class Question {
 		// TODO Auto-generated method stub
 
 	}
-	//http://blog.csdn.net/kenden23/article/details/14100851
-	//算法的本质是一次先序遍历（为啥？），递归条件即是把当前的sum乘以10并且加上当前节点传入下一函数
+	
+	//递归条件即是把当前的sum乘以10并且加上当前节点传入下一函数
 	//http://blog.csdn.net/linhuanmars/article/details/22913699
     public int sumNumbers(TreeNode root) {
     	return helper(root, 0);
     }
     
+    //递归的返回值就是sum
     private int helper(TreeNode root, int sum){
     	if (root == null){//空节点，已经不是叶子了，不需要把数值加入结果，直接返回0
     		return 0;

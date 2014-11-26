@@ -37,20 +37,52 @@ public class Question {
 
 	}
 	
-	//https://oj.leetcode.com/discuss/7313/problem-statment-should-updated-accepted-solution-approcah
-	//to understand the question: "adjacent here means same index or index +1 and not index -1."
-	//http://blog.sina.com.cn/s/blog_71d59f9a01017b85.html
-	//use this idea: https://oj.leetcode.com/discuss/5337/dp-solution-for-triangle
+	/**
+	 * https://oj.leetcode.com/problems/triangle/
+	 * Given a triangle, find the minimum path sum from top to bottom. Each step you may move to adjacent numbers on the row below.
+
+		For example, given the following triangle
+		[
+		     [2],
+		     [3,4],
+		     [6,5,7],
+		     [4,1,8,3]
+		]
+		The minimum path sum from top to bottom is 11 (i.e., 2 + 3 + 5 + 1 = 11).
+		
+		Note:
+		Bonus point if you are able to do this using only O(n) extra space, where n is the total number of rows in the triangle.
+		
+	 */
+	//DP, 2D, up to bottom
+	//result[i][j]表示从[0][0]到[i][j]的路径中的最小值。
+	//状态方程： result[i][j] = Math.min(result[i-1][j-1], result[i-1][j])
     public static int minimumTotal(ArrayList<ArrayList<Integer>> triangle) {
-    	int n = triangle.size();
-    	int[] sum = new int[n+1];
-    	for(int i=n-1;i>=0;i--){
-    		//for(int j=0; j<=n; j++){ // wrong!!!
-    		for(int j=0; j<=i; j++){ // j<=i !!
-    			sum[j] = Math.min(sum[j], sum[j+1]) + triangle.get(i).get(j);
+    	if (triangle == null || triangle.size() == 0) {
+    		return 0;
+    	}
+    	int size = triangle.size();
+    	int result[][] = new int[size][size];
+    	result [0][0] = triangle.get(0).get(0);
+    	//处理每一行的第一列
+    	for (int i = 1; i < size; i++) {
+    		result[i][0] = result[i-1][0] + triangle.get(i).get(0);
+    	}
+    	for (int i = 1; i < size; i++) {
+    		for (int j = 1; j <= i; j++) {//j的范围是<=i,而不是<size; 这样才能保证它是一个三角形
+    			if (j == i) { //处理每一行的最后一个
+    				result[i][j] = result[i-1][j-1] + triangle.get(i).get(j);
+    			} else {
+    				result[i][j] = Math.min(result[i-1][j-1], result[i-1][j]) + triangle.get(i).get(j); //状态方程
+    			}
     		}
     	}
-    	return sum[0];
+    	//找到最后一行中的最小值
+    	int min = result[size - 1][0];
+    	for (int i = 1; i < size; i++) {
+    		min = Math.min(min, result[size - 1][i]);
+    	}
+    	return min;
     }
 
 }

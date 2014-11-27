@@ -55,8 +55,11 @@ public class Question {
 		
 	 */
 	//DP, 2D, up to bottom
-	//result[i][j]表示从[0][0]到[i][j]的路径中的最小值。
-	//状态方程： result[i][j] = Math.min(result[i-1][j-1], result[i-1][j])
+	//1.state: result[i][j]表示从[0][0]到[i][j]的路径中的最小值。
+	//2.function: result[i][j] = Math.min(result[i-1][j-1], result[i-1][j])
+	//3.initialize: result[0][0] = triangle[0][0]
+	//				result[i][0] = result[i-1][0] + triangle[i][0];
+	//4.answer: min(result[size - 1][j])
     public static int minimumTotal(ArrayList<ArrayList<Integer>> triangle) {
     	if (triangle == null || triangle.size() == 0) {
     		return 0;

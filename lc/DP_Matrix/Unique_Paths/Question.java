@@ -22,8 +22,12 @@ public class Question {
 		Note: m and n will be at most 100.
 	 */
 	// http://answer.ninechapter.com/solutions/unique-paths/
-	//result[i][j]表示从[0][0]到[i][j],一共有多少种不同path
-	//通项公式general formula: result[i][j] = result[i - 1][j] + result[i][j - 1];
+	//1.state: result[i][j]表示从[0][0]到[i][j],一共有多少种不同path
+	//2:function: result[i][j] = result[i - 1][j] + result[i][j - 1];
+	//3.initialize: result[0][0] = 1
+	//				result[0][j] = 1
+	//				result[i][0] = 1
+	//4.answer: result[m - 1][n - 1]
 	public int uniquePaths(int m, int n) {
 		if (m == 0 || n == 0) {
 			return 0;

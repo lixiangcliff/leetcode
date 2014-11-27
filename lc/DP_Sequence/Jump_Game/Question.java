@@ -22,10 +22,12 @@ public class Question {
 		A = [3,2,1,0,4], return false.
 	 */
 	//http://www.ninechapter.com/solutions/jump-game/
-	//result[i]表示能否最终跳到位置i
-	//则result[i] = 能够从0跳到i || 能够从1跳到i ||...|| 能够从i-1跳到i
+	//1.state: result[i]表示能否最终跳到位置i
+	//2.function: 则result[i] = 能够从0跳到i || 能够从1跳到i ||...|| 能够从i-1跳到i
 	//能从j跳到i的条件是：result[j] && A[j] + j >= i
 	//通项公式general formula: result[i] = OR(result[j] && j < i && A[j] + j >= i) （j取值从0到i-1） ;
+	//3.initialize: result[0] = true
+	//4.answer: result[A.length - 1]
 	//O(n^2)时间复杂度，不是最优解，但是容易想。
 	public static boolean canJump(int[] A) {
 		if (A == null || A.length == 0) {

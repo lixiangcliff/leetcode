@@ -39,10 +39,12 @@ public class Question {
 	 */
 	//http://answer.ninechapter.com/solutions/unique-paths-ii/
 	//看【注】
-	//result[i][j]表示从[0][0]到[i][j],一共有多少种不同path
-	//通项公式general formula: 
-	//	1.if obstacleGrid[i][j]!=1，则result[i][j] = result[i - 1][j] + result[i][j - 1];
-	//	2.if obstacleGrid[i][j]==1，则result[i][j] = 0;(因为没有一种办法可以走到[i][j])
+	//1.state: result[i][j]表示从[0][0]到[i][j],一共有多少种不同path
+	//2.function:      if obstacleGrid[i][j]!=1，则result[i][j] = result[i - 1][j] + result[i][j - 1];
+	//			  else if obstacleGrid[i][j]==1，则result[i][j] = 0;(因为没有一种办法可以走到[i][j])
+	//3.initialize: result[0][j] = 1 (until obstacleGrid[0][j] == 1)
+	//				result[i][0] = 1 (until obstacleGrid[i][0] == 1)
+	//4.answer: result[m-1][n-1]
     public int uniquePathsWithObstacles(int[][] obstacleGrid) {
     	if (obstacleGrid == null || obstacleGrid.length == 0 || obstacleGrid[0].length == 0) {
             return 0;

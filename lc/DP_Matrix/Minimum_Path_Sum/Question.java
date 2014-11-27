@@ -17,8 +17,12 @@ public class Question {
 	 */
 	//quite similar to unique path: https://oj.leetcode.com/problems/unique-paths/
 	//http://www.ninechapter.com/solutions/minimum-path-sum/
-	//result[i][j]表示从[0][0]到[i][j],sum最小的路径
-	//通项公式general formula: result[i][j] = min(result[i - 1][j] + result[i][j - 1]) + grid[i][j];
+	//1.state: result[i][j]表示从[0][0]到[i][j],sum最小的路径
+	//2.function: result[i][j] = min(result[i - 1][j] + result[i][j - 1]) + grid[i][j];
+	//3.initialize: result[0][0] = grid[0][0];
+	//				result[0][j] = result[0][j - 1] + grid[0][j]
+	//				result[i][0] = result[i - 1][0] + grid[i][0]
+	//4.answer: result[row - 1][col - 1]
 	public int minPathSum(int[][] grid) {
 		if (grid == null || grid.length == 0 || grid[0].length == 0) {
 			return 0;

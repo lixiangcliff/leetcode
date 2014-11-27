@@ -17,8 +17,11 @@ public class Question {
 		Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
 	 */
 	// http://answer.ninechapter.com/solutions/unique-paths/
-	//result[i]表示从[0]到[i],一共有多少种不同走法
-	//通项公式general formula: result[i] = result[i - 1] + result[i - 2];
+	//1.state: result[i]表示从[0]到[i],一共有多少种不同走法
+	//2.function: result[i] = result[i - 1] + result[i - 2];
+	//3.initialize: result[0] = 1
+	//				result[1] = 2
+	//4.answer: result[n - 1]
 	//DP 1D
 	public int climbStairs(int n) {
 		if (n <= 2) {

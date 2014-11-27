@@ -8,7 +8,7 @@ public class Question {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int[] A = {0,2,3};
-		System.out.println(canJump(A));
+		//System.out.println(canJump(A));
 	}
 	
 	/**
@@ -29,7 +29,7 @@ public class Question {
 	//3.initialize: result[0] = true
 	//4.answer: result[A.length - 1]
 	//O(n^2)时间复杂度，不是最优解，但是容易想。
-	public static boolean canJump(int[] A) {
+	public boolean canJump(int[] A) {
 		if (A == null || A.length == 0) {
 			return false;
 		}
@@ -49,7 +49,7 @@ public class Question {
 	//DP 1D
 	//O(n) time complex
 	//http://blog.csdn.net/linhuanmars/article/details/21354751
-	public static boolean canJump_BigO_n(int[] A) {
+	public boolean canJump_BigO_n(int[] A) {
 		if (A == null || A.length==0){
 			return false;
 		}

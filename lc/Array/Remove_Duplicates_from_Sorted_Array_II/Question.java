@@ -16,6 +16,16 @@ public class Question {
 		}
 
 	}
+	
+	/**
+	 * https://oj.leetcode.com/problems/remove-duplicates-from-sorted-array-ii/
+	 * Follow up for "Remove Duplicates": What if duplicates are allowed at most
+	 * twice?
+	 * 
+	 * For example, Given sorted array A = [1,1,1,2,2,3],
+	 * 
+	 * Your function should return length = 5, and A is now [1,1,2,2,3].
+	 */
 	//http://blog.csdn.net/linhuanmars/article/details/24343525
 	//http://needjobasap.blogspot.com/2014/01/remove-duplicates-from-sorted-array-ii.html
     public static int removeDuplicates(int[] A) {

@@ -13,6 +13,13 @@ public class Question {
 	}
 	
 
+	/**
+	 * https://oj.leetcode.com/problems/first-missing-positive/ 
+	 * Given an unsorted integer array, find the first missing positive integer. 
+	 * For example, Given [1,2,0] return 3, and [3,4,-1,1] return 2.
+	 * 
+	 * Your algorithm should run in O(n) time and uses constant space.
+	 */
 	//http://blog.csdn.net/linhuanmars/article/details/20884585
 	//our purpose it to make: A[0]==1, A[1]==2...
 	//中心思想：遍历array，通过swap让A[i]的值为i+1；第二次遍历时哪个A[i]!=i+1 即是缺失的第一个正数

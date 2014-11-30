@@ -30,6 +30,11 @@ public class Question {
 		}
 	}
     
+	/**
+	 * https://oj.leetcode.com/problems/merge-two-sorted-lists/
+	 * Merge two sorted linked lists and return it as a new list. The new list
+	 * should be made by splicing together the nodes of the first two lists.
+	 */
 	//simpler code; dummy ListNode reduce the redundancy!  
     //http://answer.ninechapter.com/solutions/merge-two-sorted-lists/
     public static ListNode mergeTwoLists(ListNode l1, ListNode l2) {

@@ -13,7 +13,12 @@ public class Question {
 		// TODO Auto-generated method stub
 
 	}
-	
+
+	/**
+	 * https://oj.leetcode.com/problems/merge-k-sorted-lists/ 
+	 * Merge k sorted linked lists and return it as one sorted list. Analyze and
+	 * describe its complexity.
+	 */
 	/***********************divide and conquer method below***********************/
 	//divide and conquer method
 	//http://blog.csdn.net/linhuanmars/article/details/19899259

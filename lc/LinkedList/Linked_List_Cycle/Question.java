@@ -10,6 +10,12 @@ public class Question {
 
 	}
 	
+	/**
+	 * https://oj.leetcode.com/problems/linked-list-cycle/
+	 * Given a linked list, determine if it has a cycle in it.
+	 * 
+	 * Follow up: Can you solve it without using extra space?
+	 */
 	//http://blog.csdn.net/linhuanmars/article/details/21200601
     public static boolean hasCycle(ListNode head) {
         if(head ==null || head.next == null){//head.next==null就是说只有一个node

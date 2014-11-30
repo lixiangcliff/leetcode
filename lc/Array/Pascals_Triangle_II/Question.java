@@ -15,6 +15,14 @@ public class Question {
 		}
 	}
 	
+	/**
+	 * https://oj.leetcode.com/problems/pascals-triangle-ii/
+	 * Given an index k, return the kth row of the Pascal's triangle.
+	 * 
+	 * For example, given k = 3, Return [1,3,3,1].
+	 * 
+	 * Note: Could you optimize your algorithm to use only O(k) extra space?
+	 */
 	//to use O(k) space only: rolling array
 	//http://blog.csdn.net/linhuanmars/article/details/23311629
 	//http://blog.csdn.net/abcbc/article/details/8982651

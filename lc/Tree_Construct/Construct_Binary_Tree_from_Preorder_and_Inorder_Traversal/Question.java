@@ -12,6 +12,13 @@ public class Question {
 
 	}
 	
+	/**
+	 * https://oj.leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
+	 * Given preorder and inorder traversal of a tree, construct the binary
+	 * tree.
+	 * 
+	 * Note: You may assume that duplicates do not exist in the tree.
+	 */
 	//http://blog.csdn.net/linhuanmars/article/details/24389549
 	//【注】，这道题在解答时，一定要举类似下面例子来写！这样照实例来写，效率高，准确性高。
 	/*

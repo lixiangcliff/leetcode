@@ -14,6 +14,13 @@ public class Question {
 
 	}
 	
+	/**
+	 * https://oj.leetcode.com/problems/merge-intervals/
+	 * Given a collection of intervals, merge all overlapping intervals.
+	 * For example, 
+	 * Given [1,3],[2,6],[8,10],[15,18], 
+	 * return[1,6],[8,10],[15,18].
+	 */
 	//看图
 	//http://blog.csdn.net/linhuanmars/article/details/21857617
     public static ArrayList<Interval> merge(ArrayList<Interval> intervals) {

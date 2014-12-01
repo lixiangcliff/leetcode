@@ -11,6 +11,12 @@ public class Question {
 		
 
 	}
+	
+	/**
+	 * https://oj.leetcode.com/problems/convert-sorted-array-to-binary-search-tree/
+	 * Given an array where elements are sorted in ascending order, convert it
+	 * to a height balanced BST.
+	 */
 	/*
 	 * 构造树的模板：
 	 * 把根root先new出来，然后它的左节点接到递归左边部分的返回值，右节点接到递归右边部分的返回值，最后将root返回回去。

@@ -11,7 +11,11 @@ public class Question {
 		//System.out.println(Integer.MIN_VALUE);
 	}
 	
-	
+	/**
+	 * https://oj.leetcode.com/problems/divide-two-integers/
+	 * Divide two integers without using multiplication, division and mod
+	 * operator.
+	 */
 	//O(logn)
 	//http://blog.csdn.net/linhuanmars/article/details/20024907
 	public static int divide(int dividend, int divisor) {

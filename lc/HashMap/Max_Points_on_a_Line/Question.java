@@ -13,6 +13,11 @@ public class Question {
 
 	}
 	
+	/**
+	 * https://oj.leetcode.com/problems/max-points-on-a-line/
+	 * Given n points on a 2D plane, find the maximum number of points that lie
+	 * on the same straight line.
+	 */
 	//http://blog.csdn.net/linhuanmars/article/details/21060933
 	//用HashMap, time: O(n^2); space O(n)
     public int maxPoints(Point[] points) {

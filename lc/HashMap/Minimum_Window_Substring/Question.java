@@ -12,6 +12,22 @@ public class Question {
 		System.out.println(minWindow("ADOBECODEBANC", "ABC"));
 	}
 	
+	/**
+	 * https://oj.leetcode.com/problems/minimum-window-substring/
+	 * Given a string S and a string T, find the minimum window in S which will
+	 * contain all the characters in T in complexity O(n).
+	 * 
+	 * For example, 
+	 * S = "ADOBECODEBANC" 
+	 * T = "ABC" 
+	 * Minimum window is "BANC".
+	 * 
+	 * Note: If there is no such window in S that covers all characters in T,
+	 * return the emtpy string "".
+	 * If there are multiple such windows, you are guaranteed that there will
+	 * always be only one unique minimum window in S.
+	 */
+	
 	//同样很多细节！！
 	//http://blog.csdn.net/linhuanmars/article/details/20343903
     public static String minWindow(String S, String T) {

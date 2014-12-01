@@ -11,6 +11,11 @@ public class Question {
 
 	}
 	
+	/**
+	 * https://oj.leetcode.com/problems/sqrtx/
+	 * Implement int sqrt(int x). 
+	 * Compute and return the square root of x.
+	 */
 	//using BST template
 	//http://blog.csdn.net/linhuanmars/article/details/20089131
     public static int sqrt(int x) {

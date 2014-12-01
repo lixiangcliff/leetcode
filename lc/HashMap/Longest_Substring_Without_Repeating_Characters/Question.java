@@ -12,6 +12,13 @@ public class Question {
 
 	}
 	
+	/**
+	 * https://oj.leetcode.com/problems/longest-substring-without-repeating-characters/
+	 * Given a string, find the length of the longest substring without
+	 * repeating characters. For example, the longest substring without
+	 * repeating letters for "abcabcbb" is "abc", which the length is 3. For
+	 * "bbbbb" the longest substring is "b", with the length of 1.
+	 */
 	//http://blog.csdn.net/linhuanmars/article/details/19949159
 	/* 思想：
 	 * 维护一个HashSet, 正常情况下移动右窗口，如果没有出现重复则继续移动右窗口，

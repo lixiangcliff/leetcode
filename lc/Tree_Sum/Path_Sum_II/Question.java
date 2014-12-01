@@ -13,7 +13,27 @@ public class Question {
 		// TODO Auto-generated method stub
 
 	}
-	
+	/**
+	 * https://oj.leetcode.com/problems/path-sum-ii/
+	 * Given a binary tree and a sum, find all root-to-leaf paths 
+	 * where each path's sum equals the given sum.
+
+		For example:
+		Given the below binary tree and sum = 22,
+		              5
+		             / \
+		            4   8
+		           /   / \
+		          11  13  4
+		         /  \    / \
+		        7    2  5   1
+		return
+		[
+		   [5,4,11,2],
+		   [5,8,4,5]
+		]
+		
+	 */
 	//看【注】里的问题
 	//http://www.ninechapter.com/solutions/path-sum-ii/
 	//http://blog.csdn.net/linhuanmars/article/details/23655413

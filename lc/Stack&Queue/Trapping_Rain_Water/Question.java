@@ -12,7 +12,18 @@ public class Question {
 
 	}
 	
-
+	/**
+	 * https://oj.leetcode.com/problems/trapping-rain-water/
+	 * Given n non-negative integers representing an elevation map where the
+	 * width of each bar is 1, compute how much water it is able to trap after
+	 * raining.
+	 * 
+	 * For example, Given [0,1,0,2,1,0,1,3,2,1,2,1], return 6.
+	 * 
+	 * The above elevation map is represented by array
+	 * [0,1,0,2,1,0,1,3,2,1,2,1]. In this case, 6 units of rain water (blue
+	 * section) are being trapped. Thanks Marcos for contributing this image!
+	 */
 	//enhancement use 2*O(n) instead of 3*O(n)
 	//http://blog.unieagle.net/2012/10/31/leetcode%E9%A2%98%E7%9B%AE%EF%BC%9Atrapping-rain-water/
 	//O(n)的 需要进一步研究：http://blog.csdn.net/linhuanmars/article/details/20888505

@@ -10,6 +10,18 @@ public class Question {
 		System.out.println(searchInsert(A, 3));
 	}
 	
+	/**
+	 * https://oj.leetcode.com/problems/search-insert-position/
+	 * Given a sorted array and a target value, return the index if the target
+	 * is found. If not, return the index where it would be if it were inserted
+	 * in order.
+	 * You may assume no duplicates in the array.
+	 * Here are few examples. 
+	 * [1,3,5,6], 5 → 2 
+	 * [1,3,5,6], 2 → 1 
+	 * [1,3,5,6], 7 → 4
+	 * [1,3,5,6], 0 → 0
+	 */
 	//用BST模板，注意下面的【注】的细节
 	//即找target，如果找不到就返回一个比target大(在程序中要写成大于等于，下面会解释)的最小值的index（如果A中的都比target小，则返回A最后一个index+1）
 	public static int searchInsert(int[] A, int target) {  

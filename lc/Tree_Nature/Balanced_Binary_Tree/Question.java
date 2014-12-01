@@ -9,6 +9,14 @@ public class Question {
 		// TODO Auto-generated method stub
 
 	}
+
+	/**
+	 * https://oj.leetcode.com/problems/balanced-binary-tree/
+	 * Given a binary tree, determine if it is height-balanced.
+	 * For this problem, a height-balanced binary tree is defined as a binary
+	 * tree in which the depth of the two subtrees of every node never differ by
+	 * more than 1.
+	 */
 	//http://blog.csdn.net/linhuanmars/article/details/23731355
 	//这里helper的返回值有两层含义：当>=0时，表示为树高；当<0时，表示失去平衡
     public boolean isBalanced(TreeNode root) {

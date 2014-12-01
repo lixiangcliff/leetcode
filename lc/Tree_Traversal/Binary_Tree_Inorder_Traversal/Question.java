@@ -12,6 +12,21 @@ public class Question {
 		// TODO Auto-generated method stub
 
 	}
+	/**
+	 * https://oj.leetcode.com/problems/binary-tree-inorder-traversal/
+	 * Given a binary tree, return the inorder traversal of its nodes' values.
+		
+		For example:
+		Given binary tree {1,#,2,3},
+		   1
+		    \
+		     2
+		    /
+		   3
+		return [1,3,2].
+		
+		Note: Recursive solution is trivial, could you do it iteratively?
+	 */
 	//http://blog.csdn.net/linhuanmars/article/details/20187257
 	//recursion
 	public ArrayList<Integer> inorderTraversalRecursive(TreeNode root) {

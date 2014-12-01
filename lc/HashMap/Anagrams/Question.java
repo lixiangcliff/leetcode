@@ -30,6 +30,13 @@ public class Question {
 		System.out.println(charArray.toString());
 	}
 	
+	/**
+	 * https://oj.leetcode.com/problems/anagrams/
+	 * Given an array of strings, return all groups of strings that are
+	 * anagrams.
+	 * 
+	 * Note: All inputs will be in lower-case.
+	 */
 	//Question is asking to return all (group of) strings that has anagrams from the String[] 
 	//要把题意理清
 	//就是说返回结果里，可能有若干组，每组都是anagrams。但是这些组都放在一个ArrayList<String>返回

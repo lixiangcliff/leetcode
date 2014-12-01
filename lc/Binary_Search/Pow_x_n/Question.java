@@ -10,6 +10,10 @@ public class Question {
 		System.out.println(pow(-13.62608,3));
 	}
 	
+	/**
+	 * https://oj.leetcode.com/problems/powx-n/
+	 * Implement pow(x, n).
+	 */
     public static double pow(double x, int n) {
     	boolean positive;
     	if (n>0){

@@ -12,6 +12,13 @@ public class Question {
 
 	}
 	
+	/**
+	 * https://oj.leetcode.com/problems/copy-list-with-random-pointer/
+	 * A linked list is given such that each node contains an additional random
+	 * pointer which could point to any node in the list or null.
+	 * 
+	 * Return a deep copy of the list.
+	 */
 	//http://blog.csdn.net/linhuanmars/article/details/22463599
     public RandomListNode copyRandomList(RandomListNode head) {
        HashMap<RandomListNode, RandomListNode> map = new HashMap<RandomListNode, RandomListNode>();

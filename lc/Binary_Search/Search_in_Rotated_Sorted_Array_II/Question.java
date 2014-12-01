@@ -12,6 +12,13 @@ public class Question {
 		System.out.println(search(A, 9));
 	}
 	
+	/**
+	 * https://oj.leetcode.com/problems/search-in-rotated-sorted-array-ii/
+	 * Follow up for "Search in Rotated Sorted Array": What if duplicates are
+	 * allowed?
+	 * Would this affect the run-time complexity? How and why?
+	 * Write a function to determine if a given target is in the array.
+	 */
 	//using BST template
 	//http://blog.csdn.net/linhuanmars/article/details/20588511
     public static boolean search(int[] A, int target) {

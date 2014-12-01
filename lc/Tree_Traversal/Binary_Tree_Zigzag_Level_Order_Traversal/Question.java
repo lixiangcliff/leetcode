@@ -16,6 +16,25 @@ public class Question {
 
 	}
 
+	/**
+	 * https://oj.leetcode.com/problems/binary-tree-zigzag-level-order-traversal/
+	 * Given a binary tree, return the zigzag level order traversal of its nodes' values. (ie, from left to right, then right to left for the next level and alternate between).
+
+		For example:
+		Given binary tree {3,9,20,#,#,15,7},
+		    3
+		   / \
+		  9  20
+		    /  \
+		   15   7
+		return its zigzag level order traversal as:
+		[
+		  [3],
+		  [20,9],
+		  [15,7]
+		]
+
+	 */
 	//类似https://oj.leetcode.com/problems/binary-tree-level-order-traversal/
 	//http://blog.csdn.net/linhuanmars/article/details/24509105
 	//http://www.ninechapter.com/solutions/binary-tree-zigzag-level-order-traversal/ 

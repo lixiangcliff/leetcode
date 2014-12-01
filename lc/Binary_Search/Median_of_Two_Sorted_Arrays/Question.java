@@ -17,6 +17,12 @@ public class Question {
 		
 	}
 	
+	/**
+	 * https://oj.leetcode.com/problems/median-of-two-sorted-arrays/
+	 * There are two sorted arrays A and B of size m and n respectively. Find
+	 * the median of the two sorted arrays. The overall run time complexity
+	 * should be O(log (m+n)).
+	 */
 	//这个code更易懂好记 http://www.ninechapter.com/solutions/median-of-two-sorted-arrays/ 
 	//思路两者一样：http://blog.csdn.net/linhuanmars/article/details/19905515
 	//看图！

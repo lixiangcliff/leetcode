@@ -13,6 +13,12 @@ public class Question {
 
 	}
 	
+	/**
+	 * https://oj.leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/
+	 * Given inorder and postorder traversal of a tree, construct the binary
+	 * tree.
+	 * Note: You may assume that duplicates do not exist in the tree.
+	 */
 	//http://blog.csdn.net/linhuanmars/article/details/24390157
 	//此题和Construct Binary Tree from Preorder and Inorder Traversal，非常类似。唯一区别是后序排列根在最后。
 	//具体注释参考那一题即可

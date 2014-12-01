@@ -12,6 +12,13 @@ public class Question {
 		// TODO Auto-generated method stub
 
 	}
+	
+	/**
+	 * https://oj.leetcode.com/problems/minimum-depth-of-binary-tree/
+	 * Given a binary tree, find its minimum depth.
+	 * The minimum depth is the number of nodes along the shortest path from the
+	 * root node down to the nearest leaf node.
+	 */
 	//http://blog.csdn.net/linhuanmars/article/details/19660209
 	//http://blog.csdn.net/linhuanmars/article/details/39024195
 	/*

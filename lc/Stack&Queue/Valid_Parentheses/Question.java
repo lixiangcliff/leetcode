@@ -12,6 +12,14 @@ public class Question {
 		System.out.println(isValid("([)]"));
 	}
 	
+	/**
+	 * https://oj.leetcode.com/problems/valid-parentheses/
+	 * Given a string containing just the characters '(', ')', '{', '}', 
+	 * '[' and']', determine if the input string is valid.
+	 * 
+	 * The brackets must close in the correct order, "()" and "()[]{}" are all
+	 * valid but "(]" and "([)]" are not.
+	 */
 	//http://blog.csdn.net/linhuanmars/article/details/19800789
     public static boolean isValid(String s) {
     	if (s == null || s.length() == 0 || s.length() %2 ==1){

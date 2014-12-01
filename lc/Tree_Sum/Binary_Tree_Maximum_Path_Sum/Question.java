@@ -11,6 +11,20 @@ public class Question {
 		// TODO Auto-generated method stub
 
 	}
+	/**
+	 * https://oj.leetcode.com/problems/binary-tree-maximum-path-sum/
+	 * Given a binary tree, find the maximum path sum.
+		The path may start and end at any node in the tree.
+		
+		For example:
+		Given the below binary tree,
+		
+		       1
+		      / \
+		     2   3
+		     
+		Return 6.
+	 */
 	//ninechapter解题思路更加清晰：看图！
 	//之所以在ResultType里要维护两个变量singlePath和maxPath，是因为：
 	//我们最终想要的是maxPath。但是要得到maxPath的话，我们需要使用singlePath作为组成maxPath的一个部分。

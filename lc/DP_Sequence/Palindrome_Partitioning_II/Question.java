@@ -20,7 +20,7 @@ public class Question {
 	 * For example, given s = "aab", Return 1 
 	 * since the palindrome partitioning ["aa","b"] could be produced using 1 cut.
 	 */
-	//http://www.ninechapter.com/solutions/jump-game-ii/
+	//http://www.ninechapter.com/solutions/palindrome-partitioning-ii/
 	//1.state: result[i]代表直到前i个字符，最少需要几次cut
 	//2.function: 则result[i] = min(result[j]+1; 前提是j<i && 从j+1到i是palindrome)
 	//(其中，能从j跳到i的条件是：result[j] && A[j] + j >= i)

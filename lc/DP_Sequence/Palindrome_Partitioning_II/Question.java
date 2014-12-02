@@ -23,7 +23,6 @@ public class Question {
 	//http://www.ninechapter.com/solutions/palindrome-partitioning-ii/
 	//1.state: result[i]代表直到前i个字符，最少需要几次cut
 	//2.function: 则result[i] = min(result[j]+1; 前提是j<i && 从j+1到i是palindrome)
-	//(其中，能从j跳到i的条件是：result[j] && A[j] + j >= i)
 	//(之所以有result[j]+1，是因为当我们已经得到result[j]的值，如果isPalindrome[j+1][i]也为真，即有再在j和j+1之间cut一次，就可以得到result[i])
 	//3.initialize: result[i] = i - 1（比如，result[1] = 0，即如果只有一个字符，根本不需要cut就是palindrome了）
 	//4.answer: result[A.length]

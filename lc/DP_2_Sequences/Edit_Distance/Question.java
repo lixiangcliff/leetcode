@@ -10,10 +10,55 @@ public class Question {
 
 	}
 	
-	//need to chew it again
+	
+	/**
+	 * https://oj.leetcode.com/problems/edit-distance/
+	 * Given two words word1 and word2, find the minimum number of steps
+	 * required to convert word1 to word2. (each operation is counted as 1
+	 * step.)
+	 * 
+	 * You have the following 3 operations permitted on a word:
+	 * a) Insert a character 
+	 * b) Delete a character 
+	 * c) Replace a character
+	 */
+	//http://www.ninechapter.com/solutions/edit-distance/
+	//1.state: result[i][j]代表word1的前i个字符，配上word2的前j个字符，最少需要几次编辑能让他们相等。
+	//2.function: 当word1[i] == word2[j]， result[i][j] = result[i - 1][j - 1]
+	//			    	（在word1[i] == word2[j]的情况下，不需要重新编辑，就可以使word1的前i位和word2的前j位再次相等。）
+	//			      当word1[i] != word2[j]， result[i] = min(result[i - 1][j - 1] + 1 , result[i - 1][j] + 1, result[i][j - 1] + 1) 
+	//					（以上三种方式都能在word1[i] != word2[j]的情况下，经过相应的编辑，重新使word1的前i位和word2的前j位再次相等。选三个中最小的。）
+	//3.initialize: result[0][j] = j;
+	//				result[i][0] = i;
+	//4.answer: result[A.length][B.length];
+	//【注】 delete和insert可以理解为等价操作
+	//【注】result[][]和A，B有位差
+	
+	public int minDistance(String word1, String word2) {
+		if (word1 == null || word2 == null) {
+			return 0;
+		}
+		int[][] result = new int[word1.length() + 1][word2.length() + 1];
+		for (int i = 0; i <= word1.length(); i++) {
+			for (int j = 0; j <= word2.length(); j++) {
+				if (i == 0) { //初始化第一行
+					result[0][j] = j;
+				} else if (j == 0) { //初始化第一列
+					result[i][0] = i;
+				} else if (word1.charAt(i - 1) == word2.charAt(i - 2)) { //result[][]和A，B有位差
+					result[i][j] = result[i - 1][j - 1];
+				} else {
+					result[i][j] = Math.min(result[i - 1][j - 1], Math.min(result[i - 1][j], result[i][j - 1])) + 1;
+				}
+			}
+		}
+		return result[word1.length()][word2.length()];
+	}
+	
+	
 	//http://blog.csdn.net/linhuanmars/article/details/24213795
 	//http://huntfor.iteye.com/blog/2077940
-    public int minDistance(String word1, String word2) {
+    public int minDistance2(String word1, String word2) {
         int len1 = word1.length();
         int len2 = word2.length();
         if(len1 == 0){

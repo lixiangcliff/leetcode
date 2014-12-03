@@ -31,7 +31,7 @@ public class Question {
 	//http://www.ninechapter.com/solutions/distinct-subsequences/
 	//1.state: result[i][j]代表： 在S的前i个字符中，有几个不同的子串，与T的前j个字符相同。
 	//2.function: 当S[i] != T[j]， result[i][j] = result[i - 1][j] （因为S中新增加的i并没有产生新的可能的字符串可以使新的S和T满足要求）
-	//			      当A[i] == B[j]， result[i][j] = result[i - 1][j - 1] + result[i - 1][j]) （S[i]==T[i],则result[i - 1][j - 1]满足的都可以被result[i][j]所用）
+	//			      当S[i] == T[j]， result[i][j] = result[i - 1][j - 1] + result[i - 1][j]) （S[i]==T[i],则result[i - 1][j - 1]满足的都可以被result[i][j]所用）
 	//3.initialize: result[0][j] = 0; 第一行（S为空，则没有任何办法可以从S中找到子串和T相同）
 	//				result[i][0] = 1; 第一列（T为空，则只有一种办法从S中找到子串和T相同，即S也取空）
 	//4.answer: result[A.length][B.length];

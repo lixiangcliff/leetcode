@@ -48,7 +48,6 @@ public class Question {
 		ArrayList<Integer> item = new ArrayList<Integer>();
 		helper(result, item, num);
 		return result;
-		
 	}
 	
 	private void helper( ArrayList<ArrayList<Integer>> result, ArrayList<Integer> item, int[] num) {
@@ -87,7 +86,7 @@ public class Question {
 										//之所以不放回原来的result是因为我们要用result.size()来标记哪些处理过了而哪些没有。如果再放回同一个result，size就不会减小，便陷入死循环。
 				}
 			}
-			result = newResult;
+			result = newResult; //交换result引用
 		}
 		return result;
 	}

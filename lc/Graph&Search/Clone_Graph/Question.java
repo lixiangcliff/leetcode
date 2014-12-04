@@ -44,8 +44,8 @@ public class Question {
         		}
         		//下面一行简单说就是，把clone出来的node，和clone出来的该node的neighbor，连上。
         		//拆分来看：
-        		//map.get(curNode)表示通过当前node找到clone的node
-        		//map.get(curNode.neighbors.get(i)表示通过当前node的neighborNode找到被clone出来的neighborNode
+        		//前半部分map.get(curNode)表示通过当前node找到clone的node
+        		//后半部分map.get(curNode.neighbors.get(i)表示通过当前node的neighborNode找到被clone出来的neighborNode
         		//中间的.neighbors.add表示在新的clone出来的图里，把clone的neighborNode加到clone的node的neighbors的list里
         		map.get(curNode).neighbors.add(map.get(curNode.neighbors.get(i)));
         	}

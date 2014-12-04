@@ -83,8 +83,7 @@ public class Question {
 					ArrayList<Integer> item = new ArrayList<Integer>(curItem);
 					item.add(k, num[i]);
 					newResult.add(item);//把新产生的item放入另一个result。
-										//之所以不放回原来的result是因为我们要用result.size()来标记哪些处理过了而哪些没有。如果再放回同一个result，size就不会减小，便陷入死循环。
-				}
+				}						//之所以不放回原来的result是因为我们要用result.size()来标记哪些处理过了而哪些没有。如果再放回同一个result，size就不会减小，便陷入死循环。
 			}
 			result = newResult; //交换result引用
 		}

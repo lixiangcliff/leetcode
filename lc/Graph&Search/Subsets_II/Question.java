@@ -53,7 +53,8 @@ public class Question {
 		}
 		ArrayList<Integer> item = new ArrayList<Integer>();
 		Arrays.sort(S);
-		helper(result, item, S, 0);
+		int pos = 0;
+		helper(result, item, S, pos);
 		return result;
 	}
 	

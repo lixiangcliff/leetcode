@@ -67,12 +67,12 @@ public class Question {
     		return;
     	}
     	for (int i = pos; i < candidates.length; i++) { //i从pos开始处理，因为pos之前的我们已经处理完了
-    		if( i > 0 && candidates[i] == candidates[i - 1]) {//这样做避免了因为重复元素而导致的重复结果
+    		if( i > pos && candidates[i] == candidates[i - 1]) {//这样做避免了因为重复元素而导致的重复结果
     			continue;
     		}
-    		item.add(candidates[i]);
-    		helper(result, item, candidates, i, target - candidates[i]); //递归时仍为i，是因为元素可以重复使用，（如果不可以重复使用，此处就要用i + 1）
-        	item.remove(item.size() - 1);
+    		item.add(candidates[i]);//把当前值加入item中
+    		helper(result, item, candidates, i, target - candidates[i]); //target减去当前值。进一步递归。递归时仍为i，是因为元素可以重复使用，（如果不可以重复使用，此处就要用i + 1）
+        	item.remove(item.size() - 1); //恢复现场
     	}
     }
 }

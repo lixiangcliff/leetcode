@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
 public class Question {
 
 	/**
@@ -11,19 +12,18 @@ public class Question {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int[] num = {1,2,3,4};
+
+		
+		int [] num = {1,2,3};
 		Question q = new Question();
-/*		for (int m=0;m<num.length;m++){
-			System.out.print(num[m]);
-		}		
-		q.swap(num, 0, 3);
-		for (int m=0;m<num.length;m++){
-			System.out.print(num[m]);
-		}*/
-		q.permute(num);
-		/*for (int m=0;m<num.length;m++){
-			System.out.print(num[m]);
-		}*/
+		ArrayList<ArrayList<Integer>> result = q.permute(num);
+		for (int i = 0; i < result.size(); i++) {
+			ArrayList<Integer> item = result.get(i);
+			for (int j = 0; j < item.size(); j++) {
+				System.out.print(item.get(j)+ ",");
+			}
+			System.out.println("");
+		}
 
 	}
 	
@@ -83,9 +83,36 @@ public class Question {
 					ArrayList<Integer> item = new ArrayList<Integer>(curItem);
 					item.add(k, num[i]);
 					newResult.add(item);//把新产生的item放入另一个result。
-				}						//之所以不放回原来的result是因为我们要用result.size()来标记哪些处理过了而哪些没有。如果再放回同一个result，size就不会减小，便陷入死循环。
+										//之所以不放回原来的result是因为我们要用result.size()来标记哪些处理过了而哪些没有。如果再放回同一个result，size就不会减小，便陷入死循环。
+				}
 			}
-			result = newResult; //交换result引用
+			result = newResult;
+		}
+		return result;
+	}
+	
+	//iterate如果不用两个result就这样写
+	public ArrayList<ArrayList<Integer>> permuteIterative2(int[] num) {
+		ArrayList<ArrayList<Integer>> result= new ArrayList<ArrayList<Integer>>();
+		if (num== null || num.length == 0){
+			return result;
+		}
+		ArrayList<Integer> firstItem = new ArrayList<Integer>();
+		firstItem.add(num[0]);
+		result.add(firstItem);
+		for (int i = 1; i < num.length; i++) { 
+			int size = result.size();//先保留当前size
+			for (int j = 0; j < size; j++) {
+				ArrayList<Integer> curItem = result.get(j);
+				for (int k = 0; k < curItem.size() + 1; k++) {
+					ArrayList<Integer> item = new ArrayList<Integer>(curItem);
+					item.add(k, num[i]);
+					result.add(item);
+				}						
+			}
+			while (size > 0){//删去前size个元素
+				result.remove(0);
+			}
 		}
 		return result;
 	}

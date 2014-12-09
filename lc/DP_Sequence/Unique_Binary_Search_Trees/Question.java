@@ -31,7 +31,7 @@ public class Question {
 	//（即，如果有i个node，根占用了1个node，还剩i - 1个node；可以左子树分0个，右子树分i - 1，这种情况左右子树的所有可能组合个数为：result[0] * result[i - 1]
 	// 同理，还可以左子树分1个，右子树分i - 2个，这种情况左右子树的所有可能组合个数为：result[1] * result[i - 2]；etc，把这些所有可能加和起来就可以得到result[i]了）
 	//3.initialize: result[0] = 1; result[1] = 1
-	//4.answer: result[i]
+	//4.answer: result[n]
 	public int numTrees(int n) {
 		if (n < 0) {
 			return Integer.MIN_VALUE;

@@ -19,6 +19,7 @@ public class Question {
 
 	}
 	
+	
 	//brutal force
 	//all explanation below:
 	//http://blog.csdn.net/fightforyourdream/article/details/17717873

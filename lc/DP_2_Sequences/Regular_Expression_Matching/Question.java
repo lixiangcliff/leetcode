@@ -53,7 +53,6 @@ public class Question {
 	//	(3)当p[j] == '*', 且p[j - 1] == '.': 
 	//			如果result[i][j - 2]或者result[i][j - 1]为true，因为".*"可以match任意字符串，所以 result[i, i + 1, ... s.length][j]都为true
 	//3.initialize: result[0][0] = true;
-	//				如果result[0][j - 2]
 	//4.answer: result[A.length][B.length];
 	//
 	//【注】".*"可以match任意字符串，

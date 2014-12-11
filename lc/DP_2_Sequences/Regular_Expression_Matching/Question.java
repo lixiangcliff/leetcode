@@ -61,11 +61,8 @@ public class Question {
 	//【注】result[][]和s，p有位差
 	//【注】外层循环应该是p,然后待匹配串s内层循环扫过来
 	public boolean isMatch(String s, String p) {
-        if (s.length() == 0 && p.length() == 0) {
-        	return true;
-        }
-        if (p.length() == 0) {
-        	return false;
+		if (p.length() == 0){
+        	return s.length() == 0;
         }
         boolean[][] result = new boolean[s.length() + 1][p.length() + 1];
         result[0][0] = true;

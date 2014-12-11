@@ -65,7 +65,7 @@ public class Question {
         }
         boolean[][] result = new boolean[s.length() + 1][p.length() + 1];
         result[0][0] = true;
-        //j = 0时，肯定为false，所以可以直接跳过
+        //j = 0，而i != 0时，肯定为false，所以可以直接跳过
         for (int j = 1; j <= p.length(); j++) {
         	if (p.charAt(j - 1) == '*') { //位差
         		//i = 0时，因为p[j]为'*'，所以p[j - 1]的情况不影响结果（大不了j和j - 1位直接忽略）

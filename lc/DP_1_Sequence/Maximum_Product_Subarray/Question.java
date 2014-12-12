@@ -28,7 +28,7 @@ public class Question {
 	//乘法中有可能现在看起来小的一个负数，后面跟另一个负数相乘就会得到最大的乘积。”
 	//1.state: maxResult[i]代表直到前i个字符，包涵i最大的product值
 	//		   minResult[i]代表直到前i个字符，包涵i最小的product值
-	//		   maxProduct直到i最小的product值（未必要包涵i）
+	//		   maxProduct直到i最大的product值（未必要包涵i）
 	//		   minProduct直到i最小的product值（未必要包涵i）
 	//2.function: maxResult[i] = max(A[i], A[i] * maxResult[i - 1], A[i] * minResult[i - 1]); 
 	//			 （意思是：到i为止的最大乘积，可能是A[i]本身；如果A[i]为正，则可能是A[i] * maxResult[i - 1]；如果A[i]为负，则可能是 A[i] * minResult[i - 1]。三者中挑最大）

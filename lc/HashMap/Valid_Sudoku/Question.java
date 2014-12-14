@@ -10,6 +10,7 @@ public class Question {
 /*		boolean[] visited = new boolean[10]; 
 		Arrays.fill(visited, false);
 		char[] line = {'1','2', '3', '5', '.', '.' , '6', '7','8'};*/
+		Question q = new Question();
 		char[][] board = {
 				{'1','.', '.', '4', '.', '.' , '7', '.','9'},
 				{'9','.', '.', '.', '.', '.' , '.', '.','.'},
@@ -23,7 +24,7 @@ public class Question {
 				
 		};
 		//System.out.println(isValidArray(visited, board[0]));
-		System.out.println(isValidSudoku(board));
+		System.out.println(q.isValidSudoku(board));
 
 	}
 	
@@ -38,61 +39,74 @@ public class Question {
 	 * Note: A valid Sudoku board (partially filled) is not necessarily
 	 * solvable. Only the filled cells need to be validated.
 	 */
+	
+	//优化，每个位置只遍历一次。时间复杂度O(n)。思想是，每次遍历当前加入的数，是否仍然使棋盘合法。
+	public boolean isValidSudoku(char[][] board) {
+		for (int i = 0; i < 9; i++) {
+			for (int j = 0; j < 9; j++) {
+				if (!isValid(board, i, j)) {
+					return false;
+				}
+			}
+		}
+		return true; 
+	}
+	
+	private boolean isValid(char[][] board, int i, int j){
+		return false;
+	}
+	//Brutal force: 每个位置遍历三次，时间复杂度： O(3n)
 	//http://blog.csdn.net/linhuanmars/article/details/20748171
 	//【注】boolean[] visited = new boolean[9]的位置不同，原则是没处理9个元素就出reset(new)一次visited
-    public static boolean isValidSudoku(char[][] board) {
-    	if(board == null || board.length != 9 || board[0].length != 9){
-    		return false;
-    	}
-    	
-    	
-    	//rows
-    	for(int i = 0; i < 9; i++){
-    		boolean[] visited = new boolean[9]; 
-    		for (int j = 0; j < 9; j++ ){
-    			if (board[i][j] != '.'){
-		    		if (visited[(int)(board[i][j]-'1')]){//已经曾经被访问过了
-		    			return false;
-		    		}
-		    		visited[(int)(board[i][j]-'1')] = true;
-    			}//如果board[i][j] == '.' 什么也不需要做。因为'.'有几个，位置在哪里都无所谓
-    		}
-    	}
-    	
-    	//columns
-    	for(int j = 0; j < 9; j++){
-    		boolean[] visited = new boolean[9]; 
-    		for (int i = 0; i < 9; i++ ){
-    			if (board[i][j] != '.'){
-		    		if (visited[(int)(board[i][j]-'1')]){
-		    			return false;
-		    		}
-		    		visited[(int)(board[i][j]-'1')] = true;
-    			}
-    		}
-    	}
-    	
-    	//for each 3*3 square
-    	//看图！block示意图如下
-    	//0  1  2
-    	//3  4  5
-    	//6  7  8
-    	for (int block = 0; block <9 ;block++){//block 从0到9 对应了九个3*3的小block
-    		boolean[] visited = new boolean[9]; 
-	    	for (int i=block/3*3;i < block/3*3+3 ;i++){//block取0,1,2时，i要取0,1,2
-	    		//【注】j和i的取值方式不同！
-	    		for (int j=block%3*3; j < block%3*3+3 ;j++){//block取0,3,6时，j要取0,1,2
-	    			if (board[i][j] != '.'){
-			    		if (visited[(int)(board[i][j]-'1')]){
-			    			return false;
-			    		}
-			    		visited[(int)(board[i][j]-'1')] = true;
-	    			}
-	    		}
-	    	}
-    	}
-    	return true;
-    }
+	public boolean isValidSudokuBrute(char[][] board) {
+		if (board == null || board.length != 9 || board[0].length != 9) {
+			return false;
+		}
+		// rows
+		for (int i = 0; i < 9; i++) {
+			boolean[] visited = new boolean[9];
+			for (int j = 0; j < 9; j++) {
+				if (board[i][j] != '.') {
+					if (visited[(int) (board[i][j] - '1')]) {// 已经曾经被访问过了
+						return false;
+					}
+					visited[(int) (board[i][j] - '1')] = true;
+				}// 如果board[i][j] == '.' 什么也不需要做。因为'.'有几个，位置在哪里都无所谓
+			}
+		}
+		// columns
+		for (int j = 0; j < 9; j++) {
+			boolean[] visited = new boolean[9];
+			for (int i = 0; i < 9; i++) {
+				if (board[i][j] != '.') {
+					if (visited[(int) (board[i][j] - '1')]) {
+						return false;
+					}
+					visited[(int) (board[i][j] - '1')] = true;
+				}
+			}
+		}
+		// for each 3*3 square
+		// 看图！block示意图如下
+		// 0 1 2
+		// 3 4 5
+		// 6 7 8
+		for (int block = 0; block < 9; block++) {// block 从0到9 对应了九个3*3的小block
+			boolean[] visited = new boolean[9];
+			for (int i = block / 3 * 3; i < block / 3 * 3 + 3; i++) {// block取0,1,2时，i要取0,1,2
+				// 【注】j和i的取值方式不同！
+				for (int j = block % 3 * 3; j < block % 3 * 3 + 3; j++) {// block取0,3,6时，j要取0,1,2
+					if (board[i][j] != '.') {
+						if (visited[(int) (board[i][j] - '1')]) {
+							return false;
+						}
+						visited[(int) (board[i][j] - '1')] = true;
+					}
+				}
+			}
+		}
+		return true;
+	}
     
     
 

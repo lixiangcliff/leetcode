@@ -34,18 +34,20 @@ public class Question {
         map.put(node, copyNode);
         LinkedList<UndirectedGraphNode> queue = new LinkedList<UndirectedGraphNode>();
         queue.offer(node);
-        while (!queue.isEmpty()) { //BFS
+        while (!queue.isEmpty()) { //BFS 【注】下面过程看着图更容易一步步写出来
         	UndirectedGraphNode curNode = queue.poll();
-        	for(int i = 0;i < curNode.neighbors.size(); i++){
-        		if(!map.containsKey(curNode.neighbors.get(i))){//如果map里买没有neighborNode，当然neighborNode对应clone的copyNeighborNode也不存在
-        			copyNode = new UndirectedGraphNode(curNode.neighbors.get(i).label);//所以先clone一个copyNeighborNode出来
-        			map.put(curNode.neighbors.get(i), copyNode);//然后再把原neighborNode和clone出来的copyNeighborNode一起加入map中
-        			queue.offer(curNode.neighbors.get(i));//再把neighborNode放入queue中等待下一轮处理。
+        	for(int i = 0;i < curNode.neighbors.size(); i++){ //遍历当前node的所有neighbors
+        		//1.in new graph, clone neighbor
+        		if(!map.containsKey(curNode.neighbors.get(i))){//如果map里还没有curNode.neighbors.get(i)，即还没有访问过curNode.neighbors.get(i)这个节点，
+        			copyNode = new UndirectedGraphNode(curNode.neighbors.get(i).label);//那么就先clone一个curNode.neighbors.get(i)的copy节点：copyNode，出来
+        			map.put(curNode.neighbors.get(i), copyNode);//然后再把当前节点的第i个neighbor和clone出来的copyNeighborNode一起加入map中
+        			queue.offer(curNode.neighbors.get(i));//再把当前节点的第i个neighbor放入queue中等待下一轮处理。
         		}
+        		//2.in new graph, connect curNodeCopy and its neighbor
         		//下面一行简单说就是，把clone出来的node，和clone出来的该node的neighbor，连上。
         		//拆分来看：
         		//前半部分map.get(curNode)表示通过当前node找到clone的node
-        		//后半部分map.get(curNode.neighbors.get(i)表示通过当前node的neighborNode找到被clone出来的neighborNode
+        		//后半部分map.get(curNode.neighbors.get(i)表示通过当前node的第i个neighbor找到被clone出来的neighborNode
         		//中间的.neighbors.add表示在新的clone出来的图里，把clone的neighborNode加到clone的node的neighbors的list里
         		map.get(curNode).neighbors.add(map.get(curNode.neighbors.get(i)));
         	}

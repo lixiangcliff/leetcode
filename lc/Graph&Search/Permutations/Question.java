@@ -37,6 +37,7 @@ public class Question {
 	 */
 
 	
+	//【注】重点看递归的方法
 	//recursive
 	//递归函数必须保证在进入和离开函数的时候，变量的状态是一样的, 这样才能保证正确性.
 	//http://www.ninechapter.com/solutions/permutations/
@@ -52,17 +53,20 @@ public class Question {
 	
 	private void helper( ArrayList<ArrayList<Integer>> result, ArrayList<Integer> item, int[] num) {
 		if (item.size() == num.length) {// got a permutation
-			result.add(new ArrayList<Integer>(item)); // must "new" a new item, because item is shared among recursion, 
-			return;//everything will add on this item if not "new" a item every single time
+			result.add(new ArrayList<Integer>(item)); // 因为item在各层recursion中是共享的，所以此处必须用new，否则以后每次add元素都会加在这个item上
+			return;
 		}
+		//【注】下面代码看图比照搜索树
 		for( int i=0;i<num.length;i++) {
-			if (!item.contains(num[i])) {//important! to determine whether to process it for permuting
-				item.add(num[i]);
-				helper(result, item, num);
-				item.remove(item.size() - 1); // recover to its original status
+			if (!item.contains(num[i])) {// 当前元素还没用过，所以可以加入item
+				item.add(num[i]); //当前元素加入item
+				helper(result, item, num); // 递归处理下一层
+				item.remove(item.size() - 1); // 回溯backtracking “弹出”当前元素，以准备尝试下一个元素
 			}
 		}
 	}
+	
+	
 	
 	//iterative
 	//http://blog.csdn.net/linhuanmars/article/details/21569031

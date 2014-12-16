@@ -51,12 +51,13 @@ public class Question {
 		return result;
 	}
 	
+	//DFS
 	private void helper( ArrayList<ArrayList<Integer>> result, ArrayList<Integer> item, int[] num) {
 		if (item.size() == num.length) {// got a permutation
 			result.add(new ArrayList<Integer>(item)); // 因为item在各层recursion中是共享的，所以此处必须用new，否则以后每次add元素都会加在这个item上
 			return;
 		}
-		//【注】下面代码看图比照搜索树
+		//【注】下面代码看图比照DFS搜索树
 		for( int i=0;i<num.length;i++) {
 			if (!item.contains(num[i])) {// 当前元素还没用过，所以可以加入item
 				item.add(num[i]); //当前元素加入item

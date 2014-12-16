@@ -10,7 +10,7 @@ public class Question {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int[] S = {1,2,3};
+		int[] S = {3,2,1};
 		Question q = new Question();
 		
 		ArrayList<ArrayList<Integer>> result = q.subsets(S);
@@ -44,7 +44,7 @@ public class Question {
 	 * 	[] 
 	 * ]
 	 */
-	//recursive way
+	//【注】重点看递归方法 recursive way
 	//http://www.ninechapter.com/solutions/subsets/
 	public ArrayList<ArrayList<Integer>> subsets(int[] S) {
 		ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
@@ -52,17 +52,17 @@ public class Question {
 			return result;
 		}
 		ArrayList<Integer> item = new ArrayList<Integer>();
-		Arrays.sort(S);
+		Arrays.sort(S); //排序保证题中要求：“Elements in a subset must be in non-descending order”
 		helper(result, item, S, 0);
 		return result;
 	}
 	
 	private void helper(ArrayList<ArrayList<Integer>> result, ArrayList<Integer> item, int[] S, int pos) {
-		result.add(new ArrayList<Integer>(item)); //这行放在最开始或者最后都可以
-		for (int i = pos; i < S.length; i++) {
-			item.add(S[i]);
-			helper(result, item, S, i + 1);
-			item.remove(item.size() - 1);
+		result.add(new ArrayList<Integer>(item)); //这行放在最开始或者最后都可以，因为任何一层递归所得，都是一个所求子集
+		for (int i = pos; i < S.length; i++) { // i从pos开始往右扫，这样保证pos左边的都不会再重复计算。对应到DFS搜索树中：取完当前元素之后，只会取比其更大的，而不会取比其更小的。
+			item.add(S[i]); // 当前元素加入item中
+			helper(result, item, S, i + 1); // 递归下一层，pos右移一个
+			item.remove(item.size() - 1); // 回溯
 		}
 	}
 	

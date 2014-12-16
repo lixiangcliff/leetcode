@@ -40,10 +40,15 @@ public class Question {
 	 * solvable. Only the filled cells need to be validated.
 	 */
 	
-	//优化，每个位置只遍历一次。时间复杂度O(n)。思想是，每次遍历当前加入的数，是否仍然使棋盘合法。
+	
+	//另一个思想是，每次遍历当前加入的数，是否仍然使棋盘合法。
+	//http://blog.csdn.net/linhuanmars/article/details/20748761
 	public boolean isValidSudoku(char[][] board) {
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
+				if (board[i][j] == '.') {
+					continue;
+				}
 				if (!isValid(board, i, j)) {
 					return false;
 				}
@@ -53,12 +58,29 @@ public class Question {
 	}
 	
 	private boolean isValid(char[][] board, int i, int j){
-		return false;
+		for (int k = 0; k < 9; k++) { // 检测同一行
+			if (k != j && board[i][k] == board[i][j]) {
+				return false;
+			}
+		}
+		for (int k = 0; k < 9; k++) { // 检测同一列
+			if (k != i && board[k][j] == board[i][j]) {
+				return false;
+			}
+		}
+		for (int k = i / 3 * 3; k < i / 3 * 3 + 3; k++) { // 可以理解为，以3个为一个单位，向下取整。
+			for (int m = j / 3 * 3; m < j / 3 * 3 + 3; m++) {
+				if ((k != i || m != j) && board[i][j] == board[k][m]) { // k != i || m != j 意味着[i][j]个和 [k][m]不是同一个点
+					return false;
+				}
+			}
+		}
+		return true;
 	}
-	//Brutal force: 每个位置遍历三次，时间复杂度： O(3n)
+	
 	//http://blog.csdn.net/linhuanmars/article/details/20748171
 	//【注】boolean[] visited = new boolean[9]的位置不同，原则是没处理9个元素就出reset(new)一次visited
-	public boolean isValidSudokuBrute(char[][] board) {
+	public boolean isValidSudoku2(char[][] board) {
 		if (board == null || board.length != 9 || board[0].length != 9) {
 			return false;
 		}

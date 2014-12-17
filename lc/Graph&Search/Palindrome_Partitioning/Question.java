@@ -57,7 +57,7 @@ public class Question {
 			if (isPalindrome[pos][i]) { //只要找到一段新的子串（s.substring(pos, i + 1)）也是palindrome，
 				item.add(s.substring(pos, i + 1));//就把这段加入item中
 				helper(result, item, isPalindrome, s, i + 1); //然后pos置为i+1，继续对i+1后边的进行递归
-				item.remove(item.size() - 1); //递归之后恢复现场
+				item.remove(item.size() - 1); //回溯 backtracking
 			}
     	}
     }

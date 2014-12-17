@@ -26,6 +26,7 @@ public class Question {
 	}
 	
 	/**
+	 * https://oj.leetcode.com/problems/combination-sum-ii/
 	 * Given a collection of candidate numbers (C) and a target number (T), find
 	 * all unique combinations in C where the candidate numbers sums to T.
 	 * Each number in C may only be used once in the combination.
@@ -68,7 +69,7 @@ public class Question {
     		return;
     	}
     	for (int i = pos; i < num.length; i++) { 
-    		if( i > pos && num[i] == num[i - 1]) { //【注】i > pos而不是i > 0，因为如果当前值和pos之前的值相同的话，还是可以用的（而i > 0则排出了这种情况）
+    		if( i > pos && num[i] == num[i - 1]) { //【注】如果遇到相同元素则跳过，直到遇到不同的元素，再进行下一层递归。类似 Combination_Sum
     			continue;
     		}
     		item.add(num[i]);

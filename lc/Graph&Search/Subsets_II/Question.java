@@ -52,8 +52,11 @@ public class Question {
 			return result;
 		}
 		ArrayList<Integer> item = new ArrayList<Integer>();
-		Arrays.sort(S);
-		int pos = 0;
+		// 这里的排序有两层用意：
+		//1. 保证了 “Elements in a subset must be in non-descending order.”（去了较大的数之后就不用再取较小的数了）
+		//2. 把相同的元素放在了一起，为后面的去重做了准备工作。（相同元素，第一个不取时，之后的也都不取）
+		Arrays.sort(S); 
+		int pos = 0; // 表示元素从pos的位置起开始向右遍历处理
 		helper(result, item, S, pos);
 		return result;
 	}
@@ -61,8 +64,11 @@ public class Question {
 	private void helper(ArrayList<ArrayList<Integer>> result, ArrayList<Integer> item, int[] S, int pos) {
 		result.add(new ArrayList<Integer>(item)); 
 		for (int i = pos; i < S.length; i++) {
-			// 下面是与subsets的唯一区别。简单说就是如果当前值是之前出现过的，则跳过此次递归。
-			if ( i != pos && S[i] == S[i - 1]) { // i != pos：表示 当i不是第一个；S[i] == S[i - 1]：表示 当前值和前一个值相同
+			// 【注1】下面是与subsets的唯一区别。简单说就是如果当前值S[i]是之前出现过的，则跳过此次递归，直到遇到不一样值的元素。
+			// 【注2】对于相同的元素，如果第一次出现的不放入结果集，则之后出现的都不放入结果集。这样就可以去重。
+			// 看图可知，【注1】和【注2】本质上是一回事。
+			// i != pos：表示 当i不在处理的起始位置；S[i] == S[i - 1]：表示 当前值和前一个值相同
+			if ( i != pos && S[i] == S[i - 1]) { 
                 continue;
             }
 			item.add(S[i]);
@@ -72,7 +78,7 @@ public class Question {
 	}
 	
 	//iterative way
-	//http://blog.csdn.net/linhuanmars/article/details/24286377
+	//http://blog.csdn.net/linhuanmars/article/details/24613193
 	//quite similar to Subsets https://oj.leetcode.com/problems/subsets/
 	public static ArrayList<ArrayList<Integer>> subsetsWithDupIterative(int[] num) {
 		ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();

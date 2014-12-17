@@ -38,24 +38,25 @@ public class Question {
 	 * ]
 	 */
 	
+	//DFS recursive (类似permutations)
 	//http://blog.csdn.net/linhuanmars/article/details/20667175
 	//http://blog.csdn.net/zhong317/article/details/4586131
+	//http://www.ninechapter.com/solutions/n-queens/
     public ArrayList<String[]> solveNQueens(int n) {
     	ArrayList<String[]> result = new ArrayList<String[]>();
-    	//这个记录了所有n个Q所在的行和列（e.g. 比如columnForRow[0]==2，代表的意思是第0行第2列有一个Q）
-    	int[] columnForRow = new int[n]; 
-    	int row = 0; //row 代表当前处理第row行
-    	helper(result, columnForRow, n, row);
+    	//这个记录了所有n个Q所在的行和列（e.g. 比如columnForRow.get(0)==2，代表的意思是第0行第2列有一个Q）
+    	ArrayList<Integer>columnForRow = new ArrayList<Integer>(); 
+    	helper(result, columnForRow, n);
     	return result;
     }
     
-    private void helper(ArrayList<String[]> result, int[] columnForRow, int n, int row) { 
-    	if(row == n){ // 说明已经找到一个方案了，接下来就是把该方案保存到result里
+    private void helper(ArrayList<String[]> result, ArrayList<Integer> columnForRow, int n) { 
+    	if(columnForRow.size() == n){ // 说明已经找到一个方案了，接下来就是把该方案保存到result里
     		String[] item = new String[n]; // item 即为一种方案
     		for (int i = 0; i < n; i++) {
     			StringBuilder sb = new StringBuilder(); //表示item的一行
 	    		for(int j = 0; j < n; j++) {
-	    			if (j == columnForRow[i]){	//找到了在第i行queen所处于的列
+	    			if (j == columnForRow.get(i)){	//找到了在第i行queen所处于的列
 	    				sb.append('Q');
 	    			}else{
 	    				sb.append('.');
@@ -66,20 +67,23 @@ public class Question {
     		result.add(item); // 完成一个方案，并加入result
     		return;
     	}
-    	// 在当前row中找到一个可以放置queen的valid列，
-    	for (int j = 0; j < n; j++) {
-    		columnForRow[row] = j;  
-    		if (isValid(row, columnForRow)) { // 如果queen放在row和columnForRow[row]是valid的，则继续处理第row+1行;
-    			helper(result, columnForRow, n, row + 1); 
+    	// 在当前row中找到一个可以放置queen的valid列col，(col 从0开始试到n - 1)
+    	for (int col = 0; col < n; col++) {
+    		if (!isValid(columnForRow, col)) { // 如果当前col不合法
+    			continue; // 则什么也不做(相当于“剪枝”了)，继续试下一个col值
     		}
+    		columnForRow.add(col); //当前col合法，则加入columnForRow中
+    		helper(result, columnForRow, n); // 继续递归处理columnForRow
+    		columnForRow.remove(columnForRow.size() - 1); // 回溯
     	}
     }
     
-    //检查加入的queen如果放在，“第row行，第columnForRow[row]列”，是否还能保证棋盘valid
-    private boolean isValid(int row, int[] columnForRow){
-    	for(int i=0; i<row; i++){ //只需检查是否与row以上的行是否冲突就行了
+    //检查加入的queen如果放在，“当前columnForRow的下一行”和“第col列”，是否还能保证棋盘valid
+    private boolean isValid(ArrayList<Integer>columnForRow, int col){
+    	int row = columnForRow.size(); // row既表示当前columnForRow的size，同时也表示当前处理的col是在第几行
+    	for(int i = 0; i < row; i++){ //只需检查与row以上的行是否冲突就行了
     		//只需要检查，“列”和“对角线”，是否冲突（不需要检查行，因为我们以行来循环处理，所以行肯定不会冲突）
-    		if(columnForRow[row] == columnForRow[i] || Math.abs(row - i) == Math.abs(columnForRow[row] - columnForRow[i])){
+    		if(columnForRow.get(i) == col || Math.abs(row - i) == Math.abs(col - columnForRow.get(i))){
     			return false;
     		}
     	}

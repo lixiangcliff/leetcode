@@ -57,19 +57,19 @@ public class Question {
 	    queue.offer(start);
 	    dict.remove(start);
 		while (!queue.isEmpty()) {
-			int queueSize = queue.size();
-			for (int i = 0; i < queueSize; i++) {
+			int size = queue.size();
+			for (int i = 0; i < size; i++) {
 				String curStr = queue.poll(); //拿到一个相差一个字符的String
 				for (int j = 0; j < curStr.length();j++){
 					//把curStr转为curChar[]必须在j loop内部，因为不同的char可能出现在curStr的不同位置（不同的j），
 					//而我们又要通过改变了的curStr产生新的string，所以改变之后需要重新拿到原始的curChar才行
-					char[] curChar = curStr.toCharArray(); 
+					char[] curCharArray = curStr.toCharArray(); 
 					for (char c = 'a'; c <= 'z'; c++) { // 当前j位置上的char与其他的25个字母比较
 						if (curStr.charAt(j) == c) {  //如果遇到c和当前j位置上char是一样的，则什么也不做
 							continue;
 						}
-						curChar[j] = c; //走到这说明j位置上的char不为c，那么就把j位置上的char替换为c
-						String temp = new String(curChar); //产生一个相比于原来curStr换了一个字符的新的string
+						curCharArray[j] = c; //走到这说明j位置上的char不为c，那么就把j位置上的char替换为c
+						String temp = new String(curCharArray); //产生一个相比于原来curStr换了一个字符的新的string
 						if (temp.equals(end)) { //如果新string已经等于end，则完成任务，返回当前len + 1
 							return len + 1;
 						}

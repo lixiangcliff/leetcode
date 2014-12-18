@@ -39,9 +39,9 @@ public class Question {
 	 */
 	
 	//DFS recursive (类似permutations)
+	//http://www.ninechapter.com/solutions/n-queens/
 	//http://blog.csdn.net/linhuanmars/article/details/20667175
 	//http://blog.csdn.net/zhong317/article/details/4586131
-	//http://www.ninechapter.com/solutions/n-queens/
     public ArrayList<String[]> solveNQueens(int n) {
     	ArrayList<String[]> result = new ArrayList<String[]>();
     	//这个记录了所有n个Q所在的行和列（e.g. 比如columnForRow.get(0)==2，代表的意思是第0行第2列有一个Q）
@@ -52,19 +52,7 @@ public class Question {
     
     private void helper(ArrayList<String[]> result, ArrayList<Integer> columnForRow, int n) { 
     	if(columnForRow.size() == n){ // 说明已经找到一个方案了，接下来就是把该方案保存到result里
-    		String[] item = new String[n]; // item 即为一种方案
-    		for (int i = 0; i < n; i++) {
-    			StringBuilder sb = new StringBuilder(); //表示item的一行
-	    		for(int j = 0; j < n; j++) {
-	    			if (j == columnForRow.get(i)){	//找到了在第i行queen所处于的列
-	    				sb.append('Q');
-	    			}else{
-	    				sb.append('.');
-	    			}
-	    			item[i] = sb.toString(); // 完成一行，并加入item
-	    		}
-    		}
-    		result.add(item); // 完成一个方案，并加入result
+    		result.add(drawBoard(columnForRow)); // 完成一个方案，并加入result
     		return;
     	}
     	// 在当前row中找到一个可以放置queen的valid列col，(col 从0开始试到n - 1)
@@ -77,6 +65,24 @@ public class Question {
     		columnForRow.remove(columnForRow.size() - 1); // 回溯
     	}
     }
+
+    //根据一个合法的columnForRow来画出用String[]表示的棋盘
+	private String[] drawBoard(ArrayList<Integer> columnForRow) {
+		int size = columnForRow.size();
+		String[] item = new String[size]; // item 即为一种方案
+		for (int i = 0; i < size; i++) {
+			StringBuilder sb = new StringBuilder(); //表示item的一行
+			for(int j = 0; j < size; j++) {
+				if (j == columnForRow.get(i)){	//找到了在第i行queen所处于的列
+					sb.append('Q');
+				}else{
+					sb.append('.');
+				}
+				item[i] = sb.toString(); // 完成一行，并加入item
+			}
+		}
+		return item;
+	}
     
     //检查加入的queen如果放在，“当前columnForRow的下一行”和“第col列”，是否还能保证棋盘valid
     private boolean isValid(ArrayList<Integer>columnForRow, int col){

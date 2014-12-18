@@ -1,5 +1,7 @@
 package N_Queens_II;
 
+import java.util.ArrayList;
+
 public class Question {
 
 	/**
@@ -19,40 +21,42 @@ public class Question {
 	 * Now, instead outputting board configurations, return the total number of
 	 * distinct solutions.
 	 */
+	//DFS recursive
 	//和N Queen类似：https://oj.leetcode.com/problems/n-queens/
 	//http://blog.csdn.net/linhuanmars/article/details/20668017
     public int totalNQueens(int n) {
     	//和N-Queen的唯一区别就是结果是一个int数组，
     	//之所以用一个只有一个元素的数组而不是一个整数,是因为数组在递归调用时内容和以保留，而整数类型不能
 		int[] result = { 0 }; //方案总数
-    	int[] columnForRow = new int[n];
-    	int row = 0;
-    	helper(result, columnForRow, n, row);
+    	ArrayList<Integer>columnForRow = new ArrayList<Integer>(); 
+    	helper(result, columnForRow, n);
     	return result[0];
     }
     
-    private void helper(int[] result, int[] columnForRow, int n, int row) {
-    	if (row == n) {
-    		result[0]++;
+    //DFS
+    private void helper(int[] result, ArrayList<Integer> columnForRow, int n) {
+    	if(columnForRow.size() == n){ 
+    		result[0]++; // 完成一个方案，递增result[0]
     		return;
     	}
-    	// 在当前row中找到一个可以放置queen的valid列，
-    	for (int i = 0; i < n; i++) {
-    		columnForRow[row] = i;  
-    		if(isValid(row, columnForRow)){
-    			helper(result, columnForRow, n, row + 1); 
+    	for (int col = 0; col < n; col++) {
+    		if (!isValid(columnForRow, col)) { // 如果当前col不合法
+    			continue; // 则什么也不做(相当于“剪枝”了)，继续试下一个col值
     		}
+    		columnForRow.add(col); //当前col合法，则加入columnForRow中
+    		helper(result, columnForRow, n); // 继续递归处理columnForRow
+    		columnForRow.remove(columnForRow.size() - 1); // 回溯
     	}
     }
     
     //检查加入的queen如果放在，“第row行，第columnForRow[row]列”，是否还能保证棋盘valid
-	private boolean isValid(int row, int[] columnForRow) {
-		for (int i = 0; i < row; i++) {
-			if (columnForRow[row] == columnForRow[i] || Math.abs(row - i) == Math.abs(columnForRow[row] - columnForRow[i])) {
-				return false;
-			}
-		}
+    private boolean isValid(ArrayList<Integer>columnForRow, int col){
+    	int row = columnForRow.size(); 
+    	for(int i = 0; i < row; i++){ 
+    		if(columnForRow.get(i) == col || Math.abs(row - i) == Math.abs(col - columnForRow.get(i))){
+    			return false;
+    		}
+    	}
     	return true;
     }
-
 }

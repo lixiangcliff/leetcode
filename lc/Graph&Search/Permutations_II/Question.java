@@ -10,7 +10,7 @@ public class Question {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int [] num = {1,1,1,2,2,2,2,2};
+		int [] num = {1,2,2};
 		Question q = new Question();
 		ArrayList<ArrayList<Integer>> result = q.permuteUnique(num);
 		for (int i = 0; i < result.size(); i++) {
@@ -67,11 +67,11 @@ public class Question {
 	    		if(i > 0 && num[i - 1] == num[i] && !used[i - 1]){  
 	    			continue;								
 	    		}											
-				used[i] = true;
-	    		item.add(num[i]);
-				helper(result, item, num, used);
-				item.remove(item.size() - 1);
-				used[i] = false;
+				used[i] = true; // 标记第i个元素已被使用过
+	    		item.add(num[i]); // 第i个元素加入可行解item
+				helper(result, item, num, used); // 进入下一层递归
+				item.remove(item.size() - 1); // 回溯，从可行解item中移除第i个元素
+				used[i] = false; // 回溯，将第i个元素标为未使用
     		}
     	}
     }

@@ -92,10 +92,11 @@ class MinStack {
 	}
 
 	public void pop() {
-		if (!stack.isEmpty()) {
-			stack.pop();
+		if (stack.isEmpty()) {
+			return;
 		}
-		if (!minStack.isEmpty()) {
+		int item = (Integer)stack.pop();
+		if (!minStack.isEmpty() && item == (Integer)minStack.peek()) {
 			minStack.pop();
 		}
 	}

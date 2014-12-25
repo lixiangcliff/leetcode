@@ -2,125 +2,110 @@ package LRU_Cache;
 
 import java.util.HashMap;
 
-
 public class Question {
-
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
 		// TODO Auto-generated method stub
 		LRUCache ca = new LRUCache(1);
 		ca.set(2,1);
 		System.out.println(ca.get(2));
 	}
-
-
 }
+
+/**
+ * Design and implement a data structure for Least Recently Used (LRU) cache. It
+ * should support the following operations: get and set.
+ * 
+ * get(key) - Get the value (will always be positive) of the key if the key
+ * exists in the cache, otherwise return -1. 
+ * 
+ * set(key, value) - Set or insert the value if the key is not already present. 
+ * When the cache reached its capacity, 
+ * it should invalidate the least recently used item before inserting a new item.
+ */
 //最新访问（添加）的node放在尾巴；最旧的从头删除。
+//1.对于set和get，当被访问的key在cache中已经存在，则要把该key所指node从当前LinkedList的位置上删去（delete()）
+//2.对于set和get都会有key被访问，所以一定需要有把被访问key所对应node的放在tail的操作（insertTail()）（除非这个node本来就已经在tail了）
+//3.对于set，当增加新的key时（即cache里不存在的key），则要更新map  
+//【注】看图。 head和tail为dummy node，方便添加和删除。并且增加delete()和insert2Tail()的方法，方便调用和理清思路。
 //http://blog.csdn.net/linhuanmars/article/details/21310633
 class LRUCache {
-	//Node class(doubly LinkedList)
-	public class Node{
+	//Node class相当于一个wrapper包含了如下信息。同时用诸多这样的node来实现一个doubly LinkedList。
+	public class DNode{ 
 		int key;
 		int val;
-		Node next;
-		Node pre;
-		Node(int k, int v){
+		DNode next;
+		DNode pre;
+		DNode(int k, int v){
 			this.key = k;
 			this.val = v;
+			this.next = null;
+			this.pre = null;
 		}
 	}
 	
 	//private variables
-	private HashMap<Integer, Node> map; //<key, node>即key以及key对应的node(其中node中包涵了所有信息包括key, val, pre, next)
-	private int capacity;
-	private int num;
-	private Node first;
-	private Node last;
+	private HashMap<Integer, DNode> map; //<key, node>即key以及key对应的node(其中node中包涵了所有信息包括key, val, pre, next)
+	private int capacity; // LRU cache 的容量 （通过map.size()和capacity的比较来获知cache是否已经存满）
+	private DNode head = new DNode(0, 0); // 标记最旧访问key所指向的node 即Least Recently Used
+	private DNode tail = new DNode(0, 0); // 标记最新访问key所指向的node
 	
 	//constructor
-	public LRUCache(int capacity) {
-		this.capacity = capacity;
-		num = 0;
-		first = null;
-		last = null;
-		map = new HashMap<Integer, Node>();
+	public LRUCache(int cap) {
+		this.map = new HashMap<Integer, DNode>();
+		this.capacity = cap;
+		head.next = tail; //【注】dummy node的便捷得到体现
+		tail.pre = head;
+		
 	}
   
-  public int get(int key) {
-		Node node = map.get(key);
-		if (node == null) {
+	public int get(int key) {
+		if (!map.containsKey(key)) { // cache中不存在该key
 			return -1;
-		} else if (node != last) {// because if node == last, we don't need to move node to last
-			// to connect node's pre to node's next;
-			if (node == first) {
-				first = first.next;
-			} else {
-				node.pre.next = node.next;
-			}
-			// to connect node's next to node's pre
-			node.next.pre = node.pre;
-			// make node the new last
-			last.next = node;
-			node.pre = last;
-			node.next = null;
-			last = node;
 		}
+		DNode node = map.get(key);
+		delete(node);
+		insert2Tail(node);
 		return node.val;
 	}
-  
+	
 	public void set(int key, int value) {
-		Node node = map.get(key);
-		// if node already exists, no need to worry about exceed cache capacity
-		if (node != null) {
-			// update node's value;
+		if (map.containsKey(key)) { // 如果key已经在cache里了，那么不用担心超过capacity的问题
+			DNode node = map.get(key);
+			delete(node);
 			node.val = value;
-			// update node's position similar as getter()
-			if (node != last) {// because if node == last, we don't need to move
-								// node to last
-				// to connect node's pre to node's next;
-				if (node == first) {
-					first = first.next;
-				} else {
-					node.pre.next = node.next;
-				}
-				// to connect node's next to node's pre
-				node.next.pre = node.pre;
-				// make node the new last
-				last.next = node;
-				node.pre = last;
-				node.next = null;
-				last = node;
+			insert2Tail(node);
+		} else { // cache里还没有该key
+			DNode node = new DNode(key, value);
+			if (map.size() >= capacity) { // 如果已经超过cache的capacity了
+				DNode lruNode = head.next;// 【注】要记得head是dummy，head所指向的并不是最旧的的，head.next才是最旧的
+				map.remove(lruNode.key);
+				delete(lruNode);
 			}
-		} else {
-			// need to make a new node and need to concern capacity issue
-			Node newNode = new Node(key, value);
-			// reach capacity, then remove first and put newNode to last
-			if (num >= capacity) {
-				// wrong! should remove key!
-				// map.remove(first);
-				map.remove(first.key);
-				first = first.next;
-				if (first != null) {
-					first.pre = null;
-				} else {
-					last = null;// an empty cache(capacity is 1 for this scenario)
-				}
-				num--;// until now, we should have space for newNode again
-			}
-			// empty cache
-			if (first == null || last == null) {
-				first = newNode;
-			} else {// put newNode at the end
-				last.next = newNode;
-			}
-			// connect newNode to original last;
-			newNode.pre = last;
-			last = newNode;
-			map.put(key, newNode);// add new key-node couple to map
-			num++; // num increase;
+			insert2Tail(node);
+			map.put(key, node);
 		}
+		
+	}
+	
+	//从LinkedList中删去某node
+	private void delete(DNode node) {
+		DNode next = node.next;
+		DNode pre = node.pre;
+		pre.next = next;
+		next.pre = pre;
+		node.pre = null;
+		node.next = null;
+	}
+	
+	//把最近访问node放入tail
+	private void insert2Tail(DNode node) {
+		DNode mruNode = tail.pre; // 原来的最近被访问node
+		mruNode.next = node;
+		node.pre = mruNode;
+		tail.pre = node;
+		node.next = tail;
 	}
 }

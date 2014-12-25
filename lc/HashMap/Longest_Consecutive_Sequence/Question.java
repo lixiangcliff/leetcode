@@ -1,6 +1,6 @@
 package Longest_Consecutive_Sequence;
 
-import java.util.HashMap;
+import java.util.HashSet;
 
 public class Question {
 
@@ -10,7 +10,8 @@ public class Question {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int[] num = {100, 4, 200, 1, 3, 2};
-		System.out.println(longestConsecutive(num));
+		Question q = new Question();
+		System.out.println(q.longestConsecutive(num));
 
 	}
 	
@@ -26,34 +27,36 @@ public class Question {
 	 * 
 	 * Your algorithm should run in O(n) complexity.
 	 */
+	
+	//用HashSet来标记数组中元素哪些访问过(set中不存在该元素)，哪些还没有访问过（set中存在该元素）
 	//http://blog.csdn.net/linhuanmars/article/details/22964467
 	//http://www.ninechapter.com/solutions/longest-consecutive-sequence/
-    public static int longestConsecutive(int[] num) {
+	public int longestConsecutive(int[] num) {
         if(num == null || num.length == 0) { 
             return 0;  
         }
-    	HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
-		for (int i : num) { //将所有元素存入hashmap，并将每个元素的value置为0
-			map.put(i, 0);
+    	HashSet<Integer> set = new HashSet<Integer>();
+		for (int i : num) { //将所有元素存入HashSet中
+			set.add(i);
 		}
 		int maxLen = 1;
 		for (int i : num) { 
-    		if (map.get(i) == 1) { // value为1，表示当前i已被访问
+    		if (!set.contains(i)) { // 如果map里已经没有i了，表示当前i已被访问
     			continue;
     		}
     		//以当前i为原点，找它左边和右边的连续值
     		int curLen = 1; //包涵当前i的最大连续长度
     		int neighbor = i;
     		//i右边
-    		while (map.containsKey(neighbor + 1)) {
+    		while (set.contains(neighbor + 1)) {
     			curLen++;
-    			map.put(++neighbor,1); //把当前neighbor的value置为1，表示已访问
+    			set.remove(++neighbor); //把当前neighbor从HashSet中移除，表示已访问
     		}
     		neighbor = i; //neighbor恢复到i的位置
     		//i左边
-    		while (map.containsKey(neighbor - 1)) {
+    		while (set.contains(neighbor - 1)) {
     			curLen++;
-    			map.put(--neighbor, 1);
+    			set.remove(--neighbor);
     		}
     		maxLen = Math.max(curLen, maxLen); //更新maxLen
     	}

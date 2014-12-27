@@ -29,6 +29,10 @@ public class Question {
 	 * Input: numbers={2, 7, 11, 15}, target=9 
 	 * Output: index1=1, index2=2
 	 */
+	
+	//HashMap, O(n) Space, O(n) Time;
+	//【注】因为这道题要求返回的是index，所以不能打乱原来数组的顺序，故不能sort。
+	//否则也可以用two pointers达到O(1) Space, O(nlogn) Time; 
 	//http://blog.csdn.net/linhuanmars/article/details/19711387
     public static int[] twoSum(int[] numbers, int target) {
     	if(numbers == null || numbers.length < 2){
@@ -42,13 +46,15 @@ public class Question {
     		//find them!
     		if(map.containsKey(target - numbers[i])){
     			//之前已经放入map的value为target - numbers[i]
-    			result[0] = map.get(target - numbers[i])+1; //通过value作为map中的key，找map中的value也就是index
-    			result[1] = i+1;
+    			result[0] = map.get(target - numbers[i]) + 1; //通过value作为map中的key，找map中的value也就是index
+    			result[1] = i + 1;
     			return result;
     		}
     		map.put(numbers[i], i);
     	}
         return null;
     }
+    
+    
 
 }

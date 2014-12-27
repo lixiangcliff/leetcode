@@ -7,7 +7,9 @@ public class Question {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		Question q = new Question();
+		int[] prices = {2,1,2,0,1};
+		System.out.println(q.maxProfit(prices));
 	}
 	
 	/**
@@ -19,33 +21,43 @@ public class Question {
 	 * Note: You may not engage in multiple transactions at the same time (ie,
 	 * you must sell the stock before you buy again).
 	 */
-	//
-	//1.state: result[i][j]代表： 在前i天，进行j次交易，并且第j次卖出必须在第i天进行，最大profit的值。
-	//2.function: 当S[i] != T[j]， result[i][j] = result[i - 1][j - 1] + （prices[i] - prices[i - 1]）
-	//			      当S[i] == T[j]， result[i][j] = result[i - 1][j - 1] + result[i - 1][j]) （S[i]==T[i],则result[i - 1][j - 1]满足的都可以被result[i][j]所用）
-	//3.initialize: result[0][j] = 0; 第一行（S为空，则没有任何办法可以从S中找到子串和T相同）
-	//				result[i][0] = 1; 第一列（T为空，则只有一种办法从S中找到子串和T相同，即S也取空）
-	//4.answer: result[A.length][B.length];
-	//4.answer: max(result[0][2], result[1][2]...result[priecs.length][2]);
-	//【注】result[][]和prices有位差
-	
-	//http://blog.csdn.net/linhuanmars/article/details/23236995
+	//类似Best Time to Buy and Sell Stock I。
+	//思想：创建两个DP数组，left[]和right[]
+	//left表示正序着看，从第一天到第i天，卖1次最大收益（不一定要在第i天卖）；不断记录更新的是min值。
+	//right表示倒序着看，从第i天开始到最后一天，卖1次最大收益（不一定要在第i天买）；不断记录更新的是max值。
+	//最后遍历原数组，找到max(left[i] + right[i])
+	//【注】从左往右，要不断记录更新的是min值；从右往左时,要不断记录更新的是max值。
+	//此题无位差
+	//http://www.ninechapter.com/solutions/best-time-to-buy-and-sell-stock-iii/
     public int maxProfit(int[] prices) {
     	if(prices == null || prices.length == 0){
     		return 0;
     	}
-    	int[] global = new int[3];
-    	int[] local = new int[3];
-    	//global[0] = 0;
-    	//local[0] = 0;
-    	for(int i=1;i<prices.length;i++){
-    		int diff = prices[i]-prices[i-1];
-    		for(int j=2;j>=1;j--){
-    			local[j] = Math.max(global[j-1] + Math.max(diff, 0), local[j]+diff);
-    			global[j] = Math.max(global[j], local[j]);
-    		}
-    	}
-    	return global[2];
+    	int len = prices.length;
+    	int[] left = new int[len];
+    	int[] right = new int[len];
+    	left[0] = 0;
+    	right[len - 1] = 0;
+    	int min = prices[0];
+    	//得到left[]
+		for (int i = 1; i < len; i++) {
+			min = Math.min(min, prices[i]);
+			int profitSellToday = prices[i] - min;
+			left[i] = Math.max(profitSellToday, left[i - 1]); // 所以left[]从左到右一定是递增的
+		}
+		int max = prices[len - 1];
+		//得到right[]
+		for (int i = len - 2; i >= 0; i--) {
+			max = Math.max(max, prices[i]);
+			int profitBuyToday = max - prices[i];
+			right[i] = Math.max(profitBuyToday, right[i + 1]); // 所以right[]从左到右也一定是递增的
+		}
+		int maximumProfit = 0;
+		//遍历每一天，得到max
+		for (int i = 0; i < len; i++) {
+			maximumProfit = Math.max(maximumProfit, left[i] + right[i]);
+		}
+    	return maximumProfit;
     }
 
 }

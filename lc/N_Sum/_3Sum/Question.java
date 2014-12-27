@@ -54,7 +54,7 @@ public class Question {
 				continue;
 			}
 			//得到一个不含num[i]，但是其余两值之和为-num[i]的一系列ArrayList<Integer>
-			ArrayList<ArrayList<Integer>> tempResult = twoSum(num, i + 1, -num[i]);
+			ArrayList<ArrayList<Integer>> tempResult = twoSum(num, -num[i], i + 1);
 			for(int j = 0; j < tempResult.size(); j++){
 				tempResult.get(j).add(0, num[i]); // 因为num[i]肯定比tempResult.get(j)里面的元素index更靠前，所以要插入首位。
 			}
@@ -65,7 +65,7 @@ public class Question {
 	
 	//subroutine
 	//http://blog.csdn.net/linhuanmars/article/details/19711387
-	private ArrayList<ArrayList<Integer>> twoSum(int[] num, int start, int target){
+	private ArrayList<ArrayList<Integer>> twoSum(int[] num, int target, int start){
 		ArrayList<ArrayList<Integer>> tempResult = new ArrayList<ArrayList<Integer>>();
 		if(num == null || num.length <= 1){
 			return tempResult;

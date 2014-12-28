@@ -31,49 +31,51 @@ public class Question {
 	 * (-2, -1, 1, 2) 
 	 * (-2, 0, 0, 2)
 	 */
+	//类似3sum
+	//枚举i复杂度为n，枚举j复杂度为n，剩下的l和r的操作时间复杂度为n；故最终的时间复杂度为O(n^3)。
+	//通过类似方法可得:对k_sum，用类似方法时间复杂度为O(n^(k-1))。
 	//http://answer.ninechapter.com/solutions/4sum/
-    public ArrayList<ArrayList<Integer>> fourSum(int[] num, int target) {
-    	ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
-    	if (num == null || num.length<4){
-    		return result;
-    	}
-    	Arrays.sort(num);
-    	for(int i=0;i<num.length-3;i++){
-    		if(i!=0 && num[i] == num[i-1]){
-    			continue;
-    		}
-	    	for(int j=i+1;j<num.length-2;j++){ //j=i+1
-	    		if(j!=i+1 && num[j] == num[j-1]){
-	    			continue;
-	    		}
-	    		int left = j+1;
-	    		int right = num.length-1;
-	    		while(left<right){
-	    			int sum = num[i] + num[j] + num[left] + num[right]; // add FOUR of them!
-	    			if(sum==target){
-	    				ArrayList<Integer> oneResult = new ArrayList<Integer>();
-	    				oneResult.add(num[i]);
-	    				oneResult.add(num[j]);
-	    				oneResult.add(num[left]);
-	    				oneResult.add(num[right]);
-	    				result.add(oneResult);
-	    				left++;
-	    				right--;
-	    				while (left < right && num[left] == num[left-1]){ 
-	    					left++;
-	    				}
-	    				while(left<right && num[right] == num[right+1]){
-	    					right--;
-	    				}
-	    			}else if(sum>target){
-	    				right--;
-	    			}else{
-	    				left++;
-	    			}
-	    		}
-	    	}
-    	}
-    	return result;
-    }
-
+	public ArrayList<ArrayList<Integer>> fourSum(int[] num, int target) {
+		ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+		if (num == null || num.length < 4) {
+			return result;
+		}
+		Arrays.sort(num);
+		for (int i = 0; i < num.length - 3; i++) { // i最远取到倒数第4个
+			if (i != 0 && num[i] == num[i - 1]) {
+				continue;
+			}
+			for (int j = i + 1; j < num.length - 2; j++) { // j从i + 1取到倒数第3个
+				if (j != i + 1 && num[j] == num[j - 1]) {
+					continue;
+				}
+				int l = j + 1;
+				int r = num.length - 1;
+				while (l < r) {
+					int sum = num[i] + num[j] + num[l] + num[r]; 
+					if (sum == target) {
+						ArrayList<Integer> item = new ArrayList<Integer>();
+						item.add(num[i]);
+						item.add(num[j]);
+						item.add(num[l]);
+						item.add(num[r]);
+						result.add(item);
+						l++;
+						r--;
+						while (l < r && num[l] == num[l - 1]) {
+							l++;
+						}
+						while (l < r && num[r] == num[r + 1]) {
+							r--;
+						}
+					} else if (sum < target) {
+						l++;
+					} else {
+						r--;
+					}
+				}
+			}
+		}
+		return result;
+	}
 }

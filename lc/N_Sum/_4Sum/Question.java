@@ -33,7 +33,9 @@ public class Question {
 	 */
 	//类似3sum
 	//枚举i复杂度为n，枚举j复杂度为n，剩下的l和r的操作时间复杂度为n；故最终的时间复杂度为O(n^3)。
-	//通过类似方法可得:对k_sum，用类似方法时间复杂度为O(n^(k-1))。
+	//【注】通过类似方法可得:对k_sum，用类似方法时间复杂度为O(n^(k-1))。
+	//【注】另一个空间换时间的思路可以把时间复杂度降至O(n^2),方法是：
+	//把sum=num[i]+num[j]的和放入hashmap，然后遍历num[l]和num[r],在hashmap里找到target-(num[l]+num[r])==sum的不重复解。 
 	//http://answer.ninechapter.com/solutions/4sum/
 	public ArrayList<ArrayList<Integer>> fourSum(int[] num, int target) {
 		ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();

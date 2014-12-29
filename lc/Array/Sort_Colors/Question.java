@@ -7,10 +7,11 @@ public class Question {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int[] A = {0,1,2,1,2,0,1,1,1,2,0};
-		sortColors(A);
-		for (int i=0;i<A.length;i++){
-        	System.out.println(A[i] + ",");
+		Question q = new Question();
+		int[] A = {2,1,2,0,1,1,2,0,2,};
+		q.sortColors(A);
+		for (int i : A){
+        	System.out.println( i + ",");
         }
 
 	}
@@ -34,43 +35,38 @@ public class Question {
 	 * 
 	 * Could you come up with an one-pass algorithm using only constant space?
 	 */
-	//http://blog.csdn.net/linhuanmars/article/details/24286349
-    public static void sortColors(int[] A) {
+	//http://www.cnblogs.com/yuzhangcmu/p/4048668.html
+	//思想类似partition array（分为两堆），此题是分为三堆
+	//partition array用一个标记k，将数组分成两堆，一堆<k，另一堆>=k
+	//类似地，此题用两个位置标记l和r，将数组分成三堆，l位之前的（包括l位）的数都为0；r位之后的（包括r位）的数都为2；l和r之间的都为1。
+	//【注】 与右边交换之后，i不能移动，因为你有可能交换过来是1或是0，还需要与左边交换。而与左边交换后，i就可以向右边移动了。
+    public void sortColors(int[] A) {
         if(A == null || A.length == 0){
         	return;
         }
-        //idx0表示最后一个是0的元素的index，idx1类似，表示1的；
-        int idx0 = 0;
-        int idx1 = 0;
-        for(int i=0; i<A.length;i++){
-        	/*
-        	 * 对每种情况（A[i]==0,1,2）,一上来都要进行A[i]=2，这是为了把之前欠的2给补上
-        	 * （如果idx1==i,A[i]可能被覆盖，但是这一步必须要做）
-        	 */
-        	//A[i]==0时，
-        	if(A[i] == 0){
-        		A[i] = 2;
-        		/*A[idx0++] = 0; //wrong!
-        		A[idx1++] = 1;*/
-        		/*
-        		 * 以下两行的顺序matters!上面是错的。下面是对的
-        		 * 道理和先要对A[i]赋值(A[i]=2)类似。
-        		 * 在idx1==idx0时，如果后做A[idx1++] = 1，那么本该为0的这位就会被覆盖
-        		 */
-        		A[idx1++] = 1;
-        		A[idx0++] = 0; 
-        	}else if(A[i] == 1){
-        		A[i] = 2;
-        		A[idx1++] = 1;
+        int l = 0; // 表示第一个不是0的index
+        int r = A.length - 1; // 表示第一个不是2的index
+        for (int i = 0; i <= r; i++) { // 【注】要使用cur <= right作为边界值。因为right 指向的是未判断的值。所以当i == right时，此值仍然需要继续判断。
+        	if (A[i] == 0) {
+        		if (A[l] != 0) {
+        			swap(A, l, i);
+        		}
+        		l++; //【注】，只要找到一个0，l就要往右挪一个
+        		//【注】i不需停留，可以直接i++；因为从左边换过来的只可能是1，所有的2全部换到右边去了。
+        	} else if (A[i] == 2) {
+        		if (A[r] != 2) {
+        			swap(A, i, r);
+        		}
+        		r--;
+        		i--; //【注】i需停留，因为换过来的有可能是0，也有可能是1，所以i要停留
         	}
-        	//可以这么理解：如果A[i]等于2时候，idx0不增加，idx1也不增加。i单独增加的就是含有的2的个数
-        	//其实把省略的部分写完整了，应该有如下表示：
-        	/*else{
-        		A[i] = 2;
-        	}*/
-        	//但是 这个else的情况本身就是A[i] == 2, 然后在此条件下进行的操作又是A[i] = 2，所以完全没必要。故省略之。
         }
         return;
     }
-
+    
+    private void swap(int[] A, int i, int j) {
+    	int temp = A[i];
+    	A[i] = A[j];
+    	A[j] = temp;
+    }
 }

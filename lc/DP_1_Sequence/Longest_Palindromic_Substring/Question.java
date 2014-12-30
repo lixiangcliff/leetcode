@@ -26,7 +26,6 @@ public class Question {
 	//基本采用Palindrome_Partitioning_II的子函数getIsPalindrome(String s)
 	//1.state: isPalindrome[i][j]代表s中从第i个char到第j个char是否为palindrome
 	//2.function: isPalindrome[i][j] = s.charAt(i) == s.charAt(j) && isPalindrome[i + 1][j - 1];
-	//(之所以有result[j]+1，是因为当我们已经得到result[j]的值，如果isPalindrome[j+1][i]也为真，即有再在j和j+1之间cut一次，就可以得到result[i])
 	//3.initialize: isPalindrome[i][i] = true; （i = 0 ~ s.length() - 2）(对角线)
 	//				isPalindrome[i][i + 1] = s.charAt(i) == s.charAt(i + 1) （i = 0 ~ s.length() - 2）(对角线右边一个)
 	//4.answer: 所有isPalindrome[i][j]为true中的j-i值最大的那一个，返回s.substring(i, j + 1)

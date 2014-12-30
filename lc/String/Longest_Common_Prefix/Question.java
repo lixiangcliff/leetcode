@@ -14,46 +14,37 @@ public class Question {
 				"abcdefgh",
 				
 		};
-/*		String[] strs = {
-				"a",
-				"a",
-				"a",
-							
-		};*/
-/*		String[] strs = {
-				""
-				
-		};*/
-		System.out.print(longestCommonPrefix(strs));
+		Question q = new Question();
+		String result = q.longestCommonPrefix(strs);
+		System.out.print(result);
 
 	}
 	
-    public static String longestCommonPrefix(String[] strs) {
-        if (strs == null || strs.length == 0){
-        	return "";
-        }
-        
-        boolean terminated = false;
-        int len = 0;
-        char ref;
-        while(!terminated){
-        	if(len>=strs[0].length()){ // reach the end of first str;
-        		break;
-        	}else{
-        		ref = strs[0].charAt(len);
-        	}
-        	for(int i=1;i<strs.length;i++){
-        		if(len >=strs[i].length() || strs[i].charAt(len) != ref){
-        			terminated = true;
-        			break;
-        		}
-        	}
-        	if (!terminated){
-        		len++;
-        	}       	
-        }
-        
-        return strs[0].substring(0,len);
+	/**
+	 * https://oj.leetcode.com/problems/longest-common-prefix/
+	 * Write a function to find the longest common prefix string amongst an
+	 * array of strings.
+	 */
+	//http://blog.csdn.net/linhuanmars/article/details/21145733
+    public String longestCommonPrefix(String[] strs) {
+		if (strs == null || strs.length == 0) {
+			return "";
+		}
+		boolean stillSame = true;
+		int index = 0;
+		while (stillSame) {
+			for (int i = 0; i < strs.length; i++) { //遍历数组中每一个string，来比较当前位
+				//index已经超过任何一个string的长度了，或者存在某两个string在第index位不同了(都跟第0个相比)
+				if (index >= strs[i].length() || strs[i].charAt(index) != strs[0].charAt(index)) { 
+					stillSame = false;
+					break;
+				}
+			}
+			if (stillSame) { //只有数组中所有string长度都够长，并且当前位上的char相同，index才加1
+				index++;
+			}
+		}
+		return strs[0].substring(0, index);
     }    
 
 }

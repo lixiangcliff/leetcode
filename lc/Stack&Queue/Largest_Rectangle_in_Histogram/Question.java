@@ -43,7 +43,7 @@ public class Question {
     	}
     	LinkedList<Integer> stack = new LinkedList<Integer>();// 【注】stack中存的是各个元素的index
     	int max = 0;
-    	// i <= height小技巧，以为要在height虚拟地再补一个“0”高度的元素，来吧最后stack里的值都pop出来(如果stack还有值的话)
+    	// i <= height小技巧，因为要在i==height处虚拟地再补一个“0”高度的元素，来把最后stack里的值都pop出来(如果stack还有值的话)
 		for (int i = 0; i <= height.length; i++) {
 			int rightIndex = i;
 			int rightHeight = i == height.length ? 0 : height[i]; // curHeight = 0的情况， 即上面说的小技巧

@@ -12,6 +12,7 @@ public class Question {
 
 	}
 	
+	//
 	//http://blog.csdn.net/linhuanmars/article/details/24444491
     public int maximalRectangle(char[][] matrix) {
     	if(matrix == null || matrix.length == 0 || matrix[0].length == 0){

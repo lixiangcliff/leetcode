@@ -7,6 +7,7 @@ public class Question {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		Question q = new Question();
 		ListNode l1 = new ListNode(2);
 		ListNode l1b = new ListNode(4);
 		ListNode l1c = new ListNode(3);
@@ -22,17 +23,12 @@ public class Question {
 		//ListNode l1 = new ListNode(0);
 		//ListNode l1b = new ListNode(8);
 		//l1.next = l1b;
-		
 		//ListNode l2 = new ListNode(0);
-		
-		ListNode result = addTwoNumbers(l1, l2);
+		ListNode result = q.addTwoNumbers(l1, l2);
 		while(result != null){
 			System.out.println(result.val + ",");
 			result = result.next;
 		}
-		
-
-		
 	}
 	
 	/**
@@ -44,7 +40,7 @@ public class Question {
 	 * Input: (2 -> 4 -> 3) + (5 -> 6 -> 4) 
 	 * Output: 7 -> 0 -> 8
 	 */
-    public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
     	/*
     	 * 本题链表表示数字的规则如下：
     	 * 表头为最低位，表尾为最高位

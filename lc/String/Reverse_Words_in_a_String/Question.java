@@ -40,7 +40,7 @@ public class Question {
     		return "";
     	}
     	s = s.trim();
-    	String[] strArray = s.split("\\s");
+    	String[] strArray = s.split("\\s+");
     	StringBuilder sb = new StringBuilder();
     	for (int i = strArray.length - 1; i >= 0; i--) {
     		sb.append(strArray[i]).append(" ");

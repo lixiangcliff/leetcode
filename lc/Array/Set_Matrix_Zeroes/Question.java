@@ -1,9 +1,5 @@
 package Set_Matrix_Zeroes;
 
-import java.util.HashSet;
-
-
-
 public class Question {
 
 	/**
@@ -13,91 +9,86 @@ public class Question {
 		// TODO Auto-generated method stub
 
 	}
-	
-	//save space, but still not "in place"
-/*    public void setZeroes(int[][] matrix) {
-    	if (matrix == null || matrix.length == 0 || matrix[0].length ==0){
-    		return;
-    	}
-    	HashSet<Integer> row = new HashSet<Integer>();
-    	HashSet<Integer> col = new HashSet<Integer>();
-    	for (int i=0;i<matrix.length;i++){
-    		for(int j=0;j<matrix[0].length;j++){
-    			if(matrix[i][j] == 0){
-    				row.add(i);
-    				col.add(j);
-    			}
-    		}
-    	}
-    	
-    	for (int i=0;i<matrix.length;i++){
-    		for(int j=0;j<matrix[0].length;j++){
-    			if(row.contains(i) || col.contains(j)){
-    				matrix[i][j] = 0;
-    			}
-    		}
-    	}    	    	
-    }*/
+
+	/**
+	 * https://oj.leetcode.com/problems/set-matrix-zeroes/
+	 * Given a m x n matrix, if an element is 0, set its entire row and column
+	 * to 0. Do it in place.
+	 * 
+	 * click to show follow up.
+	 * Follow up: Did you use extra space? A straight forward solution using
+	 * O(mn) space is probably a bad idea. A simple improvement uses O(m + n)
+	 * space, but still not the best solution. Could you devise a constant space
+	 * solution?
+	 */
     
-    //in place method
+	//题目要求O(1)的空间消耗(in place)。
+	//1. 我们可以使用第一行，第一列来作为Flag，记录某一行，某一列是否应该被设置为0.
+	//2. 因为第一行，第一列共用左上角的flag，所以我们需要另外找2个flag来定义第一行，第一列本身是否应该设置为0. row0has0， col0has0
+	//3. 先扫描首行，首列把首行首列的flag算出。
+	//4. 扫描其他的矩阵，将第一行每一列的flag算出。
+	//5. 设置矩阵中除了首行首列的cells.
+	//6. 设置首行，设置首列。
+	//http://www.cnblogs.com/yuzhangcmu/p/4047507.html
     //http://answer.ninechapter.com/solutions/set-matrix-zeroes/
-    public void setZeroes(int[][] matrix){
-    	if (matrix == null || matrix.length == 0 || matrix[0].length ==0){
-    		return;
-    	}
-    	boolean empty_row0 = false;
-    	boolean empty_col0 =  false;
-    	int row = matrix.length;
-    	int col = matrix[0].length;
-    	
-    	//check whether row0 has "0" 
-    	for(int i=0;i<col;i++){
-    		if(matrix[0][i] == 0){
-    			empty_row0 = true;
-    			break;
-    		}
-    	}
-    	
-    	//check whether col0 has "0" 
-    	for(int i=0;i<row;i++){
-    		if(matrix[i][0] == 0){
-    			empty_col0 = true;
-    			break;
-    		}
-    	}
-    	
-    	//use row0 and col0 to mark all the coordinates that are "0"
-    	for(int i=1;i<row;i++){
-    		for(int j=1;j<col;j++){
-    			if(matrix[i][j] == 0){
-    				matrix[0][j] = 0;
-    				matrix[i][0] = 0;
-        		}
-    		}    		
-    	}
-    	
-    	// assign zero to all satisfied position except row0 and col0
-    	for(int i=1;i<row;i++){
-    		for(int j=1;j<col;j++){
-    			if(matrix[0][j] == 0 || matrix[i][0] == 0){
-    				matrix[i][j] = 0;
-        		}
-    		}    		
-    	}
-    	
-    	// assign zero to row0 if needed
-    	if (empty_row0){
-    		for(int i=0;i<col;i++){
-        		matrix[0][i] = 0;
-        	}
-    	}
-    	
-    	// assign zero to col0 if needed
-    	if (empty_col0){
-    		for(int i=0;i<row;i++){
-        		matrix[i][0] = 0;
-        	}
-    	}
-    }
+	//http://blog.csdn.net/linhuanmars/article/details/24066199
+	public void setZeroes(int[][] matrix) {
+		if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+			return;
+		}
+		boolean row0has0 = false;
+		boolean col0has0 = false;
+		int row = matrix.length;
+		int col = matrix[0].length;
+
+		// check whether row0 has "0"
+		for (int j = 0; j < col; j++) {
+			if (matrix[0][j] == 0) {
+				row0has0 = true;
+				break;
+			}
+		}
+
+		// check whether col0 has "0"
+		for (int i = 0; i < row; i++) {
+			if (matrix[i][0] == 0) {
+				col0has0 = true;
+				break;
+			}
+		}
+
+		// use row0 and col0 to mark all the coordinates that are "0"
+		for (int i = 1; i < row; i++) {
+			for (int j = 1; j < col; j++) {
+				if (matrix[i][j] == 0) {
+					matrix[0][j] = 0;
+					matrix[i][0] = 0;
+				}
+			}
+		}
+
+		// assign zero to all satisfied position except row0 and col0
+		for (int i = 1; i < row; i++) {
+			for (int j = 1; j < col; j++) {
+				if (matrix[0][j] == 0 || matrix[i][0] == 0) {
+					matrix[i][j] = 0;
+				}
+			}
+		}
+
+		// if row0 has 0, set all element in row0 to be "0"
+		if (row0has0) {
+			for (int j = 0; j < col; j++) {
+				matrix[0][j] = 0;
+			}
+		}
+
+		// if col0 has 0, set all element in col0 to be "0"
+		if (col0has0) {
+			for (int i = 0; i < row; i++) {
+				matrix[i][0] = 0;
+			}
+		}
+	}
     
 }

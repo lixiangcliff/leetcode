@@ -7,12 +7,13 @@ public class Question {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println(strStr("h", "h"));
+		Question q = new Question();
+		System.out.println(q.strStr("h", "h"));
 	}
 	
 	//brutal force
 	//http://blog.csdn.net/linhuanmars/article/details/20276833
-    public static String strStr(String haystack, String needle) {
+    public String strStr(String haystack, String needle) {
         if(haystack ==  null || needle == null || needle.length()==0){
         	return haystack;
         }
@@ -36,5 +37,4 @@ public class Question {
         }
         return null;
     }
-    
 }

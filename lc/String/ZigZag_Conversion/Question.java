@@ -7,30 +7,49 @@ public class Question {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println(convert("PAYPALISHIRING",3));
+		Question q = new Question();
+		System.out.println(q.convert("PAYPALISHIRING",3));
 		
 	}
 	
+	/**
+	 * https://oj.leetcode.com/problems/zigzag-conversion/
+	 * The string "PAYPALISHIRING" is written in a zigzag pattern on a given
+	 * number of rows like this: (you may want to display this pattern in a
+	 * fixed font for better legibility)
+	 * 
+	 * P   A   H   N 
+	 * A P L S I I G 
+	 * Y   I   R 
+	 * And then read line by line: "PAHNAPLSIIGYIR"
+	 * 
+	 * Write the code that will take a string and make this conversion given a
+	 * number of rows:
+	 * 
+	 * string convert(string text, int nRows); 
+	 * convert("PAYPALISHIRING", 3) should return "PAHNAPLSIIGYIR".
+	 */
+	
 	//http://blog.csdn.net/linhuanmars/article/details/21145039
-    public static String convert(String s, int nRows) {
+    public String convert(String s, int nRows) {
         if(s == null || s.length() == 0 || nRows <= 0){
         	return "";
         }
         if (nRows == 1){
         	return s;
         }
-        int size = 2*nRows-2;
-        StringBuilder sb = new StringBuilder();
-        //for(int i=0; i< s.length();i++){ // wrong!! 
-        for(int i=0; i< nRows;i++){
-        	for(int j=i;j<s.length();j+=size){ 
-        		sb.append(s.charAt(j));// going down
-        		if (i!=0 && i!= nRows-1 && j+size-2*i < s.length()){// going up
-            		sb.append(s.charAt(j+size-2*i));
-            	}
-        	}
-        }
-        return sb.toString();
+		int size = 2 * nRows - 2; // 每一个"下"+"上"一共多少字符.举例：PAYP, ALS, HIRI, etc
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < nRows; i++) { // 以行为单位来处理
+			for (int j = i; j < s.length(); j += size) { // 【注】 j在s中每次递进size个位置
+				sb.append(s.charAt(j));// going down （从第i - 1 行到第i行）
+				// 不在第一行，且不在最后一样，且当前j仍在s长度内
+				if (i != 0 && i != nRows - 1 && j + size - 2 * i < s.length()) {// going up （懂第i + 1行到第i行）
+					sb.append(s.charAt(j + size - 2 * i)); // s.charAt(x) 求x的表示方式的最好办法就是，画图举例。
+				}
+			}
+		}
+		return sb.toString();
     }
 
 }

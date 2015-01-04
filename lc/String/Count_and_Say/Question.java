@@ -1,7 +1,5 @@
 package Count_and_Say;
 
-import java.util.Stack;
-
 public class Question {
 
 	/**
@@ -9,70 +7,43 @@ public class Question {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println(countAndSay(5));
+		Question q = new Question();
+		System.out.println(q.countAndSay(5));
 	}
-	//over kill...or say did not understand what they want to do...
-/*    public static String countAndSay(int n) {
-    	int count=1;
-    	String str = Integer.toString(n);
-    	while(count < n){
-    		str = say(str);
-    		count++;
-    	}
-    	return str;        		
-    }
-    
-    private static String say(String str){
-    	if (str.length() == 1){
-    		return "1" + str;
-    	}
-    	int previous = 0;
-    	int current = 1;
-    	String result = "";
-    	int count = 1;
-    	while(current<str.length()){
-    		if(str.charAt(current) != str.charAt(previous)){
-    			result = result + count + str.charAt(previous);
-    			count = 1;
-    			previous = current;
-    		}else{
-    			count++;
-    		}
-    		current++;
-    	}
-    	result = result + count + str.charAt(previous);
-    	return result;
-    }*/
+
+	/**
+	 * https://oj.leetcode.com/problems/count-and-say/
+	 * The count-and-say sequence is the sequence of integers beginning as
+	 * follows: 
+	 * 1, 11, 21, 1211, 111221, ...
+	 * 1 is read off as "one 1" or 11. 
+	 * 11 is read off as "two 1s" or 21. 
+	 * 21 is read off as "one 2, then one 1" or 1211. 
+	 * Given an integer n, generate the nth sequence.
+	 * Note: The sequence of integers will be represented as a string.
+	 */
 	
-	public static String countAndSay(int n) {
-    	int count=1;
-    	String str = Integer.toString(1);
-    	while(count < n){
-    		str = say(str);
-    		count++;
-    	}
-    	return str;        		
-    }
-    
-    private static String say(String str){
-    	if (str.length() == 1){
-    		return "1" + str;
-    	}
-    	int previous = 0;
-    	int current = 1;
-    	String result = "";
-    	int count = 1;
-    	while(current<str.length()){
-    		if(str.charAt(current) != str.charAt(previous)){
-    			result = result + count + str.charAt(previous);
-    			count = 1;
-    			previous = current;
-    		}else{
-    			count++;
-    		}
-    		current++;
-    	}
-    	result = result + count + str.charAt(previous);
-    	return result;
-    }
+	//  把第n个string读出来就得到了第n + 1个string，以此类推。重点在如何“读”一个string
+	// http://www.cnblogs.com/yuzhangcmu/p/4118146.html
+	public String countAndSay(int n) {
+		if (n <= 0) { // corner case
+			return null;
+		}
+		if (n == 1) { // 终止条件
+			return "1"; 
+		}
+		String s = countAndSay(n - 1); // 通过n - 1的“读法”来推出n的读法
+		int len = s.length();
+		int count = 0;
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < len; i++) { // 依次处理n - 1中的字符。必须从i == 0开始（不能从i == 1开始），否则count对应不上
+			count++; // 每遇到一个新的字符，置其出现次数为1; 如果是重复的则出现次数递增1个
+			if (i == len - 1 || (i < len - 1 && s.charAt(i) != s.charAt(i + 1))) { // 两种情况需要读数：1.如果i已经走到s的最后1位了，则必须要读数了；2.如果当前位和上一位已经不同了，则必须读数。
+				sb.append(count); // 连续出现的次数
+				sb.append(s.charAt(i)); // 连续出现的字符内容
+				count = 0; // 【注】记得count重置为1；
+			}
+		}
+		return sb.toString();
+	}
 }

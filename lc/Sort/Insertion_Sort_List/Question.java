@@ -7,66 +7,34 @@ public class Question {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		Question q = new Question();
 		ListNode l1 = new ListNode(1);
 		ListNode l2 = new ListNode(2);
 		ListNode l3 = new ListNode(3);
-		l1.next = l2;
-		l2.next = l3;
-		ListNode head = l1;
+		l3.next = l2;
+		l2.next = l1;
+		ListNode head = l3;
 		while(head != null){
 			System.out.print(head.val + ",");
 			head = head.next;
 		}
+		System.out.println("");
 		
-		ListNode head2 = insertionSortList(l1);
+		ListNode head2 = q.insertionSortList(l3);
 		while(head2 != null){
 			System.out.print(head2.val + ",");
 			head2 = head2.next;
 		}
 		
 	}
+	
 	/**
 	 * https://oj.leetcode.com/problems/insertion-sort-list/
 	 * Sort a linked list using insertion sort.
 	 */
-	//my way
-/*    public static ListNode insertionSortList(ListNode head) {
-    	if (head == null){
-    		return null;
-    	}
-    	ListNode dummy = new ListNode(0);
-    	dummy.next = head;
-        ListNode runner = head.next;
-        ListNode pre =  head;
-        while(runner != null){
-        	ListNode currentNext = runner.next;
-        	ListNode position = dummy;
-        	boolean foundPos = false;
-        	while(position!= pre){
-        		if (runner.val <= position.next.val){//find position
-        			runner.next = position.next;
-        			position.next = runner;
-        			foundPos = true;
-        			break;
-        		}
-        		position = position.next;
-        	}
-        	if(foundPos){
-        		//pre.next = runner.next; // wrong! runner may have already be moved!!
-        		pre.next = currentNext;
-        	}else{
-        		pre = pre.next;
-        	}
-        	//pre = pre.next; // wrong! 
-        	//runner = runner.next; // wrong! runner may have already be moved!!
-        	runner = currentNext;
-        }
-        return dummy.next;
-    }*/
     
-    //similar way but simpler code
     //http://blog.csdn.net/linhuanmars/article/details/21144553
-	 public static ListNode insertionSortList(ListNode head) {
+	 public ListNode insertionSortList(ListNode head) {
 		 if (head == null){
 			 return null;
 		 }
@@ -77,10 +45,10 @@ public class Question {
 		 //put it at the tail of dummy's tail;
 		 //from second loop(cur == head.next), pick each new start node and 
 		 //insert it into dummy's linkedlist
-		 while(cur != null){
+		 while (cur != null) { // 【注】看图
 			 pre = dummy;
 			 ListNode next = cur.next;
-			 while(pre.next != null && cur.val >= pre.next.val){
+			 while (pre.next != null && cur.val >= pre.next.val) {
 				 pre = pre.next;
 			 }
 			 cur.next = pre.next;

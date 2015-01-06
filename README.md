@@ -13,6 +13,6 @@ leetcode written in java
 Summary for Round 2:
 1. finished on 1/5/2015
 2. For Aims:
-  1). to finish left 3 questions -- done!
-  2). group and summarize questions -- done!
-  3). draw auxiliary char/table to help better and easier to understand the questin and solution for possible round in future -- partly finished. will make up for ones that is necessary
+3.  1). to finish left 3 questions -- done!
+4.  2). group and summarize questions -- done!
+5.  3). draw auxiliary char/table to help better and easier to understand the questin and solution for possible round in future -- partly finished. will make up for ones that is necessary

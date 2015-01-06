@@ -34,8 +34,9 @@ public class Question {
 
 }
 
+//http://blog.csdn.net/linhuanmars/article/details/41008731
 //不能通过leetcode “Memory Limit Exceeded”，不知道为什么。ArrayList，Stack都试过了，也不行… =。=
-/*class MinStack {
+class MinStack {
 	private LinkedList<Integer> stack;
 	private LinkedList<Integer> minStack;
 
@@ -54,8 +55,11 @@ public class Question {
 	}
 
 	public void pop() {
-		if (!stack.isEmpty()) {
-			stack.pop();
+		if (stack.isEmpty()) {
+			return;
+		}
+		int item = stack.pop();
+		if (!minStack.isEmpty() && item == minStack.peek()) {
 			minStack.pop();
 		}
 	}
@@ -73,45 +77,5 @@ public class Question {
 		}
 		return Integer.MAX_VALUE;
 	}
-}*/
-
-class MinStack {
-	private Stack stack;
-	private Stack minStack;
-
-	public MinStack() {
-		stack = new Stack();
-		minStack = new Stack();
-	}
-
-	public void push(int x) {
-		if (minStack.isEmpty() || x < (Integer)minStack.peek()) {
-			minStack.push(x);
-		} 
-		stack.push(x);
-	}
-
-	public void pop() {
-		if (stack.isEmpty()) {
-			return;
-		}
-		int item = (Integer)stack.pop();
-		if (!minStack.isEmpty() && item == (Integer)minStack.peek()) {
-			minStack.pop();
-		}
-	}
-
-	public int top() {
-		if (!stack.isEmpty()) {
-			return (Integer)stack.peek();
-		}
-		return Integer.MAX_VALUE;
-	}
-
-	public int getMin() {
-		if (!minStack.isEmpty()) {
-			return (Integer)minStack.peek();
-		}
-		return Integer.MAX_VALUE;
-	}
 }
+

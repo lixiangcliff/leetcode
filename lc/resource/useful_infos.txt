@@ -1,6 +1,13 @@
 useful links:
-1. leetcode category: 
-http://www.danielbit.com/blog/puzzle/leetcode/leetcode-summary
-http://www.douban.com/note/330562764/
-115 java interview http://www.javacodegeeks.com/2014/04/java-interview-questions-and-answers.html
-http://bigocheatsheet.com/
+1. Leetcode_Matrix google doc:
+	http://goo.gl/yvEkWw
+	
+2. leetcode category: 
+	http://www.danielbit.com/blog/puzzle/leetcode/leetcode-summary
+	http://www.douban.com/note/330562764/
+
+3. 115 java interview http://www.javacodegeeks.com/2014/04/java-interview-questions-and-answers.html
+	http://bigocheatsheet.com/
+
+4. System Design:
+	http://www.mitbbs.com/article/JobHunting/32777529_0.html

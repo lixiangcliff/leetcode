@@ -7,9 +7,10 @@ public class Question {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		//int[] A =  {3,4,4,4,-1,1};
-		int[] A =  {3,4,-1,1};
-		System.out.println(firstMissingPositive(A));
+		int[] A =  {3,4,4,4,-1,1};
+		Question q = new Question();
+		//int[] A =  {3,4,-1,1};
+		System.out.println(q.firstMissingPositive(A));
 	}
 	
 
@@ -20,41 +21,39 @@ public class Question {
 	 * 
 	 * Your algorithm should run in O(n) time and uses constant space.
 	 */
-	//http://blog.csdn.net/linhuanmars/article/details/20884585
-	//our purpose it to make: A[0]==1, A[1]==2...
-	//中心思想：遍历array，通过swap让A[i]的值为i+1；第二次遍历时哪个A[i]!=i+1 即是缺失的第一个正数
+	
+	//目标是使: A[0] == 1, A[1] == 2...
+	//中心思想：遍历array，通过swap让A[i]的值为i + 1(即把值A[i]放到i - 1的index上)；第二次遍历时哪个A[i] != i + 1 即是缺失的第一个正数
 	//下面重点说如何swap
-    public static int firstMissingPositive(int[] A) {
+	//http://blog.csdn.net/linhuanmars/article/details/20884585
+	//http://www.cnblogs.com/yuzhangcmu/p/4200096.html (【注】图例)
+    public int firstMissingPositive(int[] A) {
     	if (A == null || A.length == 0){
-    		return 1;
+    		return 1; // 返回的一定是正数
     	}
-    	for(int i=0;i<A.length;i++){
-    		/*
-    		 * 我们针对每一位做处理（swap），直到这位彻底处理完（或者已经不满足swap条件）了才再往右挪一位
-    		 * 处理每位时，只有满足以下三种情况才做swap，否则continue
-    		 * 1.A[i] > 0(负数不处理)
-    		 * 2.A[i] <= A.length(长度为A.length的array中，最后一位A[A.length-1]能符合题意的数值为A.length，所以一旦A[i]>A.length，则不合我们的中心思想)
-    		 * 3.A[i] != A[A[i]-1]（swap的意图就是把A[i]的值找到他该去的地方（index ==A[i]-1），所以如果A[i]==A[A[i]-1]我们就不需要也不能交换，否则下面i-- 之后，i停留，会陷入死循环 ）
-    		 */
-    		if(A[i] > 0 && A[i] <= A.length && A[i] != A[A[i]-1]){ 
-    			//下面的swap，在A[A[i]-1]<0时会导致之后index越界（index<0）
-    			//int temp = A[i]; //Wrong!! important!  
-    			//A[i] = A[A[i]-1]; //因为如果A[A[i]-1]<= 0, 则新的 A[i]<=0, 则A[i]-1 <= -1,
-    			//A[A[i]-1] = temp; //于是当"A[A[i]-1] = temp"会导致index越界
-    			//而下面的就不会
-                int temp = A[A[i]-1];  
-                A[A[i]-1] = A[i];  
-                A[i] = temp;  
-    			i--;// i停留在此位，直到每次swap之后此位的新数值都去了它们该去的地方
+		for (int i = 0; i < A.length; i++) {
+    		 //我们针对数组中每一位做处理（swap），直到这位彻底处理完（或者已经不满足swap条件）了才再往右挪一位
+    		 //处理每位时，只有同时满足以下三种情况才做swap，否则就算处理完了这一位，可以向右挪了
+    		 //1.A[i] > 0(负数或0不处理)
+    		 //2.A[i] <= A.length(即A[i]的值要在A的长度range内，如果A[i] > A.length，则此A[i]值不能在数组中找到可以达到我们“目标”的index，可跳过之)
+    		 //3.A[i] != A[A[i] - 1]（否则swap过来一个一样的数，会陷入死循环 ）
+			while (A[i] > 0 && A[i] <= A.length && A[i] != A[A[i] - 1]) { // 处理完当前i，才跳出循环继续向右边处理
+				swap(A, i, A[i] - 1);
     		}
     	}
-    	for(int i=0; i<A.length;i++){
-    		if(A[i] != i+1){
-    			return i+1;
-    		}
-    	}
-    	//如果code能执行到这里，说明A[0]==1, A[1]==2 ...A[A.length-1]=A.length,所以下一个正数就是A.length+1
-    	return A.length+1; 
+		for (int i = 0; i < A.length; i++) {
+			if (A[i] != i + 1) {
+				return i + 1;
+			}
+		}
+    	//如果code能执行到这里，说明A[0] == 1, A[1] == 2 ...A[A.length-1] = A.length,所以下一个正数就是A.length+1
+    	return A.length + 1; 
+    }
+    
+    private void swap(int[] A, int l, int r) {
+        int tmp = A[l];
+        A[l] = A[r];
+        A[r] = tmp;
     }
 
 }

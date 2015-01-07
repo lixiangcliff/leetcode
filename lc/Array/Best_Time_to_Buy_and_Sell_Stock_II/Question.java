@@ -23,8 +23,9 @@ public class Question {
 	 * multiple times). However, you may not engage in multiple transactions at
 	 * the same time (ie, you must sell the stock before you buy again).
 	 */
-	//buy first and sell second(n-1 transaction at the most); 
-	//as long as today is higher than yesterday, sell it!
+	
+	//要先买后卖(最多可以有n - 1次transaction); 
+	//只要第i天比第i - 1天的价格高，就在第i - 1天买入，第i天卖出。（即使本来在第i - 1天打算卖出也没关系，因为同一天可以既买入，又卖出）
 	//http://blog.csdn.net/linhuanmars/article/details/23164149
 	public int maxProfit(int[] prices) {
 		if (prices == null || prices.length <= 1) {

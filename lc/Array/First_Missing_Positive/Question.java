@@ -39,8 +39,12 @@ public class Question {
     		 //3.A[i] != A[A[i] - 1]（否则swap过来一个一样的数，会陷入死循环 ）
 			while (A[i] > 0 && A[i] <= A.length && A[i] != A[A[i] - 1]) { // 处理完当前i，才跳出循环继续向右边处理
 				swap(A, i, A[i] - 1);
-    		}
-    	}
+				//下面的写法在input是[2,1]时会死循环，原因是(1)和(3)中的A[i]已经不同了（由于(2)的操作）。【注】所以一定要单独写swap方法。让其中的l和r来handle。
+				//int tmp = A[i]; //(1)
+				//A[i] = A[A[i] - 1]; //(2)
+				//A[A[i] - 1] = tmp; //(3)
+			}
+		}
 		for (int i = 0; i < A.length; i++) {
 			if (A[i] != i + 1) {
 				return i + 1;

@@ -9,8 +9,9 @@ public class Question {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		ArrayList<Integer> result = getRow(4);
-		for(int i=0;i<result.size();i++){
+		Question q = new Question();
+		ArrayList<Integer> result = q.getRow(4);
+		for (int i = 0; i < result.size(); i++) {
 			System.out.print(result.get(i) + ",");
 		}
 	}
@@ -23,25 +24,29 @@ public class Question {
 	 * 
 	 * Note: Could you optimize your algorithm to use only O(k) extra space?
 	 */
+	
 	//to use O(k) space only: rolling array
 	//http://blog.csdn.net/linhuanmars/article/details/23311629
 	//http://blog.csdn.net/abcbc/article/details/8982651
 	//http://fisherlei.blogspot.com/2012/12/leetcode-pascals-triangle-ii.html
 	//一维DP，从后往前扫。
-	//【注】因为数据类型为ArrayList所以随着add元素，size会增长,所以要处理好后面的index问题
-	//而且ArrayList的元素一定要先数据，之后才能改值，即要先add 然后才能set
+	//ArrayList的元素一定要先添加数据，之后才能改值，即要先add 然后才能set
 	//【注】此题和Pascals_Triangle_I 对kth row的定义有区别
 	public static ArrayList<Integer> getRow(int rowIndex) {
-		ArrayList<Integer> result = new ArrayList<Integer>(); 
-		if (rowIndex < 0){
+		ArrayList<Integer> result = new ArrayList<Integer>();
+		if (rowIndex < 0) {
 			return result;
 		}
-		result.add(1);//row 0
-		for(int i=1;i<=rowIndex;i++){//从第row 1到第row n
-			for(int j=result.size()-1;j>0;j--){//从后往前扫
-				result.set(j, result.get(j) + result.get(j-1));
+		for (int i = 0; i <= rowIndex; i++) {// 从第row 0到第row n
+			for (int j = i; j >= 0; j--) {// 【注】从后往前扫，第i行有i + 1列（举例第0行，有1列）
+				if (j == i) { // 添上本行最右边的1
+					result.add(1); 
+				} else if (j == 0) { // 最左边的数永远是1，无需处理即可
+					continue;
+				} else {
+					result.set(j, result.get(j - 1) + result.get(j)); // 举例画图清晰可得
+				}
 			}
-			result.add(1);//补最后一个1
 		}
 		return result;
 	}

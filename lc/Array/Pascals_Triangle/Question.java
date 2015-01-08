@@ -28,36 +28,29 @@ public class Question {
 	 * 
 	 */
 
-	//easier to understand
+	//每一行的每一个元素有这个规律：
+	//1. 左右2边的是1.
+	//i, j 表示行，列坐标。
+	//2. 中间的是f[i][j] = f[i - 1][j] + f[i - 1][j - 1]
+	//不断复用上一行的值即可。
+	//http://www.cnblogs.com/yuzhangcmu/p/4194821.html
 	//http://www.cnblogs.com/huntfor/p/3859522.html
-	public ArrayList<ArrayList<Integer>> generate(int numRows){
+	public ArrayList<ArrayList<Integer>> generate(int numRows) {
 		ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
-		if (numRows <= 0){
+		if (numRows <= 0) {
 			return result;
 		}
-		ArrayList<Integer> firstRow = new ArrayList<Integer>();
-		firstRow.add(1);
-		result.add(firstRow);
-		ArrayList<Integer> preRow = firstRow;
-		for(int i=1; i< numRows ;i++){//还剩numRows-1行要处理
-			ArrayList<Integer> newRow = getRow(preRow);
-			result.add(newRow);
-			preRow = newRow;//更新preRow
+		for (int i = 0; i < numRows; i++) {
+			ArrayList<Integer> item = new ArrayList<Integer>(); // 每一行产生一个新的item
+			for (int j = 0; j <= i; j++) { // j <= i，边界用举例的方法
+				if (j == 0 || j == i) { // 添加最左边和最右边的1
+					item.add(1);
+				} else {
+					item.add(result.get(i - 1).get(j - 1) + result.get(i - 1).get(j));
+				}
+			}
+			result.add(item); // 当前行加入结果集
 		}
 		return result;
 	}
-	
-	//通过上一行，来得到当前行
-	private ArrayList<Integer> getRow(ArrayList<Integer> preRow){
-		int last = preRow.size()-1;
-		ArrayList<Integer> newRow = new ArrayList<Integer>();
-		newRow.add(1);
-		//上一行相邻两个相加，产生的新元素加入到list里
-		for(int i=0;i<=last-1;i++){
-			newRow.add(preRow.get(i) + preRow.get(i+1));
-		}
-		newRow.add(1);
-		return newRow;
-	}
-
 }

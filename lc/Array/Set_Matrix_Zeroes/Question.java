@@ -23,10 +23,9 @@ public class Question {
 	 */
     
 	//题目要求O(1)的空间消耗(in place)。
-	//1. 我们可以使用第一行，第一列来作为Flag，记录某一行，某一列是否应该被设置为0.
-	//2. 因为第一行，第一列共用左上角的flag，所以我们需要另外找2个flag来定义第一行，第一列本身是否应该设置为0. row0has0， col0has0
-	//3. 先扫描首行，首列把首行首列的flag算出。
-	//4. 扫描其他的矩阵，将第一行每一列的flag算出。
+	//1. 我们可以使用首行，首列来作为Flag，记录某一行，某一列是否应该被设置为0.
+	//3. 先扫描首行，首列。用两个值row0has0， col0has0来记录首行首列是否含0。
+	//4. 扫描其他的矩阵，将每一个是0的[i][j]都反映在首行和首列上。
 	//5. 设置矩阵中除了首行首列的cells.
 	//6. 设置首行，设置首列。
 	//http://www.cnblogs.com/yuzhangcmu/p/4047507.html
@@ -40,7 +39,6 @@ public class Question {
 		boolean col0has0 = false;
 		int row = matrix.length;
 		int col = matrix[0].length;
-
 		// check whether row0 has "0"
 		for (int j = 0; j < col; j++) {
 			if (matrix[0][j] == 0) {
@@ -48,7 +46,6 @@ public class Question {
 				break;
 			}
 		}
-
 		// check whether col0 has "0"
 		for (int i = 0; i < row; i++) {
 			if (matrix[i][0] == 0) {
@@ -56,7 +53,6 @@ public class Question {
 				break;
 			}
 		}
-
 		// use row0 and col0 to mark all the coordinates that are "0"
 		for (int i = 1; i < row; i++) {
 			for (int j = 1; j < col; j++) {
@@ -66,7 +62,6 @@ public class Question {
 				}
 			}
 		}
-
 		// assign zero to all satisfied position except row0 and col0
 		for (int i = 1; i < row; i++) {
 			for (int j = 1; j < col; j++) {
@@ -75,14 +70,12 @@ public class Question {
 				}
 			}
 		}
-
 		// if row0 has 0, set all element in row0 to be "0"
 		if (row0has0) {
 			for (int j = 0; j < col; j++) {
 				matrix[0][j] = 0;
 			}
 		}
-
 		// if col0 has 0, set all element in col0 to be "0"
 		if (col0has0) {
 			for (int i = 0; i < row; i++) {

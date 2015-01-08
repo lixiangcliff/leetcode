@@ -11,3 +11,6 @@ useful links:
 
 4. System Design:
 	http://www.mitbbs.com/article/JobHunting/32777529_0.html
+	
+5. 8个月从CS菜鸟到拿到Google Offer的经历+内推
+	http://www.cnblogs.com/yuzhangcmu/p/4050780.html

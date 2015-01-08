@@ -41,12 +41,14 @@ public class Question {
     	if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
     		return result;
     	}
+    	int row = matrix.length;
+    	int col = matrix[0].length;
     	//l, r, u, d分别表示当前的左右上下界
         int l = 0;
-        int r = matrix[0].length - 1;
+        int r = col - 1;
         int u = 0;
-        int d = matrix.length - 1;
-        int size = matrix.length * matrix[0].length;
+        int d = row - 1;
+        int size = row * col;
 		while (true) {
 			//【注】对于每个方向遍历的时候都必须“走到底”，否则最后走到中间可能会有剩余永远无法遍历到。
 			// rightward

@@ -25,14 +25,14 @@ public class Question {
 	 * Note: Could you optimize your algorithm to use only O(k) extra space?
 	 */
 	
-	//to use O(k) space only: rolling array
+	//to use O(k) space only: 重复利用同一个“数组”
 	//http://blog.csdn.net/linhuanmars/article/details/23311629
 	//http://blog.csdn.net/abcbc/article/details/8982651
 	//http://fisherlei.blogspot.com/2012/12/leetcode-pascals-triangle-ii.html
 	//一维DP，从后往前扫。
 	//ArrayList的元素一定要先添加数据，之后才能改值，即要先add 然后才能set
 	//【注】此题和Pascals_Triangle_I 对kth row的定义有区别
-	public static ArrayList<Integer> getRow(int rowIndex) {
+	public ArrayList<Integer> getRow(int rowIndex) {
 		ArrayList<Integer> result = new ArrayList<Integer>();
 		if (rowIndex < 0) {
 			return result;

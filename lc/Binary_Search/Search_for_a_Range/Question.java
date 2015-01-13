@@ -25,7 +25,7 @@ public class Question {
 	 * return [3, 4].
 	 */
 	
-	//用bst模板【注】，要灵活利用模板！比如下面【注】处的else，体会start和end只能二者选一的逻辑关系
+	//用BS模板【注】，要灵活利用模板！比如下面【注】处的else，体会start和end只能二者选一的逻辑关系
     public static int[] searchRange(int[] A, int target) {
     	int[] result = {-1, -1};
     	if(A == null || A.length == 0){

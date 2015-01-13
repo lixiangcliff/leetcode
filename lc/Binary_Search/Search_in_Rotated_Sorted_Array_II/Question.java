@@ -20,7 +20,7 @@ public class Question {
 	 * Write a function to determine if a given target is in the array.
 	 */
 	
-	//using BST template
+	//using BS template
 	//http://blog.csdn.net/linhuanmars/article/details/20588511
     public static boolean search(int[] A, int target) {
 		if (A == null || A.length == 0) {

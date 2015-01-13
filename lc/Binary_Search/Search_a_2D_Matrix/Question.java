@@ -47,7 +47,7 @@ public class Question {
 	 * Given target = 3, return true.
 	 */
 	
-	//BST模板。看【注】！
+	//BS模板。看【注】！
     public boolean searchMatrix(int[][] matrix, int target) {
     	if(matrix == null || matrix.length==0 || matrix[0].length==0)  
             return false; 

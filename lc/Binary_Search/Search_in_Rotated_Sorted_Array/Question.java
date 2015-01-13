@@ -21,6 +21,7 @@ public class Question {
 	 * index, otherwise return -1.
 	 * You may assume no duplicate exists in the array.
 	 */
+	
 	//用BST模板
 	//http://blog.csdn.net/linhuanmars/article/details/20525681
 	//看图！（此题元素不重复）
@@ -31,7 +32,7 @@ public class Question {
     	int start = 0;
     	int end = A.length-1;
     	while(start + 1 < end){
-    		int mid = start+(end - start) / 2;
+    		int mid = start + (end - start) / 2;
     		if (target == A[mid]){//找到target
     			return mid;
     		}
@@ -49,14 +50,12 @@ public class Question {
     			}
     		}
     	}
-    	
     	if (A[start] == target){
     		return start;
     	}
     	if (A[end] == target){
     		return end;
     	}
-    	
         return -1; //没找到
     }
 

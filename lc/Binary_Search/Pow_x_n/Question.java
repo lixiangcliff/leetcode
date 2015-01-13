@@ -29,7 +29,7 @@ public class Question {
 			double reciprocal = pow(x, -(n + 1)) * x ;
 			return 1 / reciprocal; // 取倒数，返回真实值
 		}
-		double result = pow(x , n /2); // 下面是n > 0， 二分递归，再将结果相乘
+		double result = pow(x , n / 2); // 下面是n > 0， 二分递归，再将结果相乘
 		result *= result;
 		if (n % 2 == 1) { // 如果有余数，则再补乘一个x
 			result *= x;

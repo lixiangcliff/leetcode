@@ -27,7 +27,6 @@ public class Question {
 	//这个code更易懂好记 http://www.ninechapter.com/solutions/median-of-two-sorted-arrays/ 
 	//思路两者一样：http://blog.csdn.net/linhuanmars/article/details/19905515
 	//看图！
-	
 	//问题等价于求两个array的第k=(m+n)/2（假设m和n分别是两个数组的元素个数）大的数是多少。
 	//基本思路是每次通过查看两个数组的第k/2大的数(假设是A[k/2],B[k/2])，如果两个A[k/2]=B[k/2]，说明当前这个数即为两个数组剩余元素的第k大的数，
 	//如果A[k/2]>B[k/2], 那么说明B的前k/2个元素都不是我们要的第k大的数，反之则排除A的前k/2个，如此每次可以排除k/2个元素，
@@ -46,24 +45,28 @@ public class Question {
     }
     
     //A_start为当前A中剩余待处理元素的起始位置(B_start类似)，k表示取在当前剩余A和B长度和中第k个元素
-    private double helper(int[] A, int A_start, int[] B, int B_start, int k){
-    	if (A_start >= A.length) {//如果A中元素已经全部处理完了，则返回B中第k个元素
-    		return B[B_start + k - 1];
+    private double helper(int[] A, int startA, int[] B, int startB, int k){
+    	if (startA >= A.length) {//如果A中元素已经全部处理完了，则返回B中第k个元素
+    		return B[startB + k - 1];
     	}
-    	if (B_start >= B.length) {
-    		return A[A_start + k - 1];
+    	if (startB >= B.length) {
+    		return A[startA + k - 1];
     	}
     	if (k == 1) {//A和B都只剩一个待处理的元素
-    		return Math.min(A[A_start], B[B_start]);
+    		return Math.min(A[startA], B[startB]);
     	}
     	//得到A中第k/2的位置的值。看图！边界举例。(之所以后面补的是Integer.MAX_VALUE，是因为数组是递增的)
-    	int A_halfK_value = A_start + k / 2 - 1 < A.length ? A[A_start + k / 2 - 1] : Integer.MAX_VALUE;
-    	int B_halfK_value = B_start + k / 2 - 1 < B.length ? B[B_start + k / 2 - 1] : Integer.MAX_VALUE;
-    	if (A_halfK_value < B_halfK_value){//说明A_halfK_value之前的全都比A和B长度和第k个位置的值小，所以剔除之（A_halfK_value左边的值并且包括A_halfK_value）
+        // -1是因为索引本身是从0开始的。而前k大元素含有k个元素。
+        int mid = k / 2 - 1;
+    	int halfKValueA = startA + mid < A.length ? A[startA + mid] : Integer.MAX_VALUE;
+    	int halfKValueB = startB + mid < B.length ? B[startB + mid] : Integer.MAX_VALUE;
+    	//因为丢弃了k / 2个元素
+        int kNew = k - k / 2;
+    	if (halfKValueA < halfKValueB){//说明A_halfK_value之前的全都比A和B长度和第k个位置的值小，所以剔除之（A_halfK_value左边的值并且包括A_halfK_value）
     		//A_start从A_halfK_value的下一位（A_start + k / 2 - 1　+ 1 == A_start + k / 2）开始，B start的位置不变 , k减去 剔除的A_start左边的那部分（即k/2）
-    		return helper(A, A_start + k / 2, B, B_start, k - k / 2);
+    		return helper(A, startA + k / 2, B, startB, kNew);
     	}else{
-    		return helper(A, A_start, B, B_start + k / 2, k - k / 2);
+    		return helper(A, startA, B, startB + k / 2, kNew);
     	}
     }
 

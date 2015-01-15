@@ -7,7 +7,8 @@ public class Question {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		//System.out.println(climbStairs(33));
+		Question q = new Question();
+		System.out.println(q.climbStairs(33));
 
 	}
 	
@@ -17,24 +18,46 @@ public class Question {
 	 * time you can either climb 1 or 2 steps. In how many distinct ways can you
 	 * climb to the top?
 	 */
-	// http://answer.ninechapter.com/solutions/unique-paths/
-	//1.state: result[i]表示从[0]到[i],一共有多少种不同走法
+	
+	//http://www.ninechapter.com/solutions/climbing-stairs/
+	//1.state: result[i]表示从位置0到第i个位置,一共有多少种不同走法（起始位置为1）
 	//2.function: result[i] = result[i - 1] + result[i - 2];
-	//3.initialize: result[0] = 1
-	//				result[1] = 2
+	//3.initialize: result[1] = 1
+	//				result[2] = 2
 	//4.answer: result[n - 1]
-	//DP 1D
+	//DP 1D O(n) space
 	public int climbStairs(int n) {
 		if (n <= 2) {
 			return n;
 		}
-		int[] result = new int[n];
-		result[0] = 1;
-		result[1] = 2;
-		for (int i = 2; i < n; i++) {
+		int[] result = new int[n + 1];
+		result[1] = 1;
+		result[2] = 2;
+		for (int i = 3; i <= n; i++) {
 			result[i] = result[i - 1] + result[i - 2];
 		}
-		return result[n - 1];
+		return result[n];
+	}
+	
+	//O(1)space的DP	
+	//http://blog.csdn.net/linhuanmars/article/details/23976963
+	//等同于Fibonacci
+	public int climbStairsBigO_1_space(int n){
+		if (n <= 1) {
+			return 1;
+		}
+		if (n == 2) {
+			return 2;
+		}
+		int prepre = 1; //cur前第2个值
+		int pre = 2; //cur前第1个值
+		int cur; //当前值
+		for (int i = 3; i <= n; i++) {
+			cur = pre + prepre; //更新cur；
+			prepre = pre; // 【注】从远处开始更新。要先更新prepre
+			pre = cur; //然后更新 pre，因为上一步要用到pre的值来更新prepre，如果先更新pre，则之后给prepre的值就是错的。
+		}
+		return pre; // pre就是i最后一次在界内时的cur的值
 	}
 	
 	//naive recursive way
@@ -63,26 +86,4 @@ public class Question {
 		}
 		return climbStairs(n-1)+climbStairs(n-2);         
     }
-
-	//O(1)space的DP	
-	//http://blog.csdn.net/linhuanmars/article/details/23976963
-	//等同于Fibonacci
-	public int climbStairsDP(int n){
-		if (n <= 1) {
-			return 1;
-		}
-		if (n == 2) {
-			return 2;
-		}
-		int pre2 = 1; //cur前第2个值
-		int pre1 = 2; //cur前第1个值
-		int cur = 3; //当前值
-		for (int i = 3; i <= n; i++) {
-			cur = pre1 + pre2; //更新cur；
-			pre2 = pre1; //要先更新pre2
-			pre1 = cur;//然后更新 pre，因为上一步要用到pre1的值来更新pre2，如果先更新pre1，则之后给pre2的值就是错的。
-		}
-		return pre1;
-	}
-
 }

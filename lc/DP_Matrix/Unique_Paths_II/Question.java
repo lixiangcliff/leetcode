@@ -76,11 +76,34 @@ public class Question {
         
 		for (int i = 1; i < m; i++) {
 			for (int j = 1; j < n; j++) {
-				result[i][j] = obstacleGrid[i][j] != 1 ? result[i - 1][j]
-						+ result[i][j - 1] : 0;
+				result[i][j] = obstacleGrid[i][j] != 1 ? result[i - 1][j] + result[i][j - 1] : 0;
 			}
 		}
         return result[m-1][n-1];    
     }
+    
+	//DP, matrix, O(n) space
+	//http://blog.csdn.net/linhuanmars/article/details/22135231
+    public int uniquePathsWithObstaclesBigO_n_Space(int[][] obstacleGrid) {
+    	if (obstacleGrid == null || obstacleGrid.length == 0 || obstacleGrid[0].length == 0) {
+    		return 0;
+    	}
+        int m = obstacleGrid.length; // row
+        int n = obstacleGrid[0].length;
+		int[] result = new int[n]; // result[j]表示从[0][0]位置，到当前第i行，第j列有多少种走法
+		result[0] = 1;
+		for (int i = 0; i < m; i++) {
+			for (int j = 0; j < n; j++) { // 【注】此处j不能从1开始，因为如果某obstacleGrid[i][0]为1，则result[0]要变为0，所以j=0的情况必须考虑
+				if (obstacleGrid[i][j] == 1) {
+					result[j] = 0;
+				} else {
+					if (j > 0) { // 【注】因为j == 0时， j - 1数组会index越界
+						result[j] += result[j - 1];
+					}
+				}
+			}
+		}
+		return result[n - 1];
+	}
 	
 }

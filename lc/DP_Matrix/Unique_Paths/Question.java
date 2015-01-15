@@ -19,11 +19,14 @@ public class Question {
 	 * of the grid (marked 'Finish' in the diagram below). 
 	 * How many possible unique paths are there?
 	 * 
+	 * http://leetcode.com/wp-content/uploads/2014/12/robot_maze.png
 	 * Above is a 3 x 7 grid. How many possible unique paths are there?
 	 * 
 	 * Note: m and n will be at most 100.
 	 */
-	// http://answer.ninechapter.com/solutions/unique-paths/
+	
+	//DP, matrix, O(n^2) space
+	//http://answer.ninechapter.com/solutions/unique-paths/
 	//1.state: result[i][j]表示从[0][0]到[i][j],一共有多少种不同path
 	//2:function: result[i][j] = result[i - 1][j] + result[i][j - 1];
 	//3.initialize: result[0][0] = 1
@@ -40,7 +43,7 @@ public class Question {
 			result[0][j] = 1;
 		}
 		//给第一列赋初值
-		for (int i = 1; i < m; i++) {
+		for (int i = 0; i < m; i++) {
 			result[i][0] = 1;
 		}
 		for (int i = 1; i < m; i++) {
@@ -51,5 +54,20 @@ public class Question {
 		//最右下角的即为所求
 		return result[m - 1][n - 1];
 	}
-
+	
+	//DP, matrix, O(n) space
+	//http://blog.csdn.net/linhuanmars/article/details/22135231
+	public int uniquePathsBigO_n_Space(int m, int n) {
+		if (m == 0 || n == 0) {
+			return 0;
+		}
+		int[] result = new int[n]; // result[j]表示从[0][0]位置，到当前第i行，第j列有多少种走法
+		result[0] = 1;
+		for (int i = 0; i < m; i++) {
+			for (int j = 1; j < n; j++) {
+				result[j] += result[j - 1]; 
+			}
+		}
+		return result[n - 1];
+	}
 }

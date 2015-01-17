@@ -24,7 +24,8 @@ public class Question {
 	//2.function: result[i] = result[i - 1] + result[i - 2];
 	//3.initialize: result[1] = 1
 	//				result[2] = 2
-	//4.answer: result[n - 1]
+	//4.answer: result[n]
+	// 位差
 	//DP 1D O(n) space
 	public int climbStairs(int n) {
 		if (n <= 2) {

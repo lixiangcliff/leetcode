@@ -7,8 +7,9 @@ public class Solution {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		Solution s = new Solution();
 		int[] nums = {1,1,1,1,1,1};
-		System.out.println(longestIncreasingSubsequence(nums));
+		System.out.println(s.longestIncreasingSubsequence(nums));
 	}
 
 	/**
@@ -23,14 +24,15 @@ public class Solution {
 	 * 
 	 * Challenge Expand Time complexity O(n^2) or O(nlogn)
 	 */
+	
 	//http://www.ninechapter.com/solutions/longest-increasing-subsequence/
 	//1.state: result[i]代表直到前i个字符，以i结尾的LIS的长度
-	//2.function: 则result[i] = max(result[j]+1; 前提是j<i && a[j] <= a[i])
+	//2.function: 则result[i] = max(result[j]+1); （j范围为[1~i) && a[j] <= a[i]）
 	//3.initialize: result[0] = 0; 当i>0, result[i] = 1（最差情况都是倒序的，则当前i的LIS为1）
 	//4.answer: max(result[0], result[1]...result[nums.length];
 	//O(n^2)时间复杂度
 	//【注】nums[]和res[]有一个位差 
-	public static int longestIncreasingSubsequence(int[] nums) {
+	public int longestIncreasingSubsequence(int[] nums) {
 		if (nums == null || nums.length == 0) {
 			return 0;
 		}
@@ -40,8 +42,7 @@ public class Solution {
 		for (int i = 1; i <= nums.length; i++) {
 			result[i] = 1;
 			for (int j = 1; j < i; j++) {
-				// 找到一个比i数值小的位置
-				if (nums[j - 1] <= nums[i - 1]) { // nums[]和res[]有一个位差
+				if (nums[j - 1] <= nums[i - 1]) { // 找到一个比i数值小的位置。其中 nums[]和res[]有一个位差
 					result[i] = Math.max(result[i], result[j] + 1);
 				}
 			}

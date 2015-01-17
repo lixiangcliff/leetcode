@@ -6,8 +6,9 @@ public class Question {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		Question q = new Question();
 		int A[] = {1,2};
-		System.out.println(searchInsert(A, 3));
+		System.out.println(q.searchInsert(A, 3));
 	}
 	
 	/**
@@ -25,7 +26,7 @@ public class Question {
 	
 	//用BS模板，注意下面的【注】的细节
 	//即找target，如果找不到就返回一个比target大(在程序中要写成大于等于，下面会解释)的最小值的index（如果A中的都比target小，则返回A最后一个index+1）
-	public static int searchInsert(int[] A, int target) {  
+	public int searchInsert(int[] A, int target) {  
 	    if(A == null || A.length == 0) {  
 	        return 0;  
 	    }

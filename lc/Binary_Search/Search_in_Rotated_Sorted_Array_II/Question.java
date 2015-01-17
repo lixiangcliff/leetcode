@@ -8,8 +8,9 @@ public class Question {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		// TODO Auto-generated method stub
+		Question q = new Question();
 		int[] A = {4,5,6,7,0,1,2};
-		System.out.println(search(A, 9));
+		System.out.println(q.search(A, 9));
 	}
 	
 	/**
@@ -22,7 +23,7 @@ public class Question {
 	
 	//using BS template
 	//http://blog.csdn.net/linhuanmars/article/details/20588511
-    public static boolean search(int[] A, int target) {
+    public boolean search(int[] A, int target) {
 		if (A == null || A.length == 0) {
 			return false;
 		}

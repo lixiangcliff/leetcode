@@ -33,19 +33,15 @@ public class Question {
         	return Integer.MAX_VALUE;
         }
 		int start = 0;
-		int end = num.length - 1;
-		
+		int end = num.length - 1;		
 		while (start + 1 < end) {
-			if (num[start] < num[end]) { // 这一句很重要，因为我们移除一些元素后，可能会使整个数组变得有序...
-				return num[start];
-			}
 			int mid = start + (end - start) / 2;
 			if (num[mid] < num [end]) {
 				end = mid;
 			} else if (num[mid] > num [end]) {
 				start = mid;
-			} else { // 如果num[mid] == num [end]， 则end左移1位
-				end--;
+			} else { // 与Find_Minimum_in_Rotated_Sorted_Array的唯一区别
+				end--; // 如果num[mid] == num [end]， 则end左移1位
 			}
 		}
 		return Math.min(num[start], num[end]);

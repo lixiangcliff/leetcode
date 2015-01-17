@@ -19,8 +19,36 @@ public class Question {
 	 */
 	
 	//using BS template
-	//http://blog.csdn.net/linhuanmars/article/details/20089131
+	//http://www.cnblogs.com/yuzhangcmu/p/4198959.html
 	public int sqrt(int x) {
+		if (x < 0) {
+			return -1;
+		}
+		if (x <= 1) {
+			return x;
+		}
+		int l = 1; // sqrt(x) 下界
+		int r = x / 2; // sqrt(x) 上界
+		while (l + 1 < r) {
+			int m = l + (r - l) / 2;
+			int quo = x / m;
+			if (quo == m) {
+				return m;
+			} else if (quo < m) {
+				r = m;
+			} else {
+				l = m;
+			}
+		}
+		if (l / x < l && x / (l + 1) < l + 1){
+			return l;
+		} else {
+			return r;
+		}
+	}
+	
+	//http://blog.csdn.net/linhuanmars/article/details/20089131
+	public int sqrt2(int x) {
 		if (x < 0) {
 			return -1;
 		}

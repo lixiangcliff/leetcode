@@ -59,7 +59,7 @@ public class Question {
 	 */
 	//DP, Matrix, O(n^2)空间。up to bottom
 	//1.state: result[i][j]表示从[0][0]到[i][j]的路径中的最小值。
-	//2.function: result[i][j] = Math.min(result[i-1][j-1], result[i-1][j]) （即想要到达[i][j]）
+	//2.function: result[i][j] = Math.min(result[i-1][j-1], result[i-1][j]) + triangle[i][j] （即想要到达[i][j]）
 	//3.initialize: result[0][0] = triangle[0][0]
 	//				result[i][0] = result[i-1][0] + triangle[i][0];
 	//4.answer: min(result[size - 1][j])

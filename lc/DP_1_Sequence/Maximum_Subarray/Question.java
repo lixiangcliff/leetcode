@@ -29,21 +29,23 @@ public class Question {
 	 * another solution using the divide and conquer approach, which is more
 	 * subtle.
 	 */
+	
 	//DP 1Seq
 	//非常类似:http://lintcode.com/en/problem/longest-increasing-subsequence/
 	//1.state: result[i]代表直到前i个字符，包涵i最大的sum值
 	//2.function: 当result[i - 1] < 0, result[i] = A[i] (即对于result[i]来说因为result[i - 1]为负数，加上它还不如不加)
 	//			      当result[i - 1] >= 0, result[i] = A[i] + result[i - 1] (result[i - 1]为正数，加上它会使sum变大，所以就加上)
-	//3.initialize: result[0] = Integer.MIN_VALUE;（即 如果一个元素都没有，那么sum为极小值）
-	//4.answer: max(result[0], result[1]...result[nums.length];
+	//3.initialize: result[1] = A[0];（即 如果一个元素都没有，那么sum为极小值）
+	//4.answer: max(result[1]...result[nums.length];
+	//有位差
 	public int maxSubArray(int[] A) {  
 		if (A == null || A.length == 0) {
 			return Integer.MIN_VALUE;
 		}
 		int[] result = new int[A.length + 1];
-		int maxSum = Integer.MIN_VALUE;
-		result[0] = Integer.MIN_VALUE;
-		for (int i = 1; i <= A.length; i++) {
+		int maxSum = A[0];
+		result[1] = A[0];
+		for (int i = 2; i <= A.length; i++) {
 			if (result[i - 1] < 0) {
 				result[i] = A[i - 1]; //位差
 			} else {

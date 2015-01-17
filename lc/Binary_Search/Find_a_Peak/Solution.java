@@ -42,7 +42,11 @@ public class Solution {
     			end = mid;
     		}
     	}
-    	return Math.max(start, end);
+    	if (A[start] > A[end]) {
+    	    return start;
+    	} else {
+    	    return end;
+    	}
     }
 
 }

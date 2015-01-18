@@ -22,16 +22,20 @@ public class Question {
 	 * b) Delete a character 
 	 * c) Replace a character
 	 */
+	
 	//http://www.ninechapter.com/solutions/edit-distance/
+	//【注】可以知道insert和delete达到的效果是一样的。所以这里为了简化，我们只保留“删”和“换”两个操作。
 	//1.state: result[i][j]代表word1的前i个字符，配上word2的前j个字符，最少需要几次编辑能让他们相等。
 	//2.function: 当word1[i] == word2[j]， result[i][j] = result[i - 1][j - 1]
 	//			    	（在word1[i] == word2[j]的情况下，不需要重新编辑，就可以使word1的前i位和word2的前j位再次相等。）
 	//			      当word1[i] != word2[j]， result[i] = min(result[i - 1][j - 1] + 1 , result[i - 1][j] + 1, result[i][j - 1] + 1) 
 	//					（以上三种方式都能在word1[i] != word2[j]的情况下，经过相应的编辑，重新使word1的前i位和word2的前j位再次相等。选三个中最小的。）
-	//3.initialize: result[0][j] = j;
-	//				result[i][0] = i;
+	//			【注】具体的： result[i - 1][j - 1] + 1: word1的前i-1和word2的前j-1已经edit好的情况下，再加1步把word1的第i个replace成word2的第j个，就可以使word1和word2相等 
+	//						result[i - 1][j] + 1: word1的前i-1和word2的前j已经edit好的情况下，再加1步把word2的第j个删去，就可以使word1和word2相等 
+	//						result[i][j - 1] + 1)： word1的前i-1和word2的前j已经edit好的情况下，再加1步把word1的第i个删去，就可以使word1和word2相等 
+	//3.initialize: result[0][j] = j; // 把word2的前j个全删去，就可以使word1和word2相等 
+	//				result[i][0] = i; // 把word1的前i个全删去，就可以使word1和word2相等 
 	//4.answer: result[A.length][B.length];
-	//【注】 delete和insert可以理解为等价操作
 	//【注】result[][]和A，B有位差
 	
 	public int minDistance(String word1, String word2) {
@@ -45,7 +49,7 @@ public class Question {
 					result[0][j] = j;
 				} else if (j == 0) { //初始化第一列
 					result[i][0] = i;
-				} else if (word1.charAt(i - 1) == word2.charAt(i - 2)) { //result[][]和A，B有位差
+				} else if (word1.charAt(i - 1) == word2.charAt(j - 1)) { //result[][]和A，B有位差
 					result[i][j] = result[i - 1][j - 1];
 				} else {
 					result[i][j] = Math.min(result[i - 1][j - 1], Math.min(result[i - 1][j], result[i][j - 1])) + 1;

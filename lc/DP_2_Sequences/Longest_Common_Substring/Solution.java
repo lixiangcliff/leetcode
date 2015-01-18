@@ -16,17 +16,17 @@ public class Solution {
 	 * Note: The characters in substring should occur continiously in original
 	 * string. This is different with subsequnce.
 	 */
+	
 	//http://www.ninechapter.com/solutions/longest-common-substring/
 	//1.state: result[i][j]代表A的前i个字符，配上B的前j个字符的LCS的长度。（需要分别以i和j结尾的）
-	//2.function: 当A[i] == B[j]， result[i] = result[i - 1][j - 1] + 1 （累计+1可以继续）
-	//			      当A[i] != B[j]， result[i] = 0 （累计归零）
+	//2.function: 当A[i] == B[j]， result[i][j] = result[i - 1][j - 1] + 1 （累计+1可以继续）
+	//			      当A[i] != B[j]， result[i][j] = 0 （累计归零）
 	//3.initialize: result[0][j] = 0;
 	//				result[i][0] = 0;
 	//4.answer: max(result[0...A.length][B...length]);
 	//【注】result[][]和A，B有位差
     public int longestCommonSubstring(String A, String B) {
-        // write your code here
-    	if(A == null || B == null) {
+    	if (A == null || B == null) {
     		return 0;
     	}
     	int max = 0;

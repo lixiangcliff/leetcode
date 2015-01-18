@@ -53,9 +53,9 @@ public class Question {
 	 */
 	
 	//http://www.ninechapter.com/solutions/word-break/
-	//很类似https://oj.leetcode.com/problems/palindrome-partitioning-ii/
+	//很类似 https://oj.leetcode.com/problems/palindrome-partitioning-ii/
 	//1.state: result[i]代表直到前i个字符，能否被完美切分
-	//2.function: 则result[i] = OR(result[j]; 前提是j<i && 从j+1到i是字典中的一个单词)
+	//2.function: 则result[i] = OR(result[j]; （j范围[0,i) && 从j+1到i是字典中的一个单词）
 	//(即只要存在任何小于i的j， result[j]为真，并且从j+1到i也为字典中的一个单词，则返回true)
 	//3.initialize: result[0] = true
 	//4.answer: result[s.length]
@@ -72,10 +72,9 @@ public class Question {
 		result[0] = true;
 		//整个两重循环的i，j边界取值，都以result[]为准，当涉及到s的时候，再考虑减一的位差
 		for (int i = 1; i <= s.length(); i++) {
-			result[i] = false;
-			//【注】技巧，j从i的左边一个往左走，节省时间。
-			for (int j = i - 1; i - j <= maxLength && j >= 0; j--) { //i-j为当前word的长度
-				if (!result[j]) { //前j个不能完美分切，则整个j不行，换下一个j
+			//【注】技巧，j从i的左边一个往左走，节省时间。j表示从j的右边切下去
+			for (int j = i - 1; i - j <= maxLength && j >= 0; j--) { //i-j为当前word(从j+1到i)的长度
+				if (!result[j]) { //前j个不能完美分切，则从这个j的右边切下去不行，则往左挪移1个换下一个j
 					continue;
 				}
 				//走到这一步 说明s中的前j个字符可以完美分切
@@ -92,7 +91,7 @@ public class Question {
 	
 	//【注】技巧，切分位置枚举，只需probe最长单词的长度就可以停止了。
 	private int getWordMaxLength(Set<String> dict) {
-		int max = -1;
+		int max = 0;
 		for (String word : dict) {
 			max = Math.max(max, word.length());
 		}

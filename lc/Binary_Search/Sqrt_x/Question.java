@@ -18,6 +18,7 @@ public class Question {
 	 * Compute and return the square root of x.
 	 */
 	
+	//【注】l <= sqrt(x) < (l+1),展开 即为下面的【注】
 	//using BS template
 	//http://www.cnblogs.com/yuzhangcmu/p/4198959.html
 	public int sqrt(int x) {
@@ -40,7 +41,7 @@ public class Question {
 				l = m;
 			}
 		}
-		if (l / x < l && x / (l + 1) < l + 1){
+		if (l / x <= l && x / (l + 1) < l + 1) { //【注】
 			return l;
 		} else {
 			return r;

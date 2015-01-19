@@ -8,14 +8,23 @@ public class Question {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Question q = new Question();
-		System.out.println(q.isMatch("aa","a"));
+/*		System.out.println(q.isMatch("aa","a"));
 		System.out.println(q.isMatch("aa","aa"));
 		System.out.println(q.isMatch("aaa","aa"));
 		System.out.println(q.isMatch("aa", "a*"));
 		System.out.println(q.isMatch("aa", ".*"));
-		System.out.println(q.isMatch("abcdefghijklmn", ".*")); // ".*"可以match任意字符串
 		System.out.println(q.isMatch("aab", "c*a*b"));
-		System.out.println(q.isMatch("a",".*"));
+		System.out.println(q.isMatch("a",".*"));*/
+/*		System.out.println(q.isMatch2("aa","a"));
+		System.out.println(q.isMatch2("aa","aa"));
+		System.out.println(q.isMatch2("aaa","aa"));
+		System.out.println(q.isMatch2("aa", "a*"));
+		System.out.println(q.isMatch2("aa", ".*"));
+		System.out.println(q.isMatch2("aab", "c*a*b"));
+		System.out.println(q.isMatch2("a",".*"));*/
+		System.out.println(q.isMatch("abcdede", "ab.*de"));
+		System.out.println(q.isMatchDP2("abcdede", "ab.*de"));
+		//System.out.println(q.isMatch("abcdefghijklmn", ".*")); // ".*"可以match任意字符串
 	}
 	
 	/**
@@ -35,10 +44,11 @@ public class Question {
 	 * isMatch("ab", ".*") → true 
 	 * isMatch("aab", "c*a*b") → true
 	 */
+	
 	//Match可以理解为前面的string可否合理用后面的string表示出来
 	//DP 2_Seq
 	//http://blog.csdn.net/linhuanmars/article/details/21145563
-	//http://www.ninechapter.com/solutions/regular-expression-matching/
+	//http://www.cnblogs.com/yuzhangcmu/p/4105529.html
 	//1.state: result[i][j]代表s的前i个字符，是否能match上p的前j个字符。
 	//2.function: 
 	//	(1)当p[j] != '*': 
@@ -51,15 +61,59 @@ public class Question {
 	//					（也就是前面相等（res[i - 1][j]）， 然后字符重复（s[i]==s[i - 1] ），并且重复的字符就是*号前面的字符（s[i - 1]==p[j - 1]）， 
 	//					这几个条件满足时就可以满足match， 如果一直重复，那么就可以一直match）
 	//	(3)当p[j] == '*', 且p[j - 1] == '.': 
-	//			如果result[i][j - 2]或者result[i][j - 1]为true，因为".*"可以match任意字符串，所以 result[i, i + 1, ... s.length][j]都为true
-	//3.initialize: result[0][0] = true;
+	//			因为".*"可以表示任何字符，所以以下几种情况可以使result[i][j]为true
+	//				(a)只要有任何一个result[k][j-2]（k范围[0,i]）为true。（因为k后面的剩余都可以被".*"来match上）
+	//				(b)j==2时。 即如果p就是".*"，那么p可以匹配任何s
+	//				(c)result[i][j - 2]为true。这时".*"表示空
+	//				(d)result[i][j - 1]为true。这时".*"的"*"表示1,即整体表示1个"."
+	//3.initialize: result[0][0] = true; // s和p都为空
+	//				result[i][0] = false; // p为空，并且s不为空
+	//				result[0][j] = 情况复杂，只有满足下面条件才为true。具体的看下面代码; // s为空 ，并且p不为空。
 	//4.answer: result[A.length][B.length];
 	//
 	//【注】".*"可以match任意字符串，
 	//【注】 isEqual(s[i], p[j])定义为s[i] == p[j] or p[j] = '.'
 	//【注】result[][]和s，p有位差
-	//【注】外层循环应该是p,然后待匹配串s内层循环扫过来
 	public boolean isMatch(String s, String p) {
+		if (p.length() == 0){
+        	return s.length() == 0;
+        }
+        boolean[][] result = new boolean[s.length() + 1][p.length() + 1];
+        result[0][0] = true;
+        for (int i = 0; i <= s.length(); i++) {
+	        for (int j = 0; j <= p.length(); j++) {
+	        	if (i == 0 && j == 0) { // s和p都为空时，true
+	        		result[i][j] = true;
+	        	} else if (i == 0) { // s为空 ，并且p不为空。需要p长度大于1,并且p[j]是'*',并且result[i][j - 2]==true已经“扫清之前的障碍”了，才可能是true
+	        		result[i][j] = j > 1 && p.charAt(j - 1) == '*' && result[i][j - 2]; // 位差
+	        	} else if (j == 0) { // p为空，并且s不为空
+	        		result[i][j] = false;
+	        	} else {
+	        		if (p.charAt(j - 1) != '*') { //【注】情况(1)
+	    				result[i][j] = result[i - 1][j - 1] && (s.charAt(i - 1) == p.charAt(j - 1) || p.charAt(j - 1) == '.'); //位差
+	        		} else  if (j > 1 && p.charAt(j - 2) != '.') { //位差  【注】情况(2) 
+		        			result[i][j] = result[i][j - 1] || result[i][j - 2] || (i > 1 && j > 1 && result[i - 1][j] && s.charAt(i - 2) == s.charAt(i - 1) && s.charAt(i - 2) == p.charAt(j - 2)); // 位差
+		        	} else { // 【注】情况(3)
+		        		boolean foundPrevMatch = false;
+		        		if (j > 1) {
+			        		for (int k = 0; k <= i; k++) {
+			        			if (result[k][j - 2]) {
+			        				foundPrevMatch = true;
+			        				break;
+			        			}
+			        		}
+		        		}
+		        		result[i][j] = foundPrevMatch || j == 2 || (j > 1 && result[i][j - 2]) || result[i][j - 1]; 
+		        	} 
+	        	}
+	        }
+        }
+        return result[s.length()][p.length()];
+    }
+	
+	//http://blog.csdn.net/linhuanmars/article/details/21145563
+	//【注】外层循环应该是p,然后待匹配串s内层循环扫过来
+	public boolean isMatchDP2(String s, String p) {
 		if (p.length() == 0){
         	return s.length() == 0;
         }

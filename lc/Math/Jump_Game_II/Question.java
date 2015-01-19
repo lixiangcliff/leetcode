@@ -7,7 +7,8 @@ public class Question {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int[] A = {2,3,1,1,4};
+		//int[] A = {2,3,1,1,4};
+		int[] A = {3,2,1};
 		Question q = new Question();
 		System.out.println(q.jump(A));
 	}
@@ -25,6 +26,35 @@ public class Question {
 	 * reach the last index is 2. (Jump 1 step from index 0 to 1, then 3 steps
 	 * to the last index.)
 	 */
+	
+	//Greedy
+	//http://www.cnblogs.com/yuzhangcmu/p/4148858.html
+	//O(n^2)时间复杂度，O(1)空间复杂度。
+	public int jump(int[] A) {
+		if (A == null || A.length <= 1) {
+			return 0;
+		}
+		int l = 0; // 每轮开始位置
+		int r = 0; // 每轮结束位置
+		int len = A.length;
+		int step = 0;
+		//【注】r < len容易想到。但勿忘l <= r，因为可能本轮maxReach未增加，这样下一轮的i就无法到达，则该直接返回异常
+		while (l <= r && r < len) { 
+			step++; // 每增加1轮就 多跳1步
+			int maxReach = r;
+			for (int i = l; i <= r; i++) {
+				maxReach = Math.max(maxReach, A[i] + i);
+				if (maxReach >= len - 1) { // 已经可以到达最末了
+					return step;
+				}
+			}
+			l = r + 1;
+			r = maxReach;
+		}
+		return -1; // 表示无法到达最后
+	}
+	
+	//leetcode不能ac {25000,24999,24998,24997,24996,24995,24994,24993...}
 	//DP 1Seq
 	//看【注】
 	//http://www.ninechapter.com/solutions/jump-game-ii/
@@ -35,8 +65,8 @@ public class Question {
 	//3.initialize: result[1] = 0
 	//4.answer: result[A.length]
 	//result和A有1个位差
-	//O(n^2)时间复杂度，不是最优解，但是容易想。
-	public int jump(int[] A) {
+	//O(n^2)时间复杂度，O(n)空间复杂度。不是最优解，但是容易想。
+	public int jumpDP(int[] A) {
 		if (A == null || A.length == 0) {
 			return 0;
 		}

@@ -30,9 +30,9 @@ public class Question {
 	//1.state: result[i][j]代表： 在s1的前i个字符配上s2的前j个字符，是否可以交错表达出s3的前i+j个字符。
 	//2.function: result[i][j] = (s1[i] == s3[i+j] && result[i-1][j] ) OR (s2[j] == s3[i+j] && result[i][j-1]) 
 	//（即此时s1和s2是等价的，以s1为例：只要s1[i]==s3[i+j]，并且s1的前i-1和s2的前j个可以表达出s3的前i+j-1个，即result[i-1][j]，result[i][j]则为真。s2类似可推）
-	//3.initialize: result[0][j] = s2[j]==s3[j]; 第一行（s1为空，所以只能靠s2来构造s3。 如果s2[j]==s3[j]则result[0][j]为真）
-	//				result[i][0] = s1[i]==s3[i]; 第一列（类似第一行）
-	//				result[0][0] = true;
+	//3.initialize: result[0][0] = true;
+	//				result[0][j] = result[i][j - 1] && s2[j]==s3[j]; 第一行（s1为空，所以只能靠s2来构造s3。）
+	//				result[i][0] = result[i - 1][0] && s1[i]==s3[i]; 第一列（类似第一行）
 	//4.answer: result[A.length][B.length];
 	//【注】result[][]和A，B有位差
 	public boolean isInterleave(String s1, String s2, String s3) {
@@ -54,9 +54,9 @@ public class Question {
 				if (i == 0 && j == 0) {
 					result[i][j] = true;
 				} else if (i == 0) { //初始化第一行.有位差
-					result[0][j] = s2.charAt(j - 1) == s3.charAt(j - 1); 
+					result[0][j] = result[0][j - 1] && s2.charAt(j - 1) == s3.charAt(j - 1); 
 				} else if (j == 0) { //初始化第一列.有位差
-					result[i][0] = s1.charAt(i - 1) == s3.charAt(i - 1); 
+					result[i][0] = result[i - 1][j] && s1.charAt(i - 1) == s3.charAt(i - 1); 
 				} else { // 其余位置。有位差
 					result[i][j] = s1.charAt(i - 1) == s3.charAt(i + j - 1) && result[i - 1][j] || s2.charAt(j - 1) == s3.charAt(i + j - 1) && result[i][j - 1];
 				}

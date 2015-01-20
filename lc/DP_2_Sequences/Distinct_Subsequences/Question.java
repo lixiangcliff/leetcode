@@ -37,7 +37,8 @@ public class Question {
 	//  即T中出现了一个新的j，但是S中并没有多出现一个i可以表示它，所以新出现的i不起作用，用S的前i-1个来配T的前j个和S的前i个来配T的前j个效果相同
 	//			      当S[i] == T[j]， result[i][j] = result[i - 1][j - 1] + result[i - 1][j]) （S[i]==T[i],则result[i - 1][j - 1]满足的都可以被result[i][j]所用）
 	//  即S中出现了一个新的i，因为它和T[j]相等，所以它的作用可以单独表示T的第j个，从而分担了一部分任务，让S的前i-1个和T的前j-1的去配，配出的结果可以加和在result[i][j]上
-	//3.initialize: result[0][j] = 0; 第一行（S为空，则没有任何办法可以从S中找到子串和T相同）
+	//3.initialize: result[0][0] = 1;
+	//				result[0][j] = 0; 第一行（S为空，则没有任何办法可以从S中找到子串和T相同）
 	//				result[i][0] = 1; 第一列（T为空，则只有一种办法从S中找到子串和T相同，即S也取空）
 	//4.answer: result[A.length][B.length];
 	//【注】result[][]和A，B有位差
@@ -61,14 +62,18 @@ public class Question {
 		int[][] result = new int[S.length() + 1][T.length() + 1];
 		for (int i = 0; i <= S.length(); i++) {
 			for (int j = 0; j <= T.length(); j++) {
-				if (j == 0) { //第一列【注】小技巧，要先处理第一列，因为result[0][0]应该为1，如果后处理则会被result[0][j] = 0覆盖
-					result[i][0] = 1;
+				if ( i == 0 && j == 0) {
+					result[i][j] = 1;
 				} else if (i == 0) { //第一行
 					result[0][j] = 0;
-				} else if (S.charAt(i - 1) != T.charAt(j - 1)) { //位差
-					result[i][j] = result[i - 1][j]; 
+				} else if (j == 0) { //第一列
+					result[i][0] = 1;
 				} else {
-					result[i][j] = result[i - 1][j] + result[i - 1][j - 1]; 
+					if (S.charAt(i - 1) != T.charAt(j - 1)) { //位差
+						result[i][j] = result[i - 1][j]; 
+					} else {
+						result[i][j] = result[i - 1][j] + result[i - 1][j - 1];
+					}
 				}
 			}
 		}

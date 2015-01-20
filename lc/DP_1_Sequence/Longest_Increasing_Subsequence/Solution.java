@@ -8,7 +8,7 @@ public class Solution {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Solution s = new Solution();
-		int[] nums = {1,1,1,1,1,1};
+		int[] nums = {9,3,6,2,7};
 		System.out.println(s.longestIncreasingSubsequence(nums));
 	}
 
@@ -28,7 +28,7 @@ public class Solution {
 	//http://www.ninechapter.com/solutions/longest-increasing-subsequence/
 	//1.state: result[i]代表直到前i个字符，以i结尾的LIS的长度
 	//2.function: 则result[i] = max(result[j]+1); （j范围为[1~i) && a[j] <= a[i]）
-	//3.initialize: result[0] = 0; 当i>0, result[i] = 1（最差情况都是倒序的，则当前i的LIS为1）
+	//3.initialize: result[i] = 1（i范围[0,a.length]。最差情况都是倒序的，则当前i的LIS为1）
 	//4.answer: max(result[0], result[1]...result[nums.length];
 	//O(n^2)时间复杂度
 	//【注】nums[]和res[]有一个位差 
@@ -38,7 +38,6 @@ public class Solution {
 		}
 		int max = 0;
 		int[] result = new int[nums.length + 1];
-		result[0] = 0;
 		for (int i = 1; i <= nums.length; i++) {
 			result[i] = 1;
 			for (int j = 1; j < i; j++) {

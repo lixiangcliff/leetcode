@@ -10,6 +10,7 @@ public class Solution {
 
 	}
 	/**
+	 * http://lintcode.com/en/problem/longest-common-substring/
 	 * Given two strings, find the longest common substring.
 	 * Return the length of it.
 	 * 

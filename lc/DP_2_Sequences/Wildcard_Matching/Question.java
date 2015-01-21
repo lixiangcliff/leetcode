@@ -49,8 +49,7 @@ public class Question {
 	//	(2)当p[j] == '*': 
 	//			因为"*"可以表示任何字符，所以以下几种情况可以使result[i][j]为true
 	//			(a)只要有任何一个result[k][j-1]（k范围[0,i]）为true。（因为k后面的剩余都可以被"*"来match上）
-	//			(b)j==1时。 即如果p就是"*"，那么p可以匹配任何s
-	//			(c)result[i][j - 1]为true。这时"*"表示空
+	//			(b)result[i][j - 1]为true。这时"*"表示空
 	//3.initialize: result[0][0] = true; // s和p都为空
 	//				result[i][0] = false; // p为空，并且s不为空
 	//				result[0][j] = p[j]为'*',并且result[0][j - 1]为true，则result[0][j]才为true // s为空 ，并且p不为空。
@@ -58,7 +57,6 @@ public class Question {
 	//
 	//【注】 isEqual(s[i], p[j])定义为s[i] == p[j] or p[j] = '?'
 	//【注】result[][]和s，p有位差
-	
 	public boolean isMatch(String s, String p) {
 		if (p.length() == 0) {
 			return s.length() == 0;
@@ -95,7 +93,7 @@ public class Question {
 								break;
 							}
 						}
-						result[i][j] = foundPrevMatch || j == 1 || result[i][j - 1];
+						result[i][j] = foundPrevMatch || result[i][j - 1];
 					}
 				}
 			}

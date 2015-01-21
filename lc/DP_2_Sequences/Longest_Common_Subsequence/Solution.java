@@ -24,7 +24,7 @@ public class Solution {
 	//【注】subsequence，字符可以不连续取
 	//1.state: result[i][j]代表A的前i个字符，配上B的前j个字符的LCS的长度。
 	//2.function: 当A[i] == B[j]， result[i] = result[i - 1][j - 1] + 1 （+1因为A[i]和B[j]也能配上）
-	//			      当A[i] != B[j]， result[i] = max(result[i - 1][j], result[i][j - 1]) （A[i]和B[j]配不上，就让A的前i和B的前j-1配一下，就让A的前i-1和B的前j配一下，看哪个大就选哪个）
+	//			      当A[i] != B[j]， result[i] = max(result[i - 1][j], result[i][j - 1]) （A[i]和B[j]配不上，就让A的前i和B的前j-1配一下，再让A的前i-1和B的前j配一下，看哪个大就选哪个）
 	//3.initialize: result[0][j] = 0;
 	//				result[i][0] = 0;
 	//4.answer: result[A.length][B.length];

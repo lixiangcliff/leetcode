@@ -1,9 +1,6 @@
 package Permutations;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 
 public class Question {
 
@@ -36,7 +33,6 @@ public class Question {
 	 * [1,2,3], [1,3,2],[2,1,3], [2,3,1], [3,1,2], and [3,2,1].
 	 */
 
-	
 	//【注】重点看递归的方法
 	//recursive
 	//递归函数必须保证在进入和离开函数的时候，变量的状态是一样的, 这样才能保证正确性.
@@ -51,23 +47,20 @@ public class Question {
 		return result;
 	}
 	
-	//DFS
-	private void helper( ArrayList<ArrayList<Integer>> result, ArrayList<Integer> item, int[] num) {
+	//DFS 【注】下面代码看图比照DFS搜索树
+	private void helper(ArrayList<ArrayList<Integer>> result, ArrayList<Integer> item, int[] num) {
 		if (item.size() == num.length) {// got a permutation
-			result.add(new ArrayList<Integer>(item)); // 因为item在各层recursion中是共享的，所以此处必须用new，否则以后每次add元素都会加在这个item上
+			result.add(new ArrayList<Integer>(item)); // 【注】因为item在各层recursion中是共享的，所以此处必须用new，否则以后每次add和remove元素都会加在这个item上，效果是：result里面装的全是同一个item对象，且最终该item内容为空
 			return;
 		}
-		//【注】下面代码看图比照DFS搜索树
-		for( int i=0;i<num.length;i++) {
+		for (int i = 0; i < num.length; i++) {
 			if (!item.contains(num[i])) {// 当前元素还没用过，所以可以加入item
-				item.add(num[i]); //当前元素加入item
+				item.add(num[i]); // 当前元素加入item
 				helper(result, item, num); // 递归处理下一层
-				item.remove(item.size() - 1); // 回溯backtracking “弹出”当前元素，以准备尝试下一个元素
+				item.remove(item.size() - 1); // 回溯backtracking。“弹出”当前元素，以准备尝试下一个元素
 			}
 		}
 	}
-	
-	
 	
 	//iterative
 	//http://blog.csdn.net/linhuanmars/article/details/21569031

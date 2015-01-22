@@ -37,12 +37,13 @@ public class Question {
 	 * 	[1,4], 
 	 * ]
 	 */
+	
 	//DFS; recursive
 	//http://answer.ninechapter.com/solutions/combinations/
 	public ArrayList<ArrayList<Integer>> combine(int n, int k) {
 		ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
 		ArrayList<Integer> item = new ArrayList<Integer>();
-		int start = 1; // 元素的可选起始位置
+		int start = 1; // 元素的可选起始值【注】start初值并不是0
 		getCombine(result, item, n, k, start);
 		return result;
 	}
@@ -53,7 +54,7 @@ public class Question {
 		} else {
 			for (int i = start; i <= n; i++) {
 				item.add(i); // 加入一个符合条件的数
-				getCombine(result, item, n, k, i + 1); // i的可选数的起始位置往右挪一个，然后递归.【注】下一层传入的start是i + 1, 因为当前处理的是位置i（不是start + 1）
+				getCombine(result, item, n, k, i + 1); // i的可选数的起始值往右挪一个，然后递归.【注】下一层传入的start是i + 1, 因为当前处理的值是i（不是start + 1）
 				item.remove(item.size() - 1); // 回溯
 			}
 		}

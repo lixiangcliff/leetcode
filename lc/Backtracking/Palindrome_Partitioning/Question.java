@@ -24,6 +24,7 @@ public class Question {
 	}
 
 	/**
+	 * 
 	 * Given a string s, partition s such that every substring of the partition
 	 * is a palindrome.
 	 * Return all possible palindrome partitioning of s.
@@ -35,19 +36,22 @@ public class Question {
 	 * 	["a","a","b"] 
 	 * ]
 	 */
+	
+	//using DFS
 	//http://blog.csdn.net/linhuanmars/article/details/22777711
     public ArrayList<ArrayList<String>> partition(String s) {
     	ArrayList<ArrayList<String>> result = new ArrayList<ArrayList<String>>();
         if(s == null | s.length() == 0){
         	return result;
         }
-        ArrayList<String> item =  new ArrayList<String>();
+        ArrayList<String> item = new ArrayList<String>();
         boolean[][] isPalindrome = getIsPalindrome(s);
         int pos = 0;
         helper(result, item, isPalindrome, s, pos);
         return result;
     }
     
+    //DFS
     private void helper(ArrayList<ArrayList<String>>result, ArrayList<String> item, boolean[][] isPalindrome, String s, int pos){
     	if (pos == s.length()) { //s的最后一个字符都处理完了，则得到一个方案。
     		result.add(new ArrayList<String>(item));
@@ -65,23 +69,20 @@ public class Question {
 	//isPalindrome[i][j]表示从在字符串s中，从i到j是不是palindrome
 	//此矩阵只有右上三角为有效数据，具体看图。
 	private boolean[][]	getIsPalindrome(String s) {
-		boolean[][] isPalindrome = new boolean[s.length()][s.length()];
-		//初始化对角线
-		for (int i = 0; i < s.length(); i++) {
-			isPalindrome[i][i] = true;
-		}
-		//初始化对角线右边一个
-		for (int i = 0; i < s.length() - 1; i++) {
-			isPalindrome[i][i + 1] = s.charAt(i) == s.charAt(i + 1);
-		}
-		//推导右上三角剩余数据
+		int len = s.length();
+		boolean[][] isPalindrome = new boolean[len][len];
 		//【注】需要从最底层往最顶层计算，因为等号右边的isPalindrome[i + 1][j - 1]在所求的isPalindrome[i][j]的下方。
-		for (int i = s.length() - 2; i >= 0; i--) {
-			for (int j = i + 2; j < s.length(); j++) {
-				isPalindrome[i][j] = s.charAt(i) == s.charAt(j) && isPalindrome[i + 1][j - 1];
+		for (int i = len - 1; i >= 0; i--) {
+			for (int j = i; j <= len - 1; j++) {
+				if (j == i) { //初始化对角线
+					isPalindrome[i][j] = true;
+				} else if (j == i + 1) { //初始化对角线右边一个
+					isPalindrome[i][j] = s.charAt(i) == s.charAt(i + 1);
+				} else { //推导右上三角剩余数据
+					isPalindrome[i][j] = s.charAt(i) == s.charAt(j) && isPalindrome[i + 1][j - 1];
+				}
 			}
 		}
 		return isPalindrome;
 	}
-
 }

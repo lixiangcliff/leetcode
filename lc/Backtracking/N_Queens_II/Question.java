@@ -27,10 +27,10 @@ public class Question {
     public int totalNQueens(int n) {
     	//和N-Queen的唯一区别就是结果是一个int数组，
     	//之所以用一个只有一个元素的数组而不是一个整数,是因为数组在递归调用时内容和以保留，而整数类型不能
-		int[] result = { 0 }; //方案总数
-    	ArrayList<Integer>columnForRow = new ArrayList<Integer>(); 
-    	helper(result, columnForRow, n);
-    	return result[0];
+		int[] result = { 0 }; // 方案总数
+		ArrayList<Integer> columnForRow = new ArrayList<Integer>();
+		helper(result, columnForRow, n);
+		return result[0];
     }
     
     //DFS

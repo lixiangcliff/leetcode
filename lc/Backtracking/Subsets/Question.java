@@ -44,6 +44,7 @@ public class Question {
 	 * 	[] 
 	 * ]
 	 */
+	
 	//【注】重点看递归方法 recursive way
 	//http://www.ninechapter.com/solutions/subsets/
 	public ArrayList<ArrayList<Integer>> subsets(int[] S) {
@@ -52,8 +53,9 @@ public class Question {
 			return result;
 		}
 		ArrayList<Integer> item = new ArrayList<Integer>();
-		Arrays.sort(S); //排序保证题中要求：“Elements in a subset must be in non-descending order”
-		helper(result, item, S, 0);
+		Arrays.sort(S); //排序保证题中要求：“Elements in a subset must be in non-descending order”（如果没有这个要求此题可以不排序。但是Subsets_II却必须排序，具体见该题。）
+		int pos = 0;
+		helper(result, item, S, pos);
 		return result;
 	}
 	

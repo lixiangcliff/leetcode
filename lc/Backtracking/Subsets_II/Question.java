@@ -68,11 +68,11 @@ public class Question {
 			// 【注2】对于相同的元素，如果第一次出现的不放入结果集，则之后出现的都不放入结果集。这样就可以去重。
 			// 看图可知，【注1】和【注2】本质上是一回事。
 			// i != pos：表示 当i不在处理的起始位置；S[i] == S[i - 1]：表示 当前值和前一个值相同
-			if ( i != pos && S[i] == S[i - 1]) { 
+			if (i != pos && S[i] == S[i - 1]) { 
                 continue;
             }
 			item.add(S[i]);
-			helper(result, item, S, i + 1);
+			helper(result, item, S, i + 1); // 向右移1位，进入下一层递归。
 			item.remove(item.size() - 1);
 		}
 	}

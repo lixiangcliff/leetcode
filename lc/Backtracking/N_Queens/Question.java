@@ -44,14 +44,14 @@ public class Question {
 	//http://blog.csdn.net/zhong317/article/details/4586131
     public ArrayList<String[]> solveNQueens(int n) {
     	ArrayList<String[]> result = new ArrayList<String[]>();
-    	//这个记录了所有n个Q所在的行和列（e.g. 比如columnForRow.get(0)==2，代表的意思是第0行第2列有一个Q）
-    	ArrayList<Integer>columnForRow = new ArrayList<Integer>(); 
+    	//这个记录了所有n个Q所在的行和列（比如columnForRow.get(0)==2，代表的意思是第0行第2列有一个Q）其实columnForRow用int[]表示也可以，但是相比于ArrayList，后者更方便进行add和remove。
+    	ArrayList<Integer> columnForRow = new ArrayList<Integer>(); 
     	helper(result, columnForRow, n);
     	return result;
     }
     
     private void helper(ArrayList<String[]> result, ArrayList<Integer> columnForRow, int n) { 
-    	if(columnForRow.size() == n){ // 说明已经找到一个方案了，接下来就是把该方案保存到result里
+    	if (columnForRow.size() == n) { // 说明已经找到一个方案了，接下来就是把该方案保存到result里
     		result.add(drawBoard(columnForRow)); // 完成一个方案，并加入result
     		return;
     	}
@@ -73,9 +73,9 @@ public class Question {
 		for (int i = 0; i < size; i++) {
 			StringBuilder sb = new StringBuilder(); //表示item的一行
 			for(int j = 0; j < size; j++) {
-				if (j == columnForRow.get(i)){	//找到了在第i行queen所处于的列
+				if (j == columnForRow.get(i)) {	//找到了在第i行queen所处于的列
 					sb.append('Q');
-				}else{
+				} else {
 					sb.append('.');
 				}
 				item[i] = sb.toString(); // 完成一行，并加入item
@@ -85,11 +85,11 @@ public class Question {
 	}
     
     //检查加入的queen如果放在，“当前columnForRow的下一行”和“第col列”，是否还能保证棋盘valid
-    private boolean isValid(ArrayList<Integer>columnForRow, int col){
+    private boolean isValid(ArrayList<Integer>columnForRow, int col) {
     	int row = columnForRow.size(); // row既表示当前columnForRow的size，同时也表示当前处理的col是在第几行
-    	for(int i = 0; i < row; i++){ //只需检查与row以上的行是否冲突就行了
+    	for (int i = 0; i < row; i++) { //只需检查与row以上的行是否冲突就行了
     		//只需要检查，“列”和“对角线”，是否冲突（不需要检查行，因为我们以行来循环处理，所以行肯定不会冲突）
-    		if(columnForRow.get(i) == col || Math.abs(row - i) == Math.abs(col - columnForRow.get(i))){
+    		if (columnForRow.get(i) == col || Math.abs(row - i) == Math.abs(col - columnForRow.get(i))) {
     			return false;
     		}
     	}

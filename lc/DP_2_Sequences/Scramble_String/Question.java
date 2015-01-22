@@ -57,7 +57,7 @@ public class Question {
 	
 	//DP 2_Seq
 	//state: res[i][j][len]，其中i是s1的起始字符，j是s2的起始字符，而len是当前所截取的字符串长度，res[i][j][len]表示在s1和s2中分别以i和j为起点，len为长度的字符串是不是互为scramble。
-	//function: res[i][j][len] = || (res[i][j][k]&&res[i+k][j+k][len-k] || res[i][j+len-k][k]&&res[i+k][j][len-k]) k表示劈一刀的位置，k范围[1,len)，也就是对于所有len-1种劈法的结果求“或”运算
+	//function: res[i][j][len] = OR((res[i][j][k]&&res[i+k][j+k][len-k] || res[i][j+len-k][k]&&res[i+k][j][len-k])) k表示劈一刀的位置，k范围[1,len)，也就是对于所有len-1种劈法的结果求“或”运算
 	//initialize: result[i][j][1] = s1.charAt(i) == s2.charAt(j);
 	//result: result[0][0][strLen]
 	//http://blog.csdn.net/linhuanmars/article/details/24506703

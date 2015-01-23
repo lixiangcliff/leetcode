@@ -50,7 +50,7 @@ public class Question {
 	//http://blog.csdn.net/linhuanmars/article/details/20829099
     public ArrayList<ArrayList<Integer>> combinationSum2(int[] num, int target) {
     	ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
-    	if (num == null || num.length == 0){
+    	if (num == null || num.length == 0) {
     		return result;
     	}
     	Arrays.sort(num);
@@ -61,15 +61,15 @@ public class Question {
     }
     
     private void helper(ArrayList<ArrayList<Integer>> result, ArrayList<Integer> item, int[] num, int pos, int target){
-    	if(target < 0){ 
-    		return;		
-    	}
-    	if(target == 0){
-    		result.add(new ArrayList<Integer>(item)); 
-    		return;
-    	}
+		if (target < 0) {
+			return;
+		}
+		if (target == 0) {
+			result.add(new ArrayList<Integer>(item));
+			return;
+		}
     	for (int i = pos; i < num.length; i++) { 
-    		if( i > pos && num[i] == num[i - 1]) { //【注】如果遇到相同元素则跳过，直到遇到不同的元素，再进行下一层递归。类似 Combination_Sum
+    		if (i > pos && num[i] == num[i - 1]) { //【注】如果遇到相同元素则跳过，直到遇到不同的元素，再进行下一层递归。类似 Combination_Sum
     			continue;
     		}
     		item.add(num[i]);

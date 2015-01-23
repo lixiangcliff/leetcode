@@ -11,6 +11,7 @@ public class Question {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		Question q = new Question();
 		String start = "hit";
 		String end = "cog";
 		HashSet<String> dict = new HashSet<String>();
@@ -19,7 +20,7 @@ public class Question {
 		dict.add("dog");
 		dict.add("lot");
 		dict.add("log");
-		System.out.print(ladderLength(start, end, dict));
+		System.out.print(q.ladderLength(start, end, dict));
 	}
 	
 	/**
@@ -44,11 +45,13 @@ public class Question {
 	 * All words  have the same length. 
 	 * All words contain only lowercase alphabetic characters.
 	 */
+	
 	//BFS
+	//画图参考：http://www.cnblogs.com/yuzhangcmu/p/4172439.html
 	//http://www.ninechapter.com/solutions/word-ladder/
 	//http://shanjiaxin.blogspot.com/2014/04/word-ladder-leetcode.html
 	//http://blog.csdn.net/linhuanmars/article/details/23029973
-	public static int ladderLength(String start, String end, HashSet<String> dict) {  
+	public int ladderLength(String start, String end, HashSet<String> dict) {  
 	    if (start == null || end == null || start.length() != end.length() || start.length() == 0 || end.length() == 0) {
 	    	return 0;
 	    }
@@ -59,11 +62,9 @@ public class Question {
 		while (!queue.isEmpty()) {
 			int size = queue.size();
 			for (int i = 0; i < size; i++) {
-				String curStr = queue.poll(); //拿到一个相差一个字符的String
-				for (int j = 0; j < curStr.length();j++){
-					//把curStr转为curChar[]必须在j loop内部，因为不同的char可能出现在curStr的不同位置（不同的j），
-					//而我们又要通过改变了的curStr产生新的string，所以改变之后需要重新拿到原始的curChar才行
-					char[] curCharArray = curStr.toCharArray(); 
+				String curStr = queue.poll(); //拿到一个string curStr，接下来要在dict中找和curStr相差一个字符的string
+				for (int j = 0; j < curStr.length(); j++) { //在curStr定位不同的第j位来尝试，看dict中是否有一个string和curStr只相差在第j位
+					char[] curCharArray = curStr.toCharArray(); // 把curStr转为curChar[]必须在j loop内部，因为尝试过当前j后，需要重新拿到原始的curChar。
 					for (char c = 'a'; c <= 'z'; c++) { // 当前j位置上的char与其他的25个字母比较
 						if (curStr.charAt(j) == c) {  //如果遇到c和当前j位置上char是一样的，则什么也不做
 							continue;
@@ -74,7 +75,7 @@ public class Question {
 							return len + 1;
 						}
 						if (dict.contains(temp)) { //如果字典中确实含有这个新建的string
-							queue.offer(temp);// 那么我们就把这个确实存在的并且和curStr正好相差一个字符的string放入队列，以备下一轮处理
+							queue.offer(temp); // 那么我们就把这个确实存在的并且和curStr正好相差一个字符的string放入队列，以备下一轮处理
 							dict.remove(temp); //然后从字典中剔除这个相差一个字符的string，表示这个string已经visit过了
 						}
 		    		}
@@ -82,8 +83,6 @@ public class Question {
 	    	}
 	    	len++; //当前queueSize里面的元素全都visit之后了，说明这一层已经访问结束。该进入下一层了。
 	    }
-	    return 0;
+	    return 0; // no such transformation sequence
 	}
-
-	
 }

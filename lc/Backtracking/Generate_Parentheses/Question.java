@@ -34,18 +34,18 @@ public class Question {
     	return result;
     }
     
-    // item为到目前为止已经组成的部分合法结；left和right分别为还剩多少未使用的左括号和右括号
-    private void helper(ArrayList<String> result, String item, int left, int right){ // left means how many "(" are still unused
+    //DFS item为到目前为止已经组成的部分合法结；left和right分别为还剩多少未使用的左括号和右括号
+    private void helper(ArrayList<String> result, String item, int left, int right) { // left means how many "(" are still unused
     	if (left < 0 || right < 0|| left > right) { // 左或右括号剩余量为负；或者如果左括号剩下的比右括号剩下的多，即已经使用的右括号比左括号多，则非法，则返回。
     		return;
     	}
-    	if (left == 0 && right == 0){ // 所有左右括号都使用完了，返回一个	完整的合法解
+    	if (left == 0 && right == 0) { // 所有左右括号都使用完了，返回一个完整的合法解
     		result.add(item);
     	}
 		// 把一个左括号加入到item的尾部，然后递归处理
 		helper(result, item + "(", left - 1, right);
 		// 把一个右括号加入到item的尾部，然后递归处理t
-		helper(result, item + ")", left, right -1);
+		helper(result, item + ")", left, right - 1);
     }
 
 }

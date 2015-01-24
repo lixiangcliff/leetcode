@@ -43,23 +43,23 @@ public class Question {
 		}
 		int rowLen = board.length;
 		int colLen = board[0].length;
-		//第一和最后一行
+		// Flood fill第一和最后一行
 		for (int j = 0; j < colLen; j++) {
 			helper(board, 0, j);
 			helper(board, rowLen - 1, j);
 		}
-		//最左和最右列
+		// Flood fill最左和最右列
 		for (int i = 0; i < rowLen; i++) {
 			helper(board, i, 0);
 			helper(board, i, colLen - 1);
 		}
-		//恢复边缘的"#"以及反转中间的"O"
+		// 反转中间的"O" 以及 恢复边缘的"#"
 		for (int i = 0; i < rowLen; i++) {
 			for (int j = 0; j < colLen; j++) {
-				if (board[i][j] == 'O') {
+				if (board[i][j] == 'O') { // 反转中间的 'O'
 					board[i][j] = 'X';
 				}
-				if (board[i][j] == '#') {
+				if (board[i][j] == '#') { // 恢复边缘的"#"
 					board[i][j] = 'O';
 				}
 			}
@@ -72,7 +72,7 @@ public class Question {
 			return;
 		}
 		board[i][j] = '#'; // 到这步说明board[i][j] == 'O'，所以暂时把它标记为'#'
-		LinkedList<Integer> queue = new LinkedList<Integer>();
+		LinkedList<Integer> queue = new LinkedList<Integer>(); //queue中存内容（曾经）为'O'的position
 		int colLen = board[0].length;
 		int pos = i * colLen + j; // 【注】用1个整数来表示node在board中的位置，这种方法可以将原来用两个参数来表示坐标的方法(i,j)，变成只用一个（方便在queue中存储）
 		queue.offer(pos);

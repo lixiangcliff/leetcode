@@ -30,7 +30,7 @@ public class Question {
 	//http://blog.csdn.net/linhuanmars/article/details/24683699
     public ArrayList<String> restoreIpAddresses(String s) {
     	ArrayList<String> result = new ArrayList<String>(); // 结果集
-        if(s == null || s.length() < 4 || s.length() > 12){
+        if (s == null || s.length() < 4 || s.length() > 12) {
         	return result;
         }
         //一个合法结果用size为4的ArrayList<String>表示，其中的每个string表示一个2^8以内的数字
@@ -43,7 +43,7 @@ public class Question {
     
     private void helper(ArrayList<String> result, ArrayList<String> item, String s, int start){
 		if (item.size() == 4) { 
-			if(start != s.length()) { //【注】如果start未到达s末尾，则item不是一组合法解
+			if (start != s.length()) { //【注】如果start未到达s末尾，则item不是一组合法解
                 return;
 			}
 			//至此才真找到一组合法解
@@ -55,7 +55,7 @@ public class Question {
 			result.add(sb.toString());
 			return;
 		}
-		//i必须在s.length()以内；并且i <= start + 3因为一个合法的2^8以内的字符串长度<=3
+		//i必须在s.length()以内；并且i 范围[start, start + 3)，因为一个合法的2^8以内的字符串长度<=3
 		for (int i = start; i < s.length() && i < start + 3; i++) { 
 			String temp = s.substring(start, i + 1); // 取start到当前i之间的substring为temp
 			if (isValid(temp)) {

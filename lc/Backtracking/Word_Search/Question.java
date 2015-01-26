@@ -29,6 +29,7 @@ public class Question {
 	 * word = "SEE", -> returns true, 
 	 * word = "ABCB", -> returns false.
 	 */
+	
 	//DFS
 	//http://blog.csdn.net/linhuanmars/article/details/24336987
     public boolean exist(char[][] board, String word) {
@@ -65,7 +66,7 @@ public class Question {
 		boolean result = helper(board, word, start + 1, i - 1, j, used)
 				|| helper(board, word, start + 1, i + 1, j, used)
 				|| helper(board, word, start + 1, i, j - 1, used)
-				|| helper(board, word, start+1, i, j+1, used);
+				|| helper(board, word, start + 1, i, j + 1, used);
     	used[i][j] = false; // 回溯，把[i][j]标为未访问
     	return result;
     }

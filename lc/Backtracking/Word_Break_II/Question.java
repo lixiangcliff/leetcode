@@ -36,60 +36,60 @@ public class Question {
 	 * dict = ["cat", "cats", "and", "sand", "dog"].
 	 * A solution is ["cats and dog", "cat sand dog"].
 	 */
+	
 	//DFS
+	//http://www.cnblogs.com/yuzhangcmu/p/4037299.html
 	//http://blog.csdn.net/linhuanmars/article/details/22452163
 	ArrayList<String> wordBreak(String s, Set<String> dict){ // 【注1】必须用Set而不是HashSet来通过leetcode
 		ArrayList<String> result = new ArrayList<String>();
 		if (s == null || s.length() == 0 || !isWordBreakable(s, dict)) { // 如果s不能wordbreak则直接返回result，避免输入字符串过长，导致回溯超时。
 			return result;
 		}
-		String item = "";
+		ArrayList<String> item = new ArrayList<String>(); // 以ArrayList<String>的形式存一组合法的解
 		helper(result, item, s, dict, 0);
 		return result;
 	}
 	
-	private void helper(ArrayList<String> result, String item, String s, Set<String> dict, int start){
-		if (start == s.length()) {
-			result.add(item);
-			return;
+	private void helper(ArrayList<String> result, ArrayList<String> item, String s, Set<String> dict, int start){
+		if (start == s.length()) { // 结束了。start到了末尾
+            StringBuilder sb = new StringBuilder();
+            for (String str: item) {
+                sb.append(str);
+                sb.append(" ");
+            }
+            sb.deleteCharAt(sb.length() - 1); // remove the last " "
+            result.add(sb.toString());
+            return;
 		}
-		StringBuilder sb = new StringBuilder();
 		for (int i = start; i < s.length(); i++) {
-			sb.append(s.charAt(i)); // 每次增加一个s中的字符加到sb中，看sb是否为dict中的一个单词
-			if (dict.contains(sb.toString())) { // 如果是sb是否dict中的一个单词，就在后面进行递归 
-				String newItem = "";
-				if (item.length() == 0) {
-					newItem = sb.toString();
-				} else {
-					newItem = item + " " + sb.toString();
-				}
-				helper(result, newItem, s, dict, i + 1); // 用item置为newItem，start置为i + 1，继续递归
+			String temp = s.substring(start, i + 1);
+			if (!dict.contains(temp)) {// 如果sb不是dict中的一个单词，则不需要递归了 
+				continue;
 			}
+            item.add(temp); // 添加
+            helper(result, item, s, dict, i + 1); // 递归
+            item.remove(item.size() - 1); // 回溯
 		}
 	}
 	
 	//【注2】加上这个函数纯粹只是为了pass leetcode上下面这个test case
-	//"Last executed input:	"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab", 
+	//"Last executed input:	"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab", 
 	//["a","aa","aaa","aaaa","aaaaa","aaaaaa","aaaaaaa","aaaaaaaa","aaaaaaaaa","aaaaaaaaaa"]"
 	//函数重用: https://oj.leetcode.com/problems/word-break/	
-	private boolean isWordBreakable(String s, Set<String> dict) {  
-	    if(s==null || s.length()==0)  
-	        return true;  
-	    boolean[] result = new boolean[s.length()+1];  
-	    result[0] = true;  
-	    for(int i=0;i<s.length();i++)  
-	    {  
-	        for(int j=0;j<=i;j++)  
-	        {  
-	        	String sub = s.substring(j,i+1); 
-	            if(result[j] && dict.contains(sub))  
-	            {  
-	                result[i+1] = true;  
-	                break;  
-	            }  
-	        }  
-	    }  
-	    return result[s.length()];  
+	private boolean isWordBreakable(String s, Set<String> dict) {
+		if (s == null || s.length() == 0)
+			return true;
+		boolean[] result = new boolean[s.length() + 1];
+		result[0] = true;
+		for (int i = 0; i < s.length(); i++) {
+			for (int j = 0; j <= i; j++) {
+				String sub = s.substring(j, i + 1);
+				if (result[j] && dict.contains(sub)) {
+					result[i + 1] = true;
+					break;
+				}
+			}
+		}
+		return result[s.length()];
 	}
-	
 }

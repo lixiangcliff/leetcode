@@ -19,38 +19,42 @@ public class Question {
 	 * 
 	 * Return a deep copy of the list.
 	 */
-	//http://blog.csdn.net/linhuanmars/article/details/22463599
-    public RandomListNode copyRandomList(RandomListNode head) {
-       HashMap<RandomListNode, RandomListNode> map = new HashMap<RandomListNode, RandomListNode>();
-       if (head == null){
-    	   return null;
-       }
-       RandomListNode node = head.next;
-       RandomListNode newHead = new RandomListNode(head.label);
-       RandomListNode newRunner = newHead;
-       map.put(head, newHead);// key is the original node, value is the copied(new) node
-       while(node!=null){
-    	   RandomListNode newNode = new RandomListNode(node.label);//根据node的label，复制出一个内容一样的新的newnode
-    	   map.put(node, newNode);//pair存入map
-    	   newRunner.next = newNode;//newList接上newNode
-    	   newRunner = newNode;
-    	   node = node.next;
-       }
-       node = head;
-       RandomListNode newRandom = newHead;
-       //之所以要第二次遍历，因为第一次做newNode时，newNode.random的那个node可能还不存在呢
-       while(node!=null){
-    	   newRandom.random = map.get(node.random);//node.random is key 画图便知;
-    	   node = node.next;
-    	   newRandom = newRandom.next;
-       }
-       return newHead;
-    }
-
+	
+	//【注】画图 http://blog.csdn.net/linhuanmars/article/details/22463599
+	public RandomListNode copyRandomList(RandomListNode head) {
+		HashMap<RandomListNode, RandomListNode> map = new HashMap<RandomListNode, RandomListNode>();
+		if (head == null) {
+			return null;
+		}
+		RandomListNode node = head.next;
+		RandomListNode copyHead = new RandomListNode(head.label);
+		RandomListNode copyPre = copyHead;
+		map.put(head, copyHead);// key is the original node, value is the copied node
+		while (node != null) {
+			RandomListNode copyNode = new RandomListNode(node.label);// 根据node的label，复制出一个内容一样的copyNode
+			map.put(node, copyNode);// pair存入map
+			copyPre.next = copyNode;// copyList接上copyNode
+			copyPre = copyNode;
+			node = node.next;
+		}
+		node = head;
+		RandomListNode copyNode = copyHead;
+		// 之所以要第二次遍历，因为第一次创建copyNode时，copyNode.random所指向的的那个copyNode可能还不存在呢
+		// 所以这一次遍历，通过寻找每个node.random 来连接copyNode.random
+		while (node != null) {
+			copyNode.random = map.get(node.random);
+			node = node.next;
+			copyNode = copyNode.next;
+		}
+		return copyHead;
+	}
 }
 
 class RandomListNode {
-     int label;
-     RandomListNode next, random;
-     RandomListNode(int x) { this.label = x; }
- };
+	int label;
+	RandomListNode next, random;
+
+	RandomListNode(int x) {
+		this.label = x;
+	}
+}

@@ -32,7 +32,7 @@ public class Question {
 	//http://blog.csdn.net/linhuanmars/article/details/22964467
 	//http://www.ninechapter.com/solutions/longest-consecutive-sequence/
 	public int longestConsecutive(int[] num) {
-        if(num == null || num.length == 0) { 
+        if (num == null || num.length == 0) { 
             return 0;  
         }
     	HashSet<Integer> set = new HashSet<Integer>();
@@ -44,21 +44,19 @@ public class Question {
     		if (!set.contains(i)) { // 如果map里已经没有i了，表示当前i已被访问
     			continue;
     		}
-    		//以当前i为原点，找它左边和右边的连续值
+    		// 【注】思想：以当前i为原点，找它左边和右边的连续值
     		int curLen = 1; //包涵当前i的最大连续长度
     		int neighbor = i;
-    		//i右边
-    		while (set.contains(neighbor + 1)) {
+    		while (set.contains(neighbor + 1)) { //i右边
     			curLen++;
     			set.remove(++neighbor); //把当前neighbor从HashSet中移除，表示已访问
     		}
     		neighbor = i; //neighbor恢复到i的位置
-    		//i左边
-    		while (set.contains(neighbor - 1)) {
+    		while (set.contains(neighbor - 1)) { //i左边
     			curLen++;
     			set.remove(--neighbor);
     		}
-    		maxLen = Math.max(curLen, maxLen); //更新maxLen
+    		maxLen = Math.max(curLen, maxLen); // 更新maxLen
     	}
         return maxLen;
     }

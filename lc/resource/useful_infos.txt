@@ -15,5 +15,14 @@ useful links:
 	系统设计面试题思路综述	
 	http://dongxicheng.org/search-engine/system-designing-in-finging-jobs/
 	
+	如何答好面试中的系统设计题？
+	http://www.zhihu.com/question/26312148
+	
+	教你如何迅速秒杀掉：99%的海量数据处理面试题
+	http://blog.csdn.net/v_july_v/article/details/7382693
+	
+	十道海量数据处理面试题与十个方法大总结
+	http://blog.csdn.net/v_JULY_v/article/details/6279498
+	
 5. 8个月从CS菜鸟到拿到Google Offer的经历+内推
 	http://www.cnblogs.com/yuzhangcmu/p/4050780.html

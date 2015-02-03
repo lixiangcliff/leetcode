@@ -77,7 +77,7 @@ public class Question {
 		}
 		return true;
 	}
-	
+	//另一个思想是，每次遍历当前加入的数，是否仍然使棋盘合法。
 	//http://blog.csdn.net/linhuanmars/article/details/20748171
 	//【注】boolean[] visited = new boolean[9]的位置不同，原则是没处理9个元素就出reset(new)一次visited
 	public boolean isValidSudoku2(char[][] board) {

@@ -34,14 +34,14 @@ public class Question {
 		}
 		int m = a.length();
 		int n = b.length();
-		int k = Math.max(m, n); // 选长度更长的那个最为每一位相加循环的次数
+		int k = Math.max(m, n); // 选长度更长的那个作为相加循环的次数
 		int carry = 0;
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < k; i++) {
-			int aValue = i < m ? (int)(a.charAt(m - 1 - i) - '0') : 0; // 只要还有没处理的位，就得到该位的值，否则直接置0
-			int bValue = i < n ? (int)(b.charAt(n - 1 - i) - '0') : 0;
+			int aValue = i < m ? (int) (a.charAt(m - 1 - i) - '0') : 0; // 只要还有没处理的位，就得到该位的值，否则直接置0
+			int bValue = i < n ? (int) (b.charAt(n - 1 - i) - '0') : 0; // 从后往前来相加。边界要举例。
 			int value = aValue + bValue + carry;
-			int digit = value % 2; //得到加和在本位的值
+			int digit = value % 2; // 得到加和在本位的值
 			carry = value / 2; // 进位值
 			sb.append(digit);
 		}
@@ -50,6 +50,4 @@ public class Question {
 		}
 		return sb.reverse().toString(); // 之所以用append最后reverse，而不是一直insert(0), 是因为insert太costly
 	}
-
-	
 }

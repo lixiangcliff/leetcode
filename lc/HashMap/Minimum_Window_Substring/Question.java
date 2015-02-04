@@ -10,7 +10,7 @@ public class Question {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Question q = new Question();
-		System.out.println(q.minWindow("ADOBECODEBANC", "ABC"));
+		System.out.println(q.minWindow("AOBECDEBANC", "ABC"));
 	}
 	
 	/**
@@ -29,61 +29,54 @@ public class Question {
 	 * always be only one unique minimum window in S.
 	 */
 	
-	//类似：Longest_Substring_Without_Repeating_Characters 
-	//【注】 此题中T中的char顺序无所谓，所以这道题就排除了用DP的可能
+	//【注】 此题中T中的char顺序无所谓，所以这道题就排除了用DP的可能。此题是Two pointer和Hashmap的结合。
 	//http://blog.csdn.net/linhuanmars/article/details/20343903
+	//http://huntfor.iteye.com/blog/2083485
 	public String minWindow(String S, String T) {
 		if (S == null || S.length() == 0) {
 			return "";
 		}
-		// T中的char装入map
-		HashMap<Character, Integer> map = new HashMap<Character, Integer>();
-		for (int i = 0; i < T.length(); i++) {
+		HashMap<Character, Integer> srcMap = new HashMap<Character, Integer>();
+		for (int i = 0; i < T.length(); i++) { // T中的char装入map
 			char c = T.charAt(i);
-			if (map.containsKey(c)) {
-				map.put(c, map.get(c) + 1);
+			if (srcMap.containsKey(c)) {
+				srcMap.put(c, srcMap.get(c) + 1);
 			} else {
-				map.put(c, 1);
+				srcMap.put(c, 1);
 			}
 		}
 		int l = 0;
-		// 分别用minStart和minLen来记录所求string的起始位置和长度
-		int minStart = 0;
-		int minLen = S.length() + 1;
-		int count = 0;// T中的char在当前窗口中已经出现的次数
-		// 此题相比于“Substring with Concatenation of All Words”，之所以不需要维护curMap：
-		// 是因为，当前窗口里可以有多余的（不是T中的）char，即不需要和map中的char种类和数量上严格对应
-		// 在下面code中，根据窗口中含有T中的char的情况来更新map。
-		// 具体来说就是：【注】map里放置的是窗口里不包含的char及其个数
-		// 所以每次右窗口右移并且纳入了T中含有的char时，就从map中减小该char的个数
-		// 而每次左窗口右移并且剔除了T中含有的char时，就从map中增加该char的个数
+		int minStart = 0; // 所求string的起始位置
+		int minLen = S.length() + 1; // 所求string的长度
+		int foundCount = 0;// T中的char在当前窗口中已经出现的次数
+		HashMap<Character, Integer> curMap = new HashMap<Character, Integer>();
 		for (int r = 0; r < S.length(); r++) {
-			char rc = S.charAt(r);
-			if (map.containsKey(rc)) {
-				map.put(rc, map.get(rc) - 1);
-				if (map.get(rc) >= 0) { //若map.get(rc)<0,则值为rc的char在T中早已经被拿空了，所以在S中即使遇到了rc，count的数目也不该增加！
-					count++;
+			char charR = S.charAt(r);
+			if (srcMap.containsKey(charR)) { // 右边找到一个char是在srcMap中的
+				if (!curMap.containsKey(charR)) { // 【注】无论charR在curMap中的个数是不是已经超过了它在srcMap中的个数，都要在curMap中累计
+					curMap.put(charR, 1);
+				} else {
+					curMap.put(charR, curMap.get(charR) + 1);
 				}
-				while (count == T.length()) { // 只要当前窗口(from l to r) 还能包涵所有T中的char（就右移left来试图尽量减小窗口长度）
-					if (r - l + 1 < minLen) {
-						minLen = r - 1 + 1; // 更新minLen
+				if (curMap.get(charR) <= srcMap.get(charR)) { // 【注】只有curMap中charR的个数仍然小于等于srcMap中charR
+					foundCount++;
+				}
+				while (foundCount == T.length()) { // curMap已经和srcMap的内容一样了，说明当前窗口已经cover了T中所有内容，接下来要右移l，使窗口尽量小
+					if (r - l + 1 < minLen) { // 如果当前窗口是更小的合法窗口
+						minLen = r - l + 1;
 						minStart = l;
 					}
-					char lc = S.charAt(l); // 左窗口右移，来剔除当前字符lc
-					if (map.containsKey(lc)) { // 如果lc存在于原来的map里，说明把它剔除之后，窗口里就不能包涵所有T中的char了，此层循环也就可以跳出了
-						// 把剔除的char重新加回map（或者说+1）
-						map.put(lc, map.get(lc) + 1);
-						// 确认map中已经有sLeftChar
-						if (map.get(lc) > 0) {
-							count--;
+					char charL = S.charAt(l);
+					if (srcMap.containsKey(charL)) { // 如果当前charL存在于srcMap中
+						curMap.put(charL, curMap.get(charL) - 1);
+						if (curMap.get(charL) < srcMap.get(charL)) { // 如果减小当前charL的个数，真的导致	curMap里对应的个数小于srcMap中的个数
+							foundCount--;
 						}
 					}
-					l++;// left右移
+					l++; // 右移l
 				}
 			}
 		}
 		return minLen == S.length() + 1 ? "" : S.substring(minStart, minStart + minLen); //若 minLen到最后还是S.length()+1，说明S中不含有满足题意的窗口
 	}
-    
-
 }

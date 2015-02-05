@@ -39,19 +39,19 @@ public class Question {
 		if (A == null || A.length <= 2) {
 			return 0;
 		}
-    	int n = A.length;
-    	int[] edgeHeight = new int[n]; //只需要一个数组记录从左往右的即可，从右往左时候右边缘的最高值max当场就处理掉了，无需记录
+    	int len = A.length;
+    	int[] edgeHeight = new int[len]; //只需要一个数组记录从左往右的即可，从右往左时候右边缘的最高值max当场就处理掉了，无需记录
     	//max，当从左往右时，表示的是当扫描到i时，i左边遇到过的最大值(桶左端高)；从右往左类似。
     	//而edgeHeight[i]里面存的就是在第i位对应的max
     	int max = A[0]; // max赋初值
-		for (int i = 1; i < n; i++) { //从左往右,从第二个开始
+		for (int i = 1; i < len; i++) { //从左往右,从第二个开始
 			edgeHeight[i] = max; // 当前edgeHeight[i]置max
 			max = Math.max(A[i], max); // 如果当前值比max大，则更新max，以备下一个i使用
 		}
     	//从右往左扫，与上面类似
     	max = A[A.length - 1]; // max重新赋初值
     	int result = 0;
-		for (int i = n - 1; i >= 0; i--) { //从倒数第二个开始
+		for (int i = len - 2; i >= 0; i--) { //从倒数第二个开始
     		int lower = Math.min(edgeHeight[i], max); // lower表示左端和右端桶高中较低的一个
     		if (lower > A[i]) { //即 只有左边最高和右边最高两者之间较小的那个，比当前bar高度大，对当前的bar才有面积累加
     			result += lower - A[i];

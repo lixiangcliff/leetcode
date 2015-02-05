@@ -30,7 +30,7 @@ public class Question {
 	//【注】result和prices有位差
 	//http://blog.csdn.net/linhuanmars/article/details/23162793
 	public int maxProfit(int[] prices) {  
-	    if (prices == null || prices.length==0) {  
+	    if (prices == null || prices.length <= 1) {  
 	        return 0;
 	    }
 	    int[] result = new int[prices.length + 1];
@@ -45,9 +45,9 @@ public class Question {
 	    return max;
 	}
 	
-	//O(1) space
+	//O(1) space 无位差
 	public int maxProfitBigO_1_space(int[] prices) {  
-	    if (prices == null || prices.length==0) {  
+	    if (prices == null || prices.length <= 1) {  
 	        return 0;
 	    }
 	    int result = 0;

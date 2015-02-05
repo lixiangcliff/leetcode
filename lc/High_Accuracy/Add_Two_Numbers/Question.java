@@ -40,44 +40,39 @@ public class Question {
 	 * Input: (2 -> 4 -> 3) + (5 -> 6 -> 4) 
 	 * Output: 7 -> 0 -> 8
 	 */
-    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-    	/*
-    	 * 本题链表表示数字的规则如下：
-    	 * 表头为最低位，表尾为最高位
-    	 */
-        if (l1 == null && l2 == null){
-    		return null;
-    	}
-    	int carry = 0;
-    	//【注】技巧：设置一个dummy的node，令dummy.next为结果的head，返回的时候只需返回dummy.next即可
-    	//不这样做直接用pre来表示head，的坏处是：要先给pre设好初值(即整个循环体部分)，然后再进入循环体（相当于循环体被写了两遍）
-    	ListNode dummy = new ListNode(0);
-    	ListNode pre = dummy;
-        while(l1 != null || l2 != null){
-        	int l1Value = l1 == null ? 0 : l1.val;
-        	int l2Value = l2 == null ? 0 : l2.val;
-        	int value = l1Value + l2Value + carry;
-        	int digit = value % 10;
-        	carry = value / 10;
-        	ListNode cur = new ListNode(digit);
-        	pre.next = cur;
-        	pre = cur;
-        	//【注】need check null condition
-        	if(l1 != null){
-        		l1 = l1.next;
-        	}
-        	if (l2  != null){
-        		l2 = l2.next;
-        	}
-        }
-        //如果到此时carry仍为1，说明加和比两个数中位数多的那个还要多一位。则再链表结尾加一个val==1的noe（即数字开头加1）
-        if (carry == 1){
-        	pre.next = new ListNode(1);
-        }
-        return dummy.next;
-    }
 	
-
+	// 类似 Add_Binary
+	// 本题链表表示数字的规则如下： 表头为最低位，表尾为最高位
+	public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+		if (l1 == null && l2 == null) {
+			return null;
+		}
+		int carry = 0;
+		// 【注】技巧：设置一个dummy的node，令dummy.next为结果的head，返回的时候只需返回dummy.next即可
+		// 不这样做直接用pre来表示head，的坏处是：要先给pre设好初值(即整个循环体部分)，然后再进入循环体（相当于循环体被写了两遍）
+		ListNode dummy = new ListNode(0);
+		ListNode pre = dummy;
+		while (l1 != null || l2 != null) {
+			int l1Value = l1 == null ? 0 : l1.val; // l1不为null 才可以取l1的值
+			int l2Value = l2 == null ? 0 : l2.val;
+			int value = l1Value + l2Value + carry;
+			int digit = value % 10;
+			carry = value / 10;
+			ListNode cur = new ListNode(digit);
+			pre.next = cur;
+			pre = cur;
+			if (l1 != null) { // 【注】步进时需要check当前node是不是null
+				l1 = l1.next;
+			}
+			if (l2 != null) {
+				l2 = l2.next;
+			}
+		}
+		if (carry == 1) { // 此时carry仍为1，说明加和比两个数中位数多的那个还要多一位。则再链表结尾加一个val==1的node（即数字开头加1）
+			pre.next = new ListNode(1);
+		}
+		return dummy.next;
+	}
 }
 
 class ListNode {

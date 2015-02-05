@@ -36,7 +36,7 @@ public class Solution {
 		if (nums == null || nums.length == 0) {
 			return 0;
 		}
-		int max = 0;
+		int max = 1;
 		int[] result = new int[nums.length + 1];
 		for (int i = 1; i <= nums.length; i++) {
 			result[i] = 1;

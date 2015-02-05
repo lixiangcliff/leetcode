@@ -39,7 +39,7 @@ public class Question {
 		if (n < 0) {
 			return Integer.MIN_VALUE;
 		}
-		if (n == 0) {//【注】 没有node 也是一种BST的组成方式（联想下result[0]*result[i-1]肯定不为0，所以result[0]也不该为0才合理。）
+		if (n <= 1) {//【注】 没有node 也是一种BST的组成方式（联想下result[0]*result[i-1]肯定不为0，所以result[0]也不该为0才合理。）
 			return 1;
 		}
 		int[] result = new int[n + 1];

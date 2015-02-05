@@ -46,7 +46,7 @@ public class Question {
 		    m++;
 		    n--;
 		}
-		if (m >= n) {
+		if (m >= n) { // 说明s全部由相同的字符组成。
 		    return s;
 		}
 		// 上面的补丁可以pass "aaa...aaa"

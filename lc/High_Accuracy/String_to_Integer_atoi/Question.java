@@ -60,16 +60,16 @@ public class Question {
 			}
 			str = str.substring(1);
 		}
-		int result = 0; // 此后result统一当做正数来处理，知道最后恢复符号。
+		int result = 0; // 此后result统一当做正数来处理，最后恢复符号。
 		for (int i = 0; i < str.length(); i++) {
 			if (str.charAt(i) < '0' || str.charAt(i) > '9') { // 遇到非法字符就停止
 				break;
 			}
 			int digit = (int) (str.charAt(i) - '0');
-			//即先判断这一轮计算出的result是否越界(即result 为正数，并且-(result * 10 + digit) < Integer.MIN_VALUE;但是必须用除法判断)若越界则返回最小值
+			//即先判断这一轮计算出的result是否越界(即恢复符号的result为负数，并且-(result * 10 + digit) < Integer.MIN_VALUE;但是必须用除法判断)若越界则返回最小值
 			if (!isPositive && result > -((Integer.MIN_VALUE + digit) / 10)) {
 				return Integer.MIN_VALUE;
-			} else if (isPositive && result > (Integer.MAX_VALUE - digit) / 10) { //(result为正数，且(result * 10 + digit) > Integer.MIN_VALUE;用除法)	
+			} else if (isPositive && result > (Integer.MAX_VALUE - digit) / 10) { //(恢复符号的result为正数，且(result * 10 + digit) > Integer.MAX_VALUE;用除法)	
 				return Integer.MAX_VALUE;
 			}
 			result = result * 10 + digit;

@@ -62,8 +62,8 @@ public class Question {
 	//	(3)当p[j] == '*', 且p[j - 1] == '.': 
 	//			因为".*"可以表示任何字符，所以以下几种情况可以使result[i][j]为true
 	//				(a)只要有任何一个result[k][j-2]（k范围[0,i]）为true。（因为k后面的剩余都可以被".*"来match上）
-	//				(b)result[i][j - 2]为true。这时".*"表示空
-	//				(c)result[i][j - 1]为true。这时".*"的"*"表示1,即整体表示1个"."
+	//	b和c貌似不必要//(b)result[i][j - 2]为true。这时".*"表示空
+	//				//(c)result[i][j - 1]为true。这时".*"的"*"表示1,即整体表示1个"."
 	//3.initialize: result[0][0] = true; // s和p都为空
 	//				result[i][0] = false; // p为空，并且s不为空
 	//				result[0][j] = 情况复杂，只有满足下面条件才为true。具体的看下面代码; // s为空 ，并且p不为空。
@@ -73,11 +73,10 @@ public class Question {
 	//【注】 isEqual(s[i], p[j])定义为s[i] == p[j] or p[j] = '.'
 	//【注】result[][]和s，p有位差
 	public boolean isMatch(String s, String p) {
-		if (p.length() == 0){
-        	return s.length() == 0;
+		if (s == null || p == null){
+        	return false;
         }
         boolean[][] result = new boolean[s.length() + 1][p.length() + 1];
-        result[0][0] = true;
         for (int i = 0; i <= s.length(); i++) {
 	        for (int j = 0; j <= p.length(); j++) {
 	        	if (i == 0 && j == 0) { // s和p都为空时，true
@@ -101,7 +100,7 @@ public class Question {
 			        			}
 			        		}
 		        		}
-		        		result[i][j] = foundPrevMatch || j == 2 || (j > 1 && result[i][j - 2]) || result[i][j - 1]; 
+		        		result[i][j] = foundPrevMatch; 
 		        	} 
 	        	}
 	        }

@@ -25,9 +25,32 @@ public class Question {
 	 * "((()))", "(()())", "(())()", "()(())", "()()()"
 	 */
 	
+	//手写时候想到的
+    public ArrayList<String> generateParenthesis(int n) {
+    	ArrayList<String> result =  new ArrayList<String>();
+    	StringBuilder item = new StringBuilder();
+    	helper(result, item, n, n);
+    	return result;
+    }
+    
+    private void helper(ArrayList<String> result, StringBuilder item, int left, int right) { // left means how many "(" are still unused
+    	if (left < 0 || right < 0|| left > right) { // 左或右括号剩余量为负；或者如果左括号剩下的比右括号剩下的多，即已经使用的右括号比左括号多，则非法，则返回。
+    		return;
+    	}
+    	if (left == 0 && right == 0) { // 所有左右括号都使用完了，返回一个完整的合法解
+    		result.add(new String(item.toString()));
+    	}
+		item.append("(");
+		helper(result, item, left - 1, right);
+		item.deleteCharAt(item.length() - 1);
+		item.append(")");
+		helper(result, item, left, right - 1);
+		item.deleteCharAt(item.length() - 1);
+    }
+    
 	//http://www.ninechapter.com/solutions/generate-parentheses/
 	//http://blog.csdn.net/linhuanmars/article/details/19873463
-    public ArrayList<String> generateParenthesis(int n) {
+/*    public ArrayList<String> generateParenthesis(int n) {
     	ArrayList<String> result =  new ArrayList<String>();
     	String item = "";
     	helper(result, item, n, n);
@@ -46,6 +69,6 @@ public class Question {
 		helper(result, item + "(", left - 1, right);
 		// 把一个右括号加入到item的尾部，然后递归处理t
 		helper(result, item + ")", left, right - 1);
-    }
-
+    }*/
+	
 }

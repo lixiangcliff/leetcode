@@ -33,7 +33,7 @@ public class Question {
         helper(board, 0, 0);
     }
 	
-    //helper返回的是知道处理到第[i][j]位置，board是否符合sudoku的要求
+    //helper返回的是直到处理到第[i][j]位置，board是否符合sudoku的要求
 	private boolean helper(char[][] board, int i, int j){
 		if (i == 9) { // 完成所有行
 			return true;

@@ -28,19 +28,24 @@ public class Question {
 		    /     /       \                 \
 		   2     1         2                 3
 	 */
-	// “思路是每次一次选取一个点为作为根节点；然后递归求解左右子树的所有结果；最后根据所有返回的左右子树依次选取，然后接在所选的根节点上。
-	//（每个左边的子树跟所有右边的子树匹配，而每个右边的子树也要跟所有的左边子树匹配，总共有左右子树数量的乘积种情况），构造好之后作为当前树的结果返回。”
+
+	//看图
+	//1. 先定义递归的参数的左边界和右边界，即1到n.
+	//2. 考虑从left, 到right 这n个数字中选取一个作为根，余下的使用递归来构造左右子树。 
+	//3. 当无解时，应该返回一个null树，这样构造树的时候，我们会比较方便，不会出现左边解为空，或是右边解为空的情况。
+	//4. 如果说左子树有n种组合，右子树有m种组合，那最终的组合数就是n*m. 把这所有的组合组装起来即可
+	//http://www.cnblogs.com/yuzhangcmu/p/4256291.html
 	//http://blog.csdn.net/linhuanmars/article/details/24761437
 	//http://answer.ninechapter.com/solutions/unique-binary-search-trees-ii/
 	public ArrayList<TreeNode> generateTrees(int n) {
 		return helper(1, n);
 	}
 
-	//DFS helper函数得到的是范围从leftMost到rightMost的所有满足条件的树
+	//DFS helper函数返回值为：根的数值范围是从leftMost到rightMost的所有满足条件的树
 	private ArrayList<TreeNode> helper(int leftMost, int rightMost) {
 		ArrayList<TreeNode> result = new ArrayList<TreeNode>();
-		if (leftMost > rightMost) { // 如果最左比最右大，则无法找到合法的树
-			result.add(null); //【注】加入一个空元素进去来表示这是一颗空树，并且同时也是保证下面循环时即使一边是空树，也会跑另一边。
+		if (leftMost > rightMost) { // 如果最左比最右大，则只能是一种情况，即空树。
+			result.add(null); //【注】加入一个空元素进去，来表示这是一颗空树，并且同时也是保证下面循环时，即使一边是空树，也让另一边继续运算。
 			return result;
 		}
 		// 好好体会下面"在循环中调用递归函数求解子问题"

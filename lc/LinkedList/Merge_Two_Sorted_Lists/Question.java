@@ -7,6 +7,7 @@ public class Question {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		Question q = new Question();
 		ListNode l1 = new ListNode(1);
 		ListNode l1_2 = new ListNode(3);
 		ListNode l1_3 = new ListNode(5);
@@ -22,7 +23,7 @@ public class Question {
 		l2.next = l2_2;
 		l2_2.next = l2_3;
 		l2_3.next = l2_4;
-		ListNode l3 = mergeTwoLists(l1,l2);
+		ListNode l3 = q.mergeTwoLists(l1,l2);
 		ListNode l3current = l3;
 		while(l3current!=null){
 			System.out.println("----:" + l3current.val);
@@ -35,12 +36,13 @@ public class Question {
 	 * Merge two sorted linked lists and return it as a new list. The new list
 	 * should be made by splicing together the nodes of the first two lists.
 	 */
+	
 	//simpler code; dummy ListNode reduce the redundancy!  
     //http://answer.ninechapter.com/solutions/merge-two-sorted-lists/
-    public static ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         ListNode dummy = new ListNode(0);
         ListNode pre = dummy;
-      //只有l1 l2同时不等于null时，循环才能继续，这是因为循环体里有l1=l1.next以及l2=l2.next操作
+        //只有l1 l2同时不等于null时，循环才能继续，这是因为循环体里有l1.val,l2.val,li.next以及l2.next操作
         while (l1 != null && l2 != null) {
             if (l1.val < l2.val) {
                 pre.next = l1;
@@ -58,7 +60,6 @@ public class Question {
         }
         return dummy.next;
     }
-
 }
 
  class ListNode {

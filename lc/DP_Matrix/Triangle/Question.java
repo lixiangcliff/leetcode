@@ -70,8 +70,8 @@ public class Question {
 		int size = triangle.size();
 		int result[][] = new int[size][size];
 		result[0][0] = triangle.get(0).get(0);
-		for (int i = 1; i < size; i++) {
-			for (int j = 1; j <= i; j++) {// 【注】j的范围是<=i,而不是<size; 这样才能保证它是一个三角形
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j <= i; j++) {// 【注】j的范围是<=i,而不是<size; 这样才能保证它是一个三角形
 				if (i == 0 && j == 0) {
 					result[i][j] = triangle.get(i).get(j);
 				} else if (j == 0) { // 处理每一行的第一列

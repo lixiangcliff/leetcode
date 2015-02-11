@@ -79,7 +79,7 @@ public class Question {
 				result[i][j] = obstacleGrid[i][j] != 1 ? result[i - 1][j] + result[i][j - 1] : 0;
 			}
 		}
-        return result[m-1][n-1];    
+        return result[m - 1][n - 1];    
     }
     
 	//DP, matrix, O(n) space

@@ -67,6 +67,7 @@ public class Question {
 		if (triangle == null || triangle.size() == 0) {
 			return 0;
 		}
+		int min = Integer.MAX_VALUE;
 		int size = triangle.size();
 		int result[][] = new int[size][size];
 		result[0][0] = triangle.get(0).get(0);
@@ -81,12 +82,10 @@ public class Question {
 				} else {
 					result[i][j] = Math.min(result[i - 1][j - 1], result[i - 1][j]) + triangle.get(i).get(j); // 状态方程
 				}
+				if(i == size - 1) { // 找到最后一行中的最小值
+					min = Math.min(min, result[i][j]);
+				}
 			}
-		}
-		// 找到最后一行中的最小值
-		int min = result[size - 1][0];
-		for (int i = 1; i < size; i++) {
-			min = Math.min(min, result[size - 1][i]);
 		}
 		return min;
 	}

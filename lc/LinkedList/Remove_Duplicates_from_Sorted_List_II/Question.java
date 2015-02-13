@@ -7,6 +7,7 @@ public class Question {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		Question q =  new Question();
 		ListNode l1 = new ListNode(1);
 		ListNode l2 = new ListNode(1);
 		ListNode l3 = new ListNode(2);
@@ -29,7 +30,7 @@ public class Question {
 			head = head.next;
 		}
 		System.out.println("");
-		head = deleteDuplicates(l1);
+		head = q.deleteDuplicates(l1);
 		while (head != null){
 			System.out.print(head.val + ",");
 			head = head.next;
@@ -45,35 +46,30 @@ public class Question {
 	 * Given 1->2->3->3->4->4->5, return 1->2->5. 
 	 * Given 1->1->1->2->3, return 2->3.
 	 */
-	//http://blog.csdn.net/linhuanmars/article/details/24389429
-    public static ListNode deleteDuplicates(ListNode head) {
-        if (head==null || head.next == null){
-        	return head;
-        }
-        ListNode dummy = new ListNode(0);
-        dummy.next = head;
-        ListNode pre = dummy;
-        ListNode cur = head;//
-        while(cur!=null){
-        	/*
-        	 * 可以理解为：如果当前node(pre.next)值和下一个node(cur.next)值相等
-        	 * 跳出循环的条件之一是pre.next.val!=cur.next.val
-        	 * 即cur.next.val为一个不重复的值(不同于pre.next.val), 换言之cur.val仍然是重复的值(仍为pre.next.val)
-        	 */
-        	while(cur.next != null && pre.next.val == cur.next.val){
-        		cur = cur.next;
-        	}
-        	if(pre.next == cur){//即从pre.next到当前cur没有出现重复元素，则平pre前进一个
-        		pre = pre.next;
-        	}else{//有重复元素出现，删除从pre.next到当前cur(包括cur，因为上面分析了，cur.val也是重复的值)的所有元素
-        		pre.next = cur.next;
-        	}
-        	cur = cur.next;
-        }
-        return dummy.next;
-    }
-    
-
+	
+	//此题和I的不同在于：head是可能被删去的，所以需要dummy node。
+	// http://blog.csdn.net/linhuanmars/article/details/24389429
+	public ListNode deleteDuplicates(ListNode head) {
+		if (head == null || head.next == null) {
+			return head;
+		}
+		ListNode dummy = new ListNode(0);
+		dummy.next = head;
+		ListNode pre = dummy;
+		ListNode cur = head;
+		while (cur != null) {
+			while (cur.next != null && pre.next.val == cur.next.val) { //若果当前node(pre.next)值和下一个node(cur.next)值相等
+				cur = cur.next;
+			}
+			if (pre.next == cur) {// cur未曾右移过，即从pre.next到当前cur没有出现重复元素，则pre前进一个
+				pre = pre.next;
+			} else {// 有重复元素出现，删除从pre.next到当前cur(包括cur，因为cur.val也是重复的值)的所有元素
+				pre.next = cur.next;
+			}
+			cur = cur.next;
+		}
+		return dummy.next;
+	}
 }
 
 

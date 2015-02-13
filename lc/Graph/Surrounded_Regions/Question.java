@@ -9,6 +9,37 @@ public class Question {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		Question q = new Question();
+		char[][] board = {
+							{'O', 'O', 'O', 'X','X', 'X', 'X', 'O',},
+							{'X', 'O', 'O', 'X','X', 'O', 'O', 'O',},
+							{'X', 'O', 'O', 'X','X', 'O', 'X', 'X',},
+							{'X', 'O', 'O', 'O','O', 'O', 'X', 'X',},
+							{'X', 'O', 'O', 'X','O', 'X', 'X', 'X',},
+							{'O', 'O', 'O', 'X','O', 'O', 'X', 'X',},
+							{'O', 'X', 'O', 'X','O', 'O', 'O', 'X',},
+							{'O', 'O', 'O', 'X','O', 'O', 'O', 'O',},
+							};
+		/*String[] src = {"OOOOOOOOXOOOOOXOOOOO","OOOOOOOXOOOOOOOOOOOO","XOOXOXOOOOXOOXOOOOOO","OOOOOOOOOOOOOOOOOXXO","OXXOOOOOOXOOOOOOOOOO","OOOOXOOOOOOXOOOOOXXO","OOOOOOOXOOOOOOOOOOOO","OOOOOOOOOOOOOXOOOOOO","OOOOOOOOOOOOOOOOOOXO","OOOOOXOOOOOOOOOOOOOO","OOOOOOOOXOOOOOOOOOOO","OOOOXOOOOXOOOOOOOOOO","OOOOOOOOXOOOOOOOOOOO","XOOOOOOOOXXOOOOOOOOO","OOOOOOOOOOOXOOOOOOOO","OOOOXOOOOOOOOXOOOOOX","OOOOOXOOOOOOOOOXOXOO","OXOOOOOOOOOOOOOOOOOO","OOOOOOOOXXOOOXOOXOOX","OOOOOOOOOOOOOOOOOOOO"};
+		int row = src.length;
+		int col = src[0].length();
+		char[][] board = new char[row][col];
+		for (int i = 0; i < board.length; i++) {
+			for (int j = 0; j < board[0].length; j++) {
+				board[i][j] = src[i].charAt(j);
+				System.out.print(board[i][j] + ",");
+			}
+			System.out.println("");
+		}
+		System.out.println("=============");*/
+		q.solve(board);
+		for (int i = 0; i < board.length; i++) {
+			for (int j = 0; j < board[0].length; j++) {
+				System.out.print(board[i][j] + ",");
+			}
+			System.out.println("");
+		}
+		
 
 	}
 	

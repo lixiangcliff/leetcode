@@ -19,27 +19,25 @@ public class Question {
 	 * Given 1->1->2, return 1->2. 
 	 * Given 1->1->2->3->3, return 1->2->3.
 	 */
+	
+	//思路是维护两个往右走的指针pre和cur，一个指向不重复的最后一个node，另一个作为当前node往后跑
 	//http://blog.csdn.net/linhuanmars/article/details/24354291
-	public static ListNode deleteDuplicates(ListNode head) {
-		/*
-		 * 思路是维护两个指针，一个指向不重复的最后一个node，另一个作为当前node往后跑
-		 */
-		if(head==null || head.next ==null){
+	public ListNode deleteDuplicates(ListNode head) {
+		if (head == null || head.next == null) {
 			return head;
 		}
 		ListNode pre = head;
 		ListNode cur = head.next;
-		while(cur != null){
-			//如果重复了，则把当前node剔除
-			if (cur.val == pre.val){
+		while (cur != null) {
+			if (cur.val == pre.val) { // 如果重复了，则把当前node剔除
 				pre.next = cur.next;
-			}else{//若不重复，则pre向下移动
-			    pre =  pre.next;
+			} else { // 若不重复，则pre向右移动
+				pre = pre.next;
 			}
-			cur = cur.next;
-		}		
-		return head;        
-    }
+			cur = cur.next; // 不论是否重复 cur都向右移动
+		}
+		return head;
+	}
 }
 
 

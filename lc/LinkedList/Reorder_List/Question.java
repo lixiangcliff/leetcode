@@ -8,6 +8,7 @@ public class Question {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		Question q = new Question();
 		ListNode l1 = new ListNode(1);
 		ListNode l2 = new ListNode(2);
 		ListNode l3 = new ListNode(3);
@@ -30,7 +31,7 @@ public class Question {
 			head = head.next;
 		}
 		System.out.println("");
-		reorderList(l1);
+		q.reorderList(l1);
 		while (l1 != null){
 			System.out.print(l1.val + ",");
 			l1 = l1.next;
@@ -48,29 +49,24 @@ public class Question {
 	 * For example, 
 	 * Given {1,2,3,4}, reorder it to {1,4,2,3}.
 	 */
-	//my way
-	//refered to http://blog.csdn.net/linhuanmars/article/details/21503215
-    public static void reorderList(ListNode head) {
-    	if(head == null){
+	
+	//此題不需要dummy， 因为head已经确定了。
+	// http://blog.csdn.net/linhuanmars/article/details/21503215
+    public void reorderList(ListNode head) {
+    	if (head == null) {
     		return;
     	}
     	ListNode walker = head;
     	ListNode runner = head;
-    	while(runner != null && runner.next != null){
+    	while (runner != null && runner.next != null) {
     		runner = runner.next.next;
     		walker = walker.next;
     	}
-    	/*【注】
-    	 * e.g原始链表为1->2->3->4->5->6
-    	 * 上面操作之后
-    	 * head1:1->2->3->4
-    	 * head2:5->6
-    	 */
-    	ListNode head1 = head;//不要真正地移动head，因为如果移动head，函数执行完之后就找不到表头了
-    	ListNode head2 = walker.next;//head2为后半段的表头
-    	walker.next = null;//把前半段和后半段分开
+    	ListNode head1 = head; // 不要真正地移动head，因为如果移动head，函数执行完之后就找不到表头了
+    	ListNode head2 = walker.next; // head2为后半段的表头
+    	walker.next = null; // 把前半段和后半段分开
     	head2 = reverse(head2);
-    	while(head1!=null && head2 != null){
+    	while (head1 != null && head2 != null) {
     		ListNode next1= head1.next;
     		ListNode next2= head2.next;
     		head1.next = head2;
@@ -80,8 +76,9 @@ public class Question {
     	}
     }
     
-    private static ListNode reverse(ListNode head){
-    	ListNode cur = head;
+    //reverse链表要熟练掌握
+    private ListNode reverse(ListNode head) {
+    	ListNode cur = head; //【注】始终不更新cur，是因为cur指向最原始的头，它最终会变成尾。而head则一直在更新。
     	while(cur != null && cur.next != null){
     		ListNode next = cur.next;
     		cur.next = next.next;

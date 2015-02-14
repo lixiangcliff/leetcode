@@ -30,29 +30,26 @@ public class Question {
 	 * Note: Given m, n satisfy the following condition: 1 ≤ m ≤ n ≤ length of
 	 * list.
 	 */
-	//http://blog.csdn.net/linhuanmars/article/details/24613781
-	public ListNode reverseBetween(ListNode head, int m, int n){
-		if (head == null){
+	
+	// http://blog.csdn.net/linhuanmars/article/details/24613781
+	public ListNode reverseBetween(ListNode head, int m, int n) {
+		if (head == null) {
 			return null;
 		}
 		ListNode dummy = new ListNode(0);
 		dummy.next = head;
 		ListNode pre = dummy;
-		int i=1;//i从始至终作为标记走到哪里，对于确定m和n的位置很方便
-		while(pre.next != null && i<m){
+		int i = 1;// i从始至终作为标记， 表示现在走到了哪里，对于确定m和n的位置很方便
+		while (pre.next != null && i < m) {
 			pre = pre.next;
 			i++;
 		}
-		if(i<m){ //表长度小于m
+		if (i < m) { // 表长度小于m
 			return head;
 		}
 		ListNode mNode = pre.next;
 		ListNode cur = mNode.next;
-		/*
-		 * 思想是：依次从m后面直到n，拿来node塞在preNode的后边（preNode.next = cur）
-		 * 一共拿来n-m次（如果链表长度足够n的话），所以边界条件是i<n
-		 */
-		while(cur != null && i<n){
+		while (cur != null && i < n) {//画图！依次从m后面直到n，拿node塞在preNode的后边（preNode.next = cur） 一共拿来n-m次（如果链表长度足够n的话），故边界条件是i<n
 			ListNode next = cur.next;
 			cur.next = pre.next;
 			pre.next = cur;

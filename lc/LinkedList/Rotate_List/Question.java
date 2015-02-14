@@ -7,6 +7,7 @@ public class Question {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		Question q = new Question();
 		ListNode l1 = new ListNode(1);
 		ListNode l2 = new ListNode(2);
 		ListNode l3 = new ListNode(3);
@@ -29,7 +30,7 @@ public class Question {
 			head = head.next;
 		}
 		System.out.println("");
-		head = rotateRight(l1, 10);
+		head = q.rotateRight(l1, 10);
 		while (head != null){
 			System.out.print(head.val + ",");
 			head = head.next;
@@ -45,42 +46,36 @@ public class Question {
 	 * Given 1->2->3->4->5->NULL and k = 2, 
 	 * return 4->5->1->2->3->NULL.
 	 */
-	public static ListNode rotateRight(ListNode head, int n){
-		if (head == null){
-    		return null;
-    	}
-		//先计算链表长度
+	
+	public ListNode rotateRight(ListNode head, int n) {
+		if (head == null) {
+			return null;
+		}
 		ListNode walker = head;
 		ListNode runner = head;
 		int count = 0;
-		while(runner != null){
+		while (runner != null) {// 先计算链表长度
 			runner = runner.next;
 			count++;
 		}
-		//n is possibly bigger than linklist's size
-		//如果n大于链表长度，则取余
-		n %= count;
-		runner = head;//重新把runner放回表头
-		//画图理解为什么走n次，而不是n-1次
-		//这样做是为了方便walker用walker.next处理表尾
-    	for(int i=0;i<n;i++){
-    		if(runner.next != null){
-    			runner = runner.next;
-    		}else{
-    			break;
-    		}
-    	}
-    	//这样保证跳出循环时，runner停在最后一位，walker的下一位 就是要放在新链表最前面一位的
-    	while(runner.next != null){
-    		runner = runner.next;
-    		walker = walker.next;
-    	}
-    	runner.next = head; //表尾接表头
-    	head = walker.next; //更新head
-    	walker.next= null; //使新表尾指向null
-    	return head;
+		n %= count;// 如果n大于链表长度，则取余
+		runner = head;// 重新把runner放回表头
+		for (int i = 0; i < n; i++) { // 这样做是为了方便walker用walker.next处理表尾
+			if (runner.next != null) { // 这样保证跳出循环时，runner停在最后一位，walker的下一位 就是要放在新链表最前面一位的
+				runner = runner.next;
+			} else {
+				break;
+			}
+		}
+		while (runner.next != null) { // 只要runner还在链表内
+			runner = runner.next;
+			walker = walker.next;
+		}
+		runner.next = head; // 表尾接表头
+		head = walker.next; // 更新head
+		walker.next = null; // 使新表尾指向null
+		return head;
 	}
-	
 }
 
 class ListNode {

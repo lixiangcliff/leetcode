@@ -8,6 +8,7 @@ public class Question {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		Question q = new Question();
 		ListNode l1 = new ListNode(1);
 		ListNode l2 = new ListNode(2);
 		ListNode l3 = new ListNode(3);
@@ -23,7 +24,7 @@ public class Question {
 			head = head.next;
 		}
 		System.out.println("");
-		ListNode head2 = swapPairs(l1);
+		ListNode head2 = q.swapPairs(l1);
 		while(head2 != null){
 			System.out.print(head2.val + ",");
 			head2 = head2.next;
@@ -40,28 +41,22 @@ public class Question {
 	 * Your algorithm should use only constant space. You may not modify the
 	 * values in the list, only nodes itself can be changed.
 	 */
-	public static ListNode swapPairs(ListNode head) {
-        ListNode dummy = new ListNode(0);
-        dummy.next = head;
-        ListNode pre = dummy;
-        ListNode cur = head;
-        while(cur!=null &&cur.next!=null){
-        	ListNode next = cur.next;
-        	/*
-        	 * pre.next= next;这行很重要
-        	 * 在第一次循环的时候相当于dummy.next=next（即dummy.next指向第二个元素）
-        	 * 在此之后pre被更新，以后dummy再也不会跟随pre的变化而变化
-        	 */
-        	pre.next= next;
-        	cur.next = next.next;
-        	next.next = cur;
-        	pre = cur;
-        	cur = cur.next;
-        }
-        return dummy.next;
-    }
 	
-
+	public ListNode swapPairs(ListNode head) {
+		ListNode dummy = new ListNode(0);
+		dummy.next = head;
+		ListNode pre = dummy;
+		ListNode cur = head;
+		while (cur != null && cur.next != null) { // 画图
+			ListNode next = cur.next;
+			pre.next = next;
+			cur.next = next.next;
+			next.next = cur;
+			pre = cur;
+			cur = cur.next;
+		}
+		return dummy.next;
+	}
 }
 
 

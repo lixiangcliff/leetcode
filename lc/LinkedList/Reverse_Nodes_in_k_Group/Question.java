@@ -7,6 +7,7 @@ public class Question {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		Question q = new Question();
 		ListNode l1 = new ListNode(1);
 		ListNode l2 = new ListNode(2);
 		ListNode l3 = new ListNode(3);
@@ -22,7 +23,7 @@ public class Question {
 			head = head.next;
 		}
 		System.out.println("");
-		ListNode head2 = reverseKGroup(l1, 2);
+		ListNode head2 = q.reverseKGroup(l1, 2);
 		while(head2 != null){
 			System.out.print(head2.val + ",");
 			head2 = head2.next;
@@ -42,51 +43,47 @@ public class Question {
 	 * For k = 2, you should return: 2->1->4->3->5 
 	 * For k = 3, you should return: 3->2->1->4->5
 	 */
+	
     //http://blog.csdn.net/linhuanmars/article/details/19957455
     //need to understand "reverse" function well
-	public static ListNode reverseKGroup(ListNode head, int k) {  
-	    if(head == null)  
-	    {  
-	        return null;  
-	    }  
-	    ListNode dummy = new ListNode(0);  
-	    dummy.next = head;  
-	    int count = 0;  
-	    ListNode pre = dummy;  
-	    ListNode cur = head;  
-	    while(cur != null) {  
-	        count ++;  
-	        ListNode next = cur.next; //要提前把cur.next存好。不然如果经过if里面的处理, 再取cur.next，取的就不是原来的了
-	        if(count == k){  // only do reverse when reach to k nodes
-	            pre = reverse(pre, next);  // 新的pre往右挪了k个node的位子
-	            count = 0;     
-	        }  
-	        cur = next;  
-	    }  
-	    return dummy.next;  
-	}  
-	/*这个函数不但把pre和end之间的所有node reverse了，而且保证reverse之后，中间被reverse的node 左边仍连接平pre 右边仍连接end
-	 * 关于这个函数的两个参数pre 和 end
-	 * pre的下一个node是k个node里面的第1个
-	 * end的前一个node是k个node里面的第k个
-	 * 换言之：pre和end之间夹的node一共有k个
-	 */
-	private static ListNode reverse(ListNode pre, ListNode end) {  
-	    if(pre==null || pre.next==null){  
-	        return pre;  
-	    }
-	    //把head保留起来，reverse之后和end接上
-	    ListNode head = pre.next;  
-	    ListNode cur = pre.next.next;  
-	    while(cur!=end) {  
-	        ListNode next = cur.next;  
-	        cur.next = pre.next;  
-	        pre.next = cur;  // connect from "left" side每一轮都把右边挪过来的node和左边的pre接上
-	        cur = next;  
-	    }  
-	    head.next = end;  // connect from "right" side (connect kth node to k.next)最后把之前保留好的head和end接上
-	    return head;  // 返回的head作为下一轮新的pre（如果还有下一轮的话）
-	}  
+	public ListNode reverseKGroup(ListNode head, int k) {
+		if (head == null) {
+			return null;
+		}
+		ListNode dummy = new ListNode(0);
+		dummy.next = head;
+		int count = 0;
+		ListNode pre = dummy;
+		ListNode cur = head;
+		while (cur != null) {
+			count++;
+			ListNode next = cur.next; // 要提前把cur.next存好。不然如果经过if里面的处理，再取cur.next，取的就不是原来的了
+			if (count == k) { // only do reverse when reach to k nodes
+				pre = reverse(pre, next); // 新的pre往右挪了k个node的位子
+				count = 0;
+			}
+			cur = next;
+		}
+		return dummy.next;
+	}
+
+	// 这个函数不但把pre和end之间的所有node reverse了，而且保证reverse之后，中间被reverse的node 左边仍连接平pre,右边仍连接end.
+	// 关于这个函数的两个参数pre和 end: pre的下一个node是k个node里面的第1个 end的前一个node是k个node里面的第k个。即pre和end之间夹的node一共有k个
+	private ListNode reverse(ListNode pre, ListNode end) {
+		if (pre == null || pre.next == null) {
+			return pre;
+		}
+		ListNode head = pre.next;// 把head保留起来，reverse之后和end接上
+		ListNode cur = pre.next.next;
+		while (cur != end) {
+			ListNode next = cur.next;
+			cur.next = pre.next;
+			pre.next = cur; // connect from "left" side每一轮都把右边挪过来的node和左边的pre接上
+			cur = next;
+		}
+		head.next = end; // connect from "right" side (connect kth node to k.next)最后把之前保留好的head和end接上
+		return head; // 返回的head作为下一轮新的pre（如果还有下一轮的话）
+	} 
 }
 
 class ListNode {

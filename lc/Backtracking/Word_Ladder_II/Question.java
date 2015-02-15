@@ -62,12 +62,12 @@ public class Question {
 	//【注】在dfs中用breakpoint跟踪一下就全看明白了
 	//http://blog.csdn.net/linhuanmars/article/details/23071455
 	//"1）在替换String的某一位的字符时，先转换成char数组再操作；"
-	//"2）如果按照正常的方法从start找end，然后根据这个来构造路径，代价会比较高，因为保存前驱结点容易，而保存后驱结点则比较困难。
+	//"2）如果按照正常的方法从start找end，然后根据这个来构造路径，代价会比较高，因为保存趋近start的结点容易，而保存远离start的结点则比较困难。
 	//	所以我们在广度优先搜索时反过来先从end找start，最后再根据生成的前驱结点映射从start往end构造路径，这样算法效率会有明显提高。"
     public ArrayList<ArrayList<String>> findLadders(String start, String end, HashSet<String> dict) {
     	ArrayList<ArrayList<String>> result = new ArrayList<ArrayList<String>>(); // 结果集
     	ArrayList<String> item = new ArrayList<String>(); // 一个合法结果
-    	// <单词, 该单词的所有邻居>： 单词为字典中存在的单词；邻居是指和该单词只有一个字符不同的单词
+    	// <单词, 该单词的所有邻居>： 单词为字典中存在的单词；邻居是指和该单词只有一个字符不同的单词，且邻居也是字典中的单词
     	HashMap<String, ArrayList<String>> neighborMap = new HashMap<String, ArrayList<String>>(); 
     	//<单词, 该单词到start的距离>
     	HashMap<String, Integer> distanceMap = new HashMap<String, Integer>();
@@ -118,9 +118,9 @@ public class Question {
     		result.add(new ArrayList<String>(item));
     		Collections.reverse(item); // 为了回溯，需要再把item反转回去。
     		//return; 【注】此处不可以return，否则就没有办法在后面回溯了
-    	} else { // 如果curStr已经到达start，则肯定需要立刻进行回溯了，所以不再需要尝试curStr的邻居是否符合到达start的距离为1这件事
+    	} else { // 若curStr还未到达start,则尝试curStr的邻居是否符合到达start的距离为1
 	    	for (String nextStr : neighborMap.get(curStr)) {
-	    		if (distanceMap.containsKey(nextStr) && distanceMap.get(nextStr) + 1 == distanceMap.get(curStr)) { // 表明next是从curStr朝向靠近start方向的节点
+	    		if (distanceMap.containsKey(nextStr) && distanceMap.get(nextStr) + 1 == distanceMap.get(curStr)) { // 表明距离上，next在curStr和start中间
 	    			dfs(result, item, neighborMap, distanceMap, nextStr, start); // 用next取代curStr，向下一层递归；
 	    		}
 	    	}

@@ -28,9 +28,9 @@ public class Question {
 		for (int i = 0; i < points.length - 1; i++) { // 【注】i < points.length-1是因为j从i + 1起始，到 points.length-1为止，要防止j越界
 			HashMap<Double, Integer> map = new HashMap<Double, Integer>(); //<ratio(斜率), 与当前点i构成斜率为ratio的点的个数>。每个i都需要一个新的map
 			int numOfSame = 0;// 有多少点和当前点位置重复
-			double ratio = 0.0;
-			int localMax = 1; 
+			int curMax = 1;
 			for (int j = i + 1; j < points.length; j++) {
+				double ratio = 0.0;
 				// 判断j点是否和i点重复；如不重复，则求j和i的斜率（求ratio是要特殊考虑x和y等于0时的情况）
 				if (points[i].x == points[j].x && points[i].y == points[j].y) {
 					numOfSame++;
@@ -47,13 +47,9 @@ public class Question {
 				} else {
 					map.put(ratio, 2); //【注】此处点的个数为2，而不是1。因为一条直线需要两个点。
 				}
+				curMax = Math.max(curMax, map.get(ratio));
 			}
-			// 完成了对当前点i，所有与之构成直线ratio的统计，取其中value最大的作为localMax
-			for (Integer value : map.values()) {
-				localMax = Math.max(value, localMax);
-			}
-			localMax += numOfSame; // 如果有和i重复的点，也要计算上（因为ratio可以理解为相同）
-			max = Math.max(localMax, max); // 更新max
+			max = Math.max(max, curMax + numOfSame); // 更新max（ 如果有和i重复的点，也要计算上（因为ratio可以理解为相同））
 		}
 		return max;
 	}

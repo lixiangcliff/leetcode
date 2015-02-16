@@ -11,8 +11,8 @@ public class Question {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Question q = new Question();
-		String S = "barfoothefoobarman";
-		String[] L = {"foo", "bar"};
+		String S = "lingmindraboofooowingdingbarrwingmonkeypoundcake";
+		String[] L = {"fooo","barr","wing","ding","wing"};
 /*		String S = "aaaaaaaa";
 		String[] L = {"aa", "aa", "aa"};*/
 		ArrayList result = q.findSubstring(S, L);
@@ -37,9 +37,47 @@ public class Question {
 	 * You should return the indices: [0,9]. (order does not matter).
 	 */
 	
+	//手写
+	public ArrayList<Integer> findSubstring(String S, String[] L) {
+		ArrayList<Integer> result = new ArrayList<Integer>();
+		if (S == null || S.length() == 0 || L == null || L.length == 0) {
+			return result;
+		}
+		// 把L里面所有string都放入map中，<string, 该string在L中出现的次数>
+		HashMap<String, Integer> aimMap = new HashMap<String, Integer>();
+		int wordLen = L[0].length();
+		for (String word: L) {
+			if (aimMap.containsKey(word)) {
+				aimMap.put(word, aimMap.get(word) + 1);
+			} else {
+				aimMap.put(word, 1);
+			}
+		}
+		for (int i = 0; i <= S.length() - wordLen * L.length; i++) { // i的边界，举例最清晰
+			HashMap<String, Integer> matchMap = new HashMap<String, Integer>(aimMap); // 从matchMap中依次减去
+			for (int j = i; j <= S.length() - wordLen; j += wordLen) { // j标记当前word的起始index, j的边界也要画图为好
+				String curWord = S.substring(j, j + wordLen);
+				if (!aimMap.containsKey(curWord) || !matchMap.containsKey(curWord)) {
+					break;
+				}
+				if (matchMap.get(curWord) > 0) {
+					matchMap.put(curWord, matchMap.get(curWord) - 1);
+				}
+				if (matchMap.get(curWord) == 0) {
+					matchMap.remove(curWord);
+				} 
+				if (matchMap.isEmpty()) { // matchMap里的元素已经被一一剔除了，则说明i是一个合法的起始index
+					result.add(i);
+					break;
+				}
+			}
+		}
+    	return result;
+	 }
+	
 	//http://www.cnblogs.com/yuzhangcmu/p/4114656.html
 	//"每次复制一个HashMap，找到一个单词，即减少此单词的计数，直到HashMap为空，表示我们找到一个解。"
-	public ArrayList<Integer> findSubstring(String S, String[] L) {
+	public ArrayList<Integer> findSubstring2(String S, String[] L) {
 		ArrayList<Integer> result = new ArrayList<Integer>();
 		if (S == null || S.length() == 0 || L == null || L.length == 0) {
 			return result;

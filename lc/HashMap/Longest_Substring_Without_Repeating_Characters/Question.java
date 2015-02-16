@@ -1,6 +1,7 @@
 package Longest_Substring_Without_Repeating_Characters;
 
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class Question {
 
@@ -10,7 +11,7 @@ public class Question {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Question q = new Question();
-		String s = "abba";
+		String s = "aab";
 		System.out.println(q.lengthOfLongestSubstring(s));
 	}
 	
@@ -22,11 +23,36 @@ public class Question {
 	 * "bbbbb" the longest substring is "b", with the length of 1.
 	 */
 	
+	//手写
+	public int lengthOfLongestSubstring(String s) {
+		if (s == null || s.length() == 0) {
+			return 0;
+		}
+		HashSet<Character> set = new HashSet<Character>();
+		int maxLen = 1;
+		int l = 0;
+		int len = 0;
+		for (int i = 0; i < s.length(); i++) {
+			char c = s.charAt(i);
+			if (set.contains(c)) { //【注】如果map.get(c)<l，说明该c的index已经在左窗口的左边了，是无效的
+				while (l < i && set.contains(c)) {
+					set.remove(s.charAt(l));
+					l++;
+					len--;
+				}
+			} 
+			set.add(c);
+			len++;
+			maxLen = Math.max(maxLen, len);
+		}
+		return maxLen;
+	}
+	
 	// http://www.cnblogs.com/yuzhangcmu/p/4188973.html
 	// 思想：hashmap和two pointer的结合。维护一个HashMap, <元素值， 元素index>。
 	// 只要还没有出现重复则持续移动右窗口，并把;
 	// 如果发现重复字符（设为c），则通过HashMap找到第一次出现c的位置(设为idx)，更新l为idx + 1；同时新HashMap：<c, r>。
-	public int lengthOfLongestSubstring(String s) {
+	public int lengthOfLongestSubstring2(String s) {
 		if (s == null || s.length() == 0) {
 			return 0;
 		}

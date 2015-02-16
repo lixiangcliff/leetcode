@@ -48,7 +48,7 @@ public class Question {
 		int l = 0;
 		int minStart = 0; // 所求string的起始位置
 		int minLen = S.length() + 1; // 所求string的长度
-		int foundCount = 0;// T中的char在当前窗口中已经出现的次数
+		int cntInCurWin = 0;// T中的char在当前窗口中已经出现的次数
 		HashMap<Character, Integer> curMap = new HashMap<Character, Integer>();
 		for (int r = 0; r < S.length(); r++) {
 			char charR = S.charAt(r);
@@ -59,9 +59,9 @@ public class Question {
 					curMap.put(charR, curMap.get(charR) + 1);
 				}
 				if (curMap.get(charR) <= srcMap.get(charR)) { // 【注】只有curMap中charR的个数仍然小于等于srcMap中charR
-					foundCount++;
+					cntInCurWin++;
 				}
-				while (foundCount == T.length()) { // curMap已经和srcMap的内容一样了，说明当前窗口已经cover了T中所有内容，接下来要右移l，使窗口尽量小
+				while (cntInCurWin == T.length()) { // curMap已经和srcMap的内容一样了，说明当前窗口已经cover了T中所有内容，接下来要右移l，使窗口尽量小
 					if (r - l + 1 < minLen) { // 如果当前窗口是更小的合法窗口
 						minLen = r - l + 1;
 						minStart = l;
@@ -69,8 +69,8 @@ public class Question {
 					char charL = S.charAt(l);
 					if (srcMap.containsKey(charL)) { // 如果当前charL存在于srcMap中
 						curMap.put(charL, curMap.get(charL) - 1);
-						if (curMap.get(charL) < srcMap.get(charL)) { // 如果减小当前charL的个数，真的导致	curMap里对应的个数小于srcMap中的个数
-							foundCount--;
+						if (curMap.get(charL) < srcMap.get(charL)) { // 如果减小当前charL个数的结果，真的导致	curMap里对应的个数小于srcMap中的个数
+							cntInCurWin--;
 						}
 					}
 					l++; // 右移l

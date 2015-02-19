@@ -21,6 +21,7 @@ public class Question {
 	 */
 	
 	//******divide and conquer method******
+	//【注】递归边界最好的办法是举例！
 	//http://www.cnblogs.com/yuzhangcmu/p/4146119.html
 	//http://blog.csdn.net/linhuanmars/article/details/19899259
 	public ListNode mergeKLists(ArrayList<ListNode> lists) {
@@ -32,20 +33,21 @@ public class Question {
     
     //返回的是将left和right merge之后的新的head node
     //先把k个list分成两半，然后继续划分，直到剩下两个list就合并起来。
-	//【注】关于如何取分治的边界，以及mid是向上还是向下取整
-	//这个问题这样想： 1.先确定helper参数的边界，2.再确定mid是向上还是向下取整
+	//【注】关于如何取分治递归的边界，以及mid是向上还是向下取整
+	//这个问题这样想： 1.先假设mid向下取整。2.再根据mid的值来确定递归中helper参数的边界。
 	//比如：当mergeTwoLists的两个参数分别为：helper(lists, left, mid) , helper(lists, mid + 1, right)
-	//任意赋值left和right。假设 left == 0, right == 1
+	//比如假设当前helper里参数为left和right。且赋值left == 0, right == 1
 	//
-	//若向上取整，则mid = (left+right+1)/2 = 1;
+	//1.向下取整，则mid = left + (right - left) / 2 = 0;
+	//2.递归时参数边界有可能有两种情况：
+	//	1）helper(lists, left, mid - 1) , helper(lists, mid, right)
+	//	2）helper(lists, left, mid) , helper(lists, mid + 1, right)
+	// 带入left和right的值后，则有
+	//	1）helper(lists, 0, -1) , helper(lists, 0, 1) // 一个无意义；另一个和此层函数完全一样，导致死循环
+	//	2）helper(lists, 0, 0 , helper(lists, 1, 1) // 两个都正确合理
+	//
+	// 结论：当mid向下取整时，递归函数为helper(lists, left, mid) , helper(lists, mid + 1, right)
 	//则helper(lists, left, mid) , helper(lists, mid+1, right) 变为 helper(lists, 0, 1) , helper(lists, 2, 1)
-	//一下子出现两个问题：
-	//1. helper(lists, 0, 1): 和初始时候helper(lists, left, right)的值一模一样 则陷入死循环（分治的原则之一就是要使问题的规模随着分治而变小。这种取整的方式导致规模未变）
-	//2. helper(lists, 2, 1)： 则干脆就越界了
-	//综合以上两点所以不能向上取整
-	//
-	//反之若向下取整，则mid = (left+right)/2 = 0;
-	//则helper(lists, left, mid) , helper(lists, mid+1, right) 变为 helper(lists, 0, 0) , helper(lists, 1, 1) 则没有问题
 	private ListNode helper(ArrayList<ListNode> lists, int left, int right) {
 		if (left < right) {
 			int mid = left + (right - left) / 2;// 向下取整，同时避免溢出

@@ -18,33 +18,33 @@ public class Question {
 	 * The maximum depth is the number of nodes along the longest path from the
 	 * root node down to the farthest leaf node.
 	 */
-	//http://blog.csdn.net/linhuanmars/article/details/19659525
-	//recursive way
+	
+	// recursive way
+	// http://blog.csdn.net/linhuanmars/article/details/19659525
 	public int maxDepth(TreeNode root) {
-		if (root == null){
+		if (root == null) {
 			return 0;
 		}
-		return Math.max(maxDepth(root.left), maxDepth(root.right))+1;
+		return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
 	}
-	
-	//using BFS template
-	//traverse by level(using bsf)
-	public int maxDepthBSF(TreeNode root) {
-		if (root == null){
+
+	// iterative way: using BFS (traverse by level)
+	public int maxDepthBFS(TreeNode root) {
+		if (root == null) {
 			return 0;
 		}
 		LinkedList<TreeNode> queue = new LinkedList<TreeNode>();
-		int level = 0; //根据题意，只有一个root的的Tree高度为0
+		int level = 0; // 根据题意，只有一个root的Tree，高度为0
 		queue.offer(root);
-		//BSF的原理，看图！
-		while(!queue.isEmpty()){
+		// BSF的原理，看图！
+		while (!queue.isEmpty()) {
 			int size = queue.size();
 			for (int i = 0; i < size; i++) {
 				TreeNode node = queue.poll();
-				if(node.left != null){
+				if (node.left != null) {
 					queue.offer(node.left);
 				}
-				if(node.right != null){
+				if (node.right != null) {
 					queue.offer(node.right);
 				}
 			}
@@ -52,8 +52,6 @@ public class Question {
 		}
 		return level;
 	}
-	
-
 }
 
  class TreeNode {

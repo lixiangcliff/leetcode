@@ -62,29 +62,28 @@ public class Question {
 	// head跑时候根据x值得不同决定把当前node分配到before还是after的list上
 	// 最后要分别处理两个list的尾巴： 对after要把after.next置为null； 对before要把before和after连上(before.next = afterDummy.next;)。
 	//http://answer.ninechapter.com/solutions/partition-list/
-    public ListNode partition(ListNode head, int x) {
-    	if(head == null){
-    		return null;
-    	}
-    	ListNode beforeDummy = new ListNode(0);
-    	ListNode afterDummy = new ListNode(0);
-    	ListNode before = beforeDummy;
-    	ListNode after = afterDummy;
-    	while(head != null){
-    		if(head.val < x){
-    			before.next = head;
-    			before = before.next;
-    		}else {
-    			after.next = head;
-    			after = after.next;
-    		} 
-    		head = head.next;
-    	}
-    	after.next = null; //如果最后一个node不是等于x或者比x大的话，那么after.next并不是null，而是他的下一个有效node，则会出错！
-    	before.next = afterDummy.next; //把before和after连上
-    	return beforeDummy.next;
-    }
-
+	public ListNode partition(ListNode head, int x) {
+		if (head == null) {
+			return null;
+		}
+		ListNode beforeDummy = new ListNode(0);
+		ListNode afterDummy = new ListNode(0);
+		ListNode before = beforeDummy;
+		ListNode after = afterDummy;
+		while (head != null) {
+			if (head.val < x) {
+				before.next = head;
+				before = before.next;
+			} else {
+				after.next = head;
+				after = after.next;
+			}
+			head = head.next;
+		}
+		after.next = null; // 如果最后一个node不是等于x或者比x大的话，那么after.next并不是null，而是他的下一个有效node，则会出错！
+		before.next = afterDummy.next; // 把before和after连上
+		return beforeDummy.next;
+	}
 }
 
  class ListNode {

@@ -62,7 +62,7 @@ public class Question {
     		runner = runner.next.next;
     		walker = walker.next;
     	}
-    	ListNode head1 = head; // 不要真正地移动head，因为如果移动head，函数执行完之后就找不到表头了
+    	ListNode head1 = head; // 不要真正地移动head，因为如果移动head，就无法用head所在位置表示该链表了
     	ListNode head2 = walker.next; // head2为后半段的表头
     	walker.next = null; // 把前半段和后半段分开
     	head2 = reverse(head2);
@@ -78,10 +78,10 @@ public class Question {
     
     //reverse链表要熟练掌握
     private ListNode reverse(ListNode head) {
-    	ListNode cur = head; //【注】始终不更新cur，是因为cur指向最原始的头，它最终会变成尾。而head则一直在更新。
-    	while(cur != null && cur.next != null){
-    		ListNode next = cur.next;
-    		cur.next = next.next;
+    	ListNode tail = head; //【注】始终不更新cur，是因为cur指向最原始的头，它最终会变成尾。而head则一直在更新。
+    	while(tail != null && tail.next != null){
+    		ListNode next = tail.next;
+    		tail.next = next.next;
     		next.next = head;
     		head = next;
     	}

@@ -58,7 +58,7 @@ public class Question {
 		ListNode pre = dummy;
 		ListNode cur = head;
 		while (cur != null) {
-			while (cur.next != null && pre.next.val == cur.next.val) { //若果当前node(pre.next)值和下一个node(cur.next)值相等
+			while (cur.next != null && pre.next.val == cur.next.val) { //若当前node(pre.next)值和下一个node(cur.next)值相等
 				cur = cur.next;
 			}
 			if (pre.next == cur) {// cur未曾右移过，即从pre.next到当前cur没有出现重复元素，则pre前进一个

@@ -40,14 +40,13 @@ public class Question {
 		dummy.next = head;
 		ListNode pre = dummy;
 		int i = 1;// i从始至终作为标记， 表示现在走到了哪里，对于确定m和n的位置很方便
-		while (pre.next != null && i < m) {
+		for (; i < m; i++) {
+			if (pre == null) {
+				return head;
+			}
 			pre = pre.next;
-			i++;
 		}
-		if (i < m) { // 表长度小于m
-			return head;
-		}
-		ListNode mNode = pre.next;
+		ListNode mNode = pre.next; // mNode最终会右移至最开始nNode所在位置
 		ListNode cur = mNode.next;
 		while (cur != null && i < n) {//画图！依次从m后面直到n，拿node塞在preNode的后边（preNode.next = cur） 一共拿来n-m次（如果链表长度足够n的话），故边界条件是i<n
 			ListNode next = cur.next;

@@ -76,7 +76,7 @@ public class Question {
     	}
     }
     
-    //reverse链表要熟练掌握
+    //reverse链表要熟练掌握（一共四步）
     private ListNode reverse(ListNode head) {
     	ListNode tail = head; //【注】始终不更新cur，是因为cur指向最原始的头，它最终会变成尾。而head则一直在更新。
     	while(tail != null && tail.next != null){

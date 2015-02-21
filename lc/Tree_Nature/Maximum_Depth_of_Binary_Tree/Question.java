@@ -36,7 +36,7 @@ public class Question {
 		LinkedList<TreeNode> queue = new LinkedList<TreeNode>();
 		int level = 0; // 根据题意，只有一个root的Tree，高度为0
 		queue.offer(root);
-		// BSF的原理，看图！
+		// BFS的原理，看图！
 		while (!queue.isEmpty()) {
 			int size = queue.size();
 			for (int i = 0; i < size; i++) {

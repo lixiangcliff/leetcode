@@ -43,15 +43,18 @@ public class Question {
 	 */
 	
 	public ListNode swapPairs(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
 		ListNode dummy = new ListNode(0);
 		dummy.next = head;
 		ListNode pre = dummy;
 		ListNode cur = head;
 		while (cur != null && cur.next != null) { // 画图
 			ListNode next = cur.next;
-			pre.next = next;
 			cur.next = next.next;
 			next.next = cur;
+			pre.next = next;
 			pre = cur;
 			cur = cur.next;
 		}

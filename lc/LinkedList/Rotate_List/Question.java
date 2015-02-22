@@ -30,7 +30,7 @@ public class Question {
 			head = head.next;
 		}
 		System.out.println("");
-		head = q.rotateRight(l1, 10);
+		head = q.rotateRight(l1, 1);
 		while (head != null){
 			System.out.print(head.val + ",");
 			head = head.next;
@@ -51,29 +51,25 @@ public class Question {
 		if (head == null) {
 			return null;
 		}
-		ListNode walker = head;
-		ListNode runner = head;
-		int count = 0;
-		while (runner != null) {// 先计算链表长度
-			runner = runner.next;
-			count++;
+		ListNode l1 = head;
+		ListNode l2 = head;
+		int len = 0;
+		while (l2 != null) {// 先计算链表长度
+			l2 = l2.next;
+			len++;
 		}
-		n %= count;// 如果n大于链表长度，则取余
-		runner = head;// 重新把runner放回表头
-		for (int i = 0; i < n; i++) { // 这样做是为了方便walker用walker.next处理表尾
-			if (runner.next != null) { // 这样保证跳出循环时，runner停在最后一位，walker的下一位 就是要放在新链表最前面一位的
-				runner = runner.next;
-			} else {
-				break;
-			}
+		n %= len;// 如果n大于链表长度，则取余
+		l2 = head;// 重新把l2放回表头
+		for (int i = 0; i < n; i++) { // 这样做是为了方便l1用l1.next处理表尾
+			l2 = l2.next;
 		}
-		while (runner.next != null) { // 只要runner还在链表内
-			runner = runner.next;
-			walker = walker.next;
+		while (l2.next != null) { // 这样保证跳出循环时，l2停在最后一位，l1的下一位，就是要放在新链表最前面一位的
+			l2 = l2.next;
+			l1 = l1.next;
 		}
-		runner.next = head; // 表尾接表头
-		head = walker.next; // 更新head
-		walker.next = null; // 使新表尾指向null
+		l2.next = head; // 表尾接表头
+		head = l1.next; // 更新head
+		l1.next = null; // 使新表尾指向null
 		return head;
 	}
 }

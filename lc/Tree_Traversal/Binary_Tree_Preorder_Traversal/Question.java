@@ -26,13 +26,13 @@ public class Question {
 		
 		Note: Recursive solution is trivial, could you do it iteratively?
 	 */
+	
 	//http://blog.csdn.net/linhuanmars/article/details/21428647
 	//recursive way
 	public ArrayList<Integer> preorderTraversalRecursive(TreeNode root) {
 		ArrayList<Integer> result = new ArrayList<Integer>();
 		helper(root, result);
 		return result;
-		
 	}
 	
 	private void helper(TreeNode root, ArrayList<Integer> result){
@@ -43,28 +43,10 @@ public class Question {
 		helper(root.left, result);
 		helper(root.right, result);
 	}
-	
-	//iterative way
-	//更多注释，参考inOrder： https://oj.leetcode.com/problems/binary-tree-inorder-traversal/
-	public static ArrayList<Integer> preorderTraversalIterative(TreeNode root) {
-        LinkedList<TreeNode> stack = new LinkedList<TreeNode>();
-        ArrayList<Integer> result = new ArrayList<Integer>();
-        while(root != null || !stack.isEmpty()){
-        	if(root != null){
-        		result.add(root.val);//【根】
-        		stack.push(root);
-        		root = root.left; //【左】
-        	}else{
-        		root = stack.pop();
-        		root = root.right; //【右】
-        	}
-        }
-        return result;
-    }
-	
-	//interative from Mo
+
+	//interative way from Mo
 	//根左右。看图！
-	public static ArrayList<Integer> preorderTraversal(TreeNode root) {
+	public ArrayList<Integer> preorderTraversalIterative(TreeNode root) {
 		ArrayList<Integer> result = new ArrayList<Integer>();
 		if (root == null) {
 			return result;
@@ -84,6 +66,23 @@ public class Question {
 		return result;
 	}
 	
+	//iterative way
+	//更多注释，参考inOrder： https://oj.leetcode.com/problems/binary-tree-inorder-traversal/
+	public ArrayList<Integer> preorderTraversalIterative2(TreeNode root) {
+        LinkedList<TreeNode> stack = new LinkedList<TreeNode>();
+        ArrayList<Integer> result = new ArrayList<Integer>();
+        while(root != null || !stack.isEmpty()){
+        	if(root != null){
+        		result.add(root.val);//【根】
+        		stack.push(root);
+        		root = root.left; //【左】
+        	}else{
+        		root = stack.pop();
+        		root = root.right; //【右】
+        	}
+        }
+        return result;
+    }
 	
 
 	//Morris Taversal to be continue later..

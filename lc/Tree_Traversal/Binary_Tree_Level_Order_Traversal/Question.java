@@ -2,6 +2,8 @@ package Binary_Tree_Level_Order_Traversal;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 public class Question {
 
@@ -33,25 +35,26 @@ public class Question {
 	 */
 	
 	//BFS template
+	//http://www.cnblogs.com/yuzhangcmu/p/4178902.html
 	//http://blog.csdn.net/linhuanmars/article/details/23404111
 	//类似此题的iterative way：https://oj.leetcode.com/problems/maximum-depth-of-binary-tree/
-	public ArrayList<ArrayList<Integer>> levelOrder(TreeNode root) {
-		ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
-		if (root == null){
+	public List<List<Integer>> levelOrder(TreeNode root) {
+		List<List<Integer>> result = new ArrayList<List<Integer>>();
+		if (root == null) {
 			return result;
 		}
-		LinkedList<TreeNode> queue = new LinkedList<TreeNode>();
+		Queue<TreeNode> queue = new LinkedList<TreeNode>(); //【注】java中Queue是interface，Stack是class
 		queue.offer(root);
-		while(!queue.isEmpty()){
-			ArrayList<Integer> item = new ArrayList<Integer>();
+		while (!queue.isEmpty()) {
+			List<Integer> item = new ArrayList<Integer>(); // 当前的一层
 			int size = queue.size();
-			for (int i = 0; i < size; i++){
+			for (int i = 0; i < size; i++) {
 				TreeNode node = queue.poll();
 				item.add(node.val);
-				if (node.left != null){
+				if (node.left != null) {
 					queue.offer(node.left);
 				}
-				if (node.right != null){
+				if (node.right != null) {
 					queue.offer(node.right);
 				}
 			}

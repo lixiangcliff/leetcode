@@ -4,6 +4,7 @@ package Binary_Tree_Level_Order_Traversal_II;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 
 
 public class Question {
@@ -35,15 +36,18 @@ public class Question {
 		]
 		
 	 */
+	
 	//using BFS template
 	//http://blog.csdn.net/linhuanmars/article/details/23414711
-	//类似：https://oj.leetcode.com/problems/binary-tree-level-order-traversal/
-	public ArrayList<ArrayList<Integer>> levelOrderBottom(TreeNode root) {
-		ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+	//跟右边的题没什么区别：https://oj.leetcode.com/problems/binary-tree-level-order-traversal/
+	//要么用Collections.reverse； 要么把item暂时先装进stack，最后再倒出来给result
+	public List<List<Integer>> levelOrderBottom(TreeNode root) {
+		List<List<Integer>> result = new ArrayList<List<Integer>>();
 		if (root == null){
 			return result;
 		}
 		LinkedList<TreeNode> queue = new LinkedList<TreeNode>();
+		LinkedList<ArrayList<Integer>> stack = new LinkedList<ArrayList<Integer>>();
 		queue.offer(root);
 		while(!queue.isEmpty()){
 			ArrayList<Integer> item = new ArrayList<Integer>();
@@ -58,9 +62,13 @@ public class Question {
 					queue.offer(node.right);
 				}
 			}
-			result.add(item);
+			//result.add(item);
+			stack.push(item);
 		}
-		Collections.reverse(result);
+		//Collections.reverse(result);
+		while (!stack.isEmpty()) {
+			result.add(stack.poll());
+		}
 		return result;
 	}
 }

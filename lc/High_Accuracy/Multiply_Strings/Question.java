@@ -8,8 +8,8 @@ public class Question {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Question q = new Question();
-		String num1 = "1234";
-		String num2 = "7891";
+		String num1 = "9";
+		String num2 = "9";
 		System.out.println(q.multiply(num1, num2));
 
 	}
@@ -32,7 +32,7 @@ public class Question {
 		}
 		int len1 = num1.length();
 		int len2 = num2.length();
-		int[] product = new int[len1 + len2]; // 【注】 技巧是用一个数组存每一位的product的和，这样即使在改为的累计超过9，之后仍可以用进位的方式处理
+		int[] product = new int[len1 + len2]; // 【注】 技巧是用一个数组存每一位的product的和，这样即使在该位的累计超过9，之后仍可以用进位的方式处理
 		for (int i = 0; i < len1; i++) { // 计算相应位置的product.
 			for (int j = 0; j < len2; j++) { // 边界画图举例。num1和num2是从后往前相乘的，但存入product的时候是从前往后的。
 				product[i + j] += (int) (num1.charAt(len1 - 1 - i) - '0') * (int) (num2.charAt(len2 - 1 - j) - '0'); // 积累每一位乘积的和
@@ -53,6 +53,7 @@ public class Question {
 		if (result.length() > 1 && result.charAt(result.length() - 1) == '0') { // 去掉前面可能的'0'
 			result.deleteCharAt(result.length() - 1);
 		}
+
 		return result.reverse().toString();
 	}
 }

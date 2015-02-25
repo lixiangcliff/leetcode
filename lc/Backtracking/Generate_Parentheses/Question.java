@@ -25,7 +25,7 @@ public class Question {
 	 * "((()))", "(()())", "(())()", "()(())", "()()()"
 	 */
 	
-	//手写时候想到的
+	//手写时候想到的。更易理解。
     public ArrayList<String> generateParenthesis(int n) {
     	ArrayList<String> result =  new ArrayList<String>();
     	StringBuilder item = new StringBuilder();
@@ -48,9 +48,10 @@ public class Question {
 		item.deleteCharAt(item.length() - 1);
     }
     
+    //标答
 	//http://www.ninechapter.com/solutions/generate-parentheses/
 	//http://blog.csdn.net/linhuanmars/article/details/19873463
-/*    public ArrayList<String> generateParenthesis(int n) {
+    public ArrayList<String> generateParenthesis2(int n) {
     	ArrayList<String> result =  new ArrayList<String>();
     	String item = "";
     	helper(result, item, n, n);
@@ -69,6 +70,6 @@ public class Question {
 		helper(result, item + "(", left - 1, right);
 		// 把一个右括号加入到item的尾部，然后递归处理t
 		helper(result, item + ")", left, right - 1);
-    }*/
+    }
 	
 }

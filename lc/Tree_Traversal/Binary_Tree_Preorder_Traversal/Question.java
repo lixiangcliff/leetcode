@@ -46,7 +46,7 @@ public class Question {
 	}
 
 	//方法二  better
-	//interative way from Mo
+	//http://www.cnblogs.com/yuzhangcmu/p/4141530.html
 	//根左右。看图！
 	public ArrayList<Integer> preorderTraversalIterative(TreeNode root) {
 		ArrayList<Integer> result = new ArrayList<Integer>();
@@ -57,7 +57,7 @@ public class Question {
 		stack.push(root);
 		while (!stack.isEmpty()) {
 			TreeNode node = stack.pop(); 
-			result.add(node.val);//处理【根】
+			result.add(node.val); // 处理【根】。【注】result内容都是来自每次stack弹出的node
 			if (node.right != null) {
 				stack.push(node.right); //先把【右】压入栈。（为的是之后，先把【左】弹出栈来处理）
 			}

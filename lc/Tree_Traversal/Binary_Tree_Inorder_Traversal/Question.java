@@ -2,6 +2,7 @@ package Binary_Tree_Inorder_Traversal;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Question {
 
@@ -27,15 +28,17 @@ public class Question {
 		
 		Note: Recursive solution is trivial, could you do it iteratively?
 	 */
+	//方法一
 	//http://blog.csdn.net/linhuanmars/article/details/20187257
 	//recursion
-	public ArrayList<Integer> inorderTraversalRecursive(TreeNode root) {
-		ArrayList<Integer> result = new ArrayList<Integer>();
-		helper(root,result);
-        return result;
-    }
-	private void helper(TreeNode root, ArrayList<Integer> result){
-		if (root == null){
+	public List<Integer> inorderTraversalRecursive(TreeNode root) {
+		List<Integer> result = new ArrayList<Integer>();
+		helper(root, result);
+		return result;
+	}
+
+	private void helper(TreeNode root, List<Integer> result) {
+		if (root == null) {
 			return;
 		}
 		helper(root.left, result);
@@ -43,36 +46,39 @@ public class Question {
 		helper(root.right, result);
 	}
 	
+	//方法二 better
 	//Iterative
-	//this is easier for understanding than linhuan's
-	public ArrayList<Integer> inorderTraversalIterativeIterative(TreeNode root) {
-		ArrayList<Integer> result = new ArrayList<Integer>();
-		LinkedList<TreeNode> stack = new LinkedList<TreeNode>();
-		if (root==null){
-			return result;
-		}
-		
-		//看图！网上图解： http://www.programcreek.com/2012/12/leetcode-solution-of-binary-tree-inorder-traversal-in-java/
-		//关于循环条件：最开始时stack为空，但是root不为null；之后在所有node处理完之前stack始终不为空，即使有时候root为null，循环一直能进行下去，直到处理完所有node。
-		while(root != null || !stack.isEmpty()){//【注】下面的注释里用node来说明，因为root这里只是一个变量名，对所有非root的任何node下面的逻辑关系都适用
-			if(root!=null){//只要node不为null，就做下面两件事：
-				stack.push(root); //1.把每次的node压入栈
-				root = root.left; //2.node被置为它的左孩子，直到最底（即直到它的左孩子为null）【左】
-			}else{                 //当node已经没有左孩子了
-				root = stack.pop(); //当前node指向 被弹出栈的那个node
-				result.add(root.val);//处理当前node（所有对node的操作都该在这一步执行，比如print，比如存入ArrayList，等等）【根】
-				root = root.right;  //node被置为它的右孩子【右】
-			}
-		}
-		return result;
-	}
-	
+	//http://www.cnblogs.com/yuzhangcmu/p/4141585.html
+    public List<Integer> inorderTraversal(TreeNode root) {
+    	List<Integer> res = new ArrayList<Integer>();
+        if (root == null) {
+            return res;
+        }
+        LinkedList<TreeNode> s = new LinkedList<TreeNode>();
+        TreeNode cur = root;
+        while (true) {
+            while (cur != null) { //找到当前node的最左孩子，并且将node的所有左孩子及其下一级左孩子加入栈。
+                s.push(cur);
+                cur = cur.left; //【左】一直找最左的
+            }
+            
+            if (s.isEmpty()) { // 要在添加所有左孩子入栈之后，再判断栈是否为空。是因为最初栈一定是空的。
+                break;
+            }
+            cur = s.pop(); // 每次pop出来的就是当前node作为左孩子时，对应的【根】
+            res.add(cur.val); // 【注】result内容都是来自每次stack弹出的node
+            cur = cur.right; // 【右】最后当前node往它的右子树走，去处理它的右孩子
+        }
+        return res;
+    }
+    
+	//方法三
 	//interative from Mo
-	//之所以和preorder不同（preorder不需要保存保存node是否被访问过），是因为inorder时候，第一次经过某node时候不能当时就处理它，要等待会回来时候才能处理。
+	//之所以和preorder不同（preorder不需要保存node是否被访问过），是因为inorder时候，第一次经过某node时候不能当时就处理它，要等待会回来时候才能处理。
 	//所以需要标记它是否被访问过。即我们需要NodeStatusPair这个class
 	//【注】之所以这个算法有效，是因为我们压栈的顺序和inorder正好还是相反的，所以出栈（存入结果）时，就刚好是inorder的顺序了
 	//左根右。看图（看步骤！）看【注】
-	public ArrayList<Integer> inorderTraversal(TreeNode root) {
+/*	public ArrayList<Integer> inorderTraversal(TreeNode root) {
 		ArrayList<Integer> result = new ArrayList<Integer>();
 		if (root == null) {
 			return result;
@@ -106,7 +112,7 @@ public class Question {
 			this.node = node;
 			this.ready = ready;
 		}
-	}
+	}*/
 	
 	//Morris Traversal下一轮再说...
 	//http://blog.csdn.net/linhuanmars/article/details/20187257

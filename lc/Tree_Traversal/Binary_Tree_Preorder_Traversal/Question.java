@@ -27,6 +27,7 @@ public class Question {
 		Note: Recursive solution is trivial, could you do it iteratively?
 	 */
 	
+	//方法一
 	//http://blog.csdn.net/linhuanmars/article/details/21428647
 	//recursive way
 	public ArrayList<Integer> preorderTraversalRecursive(TreeNode root) {
@@ -44,6 +45,7 @@ public class Question {
 		helper(root.right, result);
 	}
 
+	//方法二  better
 	//interative way from Mo
 	//根左右。看图！
 	public ArrayList<Integer> preorderTraversalIterative(TreeNode root) {
@@ -66,23 +68,24 @@ public class Question {
 		return result;
 	}
 	
+	//方法三
 	//iterative way
 	//更多注释，参考inOrder： https://oj.leetcode.com/problems/binary-tree-inorder-traversal/
-	public ArrayList<Integer> preorderTraversalIterative2(TreeNode root) {
-        LinkedList<TreeNode> stack = new LinkedList<TreeNode>();
-        ArrayList<Integer> result = new ArrayList<Integer>();
-        while(root != null || !stack.isEmpty()){
-        	if(root != null){
-        		result.add(root.val);//【根】
-        		stack.push(root);
-        		root = root.left; //【左】
-        	}else{
-        		root = stack.pop();
-        		root = root.right; //【右】
-        	}
-        }
-        return result;
-    }
+/*	public ArrayList<Integer> preorderTraversalIterative2(TreeNode root) {
+		LinkedList<TreeNode> stack = new LinkedList<TreeNode>();
+		ArrayList<Integer> result = new ArrayList<Integer>();
+		while (root != null || !stack.isEmpty()) {
+			if (root != null) {
+				result.add(root.val);// 【根】
+				stack.push(root);
+				root = root.left; // 【左】
+			} else {
+				root = stack.pop();
+				root = root.right; // 【右】
+			}
+		}
+		return result;
+	}*/
 	
 
 	//Morris Taversal to be continue later..

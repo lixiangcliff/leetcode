@@ -2,6 +2,7 @@ package Binary_Tree_Postorder_Traversal;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Stack;
 
 
@@ -30,15 +31,17 @@ public class Question {
 		
 		Note: Recursive solution is trivial, could you do it iteratively?
 	 */
+	
+	//方法一
 	//http://blog.csdn.net/linhuanmars/article/details/22009351
 	//recursive
-    public ArrayList<Integer> postorderTraversalRecursive(TreeNode root) {
-    	ArrayList<Integer> result = new ArrayList<Integer>();
+    public List<Integer> postorderTraversalRecursive(TreeNode root) {
+    	List<Integer> result = new ArrayList<Integer>();
     	helper(root, result);
     	return result;
     }
 	
-    private void helper(TreeNode root, ArrayList<Integer> result){
+    private void helper(TreeNode root, List<Integer> result){
     	if (root == null){
     		return;
     	}
@@ -47,8 +50,36 @@ public class Question {
     	result.add(root.val);
     }
     
+    //方法二 better Smart！
 	//iterative
-	public ArrayList<Integer> postorderTraversalIterative(TreeNode root) {
+    //http://www.cnblogs.com/yuzhangcmu/p/4172783.html
+    //"从左到右的后序 与从右到左的前序的逆序是一样的，所以就简单喽！用另外一个栈进行翻转即可喽"
+    public List<Integer> postorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<Integer>();
+        if (root == null) {
+        	return res;
+        }
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        Stack<TreeNode> stack2 = new Stack<TreeNode>();
+        stack.push(root);
+        while (!stack.isEmpty()) { // 【注】此处不是 while (root != null)
+        	TreeNode node = stack.pop();
+        	stack2.push(node);
+        	if (node.left != null) {
+        		stack.push(node.left);
+        	}
+        	if (node.right != null) {
+        		stack.push(node.right);
+        	}
+        }
+        while (!stack2.isEmpty()) {
+        	res.add(stack2.pop().val);
+        }
+        return res;
+    }
+    
+    //方法三
+/*	public ArrayList<Integer> postorderTraversalIterative(TreeNode root) {
 		ArrayList<Integer> result = new ArrayList<Integer>();
 		if (root == null){
 			return result;
@@ -72,12 +103,13 @@ public class Question {
 			}
 		}
 		return result;
-	}
+	}*/
 	
+	//方法四
 	//iterative from Mo
 	//类似 inorder，具体解释参考: https://oj.leetcode.com/problems/binary-tree-inorder-traversal/
 	//左右根。
-	public ArrayList<Integer> postorderTraversal(TreeNode root) {
+/*	public ArrayList<Integer> postorderTraversalIterative2(TreeNode root) {
 		ArrayList<Integer> result = new ArrayList<Integer>();
 		if (root == null) {
 			return result;
@@ -101,7 +133,7 @@ public class Question {
 			}
 		}
 		return result;
-	}
+	}*/
 	
 	private class NodeStatusPair {
 		TreeNode node;

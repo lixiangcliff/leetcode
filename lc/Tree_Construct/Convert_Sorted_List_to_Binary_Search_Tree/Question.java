@@ -18,6 +18,44 @@ public class Question {
 	 * convert it to a height balanced BST.
 	 */
 	
+	//bottom to top:
+	// 	1. construct the left tree 
+	//	2. construct the root node, list pointer +1.
+	//	3. construct the right node
+	//http://blog.csdn.net/linhuanmars/article/details/23904937
+	//http://joycelearning.blogspot.com/2013/09/leetcode-convert-sorted-list-to-binary.html
+	//http://yucoding.blogspot.com/2012/12/leetcode-question-24-convert-sorted.html
+	public TreeNode sortedListToBST(ListNode head) {
+		if (head == null) {
+			return null;
+		}
+		int count = 0;
+		ListNode runner = head;
+		while (runner != null) {
+			runner = runner.next;
+			count++;
+		}
+		ArrayList<ListNode> sortedlist = new ArrayList<ListNode>();
+		sortedlist.add(head);
+		return helper(sortedlist, 0, count - 1);
+	}
+
+	// sortedlist里只存一个元素，即待转化为tree的ListNode的头 
+	//返回值即为: 以当前sortedlist.get(0)的值创造的TreeNode作为根，左边界为l，右边界为r，所构建的树的根
+	private TreeNode helper(ArrayList<ListNode> sortedlist, int l, int r) {
+		if (l > r) {
+			return null;
+		}
+		int m = (l + r) / 2;
+		TreeNode left = helper(sortedlist, l, m - 1); //【左】找到左半边的根left
+		TreeNode root = new TreeNode(sortedlist.get(0).val); // 【根】用sortedlist中ListNode值创造一个TreeNode作为根
+		sortedlist.set(0, sortedlist.get(0).next); // 把sortedlist里面的值置为，当前根值在链表上 右边一个位置
+		TreeNode right = helper(sortedlist, m + 1, r); // 【右】找到右半边的根right
+		root.left = left; // 当前根连上左子树的根
+		root.right = right; // 当前根连上右子树的根
+		return root;
+	}
+	
 	//Divide and Conquer
 /*	public TreeNode sortedListToBST(ListNode head) {
 		int size = getSize(head);
@@ -49,64 +87,26 @@ public class Question {
 		return root;
 	}*/
 	
-	//bottom to top:
-	// 	1. construct the left tree 
-	//	2. construct the root node, list pointer +1.
-	//	3. construct the right node
-	//http://blog.csdn.net/linhuanmars/article/details/23904937
-	//http://joycelearning.blogspot.com/2013/09/leetcode-convert-sorted-list-to-binary.html
-	//http://yucoding.blogspot.com/2012/12/leetcode-question-24-convert-sorted.html
-    public TreeNode sortedListToBST(ListNode head) {
-        if (head == null){
-        	return null;
-        }
-        int count = 0;
-        ListNode runner = head;
-        while(runner != null){
-        	runner = runner.next;
-        	count++;
-        }
-        
-        //the reason why create a ArrayList<ListNode> is because:
-        //it will be immutable in helper function
-        ArrayList<ListNode> sortedlist = new ArrayList<ListNode>();
-        sortedlist.add(head);
-        //return helper(sortedlist, 0, count); wrong!
-        return helper(sortedlist, 0, count-1);
-    }
-    
-    //helper里，左根右，关于根的处理，没看懂
-    private TreeNode helper(ArrayList<ListNode> sortedlist, int l, int r){
-    	if(l > r){
-    		return null;
-    	}
-    	int m = (l+r)/2;
-    	// get left;
-    	TreeNode left = helper(sortedlist, l, m-1);
-    	// get root use current listnode val
-    	TreeNode root = new TreeNode(sortedlist.get(0).val);
-    	root.left = left;
-    	//move to next listnode to get value for right
-    	sortedlist.set(0, sortedlist.get(0).next);
-    	//get right
-    	TreeNode right = helper(sortedlist, m+1, r);
-    	root.right = right;
-    	return root;
-    }
 
 }
 
 
- class ListNode {
-     int val;
-     ListNode next;
-     ListNode(int x) { val = x; next = null; }
- }
+class ListNode {
+	int val;
+	ListNode next;
 
+	ListNode(int x) {
+		val = x;
+		next = null;
+	}
+}
 
 class TreeNode {
-     int val;
-     TreeNode left;
-     TreeNode right;
-     TreeNode(int x) { val = x; }
- }
+	int val;
+	TreeNode left;
+	TreeNode right;
+
+	TreeNode(int x) {
+		val = x;
+	}
+}

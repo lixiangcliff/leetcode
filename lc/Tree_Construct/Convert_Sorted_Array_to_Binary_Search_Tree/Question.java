@@ -17,10 +17,8 @@ public class Question {
 	 * Given an array where elements are sorted in ascending order, convert it
 	 * to a height balanced BST.
 	 */
-	/*
-	 * 构造树的模板：
-	 * 把根root先new出来，然后它的左节点接到递归左边部分的返回值，右节点接到递归右边部分的返回值，最后将root返回回去。
-	 */
+	
+	// 【注】构造树的模板：把根root先new出来，然后它的左节点接到递归左边部分的返回值，右节点接到递归右边部分的返回值，最后将root返回回去。
 	//http://blog.csdn.net/linhuanmars/article/details/23904883
 	public TreeNode sortedArrayToBST(int[] num) {
 		if(num ==null || num.length == 0){
@@ -30,13 +28,13 @@ public class Question {
     }
 	
 	private TreeNode helper(int[] num, int l, int r) {
-		if(l > r){
+		if (l > r) {
 			return null;
 		}
-		int m = (l + r)/2;
-		TreeNode root = new TreeNode(num[m]);//以当前数组的中间值，来create根节点
-		root.left = helper(num, l, m-1); //当前root的左孩子为左半边数组的递归返回值
-		root.right = helper(num, m+1, r);//右孩子类似
+		int m = (l + r) / 2;
+		TreeNode root = new TreeNode(num[m]);// 以当前数组的中间值，来create根节点
+		root.left = helper(num, l, m - 1); // 当前root的左孩子为左半边数组的递归返回值
+		root.right = helper(num, m + 1, r);// 右孩子类似
 		return root;
 	}
 }

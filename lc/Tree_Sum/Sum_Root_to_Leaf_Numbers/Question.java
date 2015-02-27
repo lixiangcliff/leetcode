@@ -27,25 +27,24 @@ public class Question {
 		Return the sum = 12 + 13 = 25.
 	 * 
 	 */
-	//递归条件即是把当前的sum乘以10并且加上当前节点传入下一函数
+	
+	//递归条件即是把当前的sum乘以10并且加上当前节点传入下一层递归函数
 	//http://blog.csdn.net/linhuanmars/article/details/22913699
-    public int sumNumbers(TreeNode root) {
-    	return helper(root, 0);
-    }
-    
-    //递归的返回值就是sum
-    private int helper(TreeNode root, int sum){
-    	if (root == null){//空节点，已经不是叶子了，不需要把数值加入结果，直接返回0
-    		return 0;
-    	}
-    	if(root.left == null && root.right == null){//已到达叶子节点，将这一个branch的结果加入总和中
-    		return sum * 10 + root.val;
-    	}else{
-    		//不为空也不为叶子时，把左右两颗子树的返回结果相加
-    		return (helper(root.left, sum*10+root.val) + helper(root.right, sum*10+root.val));
-    	}   	
-    }
-    
+	public int sumNumbers(TreeNode root) {
+		return helper(root, 0);
+	}
+
+	// 递归的返回值就是以当前root为根的所有root-to-leaf的和
+	private int helper(TreeNode root, int sum) { // sum表示知道当前这一层，root-to-leaf的和
+		if (root == null) {// 空节点，已经不是叶子了，不需要把数值加入结果，直接返回0
+			return 0;
+		}
+		if (root.left == null && root.right == null) {// 已到达叶子节点，将这一个branch的结果加入总和中
+			return sum * 10 + root.val;
+		} else { // 不为空也不为叶子时，把左右两颗子树的返回结果相加
+			return (helper(root.left, sum * 10 + root.val) + helper(root.right, sum * 10 + root.val));
+		}
+	}
 }
 
  class TreeNode {

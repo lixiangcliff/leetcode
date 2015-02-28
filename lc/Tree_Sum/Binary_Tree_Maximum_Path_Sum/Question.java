@@ -25,10 +25,14 @@ public class Question {
 		     
 		Return 6.
 	 */
+	
+	//node中可能有负数
 	//ninechapter解题思路更加清晰：看图！
+	//singlePath: 从当前node到任意叶子的最大路径和
+	//maxPath   :　包括当前node在内的，任意node到任意node最大路径和
 	//之所以在ResultType里要维护两个变量singlePath和maxPath，是因为：
-	//我们最终想要的是maxPath。但是要得到maxPath的话，我们需要使用singlePath作为组成maxPath的一个部分。
-	public int maxPathSumDC (TreeNode root){
+	//我们最终想要的是maxPath。但是要得到maxPath的话，我们需要使用singlePath作为一个辅助值，来构造maxPath。
+	public int maxPathSum(TreeNode root){
 		if (root == null) {
 			return 0;
 		}
@@ -36,9 +40,9 @@ public class Question {
 		return result.maxPath;
 	}
 	
-	public ResultType helper (TreeNode root){
+	public ResultType helper (TreeNode root) { // 下面的注释如果看不懂，可以看视频
 		//【注】递归跳出条件：当root走到叶子的left或者right时，即root==null时候，
-		//我们要确保此时返回的ResultType里面的singlePath和maxPath不会该叶子节点的singlePath和maxPath 产生影响。
+		//我们要确保此时返回的ResultType里面的singlePath和maxPath不会对该叶子节点的singlePath和maxPath产生影响。
 		//对叶子节点的singlePath来讲，根据题意，如果它的node.val>0, 则选node.val，否则就选0）
 		//	又因为singlePath = Math.max((Math.max(left.singlePath, right.singlePath) + root.val), 0);
 		//	则只有让left.singlePath和right.singlePath都为0，才能符合题意。即root == null时 singlePath == 0。
@@ -52,7 +56,9 @@ public class Question {
 		ResultType left = helper (root.left); 
 		ResultType right = helper (root.right); 
 		//conquer
-		int singlePath = Math.max((Math.max(left.singlePath, right.singlePath) + root.val), 0);
+		//当前的singlePath可能是左子树的最大singlePath，也可能是右子树的singlePath，也可能就是0（如果左右子树的singlePath都小于0的话）
+		int singlePath = Math.max((Math.max(left.singlePath, right.singlePath) + root.val), 0); 
+		//当前的maxPat：1.如果不包含当前root，可能是左子树或者右子树的maxPath；2.如果包含当前root，可能是左右子树的singlePath加上root值的和
 		int maxPath = Math.max(Math.max(left.maxPath, right.maxPath), left.singlePath + right.singlePath + root.val);
 		return new ResultType(singlePath, maxPath);
 	}
@@ -69,7 +75,7 @@ public class Question {
 	
 	
 	//http://blog.csdn.net/linhuanmars/article/details/22969069
-    public int maxPathSum(TreeNode root) {
+    public int maxPathSum2(TreeNode root) {
     	if(root == null){
     		return 0;
     	}

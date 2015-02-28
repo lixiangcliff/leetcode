@@ -55,23 +55,23 @@ public class Question {
             return res;
         }
         LinkedList<TreeNode> s = new LinkedList<TreeNode>();
-        TreeNode cur = root;
+        TreeNode node = root;
         while (true) {
-            while (cur != null) { //找到当前node的最左孩子，并且将node的所有左孩子及其下一级左孩子加入栈。
-                s.push(cur);
-                cur = cur.left; //【左】一直找最左的
+            while (node != null) { //找到当前node的最左孩子，并且将node的所有左孩子及其下一级左孩子加入栈。
+                s.push(node);
+                node = node.left; //【左】一直找最左的
             }
             
             if (s.isEmpty()) { // 要在添加所有左孩子入栈之后，再判断栈是否为空。是因为最初栈一定是空的。
                 break;
             }
-            cur = s.pop(); // 每次pop出来的就是当前node作为左孩子时，对应的【根】
-            res.add(cur.val); // 【注】result内容都是来自每次stack弹出的node
-            cur = cur.right; // 【右】最后当前node往它的右子树走，去处理它的右孩子
+            node = s.pop(); // 每次pop出来的就是当前node作为左孩子时，对应的【根】
+            res.add(node.val); // 【注】result内容都是来自每次stack弹出的node
+            node = node.right; // 【右】最后当前node往它的右子树走，去处理它的右孩子
         }
         return res;
     }
-    
+	
 	//方法三
 	//interative from Mo
 	//之所以和preorder不同（preorder不需要保存node是否被访问过），是因为inorder时候，第一次经过某node时候不能当时就处理它，要等待会回来时候才能处理。

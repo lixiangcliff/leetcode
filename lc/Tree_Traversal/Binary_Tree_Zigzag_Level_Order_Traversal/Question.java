@@ -1,6 +1,7 @@
 package Binary_Tree_Zigzag_Level_Order_Traversal;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -37,11 +38,42 @@ public class Question {
 
 	 */
 	
+	// 手写
+	public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+		List<List<Integer>> result = new ArrayList<List<Integer>>();
+		if (root == null) {
+			return result;
+		}
+		LinkedList<TreeNode> q = new LinkedList<TreeNode>();
+		q.push(root);
+		boolean isEven = true;// 表示当前在第偶数层，即正序(自左向右)
+		while (!q.isEmpty()) {
+			int size = q.size();
+			List<Integer> item = new ArrayList<Integer>(); // 存本层内容
+			for (int i = 0; i < size; i++) { 
+				TreeNode node = q.poll();
+				item.add(node.val);// 当前node值加入item
+				if (node.right != null) {
+					q.offer(node.right);
+				}
+				if (node.left != null) {
+					q.offer(node.left);
+				}
+			}
+			if (isEven) {
+				Collections.reverse(item);
+			}
+			result.add(item);
+			isEven = !isEven;// 勿忘翻转normalOrder的boolean值
+		}
+		return result;
+	}
+	
 	//类似https://oj.leetcode.com/problems/binary-tree-level-order-traversal/ 不同之处在于由于每层遍历的方向不同，所以不能简单用queue来存node了。
 	//http://www.ninechapter.com/solutions/binary-tree-zigzag-level-order-traversal/ 
 	//此题需要两个stack(curStack和nextStack)分别存当前层node以及下一层的node。其中nextStack存的即是curStack所有node的孩子们
 	//而nextStack是按照何种方式入栈，取决于当前层的奇偶性： 偶数层自左向右（正序），而奇数层自右向左（逆序）。(根为第0层)
-	public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+	public List<List<Integer>> zigzagLevelOrder2(TreeNode root) {
 		List<List<Integer>> result = new ArrayList<List<Integer>>();
 		if (root == null) {
 			return result;

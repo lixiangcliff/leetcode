@@ -35,13 +35,13 @@ public class Question {
 	}
 
 	// 递归的返回值就是以当前root为根的所有root-to-leaf的和
-	private int helper(TreeNode root, int sum) { // sum表示知道当前这一层，root-to-leaf的和
+	private int helper(TreeNode root, int sum) { // sum表示：以起始根为根，以当前root的parent为leaf的这一条路径上已累积的总和
 		if (root == null) {// 空节点，已经不是叶子了，不需要把数值加入结果，直接返回0
 			return 0;
 		}
-		if (root.left == null && root.right == null) {// 已到达叶子节点，将这一个branch的结果加入总和中
+		if (root.left == null && root.right == null) {// 已到达叶子节点，完成了一个整个path,将这一个path的结果加入总和中
 			return sum * 10 + root.val;
-		} else { // 不为空也不为叶子时，把左右两颗子树的返回结果相加
+		} else { // 不为空也不为叶子时，本层的sum * 10 加上root.val, 然后分别传给左右子树递归，把左右子树的到leaf路径和加起来就是当前root到leaf的路径和
 			return (helper(root.left, sum * 10 + root.val) + helper(root.right, sum * 10 + root.val));
 		}
 	}

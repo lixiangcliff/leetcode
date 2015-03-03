@@ -12,14 +12,31 @@ public class Solution {
 
 	}
 	
+	/**
+	 * http://lintcode.com/en/problem/implement-iterator-of-binary-search-tree/
+	 * Design an iterator over a binary search tree with the following properties:
+		1.Elements are visited in ascending order (i.e. an inorder traversal)
+		2.next() and hasNext() queries run in O(1) time in average.
+		Example 
+		For the following binary search tree, inorder traversal by using iterator is [1, 6, 10, 11, 12]
+		      10
+		     /   \
+		   1      11
+		     \      \
+		      6      12
+		Challenge 
+		Extra memory usage O(h), h is the height of the tree.
+		Super Star: Extra memory usage O(1)
+	 */
 	
-	 /* Example of iterate a tree:
-		 * Solution iterator = new Solution(root);
-		 * while (iterator.hasNext()) {
-		 *    TreeNode node = iterator.next();
-		 *    do something for node
-		 * } 
-		 */
+	/** 
+     * Example of iterate a tree:
+	 * Solution iterator = new Solution(root);
+	 * while (iterator.hasNext()) {
+	 *    TreeNode node = iterator.next();
+	 *    do something for node
+	 * } 
+	 */
 	    
 	private LinkedList<TreeNode> stack = new LinkedList<TreeNode>();
 	private TreeNode cur;
@@ -34,7 +51,7 @@ public class Solution {
     }
     
     //@return: return next node
-    //中序遍历保证保证node以升序顺序访问
+    //中序遍历保证保证node以升序顺序访问。参考Binary_Tree_Inorder_Traversal
     public TreeNode next() {
     	while (cur != null) {//【左】，找到最小值，然后沿途依次压入栈
     		stack.push(cur);

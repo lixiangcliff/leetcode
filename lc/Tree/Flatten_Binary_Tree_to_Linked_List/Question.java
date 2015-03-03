@@ -40,31 +40,36 @@ public class Question {
 		If you notice carefully in the flattened tree, 
 		each node's right child points to the next node of a pre-order traversal.
 	 */
-	//http://www.cnblogs.com/feiling/p/3278639.html
-	/*
-	 * 看图！
-	 * 思想：整个树分成三份，根，左子树，右子树；
-	 * 递归体     1.根left指向null,
-	 * 		2.根right指向原来左子树
-	 * 		3.找到原左子树的最右孩子p
-	 * 		4.p指向原来右子树
-	 */
+	
+	//1.每次将当前root为根的树切成 root, root左子树(left), root右子树(right)三部分,（先取好left和right，然后把root.left和root.right置null）
+	//2.用tail标记root
+	//3.然后left接在tail.right,然后递归处理left
+	//4.然后right接在tail.right,然后递归处理right
+	//5.返回tail
+	// http://www.cnblogs.com/yuzhangcmu/p/4186572.html
     public void flatten(TreeNode root) {
-        if(root == null){
-        	return;
-        }
-        if(root.left != null){
-        	TreeNode leftNode = root.left;
-        	TreeNode rightNode = root.right;
-        	root.left = null; // 【注】勿忘！
-        	root.right = leftNode;
-        	TreeNode p = leftNode;
-        	while(p.right != null){
-        		p = p.right;
-        	}
-        	p.right = rightNode;
-        }
-        flatten(root.right);
+        dfs(root);
+    }
+    
+    // return : tail表示已经处理到了list中的哪一个
+    private TreeNode dfs(TreeNode root) {
+    	if (root == null) {
+    		return null;
+    	}
+    	TreeNode tail = root;
+    	TreeNode left = root.left;
+    	TreeNode right = root.right;
+    	root.left = null; //【注】重要！这两行将root, root左子树 root右子树切成三部分
+    	root.right = null;
+    	if (left != null) {  // connect the left tree.
+    		tail.right = left;
+    		tail = dfs(left);
+    	}
+    	if (right != null) {  // connect the right tree.
+    		tail.right = right;
+    		tail = dfs(right);
+    	}
+    	return tail;
     }
 
 }

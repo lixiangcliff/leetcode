@@ -53,12 +53,12 @@ public class Question {
 		TreeLinkNode nextLevelLeftMost = parent.left;
 		// 处理整个树
 		while (nextLevelLeftMost != null) {
-			TreeLinkNode pre = null; //用这个pre将parent这一样node的所有孩子们连接起来
+			TreeLinkNode pre = null; //用这个pre将parent这一行node的所有孩子们连接起来
 			// 处理parent这个node所在的那一行
-			while (parent != null) { //（除了第一次循环只处理一个孩子外，其余每次处理两个孩子）--（即除第一次外，每次循环pre右移两次）。具体的，看图！）
+			while (parent != null) { //（除了第一次循环只处理一个孩子外，其余每次处理两个孩子（即pre右移两次）。具体的，画图！）
 				if (pre == null) { //单独处理pre是最左边的node时的情况
 					pre = parent.left; 
-				} else { //上一个parent的右孩子脸上当前parent的左孩子
+				} else { //上一个parent的右孩子连上当前parent的左孩子
 					pre.next = parent.left;
 					pre = pre.next;
 				}

@@ -9,9 +9,36 @@ public class Question {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		Question q = new Question();
+		ListNode l0 = new ListNode(0);
+		ListNode l1 = new ListNode(1);
+		ListNode l2 = new ListNode(2);
+		ListNode l3 = new ListNode(3);
+		ListNode l4 = new ListNode(4);
+		ListNode l5 = new ListNode(5);
+		ListNode l6 = new ListNode(6);
+		//ListNode l7 = new ListNode(7);
+		l0.next = l1;
+		l1.next = l2;
+		l2.next = l3;
+		l3.next = l4;
+		l4.next = l5;
+		l5.next = l6;
+		//l6.next = l7;
+		System.out.println(q.sortedListToBST(l0).val);
+		
+		
+		
+		//q.sortedListToBST(head);
 	}
-
+	/*
+	 * 		Example
+			         4
+			       /    \
+			      2      6
+			     / \    / \
+			    1   3  5   7
+	 */
 	/**
 	 * https://oj.leetcode.com/problems/convert-sorted-list-to-binary-search-tree/
 	 * Given a singly linked list where elements are sorted in ascending order,

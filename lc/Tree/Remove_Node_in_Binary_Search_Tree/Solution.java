@@ -10,13 +10,39 @@ public class Solution {
 
 	}
 	
+	/**
+	 * http://lintcode.com/en/problem/remove-node-in-binary-search-tree/
+	 * Given a root of Binary Search Tree with unique value for each node.  Remove the node with given value. 
+	 * If there is no such a node with given value in the binary search tree, do nothing. 
+	 * You should keep the tree still a binary search tree after removal.
+		Example
+		Given binary search tree:
+		         5
+		        / \
+		       3   6
+		      / \
+		     2   4
+		     
+		Remove 3, you can either return:
+		         5
+		        / \
+		       2   6
+		        \
+		         4
+		or :
+		         5
+		        / \
+		       4   6
+		      / 
+		     2   
+	 */
+	
     /**
      * @param root: The root of the binary search tree.
      * @param value: Remove the node with given value.
      * @return: The root of the binary search tree after removal.
      */
     public TreeNode removeNode(TreeNode root, int value) {
-        // write your code here
     	if (root == null) { //根为null， 返回null
     		return root;
     	} else if (value < root.val) { //要remove的值比root小，则其一定在root的左子树
@@ -24,9 +50,9 @@ public class Solution {
     	} else if (value > root.val) { //要remove的值比root大，则其一定在root的右子树
     		root.right = removeNode(root.right, value);
     	} else {	//当前root即为要remove的node
-    		if (root.left == null && root.right == null) { //root没有孩子，将其置null
+    		if (root.left == null && root.right == null) { //root没有孩子，则将其置null
     			root = null;
-    		} else if (root.left == null) { //只有右孩子，用其右孩子替换root的位置
+    		} else if (root.left == null) { // 只有右孩子，用其右孩子替换root的位置 【注】有疑问。。。
     			root = root.right;
     		} else if (root.right == null) { //只有左孩子，用其左孩子替换root的位置
     			root = root.left;
@@ -51,12 +77,6 @@ public class Solution {
     		}
     		return root;
     	}
-    	//上下两种方法等价，上面清晰，下面简洁。推荐上面
-    	/*while (root != null && root.left != null) {
-    		root = root.left;
-    	}
-    	return root;
-    	*/
     }
 
 }

@@ -34,42 +34,32 @@ public class Question {
 		     / \    \
 		    4-> 5 -> 7 -> NULL
 	 */
-	//http://www.ninechapter.com/solutions/populating-next-right-pointers-in-each-node-ii/
+	
+	//此题的技巧在于设置一个dummy node来标记当前行最左端的node，然后进入下一行时，只需将leftMost置为dummy即可
+	//http://www.cnblogs.com/yuzhangcmu/p/4041345.html
 	public void connect(TreeLinkNode root) {
-		//TreeLinkNode nextLevelLeftMost = null;
 		if(root == null){
         	return;
         }
-		TreeLinkNode parent = root;
-		while (parent != null) {//处理整棵树
-			TreeLinkNode nextLevelLeftMost = null; //每完成一行都要重新置null
-			TreeLinkNode pre = null; //每完成一行都要重新置null
-			while (parent != null) {//处理当前parent所在的行
-				if (nextLevelLeftMost == null) { //找parent下一行最左的node
-					nextLevelLeftMost = parent.left != null ? parent.left : parent.right;
+		TreeLinkNode leftMost = root;
+		while (leftMost != null) {//处理整棵树
+			TreeLinkNode dummy = new TreeLinkNode(0); // 每一行都要重新做一个dummy，以及重新标记pre
+			TreeLinkNode pre = dummy;
+			TreeLinkNode cur = leftMost;
+			while (cur != null) { //处理每行
+				if (cur.left != null) {
+					pre.next = cur.left; //把pre之前所指向的node接在cur.left上
+					pre = pre.next; //更新pre
 				}
-				if (parent.left != null) { //parent左孩子存在，则处理左孩子的向右连接
-					if (pre == null) { //pre之前仍未赋值
-						pre = parent.left; //给pre赋值
-					} else {	//pre之前已经赋值
-						pre.next = parent.left; //上一个parent的右孩子连上当前parent的左孩子
-						pre = pre.next;
-					}
+				if (cur.right != null) {
+					pre.next = cur.right; 
+					pre = pre.next;
 				}
-				if (parent.right != null) {
-					if (pre == null) { //pre之前仍未赋值
-						pre = parent.right; //给pre赋值
-					} else {	//pre之前已经赋值
-						pre.next = parent.right; //当前parent的左孩子连上其右孩子
-						pre = pre.next;
-					}
-				}
-				parent = parent.next; //完成当前node，parent向右移动一个
+				cur = cur.next;
 			}
-			parent = nextLevelLeftMost; //完成本行，向下移动一行
+			leftMost = dummy.next;
 		}
 	}
-	
 	
 	//recursive way
 	//http://www.cnblogs.com/Jam01/p/3633203.html

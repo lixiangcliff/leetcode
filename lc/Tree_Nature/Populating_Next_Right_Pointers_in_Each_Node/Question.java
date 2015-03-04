@@ -43,31 +43,24 @@ public class Question {
 		     / \  / \
 		    4->5->6->7 -> NULL
 	 */
-	//看图！
-	// http://www.ninechapter.com/solutions/populating-next-right-pointers-in-each-node/
+	
+	//2层循环。外层循环遍历每一层；内层循环遍历当前层每一个node
+	//针对当前层，使用两个指针：一个指针leftMost记录每一层的最左边节点，另一个指针cur遍历本层的同时，把下一层的node链接上。
+	//下层node链接完成后，将leftMost移动到它的左孩子即可。
+	// http://www.cnblogs.com/yuzhangcmu/p/4041341.html
 	public void connect(TreeLinkNode root) {
 		if (root == null) {
 			return;
 		}
-		TreeLinkNode parent = root;
-		TreeLinkNode nextLevelLeftMost = parent.left;
-		// 处理整个树
-		while (nextLevelLeftMost != null) {
-			TreeLinkNode pre = null; //用这个pre将parent这一行node的所有孩子们连接起来
-			// 处理parent这个node所在的那一行
-			while (parent != null) { //（除了第一次循环只处理一个孩子外，其余每次处理两个孩子（即pre右移两次）。具体的，画图！）
-				if (pre == null) { //单独处理pre是最左边的node时的情况
-					pre = parent.left; 
-				} else { //上一个parent的右孩子连上当前parent的左孩子
-					pre.next = parent.left;
-					pre = pre.next;
-				}
-				pre.next = parent.right; //当前parent的左孩子连上其右孩子
-				pre = pre.next; // pre移向其右边
-				parent = parent.next; //parent移向其右边
+		TreeLinkNode leftMost = root;
+		while (leftMost != null && leftMost.left != null) { // 要连接的是下一层，所以如果下一层最左边已经为null，则可直接跳出循环了。
+			TreeLinkNode cur = leftMost;
+			while (cur != null) {
+				cur.left.next = cur.right;
+				cur.right.next = cur.next == null ? null : cur.next.left;
+				cur = cur.next;
 			}
-			parent = nextLevelLeftMost;
-			nextLevelLeftMost = parent.left;
+			leftMost = leftMost.left;
 		}
 	}
 

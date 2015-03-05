@@ -47,11 +47,11 @@ public class Question {
             return false;
         }
         // 2.如果根已经为最小值，且有左孩子
-        if (root.val == Integer.MIN_VALUE && root.left != null) {
+        if (root.val == min && root.left != null) {
             return false;
         }
         // 3.如果根已经为最大值，且有右孩子
-        if (root.val == Integer.MAX_VALUE && root.right != null) {
+        if (root.val == max && root.right != null) {
             return false;
         }
         //【左】：如果左子树非法，则false

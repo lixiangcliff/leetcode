@@ -42,6 +42,7 @@ public class Solution {
      * @param value: Remove the node with given value.
      * @return: The root of the binary search tree after removal.
      */
+	
     public TreeNode removeNode(TreeNode root, int value) {
     	if (root == null) { //根为null， 返回null
     		return root;
@@ -67,16 +68,10 @@ public class Solution {
     
     //返回以root为根的值最小的node
     private TreeNode findMin(TreeNode root) {
-    	if (root == null) {
-    		return root;
-    	} else if (root.left == null) {
-    		return root;
-    	} else {
-    		while (root.left != null) {
-    			root = root.left;
-    		}
-    		return root;
-    	}
+		while (root.left != null) {
+			root = root.left;
+		}
+		return root;
     }
 
 }

@@ -30,8 +30,8 @@ public class Question {
 	//核心是用String[] array = s.split("\\s+")将原s分成若干string并存入数组, 然后逆序取出重组成反转的字符串
 	//正则：\\s+
 	// "\s"  : 匹配任何空白字符，包括空格、制表符、换页符等等。等价于[ \f\n\r\t\v]。
-	// "+"   : 匹配前面的子表达式一次或多次。例如，“zo+”能匹配“zo”以及“zoo”，但不能匹配“z”。+等价于{1,}。
-	// "\\"  ： 转移字符，来表示 "\"
+	// "+"   : 匹配前面的子表达式一次或多次。例如，“zo+”能匹配“zo”以及“zoo”，但不能匹配“z”。+等价于[1,+oo)
+	// "\\"  ： 转义字符，来表示 "\"
 	//http://zh.wikipedia.org/wiki/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F
 	//http://www.cnblogs.com/yuzhangcmu/p/4140433.html
 	//http://www.ninechapter.com/solutions/reverse-words-in-a-string/
@@ -40,13 +40,15 @@ public class Question {
     		return "";
     	}
     	s = s.trim();
+    	if (s.length() == 0){
+    		return "";
+    	}
     	String[] strArray = s.split("\\s+");
     	StringBuilder sb = new StringBuilder();
     	for (int i = strArray.length - 1; i >= 0; i--) {
     		sb.append(strArray[i]).append(" ");
     	}
-    	//如果sb不为空，则删去最后的空格
-    	return sb.length() == 0 ? "" : sb.deleteCharAt(sb.length() - 1).toString() ;
+    	return sb.deleteCharAt(sb.length() - 1).toString() ;
     }
 
 }

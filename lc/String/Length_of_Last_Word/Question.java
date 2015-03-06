@@ -36,7 +36,7 @@ public class Question {
 			end--;
 		}
 		int start = end;
-		while (start >= 0 && s.charAt(start) != ' ') { // 标记last word的最初位左边的1位（略过所有非空格，知道找到一个空格）
+		while (start >= 0 && s.charAt(start) != ' ') { // 标记last word的首位的左边一位（略过所有非空格，直到找到一个空格）
 			start--;
 		}
 		return end - start; // 【注】防止出错的最好办法就是画图举例  

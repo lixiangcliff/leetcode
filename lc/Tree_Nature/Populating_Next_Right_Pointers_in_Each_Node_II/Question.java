@@ -41,11 +41,10 @@ public class Question {
 		if(root == null){
         	return;
         }
-		TreeLinkNode leftMost = root;
-		while (leftMost != null) {//处理整棵树
+		TreeLinkNode cur = root;
+		while (cur != null) {//处理整棵树
 			TreeLinkNode dummy = new TreeLinkNode(0); // 每一行都要重新做一个dummy，以及重新标记pre
 			TreeLinkNode pre = dummy;
-			TreeLinkNode cur = leftMost;
 			while (cur != null) { //处理每行
 				if (cur.left != null) {
 					pre.next = cur.left; //把pre之前所指向的node接在cur.left上
@@ -57,7 +56,7 @@ public class Question {
 				}
 				cur = cur.next;
 			}
-			leftMost = dummy.next;
+			cur = dummy.next;
 		}
 	}
 	

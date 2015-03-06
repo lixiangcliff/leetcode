@@ -1,7 +1,5 @@
 package ZigZag_Conversion;
 
-import java.util.ArrayList;
-
 public class Question {
 
 	/**

@@ -42,7 +42,7 @@ public class Question {
 				result -= map.get(s.charAt(i));
 			}
 		}
-		result += map.get(s.charAt(s.length() - 1)); // 处理最后一个数
+		result += map.get(s.charAt(s.length() - 1)); // 处理最后一个数（而且最右一个数一定是用加法）
 		return result;
     }
 

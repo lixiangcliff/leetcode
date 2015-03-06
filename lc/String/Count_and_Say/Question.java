@@ -38,7 +38,7 @@ public class Question {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < len; i++) { // 依次处理n - 1中的字符。必须从i == 0开始（不能从i == 1开始），否则count对应不上
 			count++; // 每遇到一个新的字符，置其出现次数为1; 如果是重复的则出现次数递增1个
-			if (i == len - 1 || (i < len - 1 && s.charAt(i) != s.charAt(i + 1))) { // 两种情况需要读数：1.如果i已经走到s的最后1位了，则必须要读数了；2.如果当前位和上一位已经不同了，则必须读数。
+			if (i == len - 1 || (i < len - 1 && s.charAt(i) != s.charAt(i + 1))) { // 两种情况需要读出当前数：1.如果i已经走到s的最后1位了；2.如果当前位和下一位是不同的数字。
 				sb.append(count); // 连续出现的次数
 				sb.append(s.charAt(i)); // 连续出现的字符内容
 				count = 0; // 【注】记得count重置为1；

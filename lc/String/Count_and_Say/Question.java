@@ -23,9 +23,37 @@ public class Question {
 	 * Note: The sequence of integers will be represented as a string.
 	 */
 	
+	// 手写
+	public String countAndSay(int n) {
+		if (n <= 0) { // corner case
+			return "";
+		}
+		if (n == 1) { // 终止条件
+			return "1"; 
+		}
+		String str = countAndSay(n - 1);
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < str.length(); ) {
+			char cur = str.charAt(i);
+			int j = i + 1;
+			if (j != str.length()) {
+				for (; j < str.length(); j++) {
+					if (str.charAt(j) != cur) {
+						break;
+					}
+				}
+			}
+			sb.append(j - i);
+			sb.append(cur);
+			i = j;
+		}
+		return sb.toString();
+	}
+	
+	
 	//  把第n个string读出来就得到了第n + 1个string，以此类推。重点在如何“读”一个string
 	// http://www.cnblogs.com/yuzhangcmu/p/4118146.html
-	public String countAndSay(int n) {
+	public String countAndSay2(int n) {
 		if (n <= 0) { // corner case
 			return null;
 		}

@@ -37,11 +37,9 @@ public class Question {
 		if (num == null || num.length <= 2){
 			return Integer.MAX_VALUE;
 		}
-		//先排序！
-		Arrays.sort(num);
+		Arrays.sort(num); //先排序！
 		int result = num[0] + num[1] + num[2];
-		for(int i = 0; i < num.length - 2; i++) { // i最远可以取到倒数第三个
-			//【注】此题不是求不重复的结果集，所以不需要跳过所谓与num[i - 1]相同的i
+		for(int i = 0; i < num.length - 2; i++) { // i最远可以取到倒数第三个 【注】此题不是求不重复的结果集，所以不需要跳过所谓与num[i - 1]相同的i
 			int l = i + 1;
 			int r = num.length - 1;
 			while (l < r) {
@@ -53,8 +51,7 @@ public class Question {
 				} else {
 					r--;
 				}
-				//如果当前sum更加接近target，则更新result
-				if (Math.abs(sum - target) < Math.abs(result - target)) {
+				if (Math.abs(sum - target) < Math.abs(result - target)) { //如果当前sum更加接近target，则更新result
 					result = sum;
 				}
 			}

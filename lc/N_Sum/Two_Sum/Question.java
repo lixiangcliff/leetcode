@@ -9,8 +9,9 @@ public class Question {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		Question q = new Question();
 		int[] numbers={0,2,4,0};
-		int[] result = twoSum(numbers,0);
+		int[] result = q.twoSum(numbers,0);
 		System.out.println(result[0]);
 		System.out.println(result[1]);
 	}
@@ -34,26 +35,22 @@ public class Question {
 	//【注】因为这道题要求返回的是index，所以不能打乱原来数组的顺序，故不能sort。
 	//否则也可以用two pointers达到O(1) Space, O(nlogn) Time; 
 	//http://blog.csdn.net/linhuanmars/article/details/19711387
-    public static int[] twoSum(int[] numbers, int target) {
-    	if(numbers == null || numbers.length < 2){
-    		return null;
-    	}
-    	int[] result = new int[2];
-    	//结构为：HashMap<value, index>
-    	//【注】之所以不设计成<index, value>，是因为之后map只能通过key来找val，反之不行
-    	HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
-    	for(int i = 0; i < numbers.length; i++){
-    		//find them!
-    		if(map.containsKey(target - numbers[i])){
-    			//之前已经放入map的value为target - numbers[i]
-    			result[0] = map.get(target - numbers[i]) + 1; //通过value作为map中的key，找map中的value也就是index
-    			result[1] = i + 1;
-    			return result;
-    		}
-    		map.put(numbers[i], i);
-    	}
-        return null;
-    }
+	public int[] twoSum(int[] numbers, int target) {
+		if (numbers == null || numbers.length < 2) {
+			return null;
+		}
+		int[] result = new int[2];
+		HashMap<Integer, Integer> map = new HashMap<Integer, Integer>(); // 结构为：HashMap<value, index>【注】不能设计成<index, value>，是因为之后map只能通过key来找val。
+		for (int i = 0; i < numbers.length; i++) {
+			if (map.containsKey(target - numbers[i])) { // find them! 之前已经放入map的value为target - numbers[i]
+				result[0] = map.get(target - numbers[i]) + 1; // 通过value作为map中的key，找map中的value也就是index
+				result[1] = i + 1;
+				return result;
+			}
+			map.put(numbers[i], i);
+		}
+		return null;
+	}
     
     
 

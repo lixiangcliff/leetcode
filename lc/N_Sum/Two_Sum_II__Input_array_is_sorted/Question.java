@@ -30,8 +30,9 @@ public class Question {
 	 * runtime complexity is O(n log n). 
 	 *
 	 */
+	
+	// Assume input is already sorted.
 	public int[] twoSum(int[] numbers, int target) {
-		// Assume input is already sorted.
 		for (int i = 0; i < numbers.length; i++) {
 			int j = bsearch(numbers, target - numbers[i], i + 1);
 			if (j != -1) {
@@ -42,16 +43,24 @@ public class Question {
 	}
 
 	private int bsearch(int[] A, int key, int start) {
-		int L = start, R = A.length - 1;
-		while (L < R) {
-			int M = (L + R) / 2;
-			if (A[M] < key) {
-				L = M + 1;
+		int l = start, r = A.length - 1;
+		while (l + 1 < r) {
+			int m = l + (r - l) / 2;
+			if (A[m] == key) {
+				return m;
+			} else if (A[m] < key){
+				l = m;
 			} else {
-				R = M;
+				r = m;
 			}
 		}
-		return (L == R && A[L] == key) ? L : -1;
+		if (A[l] == key) {
+			return l;
+		}
+		if (A[r] == key) {
+			return r;
+		}
+		return -1;
 	}
 	
 	/* 

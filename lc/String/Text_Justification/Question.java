@@ -51,6 +51,7 @@ public class Question {
 	 */
 	
 	//http://www.ninechapter.com/solutions/text-justification/
+	//http://www.cnblogs.com/yuzhangcmu/p/4127290.html
 	//http://blog.csdn.net/linhuanmars/article/details/24063271
 	public ArrayList<String> fullJustify(String[] words, int L) {
 		ArrayList<String> result = new ArrayList<String>();
@@ -61,19 +62,19 @@ public class Question {
 		int lastI = 0; // 上一行还没处理的单词的index
 		int wordsLenSum = 0; // 当前行目前累积的单词长度和
 		for (int i = 0; i <= wordsCount; i++) { // 【注】 i <= wordsCount, (i == wordsCount表示已经将最后一个单词累计入当前行)
-			// 已经处理到最后一行，或者一斤凑够一行。具体说：算上当前word[i]的话就超出一行了，所以已经攒够一行的量了，开始处理攒好的字符串们(word[i]不被计入当前行)
+			// 已经处理到最后一行，或者已经凑够一行。具体说：算上当前word[i]的话就超出一行了，所以已经攒够一行的量了，开始处理攒好的字符串们(word[i]不被计入当前行)
 			if (i == wordsCount || wordsLenSum + words[i].length() + (i - lastI) > L) { // i - last表示当前行有多少个单词(【注】每多一个单词就要多累积一个空格)
 				int slotCount = i - lastI - 1; // 表示当前行有多少个单词间隔
 				int spaceCount = L - wordsLenSum; // 当前行一共有多少空格待分配
 				StringBuilder sb = new StringBuilder();
 				if (slotCount == 0 || i == wordsCount) { // 当前行只有一个单词，或者已经将最后一个单词累计入当前行
-                    for(int j = lastI; j < i; j++){ //【注】这两种情况可以统一理解为“向左对齐，单词间隔为1个空格（如果改行有多个单词的话），最右单词后面用空格补至本行最末”
+                    for (int j = lastI; j < i; j++) { //【注】这两种情况可以统一理解为“向左对齐，单词间隔为1个空格（如果该行有多个单词的话），最右单词的后面用空格补至该行最末”
                         sb.append(words[j]);
                         if (j != i - 1) { // 只要不是本行最后一个单词，就加1个空格
                             appendSpace(sb, 1);
                         }
                     }
-                    appendSpace(sb, L - sb.length()); // 把改行剩余位置都填充为空格
+                    appendSpace(sb, L - sb.length()); // 把该行剩余位置都填充为空格
 				} else { // 常规分配空格情况
 					int spaceEach = spaceCount / slotCount; // 每个slot初始分配几个空格
 					int spaceExtra = spaceCount % slotCount; // 平均分完空格后，还剩几个空格
@@ -88,7 +89,7 @@ public class Question {
 				wordsLenSum = 0; // 重置本行单词长度和为0
 				lastI = i; // 把lastI置为当前i
 			} 
-			if (i < wordsCount) { // 只要还没累加完最后一个单词
+			if (i < wordsCount) { // 只要还没累加完最后一个单词【注】这个必须在第一个if之后。反例:Input:	["a"], 1; Output:	["","a"]; Expected:	["a"]
 				wordsLenSum += words[i].length(); // 表明还没凑够一行，要继续累加单词
 			}
 		}
@@ -97,8 +98,9 @@ public class Question {
 	
 	//在sb后添加count个空格
     private void appendSpace(StringBuilder sb, int count) {
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i < count; i++) {
             sb.append(' ');
+        }
     }
 
 }

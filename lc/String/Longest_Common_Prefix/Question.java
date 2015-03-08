@@ -8,10 +8,8 @@ public class Question {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		String[] strs = {
-				"abcdefg",
-				"abcdefg",
-				"abcdefg",
-				"abcdefgh",
+				"aa",
+				"a",
 				
 		};
 		Question q = new Question();
@@ -25,8 +23,32 @@ public class Question {
 	 * Write a function to find the longest common prefix string amongst an
 	 * array of strings.
 	 */
+	
+	// 手写
+	public String longestCommonPrefix(String[] strs) {
+		if (strs == null || strs.length == 0) {
+			return "";
+		}
+		int i = 0;
+		int len0 = strs[0].length();
+		boolean done = false;
+		for (; i < len0 && !done;) {
+			for (int j = 1; j < strs.length; j++) {
+				if (i >= strs[j].length() ||strs[0].charAt(i) != strs[j].charAt(i)) {
+					done = true;
+					break;
+				}
+			}
+			if (!done) {
+				i++;
+			}
+		}
+		return strs[0].substring(0, i);
+	}
+		
+	
 	//http://blog.csdn.net/linhuanmars/article/details/21145733
-    public String longestCommonPrefix(String[] strs) {
+    public String longestCommonPrefix2(String[] strs) {
 		if (strs == null || strs.length == 0) {
 			return "";
 		}

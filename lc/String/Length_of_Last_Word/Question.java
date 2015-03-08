@@ -26,8 +26,27 @@ public class Question {
 	 * return 5.
 	 */
 	
-	//http://blog.csdn.net/linhuanmars/article/details/21858067
+	//手写
     public int lengthOfLastWord(String s) {
+		if (s == null || s.length() == 0) {
+			return 0;
+		}
+		s = s.trim();
+		if (s.length() == 0) {
+			return 0;
+		}
+		int i = s.length() - 1;
+		while ( i >= 0) {
+			if (s.charAt(i) == ' ') {
+				break;
+			}
+			i--;
+		}
+		return s.length() - 1 - i;
+    }
+	
+	//http://blog.csdn.net/linhuanmars/article/details/21858067
+    public int lengthOfLastWord2(String s) {
 		if (s == null || s.length() == 0) {
 			return 0;
 		}

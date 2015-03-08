@@ -22,24 +22,25 @@ public class Solution {
 	 */
 	
 	//【注】index vs offset: index是从前往后数；offset是从后往前数
-	String rotateString(String A, int offset) {
-		if (A == null || A.length() == 0) {
-			return "";
+	public char[] rotateString(char[] A, int offset) {
+		if (A == null || A.length == 0 || offset % A.length == 0) {
+			return A;
 		}
-		String left = reverse(A, 0, A.length() - offset % A.length() - 1); // 【注】此处要取模，因为要防止给的offset比length还大。
-		String right = reverse(A, A.length() - offset % A.length(), A.length() - 1);
-		String str = left + right;
-		return reverse(str, 0, A.length() - 1);
+		int len = A.length;
+		offset %= len; // 【注】此处要取模，因为要防止给的offset比len还大。
+		reverse(A, 0, len - 1 - offset); 
+		reverse(A, len - offset, len - 1);
+		reverse(A, 0, len - 1);
+		return A;
 	}
 
-	private String reverse(String str, int start, int end) {
-		if (start < 0 || end > str.length() - 1) {
-			return "";
+	private void reverse(char[] A, int l, int r) {
+		while (l < r) {
+			char temp = A[l];
+			A[l] = A[r];
+			A[r] = temp;
+			l++;
+			r--;
 		}
-		StringBuilder sb = new StringBuilder();
-		for (int i = str.length() - 1; i >= 0; i--) {
-			sb.append(str.charAt(i));
-		}
-		return sb.toString();
 	}
 }

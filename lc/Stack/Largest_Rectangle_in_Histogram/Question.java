@@ -31,10 +31,10 @@ public class Question {
 	 * For example, Given height = [2,1,5,6,2,3], return 10.
 	 */
 	//Ma老师讲的思路：
-	//O(n)。看图！ 一个每个元素值为高，左边第一个比它的值小的元素index作为左端，右边第一个比它的值小的元素index作为右端所组成的矩形。然后遍历所有元素，得到最大面积值。
+	//O(n)。看图！ 以每个元素值为高，左边第一个比它的值小的元素index作为左端，右边第一个比它的值小的元素index作为右端所组成的矩形。然后遍历所有元素，得到最大面积值。
 	//对于求左右端的办法，就是用stack：（通过每次处理height中的元素，来对stack进行push和pop操作来得到以每个元素为高的最大矩形面积）
-	//push的原则： 当前元素大于等于比栈顶元素
-	//pop原则：当前元素小于栈顶元素
+	//push的原则： 当前元素值大于等于比栈顶元素值（【注】push和pop的是index）
+	//pop原则：当前元素值小于栈顶元素值
 	//则对于任何时候的栈顶元素来说，它的左端即为与它相邻并且更靠近栈底的元素的index；它的右端就是导致它pop出来的比它值小的元素的index
 	//http://blog.csdn.net/linhuanmars/article/details/20524507
     public int largestRectangleArea(int[] height) {
@@ -43,8 +43,7 @@ public class Question {
     	}
     	LinkedList<Integer> stack = new LinkedList<Integer>();// 【注】stack中存的是各个元素的index
     	int max = 0;
-    	// i <= height小技巧，因为要在i==height处虚拟地再补一个“0”高度的元素，来把最后stack里的值都pop出来(如果stack还有值的话)
-		for (int i = 0; i <= height.length; i++) {
+		for (int i = 0; i <= height.length; i++) { // i <= height小技巧，因为要在i==height处虚拟地再补一个“0”高度的元素，来把最后stack里的值都pop出来(如果stack还有值的话)
 			int rightIndex = i;
 			int rightHeight = i == height.length ? 0 : height[i]; // curHeight = 0的情况， 即上面说的小技巧
 			while (!stack.isEmpty()) {
@@ -56,7 +55,7 @@ public class Question {
 					break; 
 				}
 			}
-			stack.push(i); // 记得压栈的是index
+			stack.push(i); // 无论如何最后都要把当前i压入栈
 		}
     	return max;
     }

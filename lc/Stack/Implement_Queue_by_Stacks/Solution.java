@@ -1,7 +1,6 @@
 package Implement_Queue_by_Stacks;
 
 import java.util.LinkedList;
-import java.util.Stack;
 
 public class Solution {
 
@@ -40,12 +39,12 @@ class StackedQueue {
 		stack2 = new LinkedList<Integer>();
 	}
 	
-	public void push(int element) {
+	public void push(int element) { // push时，全都压入第一个栈
 		stack1.push(element);
 	}
 	
 	public int pop() {
-		if (stack2.isEmpty()) {
+		if (stack2.isEmpty()) { // pop时，如果第二个栈为空，则把第一个栈里的所有内容压入第一个栈。最后从第二个栈弹出。
 			while (!stack1.isEmpty()) {
 				stack2.push(stack1.pop());
 			}
@@ -53,7 +52,7 @@ class StackedQueue {
 		return stack2.pop();
 	}
 	
-	public int top() {
+	public int top() { // 和pop类似，唯一区别是最后从第二个栈中只是peek，而不是弹出元素。
 		if (stack2.isEmpty()) {
 			while (!stack1.isEmpty()) {
 				stack2.push(stack1.pop());

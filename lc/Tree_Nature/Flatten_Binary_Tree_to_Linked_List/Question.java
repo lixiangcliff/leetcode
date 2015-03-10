@@ -51,7 +51,7 @@ public class Question {
         dfs(root);
     }
     
-    // return : tail表示已经处理到了list中的哪一个
+    // return : tail表示flatten之后的最右边的node
     private TreeNode dfs(TreeNode root) {
     	if (root == null) {
     		return null;

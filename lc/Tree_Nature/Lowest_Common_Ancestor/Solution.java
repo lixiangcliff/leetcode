@@ -27,6 +27,7 @@ public class Solution {
      * @return: Return the least common ancestor(LCA) of the two nodes.
      */
 	/*
+	 * 
 	 * Given the root and two nodes in a Binary Tree. Find the lowest common ancestor(LCA) of the two nodes.
 		The lowest common ancestor is the node with largest depth which is the ancestor of both nodes.
 		Example
@@ -43,6 +44,8 @@ public class Solution {
 	
 	//http://blog.csdn.net/v_july_v/article/details/18312089
 	//返回值即为最小公共祖先
+	//【注】返回值为四种情况之一： 
+	//(1)A和B的LCA (2)A (3)B (4)null
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode A, TreeNode B) {
     	if (root == null || root == A || root == B) { // base case。root已经 为null或者碰到了A，B其中某一个点
     		return root;
@@ -51,7 +54,7 @@ public class Solution {
     	TreeNode left = lowestCommonAncestor(root.left, A, B);
     	TreeNode right = lowestCommonAncestor(root.right, A, B);
     	//conquer
-    	if (left != null && right != null) { //【注】即，left和right分别对应的是A和B(或B和A)，也就是找到了最小公共祖先
+    	if (left != null && right != null) { //【注】left和right都不为null，也不可能是left和right都是A和B的LCA。所以一定是left和right分别为A或B(B或A)
     		return root;
     	}
     	if (left != null) { //即AB都在左子树（即right == null）

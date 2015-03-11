@@ -41,14 +41,10 @@ public class Question {
 		 ListNode dummy = new ListNode(0);
 		 ListNode pre = dummy;
 		 ListNode cur = head;
-		 //first loop(cur == head) will cut the head from original linkedlist and
-		 //put it at the tail of dummy's tail;
-		 //from second loop(cur == head.next), pick each new start node and 
-		 //insert it into dummy's linkedlist
-		 while (cur != null) { // 【注】看图
+		 while (cur != null) { // 把node从原来的链表中摘出来，插入新的dummy的链表中
 			 pre = dummy;
 			 ListNode next = cur.next;
-			 while (pre.next != null && cur.val >= pre.next.val) {
+			 while (pre.next != null && pre.next.val <= cur.val) {
 				 pre = pre.next;
 			 }
 			 cur.next = pre.next;

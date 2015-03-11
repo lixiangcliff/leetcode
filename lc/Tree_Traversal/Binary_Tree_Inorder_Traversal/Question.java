@@ -55,7 +55,7 @@ public class Question {
             return res;
         }
         LinkedList<TreeNode> s = new LinkedList<TreeNode>();
-        TreeNode node = root;
+        TreeNode node = root; //【注】重点是一定要在循环中传递node，所以要在循环外定义node
         while (true) {
             while (node != null) { //找到当前node的最左孩子，并且将node的所有左孩子及其下一级左孩子加入栈。
                 s.push(node);

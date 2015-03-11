@@ -22,13 +22,13 @@ public class Question {
 	
 	//之所以要单独写一个mergeSort的方法而不是把这个写在sortList里的目的，是为了显性地说明这个sort用的是merge sort
     private ListNode mergeSort(ListNode head) {
-        if(head == null || head.next == null){
+        if (head == null || head.next == null) {
         	return head;
         }
         //找list中点
         ListNode walker = head;
         ListNode runner = head;
-        while(runner.next != null && runner.next.next != null){
+        while (runner.next != null && runner.next.next != null) {
         	walker = walker.next;
         	runner = runner.next.next;
         }
@@ -45,25 +45,22 @@ public class Question {
     //https://oj.leetcode.com/problems/merge-two-sorted-lists/
     private ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         ListNode dummy = new ListNode(0);
-        ListNode lastNode = dummy;
-        
+        ListNode pre = dummy;
         while (l1 != null && l2 != null) {
             if (l1.val < l2.val) {
-                lastNode.next = l1;
+                pre.next = l1;
                 l1 = l1.next;
             } else {
-                lastNode.next = l2;
+                pre.next = l2;
                 l2 = l2.next;
             }
-            lastNode = lastNode.next;
+            pre = pre.next;
         }
-        
         if (l1 != null) {
-            lastNode.next = l1;
+            pre.next = l1;
         } else {
-            lastNode.next = l2;
+            pre.next = l2;
         }
-        
         return dummy.next;
     }
 

@@ -38,18 +38,17 @@ public class Question {
 		int r = 0; // 每轮结束位置
 		int len = A.length;
 		int step = 0;
-		//【注】r < len容易想到。但勿忘l <= r，因为可能本轮maxReach未增加，这样下一轮的i就无法到达，则该直接返回异常
-		while (l <= r && r < len) { 
+		int maxReach = A[0];
+		while (l <= r && r < len - 1) { //【注】如果l > r 表示本轮maxReach未增加，这样下一轮的i就无法到达，则该直接返回异常。
 			step++; // 每增加1轮就 多跳1步
-			int maxReach = r;
-			for (int i = l; i <= r; i++) {
+			for (int i = l; i <= r; i++) { // 找到本轮的maxReach
 				maxReach = Math.max(maxReach, A[i] + i);
 				if (maxReach >= len - 1) { // 已经可以到达最末了
 					return step;
 				}
 			}
-			l = r + 1;
-			r = maxReach;
+			l = r + 1; // l的新位置为本轮还没尝试过的最左边位置
+			r = maxReach; // r的新位置为本轮算出的目前最远能达到的位置
 		}
 		return -1; // 表示无法到达最后
 	}

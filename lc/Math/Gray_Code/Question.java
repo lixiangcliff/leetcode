@@ -1,6 +1,7 @@
 package Gray_Code;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Question {
 
@@ -10,7 +11,7 @@ public class Question {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Question q = new Question();
-		ArrayList<Integer> result = q.grayCode(1);
+		List<Integer> result = q.grayCode(1);
 		for (int i = 0; i < result.size(); i++) {
 			System.out.println(Integer.toBinaryString(result.get(i)));
 		}
@@ -37,10 +38,11 @@ public class Question {
 	 * For now, the judge is able to judge based on one instance of gray code
 	 * sequence. Sorry about that.
 	 */
+	
 	//http://fisherlei.blogspot.com/2012/12/leetcode-gray-code.html
 	//http://blog.csdn.net/linhuanmars/article/details/24511221
-    public ArrayList<Integer> grayCode(int n) {
-    	ArrayList<Integer> result = new ArrayList<Integer>();
+    public List<Integer> grayCode(int n) {
+    	List<Integer> result = new ArrayList<Integer>();
     	if (n < 0) {
     		return result;
     	}
@@ -48,8 +50,7 @@ public class Question {
 		for (int i = 1; i <= n; i++) {
 			int size = result.size();
 			int highBit = 1 << i - 1;
-			//把当前结果集中的数，按倒序的方式在前面加1，然后存入结果集
-			for (int j = size - 1; j >= 0; j--) {
+			for (int j = size - 1; j >= 0; j--) { //把当前结果集中的数，按倒序的方式在前面加1（i==1时候，相当于直接加在本位上），然后存入结果集
 				result.add(highBit + result.get(j));
 			}
 		}

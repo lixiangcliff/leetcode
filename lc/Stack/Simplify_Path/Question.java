@@ -29,8 +29,43 @@ public class Question {
 	 * case, you should ignore redundant slashes and return "/home/foo".
 	 */
 	
-	// http://blog.csdn.net/linhuanmars/article/details/23972563
+	//手写
 	public String simplifyPath(String path) {
+		if (path == null || path.length() == 0) {
+			return "";
+		}
+		LinkedList<StringBuilder> stack = new LinkedList<StringBuilder>();
+		StringBuilder result = new StringBuilder();
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i <= path.length(); i++) { // 把path简化后的每一层的内容，放入stack中
+			if (i == path.length() || path.charAt(i) == '/'){
+				if (sb.length() > 0) { 
+					if (sb.toString().equals("..")) {// 【注】比较两个string要用equals 
+						if (!stack.isEmpty()) { //向上一层，即弹出一个元素
+							stack.pop();
+						}
+					} else if (!sb.toString().equals(".")) {// 遇到"."，则什么也不做。否则就把sb压入栈
+						stack.push(sb);
+					} 
+					sb = new StringBuilder();
+				}
+			} else {
+				sb.append(path.charAt(i));
+			}
+		}
+		if (!stack.isEmpty()) {
+			while (!stack.isEmpty()) {
+				result.append(stack.pop().reverse());
+				result.append("/");
+			}
+			return result.reverse().toString();
+		} else {
+			return "/"; // stack为空时的情况
+		}
+	}
+	
+	// http://blog.csdn.net/linhuanmars/article/details/23972563
+	public String simplifyPath2(String path) {
 		if (path == null || path.length() == 0) {
 			return "";
 		}

@@ -7,9 +7,10 @@ public class Question {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		Question q = new Question();
 		int gas[] = {1,2,3,4,5};
 		int cost[] = {3,4,5,1,2};
-		System.out.println(canCompleteCircuit(gas, cost));
+		System.out.println(q.canCompleteCircuit(gas, cost));
 	}
 	
 
@@ -28,7 +29,7 @@ public class Question {
 	
 	//http://leetcodenotes.wordpress.com/2013/11/21/leetcode-gas-station-%E8%BD%AC%E5%9C%88%E7%9A%84%E5%8A%A0%E6%B2%B9%E7%AB%99%E7%9C%8B%E8%83%BD%E4%B8%8D%E8%83%BD%E8%B5%B0%E4%B8%80%E5%9C%88/
 	//http://blog.csdn.net/linhuanmars/article/details/22706553
-	public static int canCompleteCircuit(int[] gas, int[] cost) {
+	public int canCompleteCircuit(int[] gas, int[] cost) {
 		if (gas == null || cost == null || gas.length == 0 || cost.length == 0 || gas.length != cost.length) {
     		return -1;
     	}

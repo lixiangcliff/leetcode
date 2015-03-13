@@ -22,7 +22,9 @@ public class Solution {
 		System.out.println(s.majorityNumber(nums, k));
 
 	}
+	
 	/**
+	 * http://lintcode.com/en/problem/majority-number-iii/
 	 * Given an array of integers and a number k, the majority number is the
 	 * number that occurs more than 1/k of the size of the array. Find it.
 	 * Note There is only one majority number in the array.
@@ -63,7 +65,7 @@ public class Solution {
     			} else {
     				resultMap.put(num, 1);
     			}
-    			if (!resultMap.containsKey(result) || resultMap.get(num) > resultMap.get(result)) {
+    			if (!resultMap.containsKey(result) || resultMap.get(num) > resultMap.get(result)) { // !resultMap.containsKey(result)只针对第一个map里包涵的num。
         			result = num;
         		}
     		}

@@ -28,20 +28,20 @@ public class Question {
     		return Integer.MAX_VALUE;
     	}
         int candidate = num[0];
-        int count = 1;
+        int count = 1; // 表示当前candidate出现过的次数（已经减去抵消的次数）
         for (int i = 1; i < num.length; i++) {
-        	if (count == 0) { // 前面的全都抵消掉了
-        		candidate = num[i];
-        		count = 1; //【注】勿忘count此时置1
+        	if (count == 0) { // 说明前面的全都抵消掉了
+        		candidate = num[i]; // 用当前值来更换candidate
+        		count = 1; // count重置为1
         	} else {
-        		if (candidate == num[i]) { // 有出现了一个和candidate相同的数
+        		if (candidate == num[i]) { 
         			count++;
-        		} else { // 与candidate不同，则抵消掉一次。
+        		} else { 
         			count--; 
         		}
         	}
         }
-        return candidate;
+        return candidate; //【注】能这样直接返回剩余元素的前提条件是：保证array中一定有Majority Element才行
     }
 
 }

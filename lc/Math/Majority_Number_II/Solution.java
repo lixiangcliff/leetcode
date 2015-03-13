@@ -30,6 +30,7 @@ public class Solution {
 	 */
 	
 	//思想：找到三个不一样的，同时消去。
+	// http://www.cnblogs.com/yuzhangcmu/p/4175779.html
     public int majorityNumber(ArrayList<Integer> nums) {
     	if (nums == null || nums.size() <=2) {
     		return Integer.MAX_VALUE;
@@ -43,20 +44,20 @@ public class Solution {
     			count1++;
     		} else if (item2 == nums.get(i)) {
     			count2++;
-    		} else if (count1 == 0) {
+    		} else if (count1 == 0) { // item1个数已经为“空”，则用当前值更新item1
     			item1 = nums.get(i);
-    			count1++;
+    			count1 = 1;
     		} else if (count2 == 0) {
     			item2 = nums.get(i);
-    			count2++;
-    		} else { // 找到三个不同的元素，同时消去
+    			count2 = 1;
+    		} else { // 当前值既不相同于item1又不同于item2，而且item1和item2个数都不为“空”，说明找到三个不同的元素，同时消去。
     			count1--;
     			count2--;
     		}
     	}
     	count1 = 0;
     	count2 = 0;
-    	for (int num : nums) {
+    	for (int num : nums) { // 从头走一遍，item1和item2最终个数多的那个为Majority Number
     		if (num == item1) {
     			count1++;
     		} else if (num == item2) {

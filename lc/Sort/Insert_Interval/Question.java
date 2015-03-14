@@ -27,8 +27,7 @@ public class Question {
 	
 	//看图！
 	//http://blog.csdn.net/linhuanmars/article/details/22238433
-	public ArrayList<Interval> insert(ArrayList<Interval> intervals,
-			Interval newInterval) {
+	public ArrayList<Interval> insert2(ArrayList<Interval> intervals, Interval newInterval) {
 		ArrayList<Interval> result = new ArrayList<Interval>();
 		int size = intervals.size();
 		if (intervals == null || size == 0) {

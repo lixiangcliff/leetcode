@@ -47,9 +47,9 @@ public class Question {
     		return result;
     	}
 		result.add(0); // 如果n为0，则跳过下面的循环直接返回结果集为{0}。
-		for (int i = 1; i <= n; i++) {
+		for (int i = 0; i < n; i++) {
 			int size = result.size();
-			int highBit = 1 << i - 1;
+			int highBit = 1 << i;
 			for (int j = size - 1; j >= 0; j--) { //把当前结果集中的数，按倒序的方式在前面加1（i==1时候，相当于直接加在本位上），然后存入结果集
 				result.add(highBit + result.get(j));
 			}

@@ -46,7 +46,6 @@ public class Question {
 			int remainder = x % 10; // 取x最右边一位
 			//判断这一轮新产生的result会不会越界（是否result * 10 + remainder > Integer.MAX_VALUE;但是不能这样写，否则如果不等式真的成立，那么“>”左边就已经越界了）
 			if (result > (Integer.MAX_VALUE - remainder) / 10) { // 越界，leetcode期待返回0
-				//return sign == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
 				return 0;
 			}
 			result = result * 10 + remainder; //result“左移”一位（以十进制的方式），把x最右边一位加到结果上

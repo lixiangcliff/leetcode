@@ -22,11 +22,11 @@ public class SingleNumber {
 	//O(1) 空间复杂度
 	//应用性质:
 	//1. a ^ 0 == a
-	//1. a ^ a == 0
-	//1. (a ^ b) ^ c == a ^ (b ^ c)
+	//2. a ^ a == 0
+	//3. (a ^ b) ^ c == a ^ (b ^ c)
 	public int singleNumber(int[] A) {
-        if(A == null || A.length == 0) {
-            return -1;
+        if (A == null || A.length == 0) {
+            return Integer.MAX_VALUE;
         }
 		int result = 0;
 		for (int i : A) {

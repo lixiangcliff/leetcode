@@ -23,6 +23,7 @@ public class Question {
 	//http://answer.ninechapter.com/solutions/single-number-ii/
 	//http://blog.csdn.net/linhuanmars/article/details/22645599
 	//"如果每个元素重复出现三次，那么每一位出现1的次数也会是3的倍数，如果我们统计完对每一位进行取余3，那么结果中就只剩下那个出现一次的元素。"
+	//【注】这个是通用做法，也适合Single Number I（以及重复元素出现k次，只需“% k”即可）
 	public int singleNumber(int[] A) {
 		if (A == null || A.length == 0) {
 			return -1;
@@ -32,8 +33,8 @@ public class Question {
 		for (int i = 0; i < 32; i++) { // 对每一个bit遍历所有元素，累积所有元素对这一位造成的加和
 			for (int j = 0; j < A.length; j++) {
 				bits[i] += (A[j] >> i) & 1; //【注】(A[j] >> i)表示A[j]从右往左“砍掉”i位；“& 1”表示取末位的值
-				bits[i] %= 3; // 累积完A[j]对这一位的加和之后，结果可能大于3，所以要% 3。
 			}
+			bits[i] %= 3; // 累积完所有元素对这一位的加和之后，结果可能大于3，所以要% 3。
 			result += (bits[i] << i); // 处理完这一位，把最后的“加和”左移对应的位数，加到result中
 		}
 		return result;

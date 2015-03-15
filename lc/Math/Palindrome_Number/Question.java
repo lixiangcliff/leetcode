@@ -36,7 +36,7 @@ public class Question {
 		if (x < 0){
 			return false;
 		}
-		int div = 1; // 表示比跟x位数相同的10的正整数次幂（目的是为了x / div时可以得到x的最高位数值）
+		int div = 1; // div表示跟x位数相同的10的正整数次幂（目的是为了x / div时可以得到x的最高位数值）
 		while (div <= x / 10) { //【注】，此处一定要用除法，以防越界。
 			div *= 10;
 		}

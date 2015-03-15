@@ -53,9 +53,9 @@ public class Solution {
     	} else {	//当前root即为要remove的node
     		if (root.left == null && root.right == null) { //root没有孩子，则将其置null
     			root = null;
-    		} else if (root.left == null) { // 只有右孩子，用其右孩子替换root的位置 【注】有疑问。。。
+    		} else if (root.left == null) { // root指向root.right，剔除root处的node 【注】把它想象成linkedlist，就容易懂了。
     			root = root.right;
-    		} else if (root.right == null) { //只有左孩子，用其左孩子替换root的位置
+    		} else if (root.right == null) { 
     			root = root.left;
     		} else {	//两个孩子都有，则在其右子树中找到最小值，并用最小值替换该root值，最后remove该最小值的node
     			TreeNode temp = findMin(root.right);

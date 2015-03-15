@@ -1,13 +1,13 @@
 package Single_Number;
 
-public class SingleNumber {
+public class Question {
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		int[] A = {1,2,3,4,12,-5, -1657, 13,12,6,2, -1657, -5673,3,1,4,6,13, -5, 0 , 0, -5673, -32768};
-		SingleNumber s = new SingleNumber();
+		Question s = new Question();
 		System.out.println(s.singleNumber(A));
 	}
 	

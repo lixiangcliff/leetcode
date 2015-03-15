@@ -44,14 +44,14 @@ public class Question {
 	//http://www.ninechapter.com/solutions/next-permutation/
 	//http://blog.csdn.net/linhuanmars/article/details/20434115
 	public void nextPermutation(int[] num) {
-		if (num == null || num.length == 0 || num.length == 1) {
+		if (num == null || num.length <= 1) {
 			return;
 		}
 		int len = num.length;
 		for (int i = len - 2; i >= 0; i--) {
 			if (num[i + 1] > num[i]) { // 找到i是从右往左看第一个下降的数
 				int j; //
-				for (j = len - 1; j > i - 1; j--) {
+				for (j = len - 1; j > i; j--) {
                     if (num[j] > num[i]) {
                         break;
                     }
@@ -59,7 +59,7 @@ public class Question {
 				int temp = num[i];
 				num[i] = num[j];
 				num[j] = temp;
-				Arrays.sort(num, i + 1, len); // 把num中从第i到末位升序排列
+				Arrays.sort(num, i + 1, len); // 把num中从第i + 1位到末位升序排列
 				return;
 			}
 		}

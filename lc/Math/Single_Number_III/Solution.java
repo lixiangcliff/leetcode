@@ -28,11 +28,11 @@ public class Solution {
     	if (A == null || A.length == 0) {
     		return result;
     	}
-    	int bitPos = 0; // result1和result2所有不同位上的加和
+    	int bitPos = 0; // result[0]和result[1]所有不同位上异或值的累加和
     	for (int item : A) {
     		bitPos ^= item;
     	}
-    	if (bitPos == 0) { // 说明input的都是两两成对的
+    	if (bitPos == 0) { // 说明input的都是两两成对的,则根本找不到合法解
     		return result;
     	}
     	int diffPos = 0; // 从右往左找到第一个不同位（其实任意一个不同位都可以）
@@ -42,17 +42,17 @@ public class Solution {
     			break;
     		}
     	}
+    	int result0 = 0;
     	int result1 = 0;
-    	int result2 = 0;
     	for (int item : A) {
-    		if (((item >> diffPos) & 1) == 0) { // 以不同位把元素分为两组，每组亦或累积就可以分别得到一个结果
-    			result1 ^= item;
+    		if (((item >> diffPos) & 1) == 0) { // 根据每个元素在diffPos位置的不同值，把所有元素分为两组，每组异或累积就分别得到了结果之一
+    			result0 ^= item;
     		} else {
-    			result2 ^= item;
+    			result1 ^= item;
     		}
     	}
+    	result.add(result0);
     	result.add(result1);
-    	result.add(result2);
     	return result;
     }
 }

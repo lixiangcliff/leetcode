@@ -53,5 +53,7 @@ public class Question {
 		}
 		return result * sign; // 恢复符号
 	}
+	
+	//投机的方法，用long来声明result。 参考：http://www.cnblogs.com/yuzhangcmu/p/4162196.html
 
 }

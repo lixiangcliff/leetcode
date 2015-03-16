@@ -8,8 +8,9 @@ public class Question {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		//int[] matrix = {1,2,3,4,5};
+		Question q = new Question();
 		int[] matrix = {2,1};
-		System.out.println(maxArea(matrix));
+		System.out.println(q.maxArea(matrix));
 
 	}
 	
@@ -30,8 +31,7 @@ public class Question {
 	// http://blog.csdn.net/wzy_1988/article/details/17248209
 	// 思想：每次计算面积时的bottleneck是左右两个"侧边"中较低的那一个。
 	// 假如左边的低，那么就把左边向右移动。这是因为右边向左移动只会使面积更小。
-	// (面积=底边*min(左，右)，右边向左的话，底边变小，而min(左,右)不变)
-	public static int maxArea(int[] height) {
+	public int maxArea(int[] height) {
 		if (height == null || height.length < 2) {
 			return 0;
 		}

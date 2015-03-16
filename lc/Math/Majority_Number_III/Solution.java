@@ -32,7 +32,7 @@ public class Solution {
 	 * Example For [3,1,2,3,2,3,3,4,4,4] and k = 3, return 3
 	 * Challenge O(n) time and O(k) extra space
 	 */
-	
+    
     public int majorityNumber(ArrayList<Integer> nums, int k) {
     	HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
     	for (int num : nums) {
@@ -56,6 +56,9 @@ public class Solution {
     		} 
     	}
     	
+    	//【注】不可以直接在map里统计每个num剩余的个数，然后取其中最大的那个为结果。
+    	//因为数字的编排可以让majority 数被过度消耗，使其计数反而等于或小于比其他num。以k == 3为例如下：
+    	//1 1 1 1 2 3 2 3 4 4 4 这个 1就会被消耗过多，最后余下的反而比4少。
     	HashMap<Integer, Integer> resultMap = new HashMap<Integer, Integer>();
     	int result = Integer.MIN_VALUE;
     	for (int num : nums) {

@@ -50,21 +50,18 @@ public class Question {
 		int len = num.length;
 		for (int i = len - 2; i >= 0; i--) {
 			if (num[i + 1] > num[i]) { // 找到i是从右往左看第一个下降的数
-				int j; //
-				for (j = len - 1; j > i; j--) {
+				for (int j = len - 1; j > i; j--) {
                     if (num[j] > num[i]) {
-                        break;
+        				int temp = num[i];
+        				num[i] = num[j];
+        				num[j] = temp;
+        				Arrays.sort(num, i + 1, len); // 把num中从第i + 1位到末位升序排列
+        				return;
                     }
                 }
-				int temp = num[i];
-				num[i] = num[j];
-				num[j] = temp;
-				Arrays.sort(num, i + 1, len); // 把num中从第i + 1位到末位升序排列
-				return;
 			}
 		}
 		Arrays.sort(num); // 如果能走到这一步，说明num原来是降序的，现在把它再升序排列下就行了。
 		return;
 	}
-
 }

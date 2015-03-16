@@ -57,6 +57,8 @@ public class Solution {
     	}
     	count1 = 0;
     	count2 = 0;
+    	//"为什么最后要再检查2个数字呢？因为数字的编排可以让majority 数被过度消耗，使其计数反而小于n2，或者等于n2。
+    	//例子：1 1 1 1 2 3 2 3 4 4 4 这个 1就会被消耗过多，最后余下的反而比4少。"
     	for (int num : nums) { // 从头走一遍，item1和item2最终个数多的那个为Majority Number
     		if (num == item1) {
     			count1++;

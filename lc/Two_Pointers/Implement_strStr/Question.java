@@ -28,17 +28,17 @@ public class Question {
 	//i单方向移动；j遇到needle.charAt(j) != haystack.charAt(i + j)就从头再来
 	//brutal force
 	//http://blog.csdn.net/linhuanmars/article/details/20276833
-    public int strStr(String haystack, String needle) {
-        if (haystack ==  null || needle == null) {
-        	return -1;
-        }
-        int hLen = haystack.length();
-        int nLen = needle.length();
-        if (hLen < nLen) {
-        	return -1;
-        }
-        for (int i = 0; i <= hLen - nLen; i++) { //【注】i <= hLen - nLen; 边界最好办法就是举例子
-        	int j;
+	public int strStr(String haystack, String needle) {
+		if (haystack == null || needle == null) {
+			return -1;
+		}
+		int hLen = haystack.length();
+		int nLen = needle.length();
+		if (hLen < nLen) {
+			return -1;
+		}
+		for (int i = 0; i <= hLen - nLen; i++) { // 【注】i <= hLen - nLen; 边界最好办法就是举例子
+			int j;
 			for (j = 0; j < nLen; j++) {
 				if (needle.charAt(j) != haystack.charAt(i + j)) {
 					break;
@@ -47,7 +47,7 @@ public class Question {
 			if (j == nLen) { // j已经走完了整个needle
 				return i;
 			}
-        }
-        return -1;
-    }
+		}
+		return -1;
+	}
 }

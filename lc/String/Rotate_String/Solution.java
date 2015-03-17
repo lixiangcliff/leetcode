@@ -21,7 +21,7 @@ public class Solution {
 		for offset=3, return "efgabcd"
 	 */
 	
-	//【注】index vs offset: index是从前往后数；offset是从后往前数
+	//【注】index vs offset: index是从前往后的第几位；offset表示往右挪的位数
 	public char[] rotateString(char[] A, int offset) {
 		if (A == null || A.length == 0 || offset % A.length == 0) {
 			return A;

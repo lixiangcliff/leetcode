@@ -1,6 +1,7 @@
 package Text_Justification;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Question {
 
@@ -11,7 +12,7 @@ public class Question {
 		// TODO Auto-generated method stub
 		Question q = new Question();
 		String[] words = {"This", "is", "an", "example", "of", "text", "justification."};
-		ArrayList<String> result = q.fullJustify(words, 16);
+		List<String> result = q.fullJustify(words, 16);
 		for(int i=0; i<result.size(); i++){
 			System.out.println(result.get(i));
 		}
@@ -53,8 +54,8 @@ public class Question {
 	//http://www.ninechapter.com/solutions/text-justification/
 	//http://www.cnblogs.com/yuzhangcmu/p/4127290.html
 	//http://blog.csdn.net/linhuanmars/article/details/24063271
-	public ArrayList<String> fullJustify(String[] words, int L) {
-		ArrayList<String> result = new ArrayList<String>();
+	public List<String> fullJustify(String[] words, int L) {
+		List<String> result = new ArrayList<String>();
 		if (words == null || words.length == 0) {
 			return result;
 		}
@@ -63,7 +64,7 @@ public class Question {
 		int wordsLenSum = 0; // 当前行目前累积的单词长度和
 		for (int i = 0; i <= wordsCount; i++) { // 【注】 i <= wordsCount, (i == wordsCount表示已经将最后一个单词累计入当前行)
 			// 已经处理到最后一行，或者已经凑够一行。具体说：算上当前word[i]的话就超出一行了，所以已经攒够一行的量了，开始处理攒好的字符串们(word[i]不被计入当前行)
-			if (i == wordsCount || wordsLenSum + words[i].length() + (i - lastI) > L) { // i - last表示当前行有多少个单词(【注】每多一个单词就要多累积一个空格)
+			if (i == wordsCount || wordsLenSum + words[i].length() + (i - lastI) > L) { // 【注】i - last表示当前行有多少个单词间距
 				int slotCount = i - lastI - 1; // 表示当前行有多少个单词间隔
 				int spaceCount = L - wordsLenSum; // 当前行一共有多少空格待分配
 				StringBuilder sb = new StringBuilder();

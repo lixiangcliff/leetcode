@@ -36,26 +36,24 @@ public class Question {
 			return "";
 		}
 		k--; // to adjust index
-		StringBuilder result = new StringBuilder();
-		int factorial = 1;
-		for (int i = 2; i < n; i++) { // 得到factorial为(n - 1)!
-			factorial *= i;
+		StringBuilder sb = new StringBuilder();
+		int fac = 1;
+		for (int i = 2; i < n; i++) { // 得到factorial为(n - 1)! 为后面从k中"模"去factorial(n - 1)做准备
+			fac *= i;
 		}
 		ArrayList<Integer> nums = new ArrayList<Integer>();
-		for (int i = 1; i <= n; i++) { // num里装有所有可用数字{1,2,3...n}
+		for (int i = 1; i <= n; i++) { // nums按顺序装有所有可用数字{1,2,3...n}
 			nums.add(i);
 		}
-		int round = n - 1; // round表示当前位的右边还有几位
-		while (round >= 0) { // 最多n轮
-			int index = k / factorial;
-			result.append(nums.get(index)); // 将nums[index]加入result
-			nums.remove(index); // 因为元素不能重复使用，所以剔除用过的index
-			k %= factorial; // k已经处理完当前位，对(n - 1)!取余，进入下一位处理
-			if (round > 0) { // without this, when round == 0, it will fail;
-				factorial /= round; // factorial相应除以(n - 1)变为(n - 2)!
+		for (int i = n - 1; i >= 0; i--) { // i表示当前位的右边还有几位待处理（i从n-1递减至0，共计n轮）
+			int idx = k / fac; //得到当前位置应该append的内容
+			sb.append(nums.get(idx)); // 将nums[index]加入result
+			nums.remove(idx); // 因为元素不能重复使用，所以剔除用过的index
+			k %= fac; // k已经处理完当前位，对(n - 1)!取余，更新k为下一轮做准备
+			if (i > 0) { // 如果没有这个"if", 当i == 0, 运算非法。
+				fac /= i; // factorial相应除以(n - 1)变为(n - 2)! 更新fac为下一轮做准备
 			}
-			round--; // round递减
 		}
-		return result.toString();
+		return sb.toString();
 	}
 }

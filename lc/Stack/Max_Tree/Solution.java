@@ -38,15 +38,15 @@ public class Solution {
 	public TreeNode maxTree(int[] A) {
 		LinkedList<TreeNode> stack = new LinkedList<TreeNode>();
 		for (int i = 0; i <= A.length; i++) {
-			TreeNode rightNode = i == A.length ? new TreeNode(Integer.MAX_VALUE) : new TreeNode(A[i]);
+			TreeNode rightNode = i == A.length ? new TreeNode(Integer.MAX_VALUE) : new TreeNode(A[i]); // 表示当前node右边，第一个比它值大的node
 			while (!stack.isEmpty()) {
 				if (rightNode.val > stack.peek().val) {
 					TreeNode childNode = stack.pop();
-					if (stack.isEmpty()) { // 【这里1】如果childNode已经是stack里剩下的唯一node，则接右边（原因可以想象成此时左边是极大值）
+					if (stack.isEmpty()) { // 【这里1】如果childNode已经是stack里剩下的唯一node，则向上接右边比它大的那个（原因可以想象成此时左边是极大值）
 						rightNode.left = childNode;
 					} else {
 						//基本思想是childNode向上接上左边和右边值较小的那一个
-						TreeNode leftNode = stack.peek();
+						TreeNode leftNode = stack.peek(); // 表示当前node左边，第一个比它值大的node
 						if (leftNode.val > rightNode.val) {
 							rightNode.left = childNode;
 						} else {
@@ -59,8 +59,8 @@ public class Solution {
 			}
 			stack.push(rightNode); // 【这里2】
 		}
-		// 此时stack里装的极大值的node。原因为上面的【这里2】。
-		// 而“root”之所以接在极大值node的左边，原因为上面的【这里1】
+		// 此时stack里装的唯一node：是极大值的node。（可以将其理解为dummy node，它的left为最终真正的root）原因为上面的【这里2】。
+		// 而最终真正的root之所以为dummy node的左子树，原因为上面的【这里1】
 		return stack.peek().left; 
 	}
 	

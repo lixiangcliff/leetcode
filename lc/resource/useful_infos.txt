@@ -29,3 +29,10 @@ useful links:
 	
 	【转载】LeetCode 题目总结/分类
 	http://www.cnblogs.com/yuzhangcmu/p/4048905.html
+	
+6.	map reduce:
+	十张图带你入门Map/Reduce
+	http://www.csdn.net/article/2013-01-07/2813477-confused-about-mapreduce
+	
+	Map-Reduce入门
+	http://www.cnblogs.com/forfuture1978/archive/2010/11/14/1877086.html

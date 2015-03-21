@@ -36,3 +36,6 @@ useful links:
 	
 	Map-Reduce入门
 	http://www.cnblogs.com/forfuture1978/archive/2010/11/14/1877086.html
+	
+7. 水塘抽样（Reservoir sampling）
+	http://zhan.renren.com/severus?gid=3602888497996972572

@@ -1,14 +1,14 @@
-package Question;
+package wiggle_sort;
 
 
-public class WiggleSort {
+public class Question {
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		WiggleSort q = new WiggleSort();
+		Question q = new Question();
 		//int[] A = {1, 2, 8, 9, 3, 5}; 
 		//int[] A = {1, 2, 3, 5, 8, 9}; 
 		//int[] A = {1,4,5,2,3}; 

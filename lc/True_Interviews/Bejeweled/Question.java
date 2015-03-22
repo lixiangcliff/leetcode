@@ -1,6 +1,6 @@
-package Question;
+package Bejeweled;
 
-public class Bejeweled {
+public class Question {
 
 	/**
 	 * @param args

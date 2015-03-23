@@ -101,10 +101,10 @@ public class Question {
 			int size = q.size();
 			for (int i = 0; i < size; i++) {
 				GraphNode cur = q.poll();
-				System.out.print("cur: " + cur.label);
-				System.out.println("  count: " + cur.neighbors.size());
+				if (!set.contains(cur)) {
+					count += countConnections(cur.neighbors, set, q);
+				}
 				set.add(cur);
-				count += countConnections(cur.neighbors, set, q);
 			}
 		}
 		return count;
@@ -112,13 +112,7 @@ public class Question {
 	
 	private int countConnections(ArrayList<GraphNode> neighbors, HashSet<GraphNode> set, LinkedList<GraphNode> q) {
 		int cnt = 0;
-		for (int i = 0; i <= neighbors.size() - 1; i++) {
-			if (i == neighbors.size() - 1) {
-				if (!set.contains(neighbors.get(i))) {
-					q.offer(neighbors.get(i));
-				}
-				break;
-			}
+		for (int i = 0; i < neighbors.size(); i++) {
 			if (!set.contains(neighbors.get(i))) {
 				for (int j = i + 1; j < neighbors.size(); j++) {
 					if (!set.contains(neighbors.get(j)) && neighbors.get(i).neighbors.contains(neighbors.get(j))) {

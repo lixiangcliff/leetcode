@@ -20,6 +20,7 @@ public class Question {
 		GraphNode n6 = new GraphNode(6);
 		GraphNode n7 = new GraphNode(7);
 		GraphNode n8 = new GraphNode(8);
+		
 		ArrayList<GraphNode> nb1 = new ArrayList<GraphNode>();
 		nb1.add(n2);
 		nb1.add(n3);
@@ -36,17 +37,19 @@ public class Question {
 		nb3.add(n1);
 		nb3.add(n2);
 		nb3.add(n6);
+		nb3.add(n5);
 		n3.neighbors = nb3;
 		
 		ArrayList<GraphNode> nb4 = new ArrayList<GraphNode>();
 		nb4.add(n2);
-		n3.neighbors = nb4;
+		n4.neighbors = nb4;
 		
 		ArrayList<GraphNode> nb5 = new ArrayList<GraphNode>();
 		nb5.add(n2);
 		nb5.add(n6);
 		nb5.add(n7);
 		nb5.add(n8);
+		nb5.add(n3);
 		n5.neighbors = nb5;
 		
 		ArrayList<GraphNode> nb6 = new ArrayList<GraphNode>();
@@ -98,25 +101,34 @@ public class Question {
 			int size = q.size();
 			for (int i = 0; i < size; i++) {
 				GraphNode cur = q.poll();
+				System.out.print("cur: " + cur.label);
+				System.out.println("  count: " + cur.neighbors.size());
 				set.add(cur);
-				count += countConnections(cur.neighbors, set);
+				count += countConnections(cur.neighbors, set, q);
 			}
 		}
 		return count;
 	}
 	
-	private int countConnections(ArrayList<GraphNode> neighbors, HashSet<GraphNode> set) {
-		int count = 0;
-		for (int i = 0; i < neighbors.size() - 1; i++) {
+	private int countConnections(ArrayList<GraphNode> neighbors, HashSet<GraphNode> set, LinkedList<GraphNode> q) {
+		int cnt = 0;
+		for (int i = 0; i <= neighbors.size() - 1; i++) {
+			if (i == neighbors.size() - 1) {
+				if (!set.contains(neighbors.get(i))) {
+					q.offer(neighbors.get(i));
+				}
+				break;
+			}
 			if (!set.contains(neighbors.get(i))) {
 				for (int j = i + 1; j < neighbors.size(); j++) {
 					if (!set.contains(neighbors.get(j)) && neighbors.get(i).neighbors.contains(neighbors.get(j))) {
-						count++;
+						cnt++;
 					}
 				}
+				q.offer(neighbors.get(i));
 			}
 		}
-		return count;
+		return cnt;
 	}
 
 }

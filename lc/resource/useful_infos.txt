@@ -39,3 +39,6 @@ useful links:
 	
 7. 水塘抽样（Reservoir sampling）
 	http://zhan.renren.com/severus?gid=3602888497996972572
+	
+8. glassdoor qoogle interview questions:
+	http://www.glassdoor.com/GD/Interview/Google-Interview-Questions-E9079.htm?sort.sortType=RD&sort.ascending=false&filter.jobTitleFTS=software+engineer

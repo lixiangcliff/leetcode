@@ -10,8 +10,8 @@ public class Question {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int[] A =  {1,2,3,4,5,6,11,11,22,22,34};
-		int[] B =  {3,3,4};
+		int[] A =  {3,4,5};
+		int[] B =  {2,4,5,6};
 		Question q = new Question();
 		ArrayList<Integer> res = q.substract(A, B);
 		for (int num : res) {
@@ -43,9 +43,6 @@ public class Question {
 		int aim = B[0];
 		int l = 0;
 		int r = A.length - 1;
-		// find the first element in A that is equals to aim, 
-		//if there is no such element, find the first element that is bigger that 10, 
-		//if still cannot find, then there is nothing to substract from A
 		while (l + 1 < r) { 
 			int m = l + (r - l) / 2;
 			if (A[m] >= aim) {
@@ -55,23 +52,23 @@ public class Question {
 			}
 		}
 		int idx = 0;
-		if (A[l] == aim) {
+		if (A[l] == aim) { // find the first element in A that is equals to aim,
 			idx = l;
-		} else if (A[r] == aim) {
+		} else if (A[r] == aim) { // find the first element in A that is equals to aim,
 			idx = r;
-		} else if (aim < A[l]) {
+		} else if (aim < A[l]) { //if there is no such element, find the first element that is bigger that aim, 
 			idx = l;
-		} else if (A[l] < aim && aim < A[r]) {
+		} else if (A[l] < aim && aim < A[r]) { //if there is no such element, find the first element that is bigger that aim, 
 			idx = r;
-		} else {
+		} else { //if still cannot find, then there is nothing to substract from A
 			idx = A.length;
 		}
-		for (int i = 0; i <= idx; i++) {
-			if (A[i] != aim) {
-				res.add(A[i]);
-			}
+		for (int i = 0; i < idx; i++) { //处理A在idx之前的所有
+			res.add(A[i]);
 		}
-		idx++;
+		while (idx < A.length && A[idx] == aim) { // 处理好B中第0个位置在A中所能减去的值
+			idx++;
+		}
 		for (int i = 1; i < B.length && idx < A.length; i++) {
 			if (B[i] == B[i - 1]) {
 				continue;
@@ -87,7 +84,7 @@ public class Question {
 				} 
 			}
 		}
-		for (int i = idx; i < A.length; i++) {
+		for (int i = idx; i < A.length; i++) { // 把A中可能的剩余都加到res中
 			res.add(A[i]);
 		}
 		return res;

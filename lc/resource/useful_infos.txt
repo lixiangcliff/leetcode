@@ -42,3 +42,10 @@ useful links:
 	
 8. glassdoor qoogle interview questions:
 	http://www.glassdoor.com/GD/Interview/Google-Interview-Questions-E9079.htm?sort.sortType=RD&sort.ascending=false&filter.jobTitleFTS=software+engineer
+	
+9. database sharding
+	http://highscalability.com/blog/2009/8/6/an-unorthodox-approach-to-database-design-the-coming-of-the.html
+	http://wzhw2008.iteye.com/blog/1698754
+	
+10. index of database
+	

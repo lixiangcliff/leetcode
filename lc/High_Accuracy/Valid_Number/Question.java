@@ -7,6 +7,9 @@ public class Question {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		Question q = new Question();
+		String s = "001";
+		System.out.println(q.isNumber(s));
 
 	}
 	

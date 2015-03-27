@@ -78,8 +78,8 @@ public class Question {
 				} else {
 					sb.append('.');
 				}
-				item[i] = sb.toString(); // 完成一行，并加入item
 			}
+			item[i] = sb.toString(); // 完成一行，并加入item
 		}
 		return item;
 	}

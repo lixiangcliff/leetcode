@@ -46,11 +46,12 @@ public class Question {
 			return result;
 		}
 		ArrayList<String> item = new ArrayList<String>(); // 以ArrayList<String>的形式存一组合法的解
-		helper(result, item, s, dict, 0);
+		int maxLen = getMaxLen(dict);
+		helper(result, item, s, dict, maxLen, 0);
 		return result;
 	}
 	
-	private void helper(ArrayList<String> result, ArrayList<String> item, String s, Set<String> dict, int start){
+	private void helper(ArrayList<String> result, ArrayList<String> item, String s, Set<String> dict, int maxLen, int start){
 		if (start == s.length()) { // 结束了。start到了末尾
             StringBuilder sb = new StringBuilder();
             for (String str: item) {
@@ -61,15 +62,23 @@ public class Question {
             result.add(sb.toString());
             return;
 		}
-		for (int i = start; i < s.length(); i++) {
+		for (int i = start; i < maxLen && i < s.length(); i++) {
 			String temp = s.substring(start, i + 1);
 			if (!dict.contains(temp)) {// 如果sb不是dict中的一个单词，则不需要递归了 
 				continue;
 			}
             item.add(temp); // 添加
-            helper(result, item, s, dict, i + 1); // 递归
+            helper(result, item, s, dict, maxLen, i + 1); // 递归
             item.remove(item.size() - 1); // 回溯
 		}
+	}
+	
+	private int getMaxLen(Set<String> dict) {
+		int max = 0;
+		for (String str : dict) {
+			max = Math.max(max, str.length());
+		}
+		return max;
 	}
 	
 	//【注2】加上这个函数纯粹只是为了pass leetcode上下面这个test case

@@ -48,4 +48,12 @@ useful links:
 	http://wzhw2008.iteye.com/blog/1698754
 	
 10. index of database
+	http://baike.baidu.com/view/2079871.htm
+		http://en.wikipedia.org/wiki/Database_index
+
+11.	Build heap complexity
+	http://stackoverflow.com/questions/9755721/build-heap-complexity
+	
+12. webservice
+	http://sakyone.iteye.com/blog/353063
 	

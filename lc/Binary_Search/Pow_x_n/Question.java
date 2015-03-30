@@ -8,7 +8,9 @@ public class Question {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Question q = new Question();
-		System.out.println(q.pow(5, -2));
+		System.out.println(q.pow(0.00001, 2147483647));
+		//System.out.println(Integer.MAX_VALUE);
+
 	}
 	
 	/**
@@ -16,9 +18,49 @@ public class Question {
 	 * Implement pow(x, n).
 	 */
 	
+	//手写
+	public double pow(double x, int n) {
+		if (x == 0) { // 这一步可有可无
+			return 0;
+		}
+		if (n == 0) { // base case
+			return 1;
+		}
+		boolean negative = n < 0 ? true : false;
+		if (negative) {
+			return 1 / (helper(x, -(n + 1)) * x); // MIN比MAX绝对值大1，防止取“-n”会溢出
+		} else {
+			return helper(x, n);
+		}
+	}
+	
+	private double helper(double x, int n) {
+		if (n == 0) {
+			return 1;
+		}
+		double half = (double) helper(x, n / 2);
+		if (n % 2 == 0) {
+			return half * half;
+		} else {
+			return half * half * x;
+		}
+	}
+	
+	//下面这样写会有大量重复计算helper(x, n / 2)，导致超时！
+/*	private double helper(double x, int n) {
+		if (n == 0) {
+			return 1;
+		}
+		if (n % 2 == 0) {
+			return helper(x, n / 2) * helper(x, n / 2);
+		} else {
+			return helper(x, n / 2) * helper(x, n / 2) * x;
+		}
+	}*/
+	
 	//http://www.cnblogs.com/yuzhangcmu/p/4174683.html
 	//n < 0时，转化为n > 0的处理，要注意可能的越界的问题。(Interger.MIN_VALUE的绝对值比Interger.MAX_VALUE大1，所以Interger.MIN_VALUE取反会越界)
-	public double pow(double x, int n) {
+/*	public double pow(double x, int n) {
 		if (x == 0) { // 这一步可有可无
 			return 0;
 		}
@@ -35,5 +77,5 @@ public class Question {
 			result *= x;
 		}
 		return result;
-	}
+	}*/
 }

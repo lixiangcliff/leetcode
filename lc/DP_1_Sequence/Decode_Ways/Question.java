@@ -44,17 +44,21 @@ public class Question {
 			return 0;
 		}
 		int[] result = new int[s.length() + 1];
-		result[0] = 1;
-		for (int i = 1; i <= s.length(); i++) {
-			if (i == 1) { // i == 1时，i - 2越界，所以要特殊考虑
-				result[i] = isValid(s.substring(0, 1)) ? 1 : 0;
-			} else {
-				if (isValid(s.substring(i - 1, i))) { // 位差，举例。检查当前位是合法
-					result[i] += result[i - 1];
-				}
-				if (isValid(s.substring(i - 2, i))) { // 位差，举例。检查前一位加上当前位是否合法
-					result[i] += result[i - 2];
-				}
+		result[0] = 1; // 【注】当s为空，decode way有一种，即"空"
+		if (!isValid(s.substring(0, 1))) {
+			return 0;
+		} else {
+			result[1] = 1;
+		}
+		for (int i = 2; i <= s.length(); i++) {
+			if (isValid(s.substring(i - 1, i))) { // 位差，举例。检查当前位是合法
+				result[i] += result[i - 1];
+			}
+			if (isValid(s.substring(i - 2, i))) { // 位差，举例。检查前一位加上当前位是否合法
+				result[i] += result[i - 2];
+			}
+			if (result[i] == 0) {
+				return 0;
 			}
 		}
 		return result[s.length()];

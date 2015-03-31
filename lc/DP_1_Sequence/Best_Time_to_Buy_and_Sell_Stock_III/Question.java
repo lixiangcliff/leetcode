@@ -24,14 +24,14 @@ public class Question {
 	
 	//类似Best Time to Buy and Sell Stock I。
 	//思想：想象有一个挡板从左移动到右。左边卖一次，右边卖一次。于是创建两个DP数组，left[]和right[]
-	//left表示正序着看，从第一天到第i天，卖1次最大收益（不一定要在第i天卖）；不断记录更新的是min值。
-	//right表示倒序着看，从最后一天到第i天，卖1次最大收益（不一定要在第i天买）；不断记录更新的是max值。
+	//left表示正序着看，从第一天到第i天，买卖1次最大收益（不一定要在第i天卖）；不断记录更新的是min值。
+	//right表示倒序着看，从第i天到最后一天，买卖1次最大收益（不一定要在第i天买）；不断记录更新的是max值。
 	//最后遍历原数组，找到max(left[i] + right[i])
 	//【注】从左往右，要不断记录更新的是min值；从右往左时,要不断记录更新的是max值。
 	//此题无位差
 	//http://www.ninechapter.com/solutions/best-time-to-buy-and-sell-stock-iii/
     public int maxProfit(int[] prices) {
-    	if(prices == null || prices.length == 0){
+    	if (prices == null || prices.length == 0) {
     		return 0;
     	}
     	int len = prices.length;

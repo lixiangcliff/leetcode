@@ -34,11 +34,15 @@ public class Solution {
 	 */
 	
 	//http://www.cnblogs.com/yuzhangcmu/p/4153927.html
+	//state: f[i][v] 前i个数，第i个数调整为v，满足相邻两数<=target，所需要的最小代价
+	//function: f[i][v] = min(f[i-1][v’] + |A[i]-v|),  |v-v’| <= target
+	//init: f[0][v] = Math.abs(v - A[0]);
+	//answer: min(f[n][...]) n=[1,100]
     public int MinAdjustmentCost(ArrayList<Integer> A, int target) {
         // write your code here
     	int[][] res = new int[A.size()][101]; //res[i][v]把index = i的值修改为v，所需要的最小花费
     	for (int i = 0; i < A.size(); i++) {
-    		for (int j = 1; j <= 100; j++) { // j表示v
+    		for (int j = 1; j < 101; j++) { // j表示v
     			if (i == 0) {
     				res[i][j] = Math.abs(j - A.get(i));
     			} else {

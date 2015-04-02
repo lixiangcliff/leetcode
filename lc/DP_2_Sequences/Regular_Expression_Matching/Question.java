@@ -65,7 +65,7 @@ public class Question {
 	        		result[i][j] = false;
 	        	} else {
 	        		if (p.charAt(j - 1) == '*') { 
-	        			// result[i][j - 2]:表示*前一个数取0次 ;		||后面的：表示*前一个数取n次 		result[i - 1][j]：e.g. s = "abcd", t = "d*"
+	        			// j > 1: 避免数组越界 	result[i][j - 2]:表示*前一个数取0次 ;	||后面的：表示*前一个数取n次 	result[i - 1][j]：e.g. s = "abcd", t = "d*"
 						result[i][j] = j > 1 && (result[i][j - 2] || (s.charAt(i - 1) == p.charAt(j - 2) || p .charAt(j - 2) == '.') && result[i - 1][j]);
 	        		} else { 
 	        			result[i][j] = result[i - 1][j - 1] && (s.charAt(i - 1) == p.charAt(j - 1) || p.charAt(j - 1) == '.'); //位差

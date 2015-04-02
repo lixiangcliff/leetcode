@@ -38,6 +38,44 @@ public class Question {
 	 * isMatch("aab", "c*a*b") → false
 	 */
 	
+	//Zhe's method
+	public boolean isMatch(String s, String p) {
+		if (p.length() == 0) {
+			return s.length() == 0;
+		}
+        //to pass leetcode start;
+        // without this optimization, it will fail for large data set
+		int pNoneStarLen = 0; //p中的非'*'的字符数量
+		for (char c : p.toCharArray()) {
+			if (c != '*') {
+				pNoneStarLen++;
+			}
+		}
+		if (pNoneStarLen > s.length()){ //如果p中非'*'字符数量比s还多，则说明p中肯定有冗余，所以false
+			return false;
+		}
+        //to pass leetcode end;
+		boolean[][] result = new boolean[s.length() + 1][p.length() + 1];
+		for (int i = 0; i <= s.length(); i++) {
+			for (int j = 0; j <= p.length(); j++) {
+				if (i == 0 && j == 0) {
+					result[i][j] = true;
+				} else if (i == 0) { //p[j]为'*',并且result[0][j - 1]为true，则result[0][j]才为true
+					result[i][j] = result[0][j - 1] && p.charAt(j - 1) == '*'; // 位差
+				} else if (j == 0) {
+					result[i][j] = false;
+				} else {
+					if (p.charAt(j - 1) == '*') { // 位差
+		    			result[i][j] = result[i - 1][j] || result[i][j - 1]; //举例画图
+					} else {
+						result[i][j] = result[i - 1][j - 1] && (s.charAt(i - 1) == p.charAt(j - 1) || p.charAt(j - 1) == '?');
+					}
+				}
+			}
+		}
+		return result[s.length()][p.length()];
+	}
+	
 	//Match可以理解为前面的string可否合理用后面的string表示出来
 	//DP 2_Seq
 	//http://blog.csdn.net/linhuanmars/article/details/21198049
@@ -55,7 +93,7 @@ public class Question {
 	//
 	//【注】 isEqual(s[i], p[j])定义为s[i] == p[j] or p[j] = '?'
 	//【注】result[][]和s，p有位差
-	public boolean isMatch(String s, String p) {
+	public boolean isMatch2(String s, String p) {
 		if (p.length() == 0) {
 			return s.length() == 0;
 		}

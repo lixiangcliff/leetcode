@@ -8,13 +8,15 @@ public class Question {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Question q = new Question();
-/*		System.out.println(q.isMatch("aa","a"));
+		System.out.println(q.isMatch("aa","a"));
 		System.out.println(q.isMatch("aa","aa"));
 		System.out.println(q.isMatch("aaa","aa"));
 		System.out.println(q.isMatch("aa", "a*"));
 		System.out.println(q.isMatch("aa", ".*"));
 		System.out.println(q.isMatch("aab", "c*a*b"));
-		System.out.println(q.isMatch("a",".*"));*/
+		System.out.println(q.isMatch("a",".*"));
+		System.out.println(q.isMatch("abc", "*"));
+		System.out.println(q.isMatch("", "*."));
 /*		System.out.println(q.isMatch2("aa","a"));
 		System.out.println(q.isMatch2("aa","aa"));
 		System.out.println(q.isMatch2("aaa","aa"));
@@ -22,8 +24,8 @@ public class Question {
 		System.out.println(q.isMatch2("aa", ".*"));
 		System.out.println(q.isMatch2("aab", "c*a*b"));
 		System.out.println(q.isMatch2("a",".*"));*/
-		System.out.println(q.isMatch("abcdede", "ab.*de"));
-		System.out.println(q.isMatchDP2("abcdede", "ab.*de"));
+		//System.out.println(q.isMatch("abc", "*"));
+		//System.out.println(q.isMatchDP2("abcdede", "ab.*de"));
 		//System.out.println(q.isMatch("abcdefghijklmn", ".*")); // ".*"可以match任意字符串
 	}
 	
@@ -44,7 +46,38 @@ public class Question {
 	 * isMatch("ab", ".*") → true 
 	 * isMatch("aab", "c*a*b") → true
 	 */
-	
+	//Zhe's method:
+	public boolean isMatch(String s, String p) {
+		int len1 = s.length();
+		int len2 = p.length();
+		boolean[][] result = new boolean[len1 + 1][len2 + 1];
+		result[0][0] = true;
+		for (int i = 1; i <= len1; i++) { // 其实没必要，by default每个位置的值都是false
+			result[i][0] = false;
+		}
+		for (int i = 0; i <= len1; i++) {
+			for (int j = 1; j <= len2; j++) {
+				if (p.charAt(j - 1) == '*' && j != 1) { // when j == 1, isMatch("abc", "*")  outOfBoundException
+					if (i == 0) {
+						result[i][j] = result[i][j - 2];
+					} else {
+						// 						0个* 				>0个*												e.g. s = "abcd", t = "d*"
+						result[i][j] = result[i][j - 2] || (s.charAt(i - 1) == p.charAt(j - 2) || p .charAt(j - 2) == '.') && result[i - 1][j];
+					}
+				} else {
+					if (i == 0) {
+						result[i][j] = false;
+					} else if (s.charAt(i - 1) == p.charAt(j - 1) || p.charAt(j - 1) == '.') {
+						result[i][j] = result[i - 1][j - 1];
+					} else {
+						result[i][j] = false;
+					}
+				}
+			}
+		}
+		return result[len1][len2];
+	}
+    
 	//Match可以理解为前面的string可否合理用后面的string表示出来
 	//DP 2_Seq
 	//http://blog.csdn.net/linhuanmars/article/details/21145563
@@ -72,7 +105,7 @@ public class Question {
 	//【注】".*"可以match任意字符串，
 	//【注】 isEqual(s[i], p[j])定义为s[i] == p[j] or p[j] = '.'
 	//【注】result[][]和s，p有位差
-	public boolean isMatch(String s, String p) {
+	public boolean isMatch2(String s, String p) {
 		if (s == null || p == null){
         	return false;
         }

@@ -46,38 +46,36 @@ public class Question {
 	 * isMatch("ab", ".*") → true 
 	 * isMatch("aab", "c*a*b") → true
 	 */
+	
 	//Zhe's method:
 	public boolean isMatch(String s, String p) {
+		if (s == null || p == null){
+        	return false;
+        }
 		int len1 = s.length();
 		int len2 = p.length();
 		boolean[][] result = new boolean[len1 + 1][len2 + 1];
-		result[0][0] = true;
-		for (int i = 1; i <= len1; i++) { // 其实没必要，by default每个位置的值都是false
-			result[i][0] = false;
-		}
 		for (int i = 0; i <= len1; i++) {
-			for (int j = 1; j <= len2; j++) {
-				if (p.charAt(j - 1) == '*' && j != 1) { // when j == 1, isMatch("abc", "*")  outOfBoundException
-					if (i == 0) {
-						result[i][j] = result[i][j - 2];
-					} else {
-						// 						0个* 				>0个*												e.g. s = "abcd", t = "d*"
-						result[i][j] = result[i][j - 2] || (s.charAt(i - 1) == p.charAt(j - 2) || p .charAt(j - 2) == '.') && result[i - 1][j];
-					}
-				} else {
-					if (i == 0) {
-						result[i][j] = false;
-					} else if (s.charAt(i - 1) == p.charAt(j - 1) || p.charAt(j - 1) == '.') {
-						result[i][j] = result[i - 1][j - 1];
-					} else {
-						result[i][j] = false;
-					}
-				}
+			for (int j = 0; j <= len2; j++) {
+				if (i == 0 && j == 0) { // s和p都为空时，true
+	        		result[i][j] = true;
+	        	} else if (i == 0) { // s为空 ，并且p不为空。需要p长度大于1,并且p[j]是'*',并且result[i][j - 2]==true已经“扫清之前的障碍”了，才可能是true
+	        		result[i][j] = j > 1 && p.charAt(j - 1) == '*' && result[i][j - 2]; // 位差
+	        	} else if (j == 0) { // p为空，并且s不为空
+	        		result[i][j] = false;
+	        	} else {
+	        		if (p.charAt(j - 1) == '*') { 
+	        			// result[i][j - 2]:表示*前一个数取0次 ;		||后面的：表示*前一个数取n次 		result[i - 1][j]：e.g. s = "abcd", t = "d*"
+						result[i][j] = j > 1 && (result[i][j - 2] || (s.charAt(i - 1) == p.charAt(j - 2) || p .charAt(j - 2) == '.') && result[i - 1][j]);
+	        		} else { 
+	        			result[i][j] = result[i - 1][j - 1] && (s.charAt(i - 1) == p.charAt(j - 1) || p.charAt(j - 1) == '.'); //位差
+		        	}
+	        	}
 			}
 		}
 		return result[len1][len2];
 	}
-    
+	
 	//Match可以理解为前面的string可否合理用后面的string表示出来
 	//DP 2_Seq
 	//http://blog.csdn.net/linhuanmars/article/details/21145563

@@ -7,7 +7,15 @@ public class Question {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		Question q = new Question();
+		String v1 = "1.0";
+		String v2 = "01.0.0.00";
+		String[] strArr1 = v1.split("\\.");
+		System.out.println(q.compareVersion(v1, v2));
+		/*for (String str : strArr1) {
+			System.out.println(str);
+		}*/
+		
 	}
 	
 	/**
@@ -24,10 +32,64 @@ public class Question {
 		0.1 < 1.1 < 1.2 < 13.37
 	 */
 	
-	//
     public int compareVersion(String version1, String version2) {
-    	
-        return 0;
+    	if (version1 == null && version2 == null || version1.length() == 0 && version2.length() == 0) {
+    		return 0;
+    	}
+    	if (version1 == null || version1.length() == 0) {
+    		return -1;
+    	}
+    	if (version2 == null || version2.length() == 0) {
+    		return 1;
+    	}
+    	String[] strArr1 = version1.split("\\.");
+    	String[] strArr2 = version2.split("\\.");
+    	if (strArr1 == null && strArr2 == null || strArr1.length == 0 && strArr2.length == 0) {
+    		return 0;
+    	}
+    	if (strArr1 == null || strArr1.length == 0) {
+    		return -1;
+    	}
+    	if (strArr2 == null || strArr2.length == 0) {
+    		return 1;
+    	}
+    	int len1 = strArr1.length;
+    	int len2 = strArr2.length;
+    	int i = 0;
+    	while (i < len1 && i < len2) {
+    		int v1 = Integer.parseInt(strArr1[i]);
+    		int v2 = Integer.parseInt(strArr2[i]);
+    		if (v1 < v2) {
+    			return -1;
+    		} else if (v1 > v2) {
+    			return 1;
+    		} else {
+    			i++;
+    		}
+    	}
+    	if (len1 < len2) {
+    		if (getSum(strArr2, i) == 0) {
+    			return 0;
+    		} else {
+    			return -1;
+    		}
+		} else if (len1 > len2) {
+			if (getSum(strArr1, i) == 0) {
+    			return 0;
+    		} else {
+    			return 1;
+    		}
+		} else {
+			return 0;
+		}
+    }
+    
+    private int getSum(String[] strs, int idx) {
+    	int sum = 0;
+    	for (int i = idx; i < strs.length; i++) {
+    		sum += Integer.parseInt(strs[i]); 
+    	}
+    	return sum;
     }
 
 }

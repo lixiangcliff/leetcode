@@ -50,11 +50,13 @@ public class Question {
     		}
     	}
     	int preIdx = 0;
-    	int gap = 0;
+    	int gap = num.length == 1 ?  0 : (max - min) / (num.length - 1);
     	for (int i = 1; i < bkCount; i++) {
     		if (bks.get(i).isEmpty()) {
     			continue;
     		}
+    		//【注】Then the maximum gap will be no smaller than ceiling[(B - A) / (N - 1)], 
+    		//Then the maximum gap will be no smaller than ceiling[(B - A) / (N - 1)],所以桶内的元素不需要彼此比较
     		gap = Math.max(gap, bks.get(i).get(0) - bks.get(preIdx).get(1));//桶号大的min - 桶号大的max
     		preIdx = i;
     	}

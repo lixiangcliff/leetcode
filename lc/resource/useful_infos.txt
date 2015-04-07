@@ -11,6 +11,10 @@ useful links:
 
 4. System Design:
 	http://www.mitbbs.com/article/JobHunting/32777529_0.html
+	http://www.mitbbs.com/article/JobHunting/32899043_0.html
+
+4.1	各种问题
+	https://www.evernote.com/shard/s576/sh/7e58b450-1abe-43a8-bf82-fbf07f1db13c/049802174415b418a2e65f75b744ab72
 	
 	系统设计面试题思路综述	
 	http://dongxicheng.org/search-engine/system-designing-in-finging-jobs/
@@ -40,8 +44,9 @@ useful links:
 7. 水塘抽样（Reservoir sampling）
 	http://zhan.renren.com/severus?gid=3602888497996972572
 	
-8. glassdoor qoogle interview questions:
-	http://www.glassdoor.com/GD/Interview/Google-Interview-Questions-E9079.htm?sort.sortType=RD&sort.ascending=false&filter.jobTitleFTS=software+engineer
+8. qoogle interview questions:
+	glass door:http://www.glassdoor.com/GD/Interview/Google-Interview-Questions-E9079.htm?sort.sortType=RD&sort.ascending=false&filter.jobTitleFTS=software+engineer
+	g4g: http://www.geeksforgeeks.org/forums/topic-tag/google/
 	
 9. database sharding
 	http://highscalability.com/blog/2009/8/6/an-unorthodox-approach-to-database-design-the-coming-of-the.html
@@ -56,4 +61,20 @@ useful links:
 	
 12. webservice
 	http://sakyone.iteye.com/blog/353063
+	
+13. min heap vs max heap
+	http://www.mitbbs.com/article_t1/JobHunting/32692253_0_3.html 53楼
+	
+14. Roman to interger corner cases:
+	http://www.cnblogs.com/TenosDoIt/p/3793503.html
+	
+15. 线性排序算法（计数排序，基数排序，桶排序）分析及实现
+	http://blog.csdn.net/zouliping123/article/details/8934856
+	http://www.cnblogs.com/ttltry-air/archive/2012/08/04/2623302.html
+	计数排序：http://www.cnblogs.com/eaglet/archive/2010/09/16/1828016.html
+	bucket vs radix
+	http://stackoverflow.com/questions/4461737/what-is-the-difference-between-bucket-sort-and-radix-sort
+	
+16. “变态题目”
+	http://www.mitbbs.com/article_t/JobHunting/32921859.html
 	

@@ -27,6 +27,7 @@ public class Question {
 	//radix sorting
 	public String largestNumber(int[] num) {
         Comparator<String> comp = new Comparator<String>(){
+        	@Override
         	public int compare(String s1, String s2) {
         		if (s1 == null || s2 == null) {
         			return 0;
@@ -71,8 +72,4 @@ public class Question {
         }
         return sb.toString();
     }
-	
-	
-    
-
 }

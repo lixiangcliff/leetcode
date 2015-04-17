@@ -6,7 +6,8 @@ useful links:
 	http://www.danielbit.com/blog/puzzle/leetcode/leetcode-summary
 	http://www.douban.com/note/330562764/
 
-3. 115 java interview http://www.javacodegeeks.com/2014/04/java-interview-questions-and-answers.html
+3. 115 java interview 
+	http://www.javacodegeeks.com/2014/04/java-interview-questions-and-answers.html
 	http://bigocheatsheet.com/
 
 4. System Design:
@@ -78,3 +79,11 @@ useful links:
 16. “变态题目”
 	http://www.mitbbs.com/article_t/JobHunting/32921859.html
 	
+17. OO design: Aggregation vs Composition
+	http://programmers.stackexchange.com/questions/61376/aggregation-vs-composition
+
+18. 面试知识点汇集
+	http://www.programmerinterview.com/	
+
+19. tech::interview
+	http://www.fgdsb.com/

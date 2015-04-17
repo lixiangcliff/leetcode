@@ -24,7 +24,6 @@
 	<classpathentry kind="src" path="Tree_Sum"/>
 	<classpathentry kind="src" path="Tree_Traversal"/>
 	<classpathentry kind="src" path="Two_Pointers"/>
-	<classpathentry kind="src" path="True_Interviews"/>
 	<classpathentry kind="src" path="Leetcode_New_Questions"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="output" path="bin"/>

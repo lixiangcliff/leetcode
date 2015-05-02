@@ -47,7 +47,7 @@ public class Question {
     	int m = grid.length;
     	int n = grid[0].length;
     	boolean[][] used = new boolean[m][n];
-    	int[] res = new int[1];
+    	int res = 0;
     	for (int i = 0; i < m; i++) {
     		for (int j = 0; j < n; j++) {
     			if (!used[i][j] && grid[i][j] == '1') {
@@ -79,11 +79,11 @@ public class Question {
     						}
     					}
     				}
-    				res[0]++;
+    				res++;
     			}
     		}
     	}
-    	return res[0];
+    	return res;
     }
     
 }

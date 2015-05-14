@@ -7,8 +7,12 @@ public class Question {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		Question q = new Question();
+		int m = 5; 
+		int n = 9;
+		System.out.println(q.rangeBitwiseAnd(m, n));
 	}
+	
 	
 	/**
 	 * Given a range [m, n] where 0 <= m <= n <= 2147483647, 
@@ -18,7 +22,17 @@ public class Question {
 	 */
 	
     public int rangeBitwiseAnd(int m, int n) {
-        return 0;
+    	if (m == n) {
+    		return m;
+    	}
+    	if ( n == 1) {
+    		return 0;
+    	}
+    	int base = 1;
+    	while (base <= n / 2) {
+    		base *= 2;
+    	}
+        return base;
     }
 
 }

@@ -15,24 +15,30 @@ public class Question {
 	
 	
 	/**
+	 * https://leetcode.com/problems/bitwise-and-of-numbers-range/
 	 * Given a range [m, n] where 0 <= m <= n <= 2147483647, 
 	 * return the bitwise AND of all numbers in this range, inclusive.
 	 * 
 	 * For example, given the range [5, 7], you should return 4.
 	 */
 	
-    public int rangeBitwiseAnd(int m, int n) {
-    	if (m == n) {
-    		return m;
+	//http://www.meetqun.com/thread-8769-1-1.html
+	//https://leetcode.com/discuss/32278/8line-c-simple-clear-solution
+	public int rangeBitwiseAnd(int m, int n) {
+		int i = 0;
+		while (m != n) {
+			m >>= 1;
+			n >>= 1;
+			i++;
+		}
+		return m << i;
+	}
+	
+    public int rangeBitwiseAnd2(int m, int n) {
+    	while (n > m) {
+    		n &= n - 1;
     	}
-    	if ( n == 1) {
-    		return 0;
-    	}
-    	int base = 1;
-    	while (base <= n / 2) {
-    		base *= 2;
-    	}
-        return base;
+        return n;
     }
 
 }

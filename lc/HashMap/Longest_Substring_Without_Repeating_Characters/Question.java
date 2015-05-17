@@ -31,19 +31,16 @@ public class Question {
 		HashSet<Character> set = new HashSet<Character>();
 		int maxLen = 1;
 		int l = 0;
-		int len = 0;
 		for (int i = 0; i < s.length(); i++) {
 			char c = s.charAt(i);
-			if (set.contains(c)) { //【注】如果map.get(c)<l，说明该c的index已经在左窗口的左边了，是无效的
+			if (set.contains(c)) { 
 				while (l < i && set.contains(c)) {
 					set.remove(s.charAt(l));
 					l++;
-					len--;
 				}
 			} 
 			set.add(c);
-			len++;
-			maxLen = Math.max(maxLen, len);
+			maxLen = Math.max(maxLen, i - l + 1);
 		}
 		return maxLen;
 	}

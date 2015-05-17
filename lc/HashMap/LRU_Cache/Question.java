@@ -27,10 +27,12 @@ public class Question {
  * it should invalidate the least recently used item before inserting a new item.
  */
 
+// set和get都是O(1)
 // 最新访问（添加）的node放在尾巴；最旧的从头删除。
 // 1.对于set和get，当被访问的key在cache中已经存在，则要把该key所指node从当前LinkedList的位置上删去（delete()）
 // 2.对于set和get都会有key被访问，所以一定需要有把被访问key所对应node的放在tail的操作（insertTail()）（除非这个node本来就已经在tail了）
 // 3.对于set，当增加新的key时（即cache里不存在的key），则要更新map
+// 【注】之所以用双向链表，是为了删除时候也用O(1)的时间（如果单向的话，需要O(n)时间）
 // 【注】看图。 head和tail为dummy node，方便添加和删除。并且增加delete()和insert2Tail()的方法，方便调用和理清思路。
 // http://blog.csdn.net/linhuanmars/article/details/21310633
 // 【注】放在leetcode里的话 siganature要改为public class LRUCache

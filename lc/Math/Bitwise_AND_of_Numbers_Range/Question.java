@@ -8,8 +8,8 @@ public class Question {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Question q = new Question();
-		int m = 5; 
-		int n = 9;
+		int m = 63; 
+		int n = 97;
 		System.out.println(q.rangeBitwiseAnd(m, n));
 	}
 	

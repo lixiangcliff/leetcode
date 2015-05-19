@@ -1,4 +1,4 @@
-package Minimum_Size_Subnums_Sum;
+package Minimum_Size_Subarray_Sum;
 
 public class Question {
 

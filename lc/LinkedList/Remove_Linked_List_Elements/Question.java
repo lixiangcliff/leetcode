@@ -26,13 +26,15 @@ public class Question {
         ListNode pre = dummy;
         dummy.next = head;
         while (head != null) {
+            ListNode next = head.next;
         	if (head.val != val) {
         		pre.next = head;
         		pre = head;
         	} else {
         		pre.next = head.next;
+        		head.next = null;
         	}
-        	head = head.next;
+        	head = next;
         }
         return dummy.next;
     }

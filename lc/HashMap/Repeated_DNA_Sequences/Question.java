@@ -42,52 +42,32 @@ public class Question {
     	charMap.put('C', 1);
     	charMap.put('G', 2);
     	charMap.put('T', 3);
-    	int val = 0;
+    	int val = 0; //【注】中心思想：每一种单独的排列，表示成bin的数值都不同
     	for (int i = 0; i < 10; i++) {
     		val = addValEnd(s, charMap, val, i);
     	}
-    	HashMap<Integer, Integer> dnamMap = new HashMap<Integer, Integer>();
-    	dnamMap.put(val, 1);
+    	HashMap<Integer, Integer> dnaMap = new HashMap<Integer, Integer>();
+    	dnaMap.put(val, 1);
     	for (int i = 10; i < s.length(); i++) {
-    		val &= ((int)Math.pow(2, 18) - 1);
-    		val = addValEnd(s, charMap, val, i);
-    		if (dnamMap.containsKey(val)) {
-    			if (dnamMap.get(val) == 1) {
-    				//根本不需要
-    				/*String str = Integer.toBinaryString(val);
-    				StringBuilder binSb = new StringBuilder(str);
-    				while (binSb.length() < 20) {
-    					binSb.insert(0, "0");
-    				}
-    				String binStr = binSb.toString();
-    				StringBuilder sb = new StringBuilder();
-    				for (int j = 0; j <= binStr.length() - 2; j += 2) {
-    					String letter = binStr.substring(j, j + 2);
-    					if (letter.equals("00")) {
-    						sb.append("A");
-    					} else if (letter.equals("01")) {
-    						sb.append("C");
-    					} else if (letter.equals("10")) {
-    						sb.append("G");
-    					} else if (letter.equals("11")) {
-    						sb.append("T");
-    					}
-    				}
-    				String curStr = sb.toString();*/
+    		val &= ((int)Math.pow(2, 18) - 1); //mask掉左边第一个字母表示的bin数值(留下右边九个)
+    		val = addValEnd(s, charMap, val, i); //加上当前i位置的bin值
+    		if (dnaMap.containsKey(val)) {
+    			if (dnaMap.get(val) == 1) { //只在第二次遇到相同的时候才增加，保证在res中添加一次
     				String curStr = s.substring(i - 9, i + 1);
     				res.add(curStr);
-    				dnamMap.put(val, 2);
-    			} else {
-    				dnamMap.put(val, dnamMap.get(val) + 1);
+    				dnaMap.put(val, 2);
+    			} else { // 这步其实可有可无
+    				dnaMap.put(val, dnaMap.get(val) + 1);
     			}
     		} else {
-    			dnamMap.put(val, 1);
+    			dnaMap.put(val, 1);
     		}
     	}
     	return res;
     }
 
-	private int addValEnd(String s, HashMap<Character, Integer> charMap, int val, int i) {
+    //add bin value from the end
+	private int addValEnd(String s, HashMap<Character, Integer> charMap, int val, int i) { 
 		int num = charMap.get(s.charAt(i));
 		val <<= 1;
 		val += (num / 2);

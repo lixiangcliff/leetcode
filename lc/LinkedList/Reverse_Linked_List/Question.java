@@ -19,18 +19,15 @@ public class Question {
         if (head == null || head.next == null) {
         	return head;
         }
-        ListNode pre = new ListNode(0);
-        pre.next = head;
-        while (head.next != null) {
-        	ListNode next = head.next;
-        	head.next = next.next;
-        	next.next = pre.next;
-        	pre.next = next;
+        ListNode cur = head;
+        while (cur.next != null) {
+        	ListNode next = cur.next;
+        	cur.next = next.next;
+        	next.next = head;
+        	head = next;
         }
-        return pre.next;
+        return head;
     }
-	
-
 }
 
 

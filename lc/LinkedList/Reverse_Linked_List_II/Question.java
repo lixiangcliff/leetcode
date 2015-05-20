@@ -39,21 +39,19 @@ public class Question {
 		ListNode dummy = new ListNode(0);
 		dummy.next = head;
 		ListNode pre = dummy;
-		int i = 1;// i从始至终作为标记， 表示现在走到了哪里，对于确定m和n的位置很方便
+		int i = 1;// 【注】i从始至终作为标记， 表示现在走到了哪里，对于确定m和n的位置很方便
 		for (; i < m; i++) {
 			if (pre == null) {
 				return head;
 			}
 			pre = pre.next;
 		}
-		ListNode mNode = pre.next; // mNode最终会右移至最开始nNode所在位置
-		ListNode cur = mNode.next;
-		while (cur != null && i < n) {//画图！依次从m后面直到n，拿node塞在preNode的后边（preNode.next = cur） 一共拿来n-m次（如果链表长度足够n的话），故边界条件是i<n
+		ListNode cur = pre.next; // cur最终会右移至最开始nNode所在位置
+		while (cur != null && i < n) {//画图！依次从m后面直到n，拿node塞在pre的后边（pre.next = next） 一共拿来n-m次（如果链表长度足够n的话），故边界条件是i<n
 			ListNode next = cur.next;
-			cur.next = pre.next;
-			pre.next = cur;
-			mNode.next = next;
-			cur = next;
+			cur.next = next.next;
+			next.next = pre.next;
+			pre.next = next;
 			i++;
 		}
 		return dummy.next;

@@ -72,7 +72,7 @@ public class Question {
 			curMin = curMin.next;
 			curMax = curMax.next;
 		}
-		return curMax == null ? null : curMax;
+		return curMax; //返回curMin也一样
 	}
 
 }

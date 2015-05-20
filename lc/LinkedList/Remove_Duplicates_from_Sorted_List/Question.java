@@ -30,7 +30,7 @@ public class Question {
 		ListNode cur = head.next;
 		while (cur != null) {
 			if (cur.val == pre.val) { // 如果重复了，则把当前node剔除
-				pre.next = cur.next;
+				pre.next = cur.next; //【注】这步不可少。反例：[1,1]会返回[1,1]（正确答案应该是[1]）
 			} else { // 若不重复，则pre向右移动
 				pre = pre.next;
 			}

@@ -38,7 +38,7 @@ public class Question {
         	if (cur < 'A' || cur > 'Z') {
         		return -1;
         	}
-        	int val = cur- 'A' + 1;
+        	int val = cur - 'A' + 1;
         	if (val <= (Integer.MAX_VALUE - res) / base) {
         		res += val * base;
         	} else {

@@ -33,8 +33,8 @@ public class Question {
 		if (gas == null || cost == null || gas.length == 0 || cost.length == 0 || gas.length != cost.length) {
     		return -1;
     	}
-		int i = 0;
-		int j = i;
+		int i = 0; //当前尝试的起始位置
+		int j = i; //相当于runner
 		int sum = 0; // 表示从当前i到当前j累积的diff和(sum跟着i走)
 		int total = 0; // 表示从起点(位置0)到当前j累积的diff和(total跟着j走)
 		while (j < gas.length) { // j走完一圈就无需再走，原因看图

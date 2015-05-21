@@ -39,8 +39,8 @@ public class Question {
     		set.add(n);
     		int sum = 0;
     		while (n != 0) {
-    			sum += Math.pow((n % 10), 2);
-    			n /= 10;
+    			sum += Math.pow((n % 10), 2); // 每次取最右一位
+    			n /= 10; // 截去最右一位
     		}
     		if (sum == 1) {
     			return true;

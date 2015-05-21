@@ -14,9 +14,9 @@ public class Question {
 		ListNode l4 = new ListNode(4);
 		ListNode l5 = new ListNode(5);
 		l1.next = l2;
-		l2.next = l3;
+/*		l2.next = l3;
 		l3.next = l4;
-		l4.next = l5;
+		l4.next = l5;*/
 		ListNode head = l1;
 		while(head != null){
 			System.out.print(head.val + ",");
@@ -47,6 +47,44 @@ public class Question {
     //http://blog.csdn.net/linhuanmars/article/details/19957455
     //need to understand "reverse" function well
 	public ListNode reverseKGroup(ListNode head, int k) {
+		if (head == null || head.next == null || k <= 1) {
+			return head;
+		}
+		int n = k - 1; //n为需要从后边往前边调动node的次数
+		ListNode dummy = new ListNode(0);
+		dummy.next = head;
+		int count = 0;
+		ListNode pre = dummy;
+		while (head != null) {
+			if (count == n) { // only do reverse when reach there is still n times to "fetch and insert"
+				pre = reverse(pre, n); // 新的pre往右挪了n个node的位子
+				head = pre.next;
+				count = 0;
+				continue;
+			}
+			count++;
+			head = head.next;
+		}
+		return dummy.next;
+	}
+
+	// 这个函数不但把pre和end之间的所有node reverse了，而且保证reverse之后，中间被reverse的node 左边仍连接平pre,右边仍连接原链表.
+	// 关于这个函数的两个参数pre和 end: pre的下一个node是k个node里面的第1个 ,n表示调动n次
+	private ListNode reverse(ListNode pre, int n) {
+		if (pre == null || pre.next == null) {
+			return pre;
+		}
+		ListNode cur = pre.next;
+		for (int i = 0; i < n; i++) {
+			ListNode next = cur.next;
+			cur.next = next.next;
+			next.next = pre.next;
+			pre.next = next;
+		}
+		return cur; // 返回的head作为下一轮新的pre（如果还有下一轮的话）
+	} 
+	
+/*	public ListNode reverseKGroup(ListNode head, int k) {
 		if (head == null) {
 			return null;
 		}
@@ -83,7 +121,7 @@ public class Question {
 		}
 		head.next = end; // connect from "right" side (connect kth node to k.next)最后把之前保留好的head和end接上
 		return head; // 返回的head作为下一轮新的pre（如果还有下一轮的话）
-	} 
+	} */
 }
 
 class ListNode {

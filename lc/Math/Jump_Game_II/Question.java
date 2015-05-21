@@ -30,19 +30,19 @@ public class Question {
 	//Greedy
 	//http://www.cnblogs.com/yuzhangcmu/p/4148858.html
 	//O(n^2)时间复杂度，O(1)空间复杂度。
-	public int jump(int[] A) {
-		if (A == null || A.length <= 1) {
+	public int jump(int[] nums) {
+		if (nums == null || nums.length <= 1) {
 			return 0;
 		}
 		int l = 0; // 每轮开始位置
 		int r = 0; // 每轮结束位置
-		int len = A.length;
+		int len = nums.length;
 		int step = 0;
-		int maxReach = A[0];
+		int maxReach = nums[0];
 		while (l <= r && r < len - 1) { //【注】如果l > r 表示本轮maxReach未增加，这样下一轮的i就无法到达，则该直接返回异常。
 			step++; // 每增加1轮就 多跳1步
 			for (int i = l; i <= r; i++) { // 找到本轮的maxReach
-				maxReach = Math.max(maxReach, A[i] + i);
+				maxReach = Math.max(maxReach, nums[i] + i);
 				if (maxReach >= len - 1) { // 已经可以到达最末了
 					return step;
 				}

@@ -26,18 +26,19 @@ public class Question {
 	
 	//http://www.cnblogs.com/yuzhangcmu/p/4039840.html
 	//greedy O(n)时间复杂度，O(1)空间复杂度。
-	public boolean canJump(int[] A) {
-		if (A == null || A.length == 0) {
+	public boolean canJump(int[] nums) {
+		if (nums == null || nums.length == 0) {
 			return false;
 		}
-		int maxReach = A[0];
-		for (int i = 1; i < A.length; i++) {
+		int maxReach = nums[0];
+		for (int i = 1; i < nums.length; i++) {
 			if (maxReach < i) { // 无法到达前i处
 				return false;
-			} else if (maxReach >= A.length - 1) { // 已经可以直接到最右
+			}
+			maxReach = Math.max(maxReach, nums[i] + i); // 更新maxReach
+			if (maxReach >= nums.length - 1) { // 已经可以直接到最右
 				return true;
 			}
-			maxReach = Math.max(maxReach, A[i] + i); // 更新maxReach
 		}
 		return true;
 	}

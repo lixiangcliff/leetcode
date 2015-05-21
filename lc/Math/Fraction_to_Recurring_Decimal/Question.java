@@ -11,8 +11,8 @@ public class Question {
 		// TODO Auto-generated method stub
 		Question q = new Question();
 		//System.out.println(q.fractionToDecimal(-1, -Integer.MIN_VALUE));
-		System.out.println((-0) / 5);
-		//System.out.println(q.fractionToDecimal(1, 132456));
+		//System.out.println((2) / 5);
+		System.out.println(q.fractionToDecimal(2, 50));
 
 	}
 	
@@ -31,6 +31,9 @@ public class Question {
     	if (denominator == 0) {
     		return null;
     	}
+    	if (numerator == 0) {
+    		return "0";
+    	}
     	long a = Math.abs((long) numerator);
     	long b = Math.abs((long) denominator);
 		boolean negative = (((numerator ^ denominator) >> 31 ) & 1) == 1;
@@ -40,36 +43,31 @@ public class Question {
 			intPart.append("-");
 		}
 		intPart.append(intVal);
-		if (a == b * intVal) {
+		if (a == b * intVal) { // 可以整除
 			String res = intPart.toString();
-			if (intVal == 0) {
-				return "0";
-			} else {
-				return res;
-			}
+			return res;
 		}
 		intPart.append(".");
 		StringBuilder deciPart = new StringBuilder();
-		HashMap<Long, Integer> map = new HashMap<Long, Integer>(); // <rem val, rem pos>
-		long rem = a % b;
+		long rem = a % b; // 余数
+		HashMap<Long, Integer> map = new HashMap<Long, Integer>(); // <rem's val, rem's pos>
 		int i = 0;
-		boolean perodic = true;
-		while(!map.containsKey(rem)) {
-			deciPart.append(rem * 10 / b);
-			map.put(rem, i);
-			rem = rem * 10 % b;
+		boolean perodic = true; //是否为循环小数
+		while (!map.containsKey(rem)) {
 			if (rem == 0) {
 				perodic = false;
 				break;
 			}
+			deciPart.append(rem * 10 / b);
+			map.put(rem, i);
+			rem = rem * 10 % b;
 			i++;
 		}
 		if (perodic) {
-			deciPart.insert(map.get(rem), "(");
+			deciPart.insert(map.get(rem), "("); //找到“循环节”第一位的位置
 			deciPart.append(")");
 		}
 		intPart.append(deciPart);
 		return intPart.toString();
     }
-
 }

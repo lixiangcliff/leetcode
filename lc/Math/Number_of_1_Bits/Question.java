@@ -16,6 +16,15 @@ public class Question {
 	 */
 	
     // you need to treat n as an unsigned value
+	
+	//http://stackoverflow.com/questions/15370250/how-does-this-line-works-n-nn-1
+	public int hammingWeight(int n) {
+	    int c;
+	    for (c = 0; n != 0; ++c) 
+	        n = n & (n - 1); // 【注】n & (n - 1)可以消去n的二进制形式的最右边一个1
+	    return c;
+    }
+	
 	//【注】>>>与>>的区别 https://leetcode.com/discuss/28216/accepted-java-solution-but-i-have-a-question-to-ask
 	// >> 符号位不会被移动 ；>>> 符号位也可以被移动
     public int hammingWeight2(int n) {
@@ -29,7 +38,7 @@ public class Question {
         return count;
     }
     
-    public int hammingWeight(int n) {
+    public int hammingWeight3(int n) {
     	int count = 0;
     	long a = (long)n;
     	for (int i = 0; i < 32; i++) {

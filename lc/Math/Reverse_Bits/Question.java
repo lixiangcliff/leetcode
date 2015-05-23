@@ -22,6 +22,7 @@ public class Question {
 		Related problem: Reverse Integer
 	 */
 	
+	//http://articles.leetcode.com/2011/08/reverse-bits.html
     public int reverseBits(int n) {
     	long a = (long)n;
     	int res = 0;

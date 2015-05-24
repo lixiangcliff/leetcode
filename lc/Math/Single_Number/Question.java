@@ -19,7 +19,7 @@ public class Question {
 	 * implement it without using extra memory?
 	 */
 	
-    //通用做法
+    //通用做法（当其他数字出现n次时， 只需bit[i] % n就行了）
 	public int singleNumber(int[] A) {
 		if (A == null || A.length == 0) {
 			return -1;

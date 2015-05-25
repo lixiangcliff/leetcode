@@ -46,7 +46,7 @@ public class Question {
 	 */
 	
 	/*
-	 * add – O(log n) runtime, find – O(n) runtime, O(n) space – Binary search +
+	 * add – O(log n) runtime, find – O(n) runtime, O(1) space – Binary search +
 	 * Two pointers: 
 	 * 
 	 * Maintain a sorted array of numbers. Each add operation would need O(log
@@ -63,6 +63,7 @@ public class Question {
 	 * Make sure you are able to handle duplicates correctly.
 	 */
 	
+	//below is the last strategy  
 	public class TwoSum {
 		private Map<Integer, Integer> table = new HashMap<Integer, Integer>();
 

@@ -3,7 +3,6 @@ package _3Sum;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-
 public class Question {
 
 	/**
@@ -12,7 +11,8 @@ public class Question {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Question q = new Question();
-		int[] num = {-1, 0, 1, 2, -1, -4};
+		//int[] num = {-1, 0, 1, 2, -1, -4};
+		int[] num = {-1, -1, 0, 1, 2};
 		ArrayList<ArrayList<Integer>> result = q.threeSum(num);
 		for (ArrayList<Integer> item : result) {
 			for (int val : item) {
@@ -40,7 +40,7 @@ public class Question {
 	 * (-1, -1, 2)
 	 */
 	
-	// two pointers; O(n) Space, O(n^2) Time;
+	// two pointers; O(1) Space, O(n^2) Time;
 	// http://www.ninechapter.com/solutions/3sum/
 	// http://blog.csdn.net/linhuanmars/article/details/19711651
 	public ArrayList<ArrayList<Integer>> threeSum(int[] num) {
@@ -50,7 +50,7 @@ public class Question {
 		}
 		Arrays.sort(num); // 先排序！
 		for (int i = 0; i < num.length - 2; i++) { // i最远可以取到倒数第三个
-			if (i > 0 && num[i] == num[i - 1]) { // 略过和num[i - 1]值相同的所有元素
+			if (i > 0 && num[i] == num[i - 1]) { // 【注】去重（相同元素，如果第一次出现的时候不取，那么之后出现的也不取）
 				continue;
 			}
 			int l = i + 1;

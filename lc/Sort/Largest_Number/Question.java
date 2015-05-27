@@ -1,6 +1,7 @@
 package Largest_Number;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -34,7 +35,9 @@ public class Question {
         		}
         		int len1 = s1.length();
         		int len2 = s2.length();
-        		if (len1 == 0) {
+        		if (len1 == 0 && len2 == 0) {
+        			return 0;
+        		} else if (len1 == 0) {
         			return -1;
         		} else if (len2 == 0) {
         			return 1;
@@ -54,7 +57,7 @@ public class Question {
         		
         	}
         };
-        ArrayList<String> strs = new ArrayList<String>();
+        ArrayList<String> strs = new ArrayList<String>(); //把原来的数组变成ArrayList，方便根据comp来sort
         boolean allZero = true;
         for (int d : num) {
         	if (d != 0) {
@@ -62,7 +65,7 @@ public class Question {
         	}
         	strs.add(Integer.toString(d));
         }
-        if (allZero) {
+        if (allZero) { // corner case
         	return "0";
         }
         Collections.sort(strs, comp);

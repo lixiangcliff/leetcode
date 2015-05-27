@@ -36,7 +36,7 @@ public class Solution {
 	//对每个元素，找到左边和右边第一个比它大的，以其中较小的那个作为它的根（通过画图举例可以证明之）。自底向上建立树
 	//以下为ma老师答案
 	public TreeNode maxTree(int[] A) {
-		LinkedList<TreeNode> stack = new LinkedList<TreeNode>();
+		LinkedList<TreeNode> stack = new LinkedList<TreeNode>(); //从栈顶到栈底是升序的
 		for (int i = 0; i <= A.length; i++) {
 			TreeNode rightNode = i == A.length ? new TreeNode(Integer.MAX_VALUE) : new TreeNode(A[i]); // 表示当前node右边，第一个比它值大的node
 			while (!stack.isEmpty()) {
@@ -83,7 +83,7 @@ public class Solution {
     	for (int i = start; i <= end; i++) {
     		if (A[i] > max) {
     			max = A[i];
-    			maxIndex = i;
+    			maxIndex = i; //one pass找到值最大的index
     		}
     	}
     	TreeNode root = new TreeNode(max);

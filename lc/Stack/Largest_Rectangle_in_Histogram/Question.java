@@ -46,8 +46,8 @@ public class Question {
     	int max = 0;
 		for (int i = 0; i <= height.length; i++) { // i <= height小技巧，因为要在i==height.length处虚拟地再补一个“0”高度的元素，来把最后stack里的值都pop出来(如果stack还有值的话)
 			int rightIdx = i;
-			int rightH = i == height.length ? 0 : height[i]; // curH = 0的情况， 即上面说的小技巧
-			while (!stack.isEmpty() && rightH < height[stack.peek()]) { //说明当前i就是此时stack的栈顶元素的右端，可以将其pop出来并且计算以pop元素为高的最大矩形面积了) 
+			int rightH = i == height.length ? 0 : height[i]; // rightH == 0的情况， 即上面说的小技巧
+			while (!stack.isEmpty() && rightH < height[stack.peek()]) { //说明当前i就是此时stack的栈顶元素为高度的右端边界（不包括），可以将其pop出来并且计算以pop元素为高的最大矩形面积了) 
 				int curH = height[stack.pop()];
 				int leftIdx = stack.isEmpty() ? -1 : stack.peek(); // 【注】当stack为空时，leftIdx值为-1 而不是0
 				max = Math.max(max, (rightIdx - leftIdx - 1) * curH); // 此处面积公式要分清：左端，右端和高分别是什么。

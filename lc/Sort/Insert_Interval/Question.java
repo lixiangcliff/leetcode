@@ -1,6 +1,7 @@
 package Insert_Interval;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Question {
 
@@ -25,10 +26,14 @@ public class Question {
 	 * This is because the new interval [4,9] overlaps with [3,5],[6,7],[8,10].
 	 */
 	
-	//看图！
+	//【注】：思想如下
+	//1. 把“并集”之前的加入res
+	//2. newInterval向左产生的“并集”：new.start <= i.end 才合并；然后重新更新new.start为min(i.start, new.start)
+	//3. newInterval向右产生的“并集”：new.end >= i.start 就合并；然后重新更新new.end为max(i.end, new.end)
+	//4. 把“并集”之后的加入res
 	//http://blog.csdn.net/linhuanmars/article/details/22238433
-	public ArrayList<Interval> insert2(ArrayList<Interval> intervals, Interval newInterval) {
-		ArrayList<Interval> result = new ArrayList<Interval>();
+	public List<Interval> insert(List<Interval> intervals, Interval newInterval) {
+		List<Interval> result = new ArrayList<Interval>();
 		int size = intervals.size();
 		if (intervals == null || size == 0) {
 			result.add(newInterval);

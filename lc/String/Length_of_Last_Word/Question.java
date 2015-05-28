@@ -36,7 +36,7 @@ public class Question {
 			return 0;
 		}
 		int i = s.length() - 1;
-		while ( i >= 0) {
+		while (i >= 0) {
 			if (s.charAt(i) == ' ') {
 				break;
 			}

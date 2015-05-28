@@ -31,9 +31,9 @@ public class Question {
 		if (n == 1) { // 终止条件
 			return "1"; 
 		}
-		String str = countAndSay(n - 1);
+		String str = countAndSay(n - 1); // 【注】拿到上一轮的res，只需将其读出，就可以得到这一轮的res
 		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < str.length(); ) {
+		for (int i = 0; i < str.length();) {
 			char cur = str.charAt(i);
 			int j = i + 1;
 			if (j != str.length()) {
@@ -43,8 +43,8 @@ public class Question {
 					}
 				}
 			}
-			sb.append(j - i);
-			sb.append(cur);
+			sb.append(j - i); // 值为cur的个数
+			sb.append(cur); // cur值
 			i = j;
 		}
 		return sb.toString();

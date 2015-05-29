@@ -38,7 +38,7 @@ public class Question {
 		if (nRows == 1) {
 			return s;
 		}
-		int size = 2 * nRows - 2; // 每一个"下"+"上"一共多少字符.举例：PAYP, ALS, HIRI, etc
+		int size = 2 * nRows - 2; // 每一个"下"+"上"一共多少字符.举例：PAYP, ALIS, HIRI, etc
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < nRows; i++) { // 以行为单位来处理
 			for (int j = i; j < s.length(); j += size) { // 【注】 j在s中每次递进size个位置

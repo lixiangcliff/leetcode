@@ -61,7 +61,6 @@ public class Question {
                 s.push(node);
                 node = node.left; //【左】一直找最左的
             }
-            
             if (s.isEmpty()) { // 要在添加所有左孩子入栈之后，再判断栈是否为空。是因为最初栈一定是空的。
                 break;
             }
@@ -71,6 +70,7 @@ public class Question {
         }
         return res;
     }
+	
 	
 	//方法三
 	//interative from Mo

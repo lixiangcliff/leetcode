@@ -50,8 +50,7 @@ public class Question {
 			return;
 		}
 		ArrayList<TreeNode> swappedNodes = new ArrayList<TreeNode>(); // 里面存有待恢复的两个node
-		ArrayList<TreeNode> pre = new ArrayList<TreeNode>(); // 标记以inorder遍历时当前node之前的那个node（作为一个指针在递归不同层之间传递）
-		pre.add(null); // pre初始内容为null
+		TreeNode[] pre = {null}; // 标记以inorder遍历时当前node之前的那个node（作为一个指针在递归不同层之间传递）。pre初始内容为null
 		helper(root, pre, swappedNodes);
 		if (swappedNodes.size() > 0) { // 只要找到有逆序存在
 			int temp = swappedNodes.get(0).val;
@@ -61,20 +60,20 @@ public class Question {
 	}
 
 	// DFS -- inorder
-	private void helper(TreeNode root, ArrayList<TreeNode> pre, ArrayList<TreeNode> swappedNodes) {
+	private void helper(TreeNode root, TreeNode[] pre, ArrayList<TreeNode> swappedNodes) {
 		if (root == null) {
 			return;
 		}
 		helper(root.left, pre, swappedNodes); // 递归左子树
-		if (pre.get(0) != null && root.val < pre.get(0).val) { // 找到了一个逆序的node
+		if (pre[0] != null && root.val < pre[0].val) { // 找到了一个逆序的node
 			if (swappedNodes.size() == 0) { // 通过swappedNodes.size()的大小，知道这是第一个逆序的node
-				swappedNodes.add(pre.get(0)); // swappedNodes[0]装的是第一次逆序前面的元素
+				swappedNodes.add(pre[0]); // swappedNodes[0]装的是第一次逆序前面的元素
 				swappedNodes.add(root); // swappedNodes[1]装的是第一次逆序后面的元素
 			} else { // 如果已经不是第一次逆序
 				swappedNodes.set(1, root); // swappedNodes[1]更新为第二次逆序后面的元素
 			}
 		}
-		pre.set(0, root);// update pre
+		pre[0] = root;// update pre
 		helper(root.right, pre, swappedNodes); // 递归右子树
 	}
     

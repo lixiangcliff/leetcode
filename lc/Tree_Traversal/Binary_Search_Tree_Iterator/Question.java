@@ -25,11 +25,12 @@ public class Question {
 
 //同Implement_Iterator_of_Binary_Search_Tree
 class BSTIterator {
-	private LinkedList<TreeNode> stack = new LinkedList<TreeNode>();
+	private LinkedList<TreeNode> stack; 
 	private TreeNode cur;
 	
     public BSTIterator(TreeNode root) {
         cur = root;
+        stack = new LinkedList<TreeNode>();
     }
 
     /** @return whether we have a next smallest number */

@@ -38,10 +38,11 @@ public class Solution {
 	 * } 
 	 */
 	    
-	private LinkedList<TreeNode> stack = new LinkedList<TreeNode>();
+	private LinkedList<TreeNode> stack;
 	private TreeNode cur;
 	//@param root: The root of binary tree.
     public Solution(TreeNode root) { //构造函数
+    	stack = new LinkedList<TreeNode>();
     	cur = root;
     }
 

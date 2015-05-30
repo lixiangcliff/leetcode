@@ -36,7 +36,7 @@ public class Solution {
 		if (root == null) {
 			return;
 		}
-		if (root.val > k1) { // 【左】 只有当root.val > k1 说明左子树里肯定还有符合的node，就递归给左子树
+		if (root.val > k1) { // 【左】 只要当root.val > k1 说明左子树里肯定还有符合的node，就递归给左子树
 			helper(result, root.left, k1, k2);
 		}
 		if (k1 <= root.val && root.val <= k2) { // 【根】添加根到result
@@ -46,7 +46,6 @@ public class Solution {
 			helper(result, root.right, k1, k2);
 		}
 	}
-    
     
     //divide and conquer
     public ArrayList<Integer> searchRange2(TreeNode root, int k1, int k2) {
@@ -71,7 +70,6 @@ public class Solution {
        res.addAll(right); //【右】
        return res;
     }
-
 }
 
  class TreeNode {

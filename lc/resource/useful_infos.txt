@@ -90,3 +90,6 @@ useful links:
 	
 20. 基础知识：
 	https://www.topcoder.com/community/data-science/data-science-tutorials/
+	
+21. 董老师专栏：
+	http://zhuanlan.zhihu.com/donglaoshi

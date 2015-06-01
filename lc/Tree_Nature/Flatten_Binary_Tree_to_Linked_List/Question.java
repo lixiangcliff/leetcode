@@ -71,7 +71,6 @@ public class Question {
     	}
     	return tail;
     }
-
 }
 
  class TreeNode {

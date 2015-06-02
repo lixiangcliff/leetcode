@@ -31,6 +31,7 @@ public class Question {
 	// http://blog.csdn.net/wzy_1988/article/details/17248209
 	// 思想：每次计算面积时的bottleneck是左右两个"侧边"中较低的那一个。
 	// 假如左边的低，那么就把左边向右移动。这是因为右边向左移动只会使面积更小。
+	//【注】left和right，只有位置，没有宽度。
 	public int maxArea(int[] height) {
 		if (height == null || height.length < 2) {
 			return 0;

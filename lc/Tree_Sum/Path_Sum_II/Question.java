@@ -1,6 +1,7 @@
 package Path_Sum_II;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 
@@ -37,18 +38,18 @@ public class Question {
 	
 	//http://www.ninechapter.com/solutions/path-sum-ii/
 	//http://blog.csdn.net/linhuanmars/article/details/23655413
-    public ArrayList<ArrayList<Integer>> pathSum(TreeNode root, int sum) {
-    	ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
-    	if (root == null){
+    public List<List<Integer>> pathSum(TreeNode root, int sum) {
+    	List<List<Integer>> result = new ArrayList<List<Integer>>();
+    	if (root == null) {
     		return result;
     	}
-    	ArrayList<Integer> item = new ArrayList<Integer>();
+    	List<Integer> item = new ArrayList<Integer>();
     	helper(root, sum, item, result);
     	return result;
     }
     
     //backtracking
-    private void helper(TreeNode root, int sum, ArrayList<Integer> item, ArrayList<ArrayList<Integer>> result) {
+    private void helper(TreeNode root, int sum, List<Integer> item, List<List<Integer>> result) {
     	if (root == null) {
     		return;
     	}

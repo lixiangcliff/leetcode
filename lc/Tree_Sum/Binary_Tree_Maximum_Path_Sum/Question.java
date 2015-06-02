@@ -28,11 +28,11 @@ public class Question {
 	
 	//node中可能有负数
 	//ninechapter解题思路更加清晰：看图！
-	//singlePath: 从当前node到任意叶子的最大路径和
-	//maxPath   :　包括当前node在内的，任意node到任意node最大路径和
+	//singlePath: 从当前node到任意叶子的最大路径和（可以一个node都不取）
+	//maxPath   :　包括当前node在内的，任意node到任意node最大路径和（至少要取一个node）
 	//之所以在ResultType里要维护两个变量singlePath和maxPath，是因为：
 	//我们最终想要的是maxPath。但是要得到maxPath的话，我们需要使用singlePath作为一个辅助值，来构造maxPath。
-	public int maxPathSum(TreeNode root){
+	public int maxPathSum(TreeNode root) {
 		if (root == null) {
 			return 0;
 		}
@@ -58,7 +58,7 @@ public class Question {
 		//conquer
 		//当前的singlePath可能是左子树的最大singlePath，也可能是右子树的singlePath，也可能就是0（如果左右子树的singlePath都小于0的话）
 		int singlePath = Math.max((Math.max(left.singlePath, right.singlePath) + root.val), 0); 
-		//当前的maxPat：1.如果不包含当前root，可能是左子树或者右子树的maxPath；2.如果包含当前root，可能是左右子树的singlePath加上root值的和
+		//当前的maxPath：1.如果不包含当前root，可能是左子树或者右子树的maxPath；2.如果包含当前root，可能是左右子树的singlePath加上root值的和
 		int maxPath = Math.max(Math.max(left.maxPath, right.maxPath), left.singlePath + right.singlePath + root.val);
 		return new ResultType(singlePath, maxPath);
 	}

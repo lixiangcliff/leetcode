@@ -1,5 +1,8 @@
 package Course_Schedule;
 
+import java.util.HashMap;
+import java.util.LinkedList;
+
 public class Question {
 
 	/**
@@ -7,10 +10,17 @@ public class Question {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		Question q = new Question();
+		int numCourses = 2;
+		int [][] prerequisites = {
+				{1, 0},
+		};
+		System.out.println(q.canFinish(numCourses, prerequisites));
 
 	}
 	
 	/**
+	 * https://leetcode.com/problems/course-schedule/
 	 * There are a total of n courses you have to take, labeled from 0 to n - 1.
 		Some courses may have prerequisites, for example to take course 0 you have to first take course 1, which is expressed as a pair: [0,1]
 		Given the total number of courses and a list of prerequisite pairs, is it possible for you to finish all courses?
@@ -30,9 +40,52 @@ public class Question {
 		
 		Hints:
 		This problem is equivalent to finding if a cycle exists in a directed graph. If a cycle exists, no topological ordering exists and therefore it will be impossible to take all courses.
-		Topological Sort via DFS - A great video tutorial (21 minutes) on Coursera explaining the basic concepts of Topological Sort.
+		Topological Sort via DFS( https://class.coursera.org/algo-003/lecture/52 ) - A great video tutorial (21 minutes) on Coursera explaining the basic concepts of Topological Sort.
 		Topological sort could also be done via BFS.
 	 */
 	
+	//http://www.meetqun.com/thread-9123-1-4.html
+	//http://www.meetqun.com/thread-9208-1-1.html
+	//check whether there is circle. similar to "Topological_Sorting" in lintcode
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+    	HashMap<Integer, Integer> map = new HashMap<Integer, Integer>(); // <course #, 该course入度（即以它为prereq的course个数）>
+    	//统计每个node的入度
+    	for (int i = 0; i < prerequisites.length; i++) {
+    		if (prerequisites[i][0] < 0 || prerequisites[i][0] >= numCourses || prerequisites[i][1] < 0 || prerequisites[i][1] >= numCourses) {
+    			return false;
+    		}
+    		int key = prerequisites[i][1]; // 被required的这个course，出现的次数
+    		if (map.containsKey(key)) {
+    			map.put(key, map.get(key) + 1);
+    		} else {
+    			map.put(key, 1);
+    		}
+    	}
+    	LinkedList<Integer> q = new LinkedList<Integer>();
+    	int zeroInDegreeCount = 0;
+    	for (int i = 0; i < numCourses; i++) { //遍历所有课程
+    		if (!map.containsKey(i)) {
+    			q.add(i);
+    			zeroInDegreeCount++;
+    		}
+    	}
+    	if (zeroInDegreeCount == 0) { // 说明没有入度为0的
+    		return false;
+    	}
+    	while (!q.isEmpty()) {
+    		int key = q.poll();
+    		for (int i = 0; i < prerequisites.length; i++) {
+    			if (prerequisites[i][0] == key) {
+    				int next = prerequisites[i][1];
+    				map.put(next, map.get(next) - 1);
+    				if (map.get(next) == 0) {
+    					q.add(next);
+    					zeroInDegreeCount++;
+    				}
+    			}
+    		}
+    	}
+        return zeroInDegreeCount == numCourses;
+    }
 
 }

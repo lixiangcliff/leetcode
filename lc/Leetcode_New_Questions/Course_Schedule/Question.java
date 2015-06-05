@@ -54,7 +54,7 @@ public class Question {
     		if (prerequisites[i][0] < 0 || prerequisites[i][0] >= numCourses || prerequisites[i][1] < 0 || prerequisites[i][1] >= numCourses) {
     			return false;
     		}
-    		int key = prerequisites[i][1]; // 被required的这个course，出现的次数
+    		int key = prerequisites[i][0]; // 一个node作为“下游” 出现的次数
     		if (map.containsKey(key)) {
     			map.put(key, map.get(key) + 1);
     		} else {
@@ -75,8 +75,8 @@ public class Question {
     	while (!q.isEmpty()) {
     		int key = q.poll();
     		for (int i = 0; i < prerequisites.length; i++) {
-    			if (prerequisites[i][0] == key) {
-    				int next = prerequisites[i][1];
+    			if (prerequisites[i][1] == key) {
+    				int next = prerequisites[i][0]; //得到key的“下游”--next
     				map.put(next, map.get(next) - 1);
     				if (map.get(next) == 0) {
     					q.add(next);

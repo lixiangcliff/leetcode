@@ -69,9 +69,6 @@ public class Question {
     			zeroInDegreeCount++;
     		}
     	}
-    	if (zeroInDegreeCount == 0) { // 说明没有入度为0的
-    		return false;
-    	}
     	while (!q.isEmpty()) {
     		int key = q.poll();
     		for (int i = 0; i < prerequisites.length; i++) {

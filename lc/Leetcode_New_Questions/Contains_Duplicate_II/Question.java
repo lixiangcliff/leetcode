@@ -28,13 +28,9 @@ public class Question {
         	int value = nums[i];
         	if (map.containsKey(value)) {
         		ArrayList<Integer> indexes = map.get(value);
-        		for (int j = indexes.size() - 1; j >= 0; j--) {
-        			if (i - indexes.get(j) <= k) {
-        				return true;
-        			} else {
-        				break;
-        			}
-        		}
+        		if (i - indexes.get(indexes.size() - 1) <= k) {
+    				return true;
+    			} 
         		map.get(value).add(i);
         	} else {
         		ArrayList<Integer> indexes = new ArrayList<Integer>();

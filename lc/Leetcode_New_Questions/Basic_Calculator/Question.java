@@ -1,5 +1,7 @@
 package Basic_Calculator;
 
+import java.util.LinkedList;
+
 public class Question {
 
 	/**
@@ -21,8 +23,11 @@ public class Question {
 	 * Note: Do not use the eval built-in library function.
 	 */
 
+	//https://leetcode.com/discuss/39458/64-ms-c-easy-solution
     public int calculate(String s) {
     	int res = 0;
+    	LinkedList<Character> stack = new LinkedList<Character>();
+    	
         return res;
     }
 }

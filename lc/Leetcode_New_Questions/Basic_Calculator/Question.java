@@ -9,7 +9,17 @@ public class Question {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		Question q = new Question();
+//		String s = " 2-1 + 2 ";
+		String s = "211111111";
+		StringBuilder sb = new StringBuilder();
+		sb.append('1');
+		//System.out.println(new StringBuilder().length() == 0);
+		//System.out.println(Integer.parseInt(sb.toString()));
+		System.out.println(q.calculate(s));
+		System.out.println(Integer.MAX_VALUE);
+		
+		
 	}
 	
 	/**
@@ -25,9 +35,44 @@ public class Question {
 
 	//https://leetcode.com/discuss/39458/64-ms-c-easy-solution
     public int calculate(String s) {
+    	LinkedList<Integer> s1 = new LinkedList<Integer>();
+    	LinkedList<Character> s2 = new LinkedList<Character>();
+    	StringBuilder sb = new StringBuilder();
+    	for (int i = s.length() - 1; i >= 0; i--) { //【注】从右往左压栈，弹出时候才能从左往右计算
+    		char c = s.charAt(i);
+    		if (c == ')' || c == '+' || c == '-') { //c 是操作符
+    			s2.push(c);
+    		} else if (c >= '0' && c <= '9') { // c 操作数的一部分
+    			//sb.append(c);
+    			sb.insert(0, c);
+    			if (i == 0 || s.charAt(i - 1) < '0' || s.charAt(i - 1) > '9') { //第i位是当前操作数的最后一位
+    				s1.push(Integer.parseInt(sb.toString()));
+    				sb = new StringBuilder();
+    			}
+    		} else if (c == '(') { //碰到'(', 出现了一对完整的括号，把这对括号内的计算式都完成
+    			while (s2.peek() != ')') {
+    				cal(s1, s2);
+    			}
+    			s2.pop(); // pop出s2里的'('
+    		}
+    		
+    	}
+    	while (!s2.isEmpty()) {
+    		cal(s1, s2);
+    	}
+        return s1.pop(); 
+    }
+    
+    private void cal(LinkedList<Integer> s1, LinkedList<Character> s2) {
+    	int num1 = s1.pop();
+    	int num2 = s1.pop();
+    	char oper = s2.pop();
     	int res = 0;
-    	LinkedList<Character> stack = new LinkedList<Character>();
-    	
-        return res;
+    	if (oper == '+') {
+    		res = num1 + num2;
+    	} else if (oper == '-'){
+    		res = num1 - num2;
+    	}
+    	s1.push(res);
     }
 }

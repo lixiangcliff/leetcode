@@ -10,6 +10,9 @@ public class Question {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		Question q = new Question();
+		String s = "3+2*2";
+		System.out.println(q.calculate(s));
 
 	}
 	
@@ -29,24 +32,94 @@ public class Question {
 	 */
 	
 	//https://leetcode.com/discuss/41627/easy-c-solution-with-detailed-explanations
-    public int calculate(String s) {
+	//O(1) space
+	public int calculate(String s) {
+		int sign = 1;
+		int res = 0;
+		int[] idx = {0};
+		int num = getNum(s, idx); // 累积到当前的计算结果
+		while (idx[0] < s.length()) {
+			char c = s.charAt(idx[0]);
+			idx[0]++;
+			if (c == '+' || c == '-') { //遇到加减法，把前面的累积算上，然后把后面的符号置上
+				res += num * sign;
+				num = getNum(s, idx); //之前的已经结算完了，现在重置num
+				sign = c == '+' ? 1 : -1; //重置sign
+			} else if (c == '*') {
+				num *= getNum(s, idx);
+			} else if (c == '/') {
+				num /= getNum(s, idx);
+			} else {
+				idx[0]--;
+			}
+		}
+		res += num * sign; //计算最后一笔
+		return res;
+	}
+	
+	private int getNum(String s, int[] idx) {
+		int num = 0;
+		while (idx[0] < s.length()) {
+			if (Character.isDigit(s.charAt(idx[0]))) {
+				num = num * 10 + s.charAt(idx[0]) - '0';
+			} else if  (s.charAt(idx[0]) != ' ') {
+				return num;
+			}
+			idx[0]++;
+		}
+		return num;
+	}
+	//https://leetcode.com/discuss/41627/easy-c-solution-with-detailed-explanations
+	//两个deque的方法，超时
+/*    public int calculate(String s) {
     	ArrayDeque<Integer> nums = new ArrayDeque<Integer>();
     	ArrayDeque<Character> ops = new ArrayDeque<Character>();
-    	
-        return 0;
+    	int[] idx = {0};
+    	for (; idx[0] < s.length(); idx[0]++) { //第一次遍历，计算所有乘除法
+    		char cur = s.charAt(idx[0]);
+			if (Character.isDigit(cur)) {
+				int num = getNumber(s, idx);
+				nums.push(num);
+			} else if (cur == '/' || cur == '*') { //如果是乘除法，以stack的方式当场计算
+				int num1 = nums.pop();
+				idx[0]++; //取乘除法的第二个操作数
+				while (!Character.isDigit(s.charAt(idx[0]))) { //去掉所有空格
+					idx[0]++;
+				}
+				int num2 = getNumber(s, idx);
+				if (cur == '*') {
+					nums.push(num1 * num2);
+				} else {
+					nums.push(num1 / num2);
+				}
+			} else if (cur == '+' || cur == '-') { //第一次遍历时，遇到所有的加减法符号都压入栈ops
+				ops.push(cur);
+			}
+    	}
+    	while (!ops.isEmpty()) { //第二次遍历，计算所有加减法
+    		int num1 = nums.removeLast();
+    		int num2 = nums.removeLast();
+    		System.out.println(num1);
+    		System.out.println(num2);
+    		char op = ops.removeLast();
+    		if (op == '+') {
+    			nums.addLast(num1 + num2);
+    		} else {
+    			nums.addLast(num1 - num2);
+    		}
+    	}
+        return nums.pop();
     }
     
-    private void cal(LinkedList<Integer> s1, LinkedList<Character> s2) {
-    	int num1 = s1.pop();
-    	int num2 = s1.pop();
-    	char oper = s2.pop();
-    	int res = 0;
-    	if (oper == '+') {
-    		res = num1 + num2;
-    	} else if (oper == '-'){
-    		res = num1 - num2;
+    private int getNumber(String s, int[] idx) {
+    	int num = 0;
+    	while (idx[0] < s.length() && Character.isDigit(s.charAt(idx[0]))) {
+    		num = num * 10 + s.charAt(idx[0]++) - '0';
     	}
-    	s1.push(res);
-    }
+    	idx[0]--;
+    	return num;
+    }*/
+    
+
 
 }

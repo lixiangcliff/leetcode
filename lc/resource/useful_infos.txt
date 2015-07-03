@@ -29,6 +29,9 @@ useful links:
 	十道海量数据处理面试题与十个方法大总结
 	http://blog.csdn.net/v_JULY_v/article/details/6279498
 	
+	f design
+	http://blog.csdn.net/sigh1988/article/details/9790337
+	
 5. 8个月从CS菜鸟到拿到Google Offer的经历+内推
 	http://www.cnblogs.com/yuzhangcmu/p/4050780.html
 	
@@ -96,3 +99,6 @@ useful links:
 	
 22. 面经:
 	http://www.mitbbs.com/article_t/JobHunting/32988535.html
+	
+23. design pattern:
+	https://sourcemaking.com/design_patterns

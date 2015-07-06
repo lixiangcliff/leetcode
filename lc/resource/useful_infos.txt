@@ -102,3 +102,5 @@ useful links:
 	
 23. design pattern:
 	https://sourcemaking.com/design_patterns
+	
+	

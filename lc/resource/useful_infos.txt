@@ -103,4 +103,19 @@ useful links:
 23. design pattern:
 	https://sourcemaking.com/design_patterns
 	
+24. Big and Little Endian
+	http://www.cs.umd.edu/class/sum2003/cmsc311/Notes/Data/endian.html	
+	
+25. java feature:
+	jdk7 new feature:
+	http://javarevisited.blogspot.com/2014/04/10-jdk-7-features-to-revisit-before-you.html#ixzz3f7eSWXp6
+	
+	Java 8新特性终极指南:
+	http://www.importnew.com/11908.html
+	
+	Java 8 特性 – 终极手册
+	http://ifeve.com/java-8-features-tutorial/
+	
+26. java.lang.NullPointerException – How to handle Null Pointer Exception
+	http://examples.javacodegeeks.com/java-basics/exceptions/java-lang-nullpointerexception-how-to-handle-null-pointer-exception/
 	

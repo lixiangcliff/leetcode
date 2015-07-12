@@ -119,3 +119,6 @@ useful links:
 26. java.lang.NullPointerException – How to handle Null Pointer Exception
 	http://examples.javacodegeeks.com/java-basics/exceptions/java-lang-nullpointerexception-how-to-handle-null-pointer-exception/
 	
+27. leetcode 答案blog
+	http://wlcoding.blogspot.com
+	

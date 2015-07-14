@@ -122,3 +122,5 @@ useful links:
 27. leetcode 答案blog
 	http://wlcoding.blogspot.com
 	
+28. 报F和G的offer，分享面经和准备经验（干货）
+	http://www.mitbbs.com/article_t/JobHunting/32984309.html	

@@ -123,4 +123,7 @@ useful links:
 	http://wlcoding.blogspot.com
 	
 28. 报F和G的offer，分享面经和准备经验（干货）
-	http://www.mitbbs.com/article_t/JobHunting/32984309.html	
+	http://www.mitbbs.com/article_t/JobHunting/32984309.html
+	
+29 database ACID example
+	http://stackoverflow.com/questions/999394/whats-a-real-world-example-of-acid

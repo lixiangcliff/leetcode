@@ -2,6 +2,7 @@ package Permutations_II;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Question {
 
@@ -12,9 +13,9 @@ public class Question {
 		// TODO Auto-generated method stub
 		int [] num = {1,2,2};
 		Question q = new Question();
-		ArrayList<ArrayList<Integer>> result = q.permuteUnique(num);
+		List<List<Integer>> result = q.permuteUnique(num);
 		for (int i = 0; i < result.size(); i++) {
-			ArrayList<Integer> item = result.get(i);
+			List<Integer> item = result.get(i);
 			for (int j = 0; j < item.size(); j++) {
 				System.out.print(item.get(j)+ ",");
 			}
@@ -39,19 +40,19 @@ public class Question {
 	//否则就会出现重复，而used[]就可以来标记不同的1分别是哪一个位子的。item.contains(num[i])却做不到
 	//http://blog.csdn.net/linhuanmars/article/details/21570835
 	//http://fisherlei.blogspot.com/2012/12/leetcode-permutations-ii.html
-    public ArrayList<ArrayList<Integer>> permuteUnique(int[] num) {
-    	ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+    public List<List<Integer>> permuteUnique(int[] num) {
+    	List<List<Integer>> result = new ArrayList<List<Integer>>();
     	if (num == null || num.length == 0){
     		return result;
     	}
-    	ArrayList<Integer> item = new ArrayList<Integer>();
+    	List<Integer> item = new ArrayList<Integer>();
     	boolean used[] = new boolean[num.length];
     	Arrays.sort(num);//important!
     	helper(result, item, num, used);
     	return result;
     }
     
-	private void helper(ArrayList<ArrayList<Integer>> result, ArrayList<Integer> item, int[] num, boolean used[]) {
+	private void helper(List<List<Integer>> result, List<Integer> item, int[] num, boolean used[]) {
 		if (item.size() == num.length) {
 			result.add(new ArrayList<Integer>(item));
 			return;

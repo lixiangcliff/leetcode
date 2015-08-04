@@ -2,6 +2,7 @@ package Word_Break_II;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Question {
@@ -18,7 +19,7 @@ public class Question {
 		for (String str : dictStrs) {
 			dict.add(str);
 		}
-		ArrayList<String> result = q.wordBreak(s, dict);
+		List<String> result = q.wordBreak(s, dict);
 		for (String item : result) {
 			System.out.println(item);
 		}
@@ -40,18 +41,18 @@ public class Question {
 	//DFS
 	//http://www.cnblogs.com/yuzhangcmu/p/4037299.html
 	//http://blog.csdn.net/linhuanmars/article/details/22452163
-	ArrayList<String> wordBreak(String s, Set<String> dict){ // 【注1】必须用Set而不是HashSet来通过leetcode
-		ArrayList<String> result = new ArrayList<String>();
+	List<String> wordBreak(String s, Set<String> dict){ // 【注1】必须用Set而不是HashSet来通过leetcode
+		List<String> result = new ArrayList<String>();
 		if (s == null || s.length() == 0 || !isWordBreakable(s, dict)) { // 如果s不能wordbreak则直接返回result，避免输入字符串过长，导致回溯超时。
 			return result;
 		}
-		ArrayList<String> item = new ArrayList<String>(); // 以ArrayList<String>的形式存一组合法的解
+		List<String> item = new ArrayList<String>(); // 以ArrayList<String>的形式存一组合法的解
 		int maxLen = getMaxLen(dict);
 		helper(result, item, s, dict, maxLen, 0);
 		return result;
 	}
 	
-	private void helper(ArrayList<String> result, ArrayList<String> item, String s, Set<String> dict, int maxLen, int start){
+	private void helper(List<String> result, List<String> item, String s, Set<String> dict, int maxLen, int start){
 		if (start == s.length()) { // 结束了。start到了末尾
             StringBuilder sb = new StringBuilder();
             for (String str: item) {
@@ -62,7 +63,7 @@ public class Question {
             result.add(sb.toString());
             return;
 		}
-		for (int i = start; i < maxLen && i < s.length(); i++) {
+		for (int i = start; i < start + maxLen && i < s.length(); i++) {
 			String temp = s.substring(start, i + 1);
 			if (!dict.contains(temp)) {// 如果sb不是dict中的一个单词，则不需要递归了 
 				continue;

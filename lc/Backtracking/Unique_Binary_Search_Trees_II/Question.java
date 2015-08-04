@@ -1,6 +1,7 @@
 package Unique_Binary_Search_Trees_II;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Question {
@@ -11,7 +12,7 @@ public class Question {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Question q = new Question();
-		ArrayList<TreeNode> result = q.generateTrees(3);
+		List<TreeNode> result = q.generateTrees(3);
 		for (int i = 0; i < result.size(); i++) {
 			System.out.print(result.get(i).val + ",");
 		}
@@ -37,21 +38,21 @@ public class Question {
 	//http://www.cnblogs.com/yuzhangcmu/p/4256291.html
 	//http://blog.csdn.net/linhuanmars/article/details/24761437
 	//http://answer.ninechapter.com/solutions/unique-binary-search-trees-ii/
-	public ArrayList<TreeNode> generateTrees(int n) {
+	public List<TreeNode> generateTrees(int n) {
 		return helper(1, n);
 	}
 
-	//DFS helper函数返回值为：根的数值范围是从leftMost到rightMost的所有满足条件的树
-	private ArrayList<TreeNode> helper(int leftMost, int rightMost) {
-		ArrayList<TreeNode> result = new ArrayList<TreeNode>();
+	//DFS helper【注】函数返回值为：根的数值范围是从leftMost到rightMost的所有满足条件的一颗树【注】必须要有返回值，否则无法得到leftChildren和rightChildren
+	private List<TreeNode> helper(int leftMost, int rightMost) {
+		List<TreeNode> result = new ArrayList<TreeNode>();
 		if (leftMost > rightMost) { // 如果最左比最右大，则只能是一种情况，即空树。
 			result.add(null); //【注】加入一个空元素进去，来表示这是一颗空树，并且同时也是保证下面循环时，即使一边是空树，也让另一边继续运算。
 			return result;
 		}
 		// 好好体会下面"在循环中调用递归函数求解子问题"
 		for (int i = leftMost; i <= rightMost; i++) {
-			ArrayList<TreeNode> leftChildren = helper(leftMost, i - 1);
-			ArrayList<TreeNode> rightChildren = helper(i + 1, rightMost);
+			List<TreeNode> leftChildren = helper(leftMost, i - 1);
+			List<TreeNode> rightChildren = helper(i + 1, rightMost);
 			for (TreeNode l : leftChildren) { // 以i为root的，各个左子树和各个右子树两两相配
 				for (TreeNode r : rightChildren) {
 					TreeNode root = new TreeNode(i); // 此处必须要new一个root的出来，因为每个tree都需要一个自己的root
@@ -63,6 +64,7 @@ public class Question {
 		}
 		return result;
 	}
+	
 }
 
 class TreeNode {

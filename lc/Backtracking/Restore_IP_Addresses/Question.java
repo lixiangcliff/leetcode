@@ -1,6 +1,7 @@
 package Restore_IP_Addresses;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Question {
 
@@ -11,7 +12,7 @@ public class Question {
 		// TODO Auto-generated method stub
 		Question q = new Question();
 		String s = "25525511135";
-		ArrayList<String> result = q.restoreIpAddresses(s);
+		List<String> result = q.restoreIpAddresses(s);
 		for (String item : result) {
 			System.out.println(item);
 		}
@@ -28,8 +29,8 @@ public class Question {
 	//画搜索树（“层数不会超过四层”）
 	//http://www.ninechapter.com/solutions/restore-ip-addresses/
 	//http://blog.csdn.net/linhuanmars/article/details/24683699
-    public ArrayList<String> restoreIpAddresses(String s) {
-    	ArrayList<String> result = new ArrayList<String>(); // 结果集
+    public List<String> restoreIpAddresses(String s) {
+    	List<String> result = new ArrayList<String>(); // 结果集
         if (s == null || s.length() < 4 || s.length() > 12) {
         	return result;
         }
@@ -41,7 +42,7 @@ public class Question {
         return result;
     }
     
-    private void helper(ArrayList<String> result, ArrayList<String> item, String s, int start){
+    private void helper(List<String> result, List<String> item, String s, int start){
 		if (item.size() == 4) { 
 			if (start != s.length()) { //【注】如果start未到达s末尾，则item不是一组合法解
                 return;

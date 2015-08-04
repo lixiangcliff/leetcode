@@ -52,7 +52,7 @@ public class Solution {
     			start = mid;
     		}
     	}
-    	int min = Math.min(start, start);
+    	int min = Math.min(start, end);
     	//三步翻转
     	reverse(nums, 0, min - 1);
     	reverse(nums, min, nums.size() - 1);

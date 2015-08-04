@@ -2,6 +2,7 @@ package Combination_Sum;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 
 public class Question {
@@ -15,9 +16,9 @@ public class Question {
 		int target = 7;
 		Question q = new Question();
 		
-		ArrayList<ArrayList<Integer>> result = q.combinationSum(candidates, target);
+		List<List<Integer>> result = q.combinationSum(candidates, target);
 		for (int i = 0; i < result.size(); i++) {
-			ArrayList<Integer> item = result.get(i);
+			List<Integer> item = result.get(i);
 			for (int j = 0; j < item.size(); j++) {
 				System.out.print(item.get(j)+ ",");
 			}
@@ -48,19 +49,19 @@ public class Question {
 	
 	//【注】类似subsets为了避免相同元素导致的结果集重复，需要pos这个参数来标记，每次递归的时的，起始处理元素的位置。
 	//http://blog.csdn.net/linhuanmars/article/details/20828631
-    public ArrayList<ArrayList<Integer>> combinationSum(int[] candidates, int target) {
-    	ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+    	List<List<Integer>> result = new ArrayList<List<Integer>>();
     	if (candidates == null || candidates.length == 0) {
     		return result;
     	}
     	Arrays.sort(candidates); // 这类题基本都需要先sort。对于此题sort之后，递归时如果当前元素已经比target大了，则之后的元素就不用再看了，直接返回即可。
-    	ArrayList<Integer> item = new ArrayList<Integer>();
+    	List<Integer> item = new ArrayList<Integer>();
     	int pos = 0;
     	helper(result, item, candidates, pos, target);
     	return result;
     }
     
-    private void helper(ArrayList<ArrayList<Integer>> result, ArrayList<Integer> item, int[] candidates, int pos, int target){
+    private void helper(List<List<Integer>> result, List<Integer> item, int[] candidates, int pos, int target){
     	if (target < 0) { // 因为所有元素都为正，如果target为负，则不可能找到数字组合来达到target，故返回
     		return;		
     	}

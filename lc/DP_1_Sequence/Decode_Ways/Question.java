@@ -40,16 +40,12 @@ public class Question {
 	// 【注】 res和s有位差
 	// 因为res[i]只需要res[i-1]和res[i-2]的值，所以可以将数组变为三个interger，使空间复杂度从O(n)变为O(1)
 	public int numDecodings(String s) {
-		if (s == null || s.length() == 0 || s.charAt(0) == '0') {
+		if (s == null || s.length() == 0 || s.charAt(0) == '0') { //s.charAt(0) == '0'，排出了第一位就是'0'的情况
 			return 0;
 		}
 		int[] result = new int[s.length() + 1];
 		result[0] = 1; // 【注】当s为空，decode way有一种，即"空"
-		if (!isValid(s.substring(0, 1))) {
-			return 0;
-		} else {
-			result[1] = 1;
-		}
+		result[1] = 1;
 		for (int i = 2; i <= s.length(); i++) {
 			if (isValid(s.substring(i - 1, i))) { // 位差，举例。检查当前位是合法
 				result[i] += result[i - 1];

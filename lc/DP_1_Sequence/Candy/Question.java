@@ -13,6 +13,7 @@ public class Question {
 	}
 	
 	/**
+	 * https://leetcode.com/problems/candy/
 	 * There are N children standing in a line. Each child is assigned a rating
 	 * value.
 	 * 
@@ -23,6 +24,11 @@ public class Question {
 	 * get more candies than their neighbors. What is the minimum candies you
 	 * must give?
 	 */
+	
+	//手写：left[i]从左到右一边,right[i]从右到左一边，for i=[0,len) res += Math.max(left[i], right[t])
+	//这样用两个数组不容易错
+	
+	
 	
 	//DP。之所以用DP思想，是因为每个小孩得到的糖数和他左边以及右边的有关，即状态和它前面的值有关，并且可以递推。
 	//以从左往右扫时为例：

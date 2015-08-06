@@ -27,12 +27,15 @@ public class Question {
 		if (num == null || num.length == 0) {
 			return 0;
 		}
-		int[] res = new int[num.length + 1];
-		res[0] = 0;
-		res[1] = num[0];
-		for (int i = 2; i <= num.length; i++) {
-			res[i] = Math.max(res[i - 1], num[i - 1] + res[i - 2]); // 位差
+		if (num.length == 1) {
+			return num[0];
 		}
-		return res[num.length];
+		int[] res = new int[num.length];
+		res[0] = num[0];
+		res[1] = Math.max(num[0], num[1]);
+		for (int i = 2; i < num.length; i++) {
+			res[i] = Math.max(res[i - 1], num[i] + res[i - 2]); 		
+		}
+		return res[num.length - 1];
 	}
 }

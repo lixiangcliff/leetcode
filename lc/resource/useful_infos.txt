@@ -124,9 +124,16 @@ useful links:
 	
 28. 报F和G的offer，分享面经和准备经验（干货）
 	http://www.mitbbs.com/article_t/JobHunting/32984309.html
+	准备面试篇，无干货
+	http://www.mitbbs.com/article_t/JobHunting/32990199.html
 	
 29 database ACID example
 	http://stackoverflow.com/questions/999394/whats-a-real-world-example-of-acid
 	
 30 几何题（search Geometry）
 	https://www.topcoder.com/community/data-science/data-science-tutorials/
+	
+31. 一亩三分地 面经
+	http://www.1point3acres.com/bbs/forum.php?mod=forumdisplay&fid=145&filter=author&orderby=dateline&sortid=311
+	内推
+	http://www.1point3acres.com/bbs/forum.php?mod=forumdisplay&fid=198&filter=author&orderby=dateline&sortid=192

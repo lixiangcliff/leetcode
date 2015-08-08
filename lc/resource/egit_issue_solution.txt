@@ -1,6 +1,5 @@
 link: http://stackoverflow.com/questions/19474186/egit-rejected-non-fast-forward
 
-
 Question:
 Egit rejected non-fast-forward
 

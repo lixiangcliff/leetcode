@@ -80,7 +80,7 @@ public class Question {
 			helper(board, rowLen - 1, j);
 		}
 		// Flood fill最左和最右列
-		for (int i = 0; i < rowLen; i++) {
+		for (int i = 1; i < rowLen - 1; i++) {
 			helper(board, i, 0);
 			helper(board, i, colLen - 1);
 		}

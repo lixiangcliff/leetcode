@@ -36,13 +36,13 @@ public class Question {
         }
         int row = dungeon.length;
         int col = dungeon[0].length;
-        int[][] res = new int[row][col]; //从[i][j]位置走到最右下角 最小的health量
-        for (int i = row - 1; i >= 0; i--) { //每个位置都要保证不管进入还是离开都要 >= 1
+        int[][] res = new int[row][col]; //保证能从[i][j]位置走到最右下角 ，在[i][j]处的最小的health量
+        for (int i = row - 1; i >= 0; i--) { //【注】下面分别每种情况，都要保证不管进入还是离开都要health >= 1
         	for (int j = col - 1; j >= 0; j--) {
         		if (i == row - 1 && j == col - 1) {
         			res[i][j] = dungeon[i][j] >= 0 ? 1 : - dungeon[i][j] + 1;
         		} else if (i == row - 1) {
-        			res[i][j] = Math.max(res[i][j + 1] - dungeon[i][j], 1);
+        			res[i][j] = Math.max(res[i][j + 1] - dungeon[i][j], 1); 
         		} else if (j == col - 1) {
         			res[i][j] = Math.max(res[i + 1][j] - dungeon[i][j], 1);
         		} else {

@@ -39,7 +39,8 @@ public class Question {
 		Answer: 3
 	 */
 	
-	//
+	//如果不可以改变原数组的话，就需要一个bool used[m][n]的辅助矩阵。
+	//如果可以改变数组，则可以把所有已发现的陆地标记为‘2’， 然后最后再恢复为1.这样不需要额外空间，但是时间近似多一倍。
     public int numIslands(char[][] grid) {
     	if (grid == null || grid.length == 0 || grid[0].length == 0) {
     		return 0;
@@ -56,30 +57,27 @@ public class Question {
     				LinkedList<Integer> queue = new LinkedList<Integer>();
     				queue.offer(pos);
     				while (!queue.isEmpty()) {
-    					int size = queue.size();
-    					for (int k = 0; k < size; k++) {
-    						pos = queue.poll();
-    						int row = pos / n;
-    						int col = pos % n;
-    						if (row > 0 && !used[row - 1][col] && grid[row - 1][col] == '1') {
-    							queue.offer(pos - n); //【注】要减去一个列的长度
-    							used[row - 1][col] = true;
-    						}
-    						if (row < m - 1 && !used[row + 1][col] && grid[row + 1][col] == '1') {
-    							queue.offer(pos + n);
-    							used[row + 1][col] = true;
-    						}
-    						if (col > 0 && !used[row][col - 1] && grid[row][col - 1] == '1') {
-    							queue.offer(pos - 1);
-    							used[row][col - 1] = true;
-    						}
-    						if (col < n - 1 && !used[row][col + 1] && grid[row][col + 1] == '1') {
-    							queue.offer(pos + 1);
-    							used[row][col + 1] = true;
-    						}
-    					}
+						pos = queue.poll();
+						int row = pos / n;
+						int col = pos % n;
+						if (row > 0 && !used[row - 1][col] && grid[row - 1][col] == '1') {
+							queue.offer(pos - n); //【注】要减去“列数”
+							used[row - 1][col] = true;
+						}
+						if (row < m - 1 && !used[row + 1][col] && grid[row + 1][col] == '1') {
+							queue.offer(pos + n);
+							used[row + 1][col] = true;
+						}
+						if (col > 0 && !used[row][col - 1] && grid[row][col - 1] == '1') {
+							queue.offer(pos - 1);
+							used[row][col - 1] = true;
+						}
+						if (col < n - 1 && !used[row][col + 1] && grid[row][col + 1] == '1') {
+							queue.offer(pos + 1);
+							used[row][col + 1] = true;
+						}
     				}
-    				res++;
+    				res++; // 找到一块“陆地”，就把跟这个陆地相邻的所有陆地处理完毕。
     			}
     		}
     	}

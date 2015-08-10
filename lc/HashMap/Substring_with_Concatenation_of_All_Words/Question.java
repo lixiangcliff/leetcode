@@ -57,7 +57,7 @@ public class Question {
 			HashMap<String, Integer> matchMap = new HashMap<String, Integer>(aimMap); // 从matchMap中依次减去
 			for (int j = i; j <= S.length() - wordLen; j += wordLen) { // j标记当前word的起始index, j的边界也要画图为好
 				String curWord = S.substring(j, j + wordLen);
-				if (!aimMap.containsKey(curWord) || !matchMap.containsKey(curWord)) {
+				if (!matchMap.containsKey(curWord)) {
 					break;
 				}
 				if (matchMap.get(curWord) > 0) {

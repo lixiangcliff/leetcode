@@ -28,8 +28,38 @@ public class Question {
 		Note:
 		You may assume both s and t have the same length.
 	 */
+	
+	//手写，更好理解
+    public boolean isIsomorphic(String s, String t) {
+		if (s == null && t == null || s.length() == 0 && t.length() == 0) {
+			return true;
+		}
+		HashMap<Character, Character> map1 = new HashMap<Character, Character>();
+		HashMap<Character, Character> map2 = new HashMap<Character, Character>();
+		for (int i = 0; i < s.length(); i++) {
+			char achar = s.charAt(i);
+			char bchar = t.charAt(i);
+			if (map1.containsKey(achar)) {
+			    if (map1.get(achar) != bchar) {
+			        return false;
+			    }
+			} else {
+			    map1.put(achar, bchar);
+			}
+			if (map2.containsKey(bchar)) {
+			    if (map2.get(bchar) != achar) {
+			        return false;
+			    }
+			} else {
+			    map2.put(bchar, achar);
+			}
+			
+		}
+		return true;
+    }
+	
 	//same as fgdsb
-	public boolean isIsomorphic(String s, String t) {
+	public boolean isIsomorphic2(String s, String t) {
 		if (s == null && t == null || s.length() == 0 && t.length() == 0) {
 			return true;
 		}

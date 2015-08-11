@@ -27,6 +27,7 @@ public class Question {
 		Given numerator = 2, denominator = 3, return "0.(6)".	
 	 */
 	
+	//http://blog.csdn.net/u012162613/article/details/41998617
     public String fractionToDecimal(int numerator, int denominator) {
     	if (denominator == 0) {
     		return null;
@@ -52,10 +53,10 @@ public class Question {
 		long rem = a % b; // 余数
 		HashMap<Long, Integer> map = new HashMap<Long, Integer>(); // <rem's val, rem's pos>
 		int i = 0;
-		boolean perodic = true; //是否为循环小数
-		while (!map.containsKey(rem)) {
+		boolean isPerodic = true; //是否为循环小数
+		while (!map.containsKey(rem)) { //一旦碰到余数重复，则找到一个完整的循环节
 			if (rem == 0) {
-				perodic = false;
+				isPerodic = false;
 				break;
 			}
 			deciPart.append(rem * 10 / b);
@@ -63,7 +64,7 @@ public class Question {
 			rem = rem * 10 % b;
 			i++;
 		}
-		if (perodic) {
+		if (isPerodic) {
 			deciPart.insert(map.get(rem), "("); //找到“循环节”第一位的位置
 			deciPart.append(")");
 		}

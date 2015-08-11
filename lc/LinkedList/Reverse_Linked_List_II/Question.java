@@ -7,7 +7,9 @@ public class Question {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		ListNode l1 = new ListNode(1);
+		Question q = new Question();
+		System.out.println("test");
+/*		ListNode l1 = new ListNode(1);
 		ListNode l1b = new ListNode(2);
 		ListNode l1c = new ListNode(3);
 		ListNode l1d = new ListNode(4);
@@ -16,6 +18,21 @@ public class Question {
 		l1b.next = l1c;
 		l1c.next = l1d;
 		l1d.next = l1e;
+		Question q = new Question();
+		ListNode current = l1;
+		System.out.println("test");
+		while(current != null){
+			System.out.print(current.val + ",");
+			current = current.next;
+		}
+		System.out.println("=========");
+		current = l1;
+		q.reverseBetween(current, 2, 4);
+		
+		while(current != null){
+			System.out.print(current.val + ",");
+			current = current.next;
+		}*/
 	}
 	
 	/**

@@ -1,5 +1,7 @@
 package Count_Primes;
 
+import java.util.ArrayList;
+
 public class Question {
 
 	/**
@@ -16,9 +18,6 @@ public class Question {
 	 * https://leetcode.com/problems/count-primes/
 	 * Count the number of prime numbers less than a non-negative number, n
 	 */
-	
-	//http://en.wikipedia.org/wiki/Sieve_of_Eratosthenes
-	//不包括n
     public int countPrimes(int n) {
 		if (n < 2) {
 			return 0;
@@ -27,14 +26,14 @@ public class Question {
 		isComp[0] = true;
 		isComp[1] = true;
 		int cur = 2;
-		while ((double) cur < (double) n / cur) {
+		while (cur <= n / cur) { // 用除法防止越界
 			int times = 2;
-			while ((double) cur <= (double) n / times) {
+			while (cur <= n / times) {
 				isComp[cur * times] = true;
 				times++;
 			}
 			cur++;
-			while (cur < n / cur && isComp[cur]) {
+			while (cur < n / cur && isComp[cur]) { //【注】只用prime来除
 				cur++;
 			}
 		}
@@ -46,5 +45,31 @@ public class Question {
 		}
 		return count;
     }
+    
+	//手写 input == 499979时候会超时
+	public int countPrimes2(int n) {
+		if (n < 3) {
+			return 0;
+		}
+		ArrayList<Integer> primes = new ArrayList<Integer>();
+		primes.add(2);
+		for (int i = 3; i < n; i++) {
+			boolean isPrime = true;
+			for (int prime : primes) {
+				if (i % prime == 0) {
+					isPrime = false;
+					break;
+				}
+			}
+			if (isPrime) {
+				primes.add(i);
+			}
+		}
+		return primes.size();
+    }
+	
+	//http://en.wikipedia.org/wiki/Sieve_of_Eratosthenes
+	//不包括n
+
 
 }

@@ -140,3 +140,5 @@ useful links:
 	
 32 米群网：
 	http://www.meetqun.com/forum-36-1.html
+	
+33. google 特殊要准备的 概率题。sampling, shuttle（洗牌），都是以算法的形式考，要写代码。

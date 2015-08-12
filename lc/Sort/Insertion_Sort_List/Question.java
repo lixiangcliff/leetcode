@@ -41,7 +41,7 @@ public class Question {
 		 ListNode dummy = new ListNode(0);
 		 ListNode pre = dummy;
 		 ListNode cur = head;
-		 while (cur != null) { // 把node从原来的链表中摘出来，插入新的dummy的链表中
+		 while (cur != null) { // 把cur从原来的链表中摘出来，插入新的dummy的链表中
 			 pre = dummy;
 			 ListNode next = cur.next;
 			 while (pre.next != null && pre.next.val <= cur.val) {

@@ -65,22 +65,26 @@ public class Question {
 	
 	//below is the last strategy  
 	public class TwoSum {
-		private Map<Integer, Integer> table = new HashMap<Integer, Integer>();
+		private Map<Integer, Integer> map = new HashMap<Integer, Integer>();
 
 		public void add(int input) {
-			int count = table.containsKey(input) ? table.get(input) : 0;
-			table.put(input, count + 1);
+			int count = map.containsKey(input) ? map.get(input) : 0;
+			map.put(input, count + 1);
 		}
 
 		public boolean find(int val) {
-			for (Map.Entry<Integer, Integer> entry : table.entrySet()) {
+			for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
 				int num = entry.getKey();
 				int y = val - num;
-				if (y == num) {
+				//下面是原来的写法，感觉画蛇添足
+/*				if (y == num) {
 					// For duplicates, ensure there are at least two individual numbers.
 					if (entry.getValue() >= 2)
 						return true;
-				} else if (table.containsKey(y)) {
+				} else if (map.containsKey(y)) {
+					return true;
+				}*/
+				if (map.containsKey(y)) {
 					return true;
 				}
 			}

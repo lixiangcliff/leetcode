@@ -40,11 +40,11 @@ public class Solution {
 		}
 		for (int i = 1; i <= len; i++) {
 			for (int j = 1; j <= i && j <= k; j++) {
-				for(int m = 1; m <= target; m++) { // 位差
-					if (m >= A[i - 1]){
-						result[i][j][m] = result[i - 1][j][m] + result[i - 1][j - 1][m - A[i - 1]];
-					} else { //即， 如果m < A[i - 1],那A[i - 1]肯定不能取
-						result[i][j][m] = result[i - 1][j][m]; 
+				for(int t = 1; t <= target; t++) { // 位差
+					if (t >= A[i - 1]){
+						result[i][j][t] = result[i - 1][j][t] + result[i - 1][j - 1][t - A[i - 1]];
+					} else { //即， 如果t < A[i - 1],那A[i - 1]肯定不能取
+						result[i][j][t] = result[i - 1][j][t]; 
 					}
 				}
 			}

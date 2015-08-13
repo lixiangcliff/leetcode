@@ -34,7 +34,7 @@ public class Question {
 	//Ma老师讲的思路：
 	//O(n)。看图！ 以每个元素值为高，左边第一个比它的值小的元素index作为左端，右边第一个比它的值小的元素index作为右端所组成的矩形。然后遍历所有元素，得到最大面积值。
 	//对于求左右端的办法，就是用stack：（通过每次处理height中的元素，来对stack进行push和pop操作来得到以每个元素为高的最大矩形面积）
-	//push的原则： 当前元素值大于等于比栈顶元素值（【注】push和pop的是index）
+	//push的原则： 当前元素值大于等于栈顶元素值（【注】push和pop的是index）
 	//pop原则：当前元素值小于栈顶元素值
 	//则对于任何时候的栈顶元素来说，它的左端即为与它相邻并且更靠近栈底的元素的index；它的右端就是导致它pop出来的比它值小的元素的index
 	//http://blog.csdn.net/linhuanmars/article/details/20524507

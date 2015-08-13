@@ -69,9 +69,9 @@ public class Question {
 			}
 		};
 		Collections.sort(intervals, comp);
-		result.add(intervals.get(0));
+		result.add(intervals.get(0));//要在另一个list（result）里添加，而不要在原来的list（intervals）里操作
 		for (int i = 0; i < intervals.size(); i++) {
-			if (result.get(result.size() - 1).end >= intervals.get(i).start) { // 上一个end在下一个start的右边（即，上一个interval和下一个interval有重合）
+			if (result.get(result.size() - 1).end >= intervals.get(i).start) { // 【注】上一个end在下一个start的右边（即，上一个interval和下一个interval有重合）
 				result.get(result.size() - 1).end = Math .max(result.get(result.size() - 1).end, intervals.get(i).end);// 则更新上一个end为：max（上一个end，下一个end）
 			} else { // 上一个interval和下一个interval没有重合，则将下一个interval直接加入结果集
 				result.add(intervals.get(i));

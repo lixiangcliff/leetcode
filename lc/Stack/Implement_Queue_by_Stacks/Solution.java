@@ -13,7 +13,7 @@ public class Solution {
 	}
 	
 	/**
-	 * http://lintcode.com/en/problem/implement-queue-by-stacks/
+	 * http://www.lintcode.com/en/problem/implement-queue-by-two-stacks/
 	 * As the title described, you should only use two stacks to implement a
 	 * queue's actions.
 	 * The queue should support push(element), pop() and top() where pop is pop

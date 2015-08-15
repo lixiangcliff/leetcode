@@ -63,8 +63,8 @@ public class Question {
 		int curStart = 0; // 当前行第一个元素的index（亦即：上一行还没处理的单词的index）
 		int wordsLenSum = 0; // 当前行目前累积的单词长度和
 		for (int i = 0; i <= wordsCount; i++) { // 【注】 i <= wordsCount, (i == wordsCount表示已经将最后一个单词累计入当前行)
-			// 已经处理到最后一行，或者已经凑够一行。具体说：算上当前word[i]的话就超出一行了，所以已经攒够一行的量了，开始处理攒好的字符串们(word[i]不被计入当前行)
-			if (i == wordsCount || wordsLenSum + words[i].length() + (i - curStart) > L) { // 【注】i - last表示当前行，如果加上word[i]会有多少个单词间隔
+			// 已经处理到最后一行，或者已经凑够一行。具体说：如果算上当前word[i]的话就超出一行了。所以不算word[i]的话，已经攒够一行的量了。开始处理攒好的字符串们(word[i]不被计入当前行)
+			if (i == wordsCount || wordsLenSum + words[i].length() + (i - curStart) > L) { // 【注】i - curStart表示当前行，如果加上word[i]会有多少个单词间隔
 				int slotCount = i - 1 - curStart; // 表示当前行实际有多少个单词间隔(不加word[i])
 				int spaceCount = L - wordsLenSum; // 当前行一共有多少空格待分配
 				StringBuilder sb = new StringBuilder();

@@ -46,11 +46,11 @@ public class Solution {
     public TreeNode removeNode(TreeNode root, int value) {
     	if (root == null) { //根为null， 返回null
     		return root;
-    	} else if (value < root.val) { //要remove的值比root小，则其一定在root的左子树
+    	} else if (value < root.val) { //【左】要remove的值比root小，则其一定在root的左子树
     		root.left = removeNode(root.left, value);
-    	} else if (value > root.val) { //要remove的值比root大，则其一定在root的右子树
+    	} else if (value > root.val) { //【右】要remove的值比root大，则其一定在root的右子树
     		root.right = removeNode(root.right, value);
-    	} else {	//当前root即为要remove的node
+    	} else {	//【根】当前root即为要remove的node
     		if (root.left == null && root.right == null) { //root没有孩子，则将其置null
     			root = null;
     		} else if (root.left == null) { // root指向root.right，剔除root处的node 【注】把它想象成linkedlist，就容易懂了。

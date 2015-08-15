@@ -62,22 +62,22 @@ public class Question {
 			runner = runner.next;
 			count++;
 		}
-		ArrayList<ListNode> sortedlist = new ArrayList<ListNode>();
-		sortedlist.add(head);
-		return helper(sortedlist, 0, count - 1);
+		ListNode[] lnode = new ListNode[1];
+		lnode[0] = head;
+		return helper(lnode, 0, count - 1);
 	}
 
-	// sortedlist里只存一个元素，即待转化为tree的ListNode的头 
-	//返回值即为: 以当前sortedlist.get(0)的值创造的TreeNode作为根，左边界为l，右边界为r，所构建的树的根
-	private TreeNode helper(ArrayList<ListNode> sortedlist, int l, int r) {
+	// lnode里只存一个元素，即待转化为tree的ListNode的头 
+	//返回值即为: 以当前lnode[0]的值作为新建tree中【注】最小值【注】，左边界为l，右边界为r，所构建的树的根
+	private TreeNode helper(ListNode[] lnode, int l, int r) {
 		if (l > r) {
 			return null;
 		}
 		int m = (l + r) / 2;
-		TreeNode left = helper(sortedlist, l, m - 1); //【左】找到左半边的根left
-		TreeNode root = new TreeNode(sortedlist.get(0).val); // 【根】用sortedlist中ListNode值创造一个TreeNode作为根
-		sortedlist.set(0, sortedlist.get(0).next); // 把sortedlist里面的值置为，当前根值在链表上 右边一个位置
-		TreeNode right = helper(sortedlist, m + 1, r); // 【右】找到右半边的根right
+		TreeNode left = helper(lnode, l, m - 1); //【左】找到左半边的根left
+		TreeNode root = new TreeNode(lnode[0].val); // 【注】递归做完左子树之后，lnode[0].val最后变为原链表中第"m"个值。【根】用当前lnode[0]的值创造一个TreeNode作为根
+		lnode[0] = lnode[0].next; // 把lnode[0]的值置为，当前根值在原链表上 下一个位置（得到右子树的最小值）
+		TreeNode right = helper(lnode, m + 1, r); // 【右】找到右半边的根right
 		root.left = left; // 当前根连上左子树的根
 		root.right = right; // 当前根连上右子树的根
 		return root;

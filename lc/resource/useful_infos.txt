@@ -143,4 +143,22 @@ useful links:
 	
 33. google 特殊要准备的 概率题。sampling, shuttle（洗牌），都是以算法的形式考，要写代码。
 
-test
+34. 关于lock
+	https://www.youtube.com/watch?v=TVkQ1VeRKt4&list=PLrRW1w6CGAcXbMtDFj205vALOGmiRc82-&index=39
+	
+35. houzz 面经
+	http://www.mitbbs.com/article_t/Recommend/31399593.html
+	houzz面筋：
+	Q1: print out prime factors. e.g., 20=2x2x5, 90=2x3x3x5
+	How to get a list of prime numbers
+	Q2: LRU. How to implement linkedHashtable
+	Q3: draw architectural picture for a typical web stack.
+	Q4: implement thread pool
+	
+	
+	http://www.glassdoor.com/GD/Interview/Houzz-Interview-Questions-E716331.htm?filter.jobTitleFTS=software+engineer
+	
+36. regex 
+	https://regex101.com/
+	
+37 relatinal db vs non-ralational db

@@ -162,3 +162,11 @@ useful links:
 	https://regex101.com/
 	
 37 relatinal db vs non-ralational db
+
+38 python interview questions:
+	http://www.careerride.com/python-interview-questions.aspx
+	http://www.bogotobogo.com/python/python_classes_instances.php#properties
+	http://www.ilian.io/python-interview-question-and-answers/
+	
+39. python tuple vs list:
+	http://stackoverflow.com/questions/626759/whats-the-difference-between-list-and-tuples

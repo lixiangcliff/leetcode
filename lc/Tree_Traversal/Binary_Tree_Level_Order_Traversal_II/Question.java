@@ -67,7 +67,7 @@ public class Question {
 		}
 		//Collections.reverse(result);
 		while (!stack.isEmpty()) {
-			result.add(stack.poll());
+			result.add(stack.pop());
 		}
 		return result;
 	}

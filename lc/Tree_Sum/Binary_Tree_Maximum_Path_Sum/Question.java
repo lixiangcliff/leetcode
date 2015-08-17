@@ -40,7 +40,7 @@ public class Question {
 		return result.maxPath;
 	}
 	
-	public ResultType helper (TreeNode root) { // 下面的注释如果看不懂，可以看视频
+	public ResultType helper (TreeNode root) { // 下面的注释如果看不懂，可以复习。
 		//【注】递归跳出条件：当root走到叶子的left或者right时，即root==null时候，
 		//我们要确保此时返回的ResultType里面的singlePath和maxPath不会对该叶子节点的singlePath和maxPath产生影响。
 		//对叶子节点的singlePath来讲，根据题意，如果它的node.val>0, 则选node.val，否则就选0）
@@ -50,7 +50,7 @@ public class Question {
 		//	又因为maxPath = Math.max(Math.max(left.maxPath, right.maxPath), left.singlePath + right.singlePath + root.val);
 		//	由上面可知left.singlePath和right.singlePath都为0，若要保证maxPath可以取到root.val， 则必须让left.maxPath和right.maxPath都为Integer.MIN_VALUE。
 		if (root == null) {
-			return new ResultType(0, Integer.MIN_VALUE);
+			return new ResultType(0, Integer.MIN_VALUE); // 【注】maxPath要想取最大的，所以初始化的时候要尽量小，选MIN
 		}
 		//divide
 		ResultType left = helper (root.left); 

@@ -170,3 +170,6 @@ useful links:
 	
 39. python tuple vs list:
 	http://stackoverflow.com/questions/626759/whats-the-difference-between-list-and-tuples
+	
+40. PEP 8 总结 
+	http://www.malike.net.cn/blog/2013/07/25/pep8-summary/

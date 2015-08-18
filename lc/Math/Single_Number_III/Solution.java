@@ -23,6 +23,7 @@ public class Solution {
 	 * Challenge O(n) time, O(1) extra space.
 	 */
 	
+	//cleaner code: https://leetcode.com/discuss/52351/accepted-java-space-easy-solution-with-detail-explanations
     public ArrayList<Integer> singleNumberIII(int[] A) {
     	ArrayList<Integer> result = new ArrayList<Integer>();
     	if (A == null || A.length == 0) {

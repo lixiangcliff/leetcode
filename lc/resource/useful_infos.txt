@@ -170,3 +170,12 @@ useful links:
 	
 39. python tuple vs list:
 	http://stackoverflow.com/questions/626759/whats-the-difference-between-list-and-tuples
+	
+40. javascript interview:
+	http://career.guru99.com/top-85-javascript-interview-questions/
+	
+41. static vs dynamic vs strong vs weak vs duck typing
+	http://www.koffeinfrei.org/2012/03/19/static-vs-dynamic-vs-strong-vs-weak-vs-duck-typing
+	
+42. PEP 8 总结 
+	http://www.malike.net.cn/blog/2013/07/25/pep8-summary/

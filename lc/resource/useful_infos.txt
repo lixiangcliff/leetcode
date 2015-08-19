@@ -179,3 +179,9 @@ useful links:
 	
 42. PEP 8 总结 
 	http://www.malike.net.cn/blog/2013/07/25/pep8-summary/
+	
+43. google 生产者消费者问题（可参考系统设计第四讲的slides里的链接）
+	http://www.mitbbs.com/article_t/JobHunting/33030297.html
+	
+44. software testing engineer interview question
+	http://www.indiabix.com/technical/software-testing/software-testing-basics/

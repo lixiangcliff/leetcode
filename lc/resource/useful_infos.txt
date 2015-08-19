@@ -166,7 +166,7 @@ useful links:
 	8. edit distance，本来想背dp答案的，结果没等我开口给我简化了并让我用 recursion 写
 	9. 前端基础
 	
-	http://www.1point3acres.com/bbs/forum.php?mod=viewthread&action=printable&tid=121913
+	http://www.1point3acres.com/bbs/thread-121913-1-1.html
 	算法两道：
 	1. Calculate the distance of bits between two integers. 
 	For example: 1 -> 01; 2 -> 10; dist = 2;

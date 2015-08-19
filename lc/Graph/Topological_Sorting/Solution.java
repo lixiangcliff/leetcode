@@ -80,9 +80,9 @@ public class Solution {
     		for (DirectedGraphNode nextNode : node.neighbors) {
     			if (map.containsKey(nextNode)) {
         			map.put(nextNode, map.get(nextNode) - 1); //入度减一
-    				if (map.get(nextNode) == 0) { //依次剔除入度为0的node
-        				queue.offer(nextNode);
-            			res.add(nextNode);
+    				if (map.get(nextNode) == 0) { //依次从map里剔除入度为0的node
+        				queue.offer(nextNode); //入度为0的可以放入queue中
+            			res.add(nextNode); // 入度为0的加入结果集中
             			map.remove(nextNode);
         			} 
     			}

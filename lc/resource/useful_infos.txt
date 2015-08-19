@@ -210,3 +210,7 @@ useful links:
 	
 44. software testing engineer interview question
 	http://www.indiabix.com/technical/software-testing/software-testing-basics/
+	
+45. What happens when you type a URL in browser 
+	http://edusagar.com/articles/view/70/What-happens-when-you-type-a-URL-in-browser
+	视频的前10分钟：  https://www.youtube.com/watch?v=8KuO4r5CHjM&list=PLtHNgNivKAzeeh2Q7h8VYgQOoJNhk8zgZ&index=2

@@ -155,6 +155,31 @@ useful links:
 	Q3: draw architectural picture for a typical web stack.
 	Q4: implement thread pool
 	
+	http://www.1point3acres.com/bbs/thread-101758-1-1.html
+	1. two sum, 电面用 hashset，onstie 又考了一遍用两种方法做
+	2. 分解质因数
+	3. shift array (shifts an array by N number of steps. E.g. [0,1,2,3,4] shiftArray(arr, 3) -> [2,3,4,0,1])
+	4. search in rotated array
+	5. valid BST. 我刚说完思路面试官就说我知道是对的你不用写代码了⊙▽⊙. 1point3acres.com/bbs
+	6. database design + SQL
+	7. fib, 非要让我不用 temp 和不能多用两个数……. From 1point 3acres bbs
+	8. edit distance，本来想背dp答案的，结果没等我开口给我简化了并让我用 recursion 写
+	9. 前端基础
+	
+	http://www.1point3acres.com/bbs/forum.php?mod=viewthread&action=printable&tid=121913
+	算法两道：
+	1. Calculate the distance of bits between two integers. 
+	For example: 1 -> 01; 2 -> 10; dist = 2;
+	2. Fibonacci, recursive + non recursive;
+	然后都问了下时间空间复杂度。
+	
+	其他内容：
+	HashMap vs HashTable;
+	Design Database tabe;
+	简历随意走了一下;
+	HTTP Request: GET vs. POST vs. PUT，能不能互相换着用。
+	Java vs JavaScript. 以及各自如何实现OOP。
+	
 	
 	http://www.glassdoor.com/GD/Interview/Houzz-Interview-Questions-E716331.htm?filter.jobTitleFTS=software+engineer
 	

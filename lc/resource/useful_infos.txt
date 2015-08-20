@@ -171,13 +171,18 @@ useful links:
 	1. Calculate the distance of bits between two integers. 
 	For example: 1 -> 01; 2 -> 10; dist = 2;
 	2. Fibonacci, recursive + non recursive;
+	recursive and iterative: http://www.programcreek.com/2012/10/iteration-vs-recursion-in-java/
 	然后都问了下时间空间复杂度。
+	recursive 时间2^n(即exponential time)，空间n
+								时间 http://stackoverflow.com/questions/360748/computational-complexity-of-fibonacci-sequence
+								空间 http://www.quora.com/What-is-the-space-complexity-of-a-recursive-fibonacci-function
+	iterative:
 	
 	其他内容：
-	HashMap vs HashTable;
+	HashMap vs HashTable;(http://javahungry.blogspot.com/2014/03/hashmap-vs-hashtable-difference-with-example-java-interview-questions.html)
 	Design Database tabe;
 	简历随意走了一下;
-	HTTP Request: GET vs. POST vs. PUT，能不能互相换着用。
+	HTTP Request: GET vs. POST vs. PUT，能不能互相换着用。(http://jingxin.me/blog/blog/2013/01/30/get-post-put-delete-sha-sha-fen-bu-qing-chu/)
 	Java vs JavaScript. 以及各自如何实现OOP。
 	
 	

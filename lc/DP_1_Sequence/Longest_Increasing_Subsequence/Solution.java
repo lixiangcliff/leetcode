@@ -31,17 +31,16 @@ public class Solution {
 	//3.initialize: result[i] = 1（i范围[0,a.length]。最差情况都是倒序的，则当前i的LIS为1）
 	//4.answer: max(result[0], result[1]...result[nums.length];
 	//O(n^2)时间复杂度
-	//【注】nums[]和res[]有一个位差 
 	public int longestIncreasingSubsequence(int[] nums) {
 		if (nums == null || nums.length == 0) {
 			return 0;
 		}
 		int max = 1;
-		int[] result = new int[nums.length + 1];
-		for (int i = 1; i <= nums.length; i++) {
+		int[] result = new int[nums.length];
+		for (int i = 0; i < nums.length; i++) {
 			result[i] = 1;
-			for (int j = 1; j < i; j++) {
-				if (nums[j - 1] <= nums[i - 1]) { // 找到一个比i数值小的位置。其中 nums[]和res[]有一个位差
+			for (int j = 0; j < i; j++) {
+				if (nums[j] <= nums[i]) { // 找到一个比i数值小的位置。
 					result[i] = Math.max(result[i], result[j] + 1);
 				}
 			}

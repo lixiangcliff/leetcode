@@ -57,12 +57,12 @@ public class Question {
     				LinkedList<Integer> queue = new LinkedList<Integer>();
     				queue.offer(pos);
     				while (!queue.isEmpty()) {
-						pos = queue.poll();
+						pos = queue.poll(); // 每次拿到一个位置pos, 然后根据pos 恢复出row和col，然后上下左右分别试探。
 						int row = pos / n;
 						int col = pos % n;
-						if (row > 0 && !used[row - 1][col] && grid[row - 1][col] == '1') {
+						if (row > 0 && !used[row - 1][col] && grid[row - 1][col] == '1') { //往上走
 							queue.offer(pos - n); //【注】要减去“列数”
-							used[row - 1][col] = true;
+							used[row - 1][col] = true; //该位置标记为访问过
 						}
 						if (row < m - 1 && !used[row + 1][col] && grid[row + 1][col] == '1') {
 							queue.offer(pos + n);

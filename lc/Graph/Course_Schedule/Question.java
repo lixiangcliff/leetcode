@@ -74,7 +74,7 @@ public class Question {
     	}
     	while (!q.isEmpty()) {
     		int key = q.poll();
-    		for (int i = 0; i < prerequisites.length; i++) {
+    		for (int i = 0; i < prerequisites.length; i++) { //如果事先把当前key的所有next都存入一个数组，就可以省去这次遍历。参考Course_Schedule_II
     			if (prerequisites[i][1] == key) {
     				int next = prerequisites[i][0]; //得到key的“下游”--next
     				map.put(next, map.get(next) - 1);

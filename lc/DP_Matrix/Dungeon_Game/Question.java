@@ -36,17 +36,17 @@ public class Question {
         }
         int row = dungeon.length;
         int col = dungeon[0].length;
-        int[][] res = new int[row][col]; //保证能从[i][j]位置走到最右下角 ，在[i][j]处的最小的health量
+        int[][] res = new int[row][col]; //【注】表示带着至少多大的health量进入[i][j]（该量能保证能从[i][j]位置走到最右下角 ）
         for (int i = row - 1; i >= 0; i--) { //【注】下面分别每种情况，都要保证不管进入还是离开都要health >= 1
         	for (int j = col - 1; j >= 0; j--) {
         		if (i == row - 1 && j == col - 1) {
         			res[i][j] = dungeon[i][j] >= 0 ? 1 : - dungeon[i][j] + 1;
-        		} else if (i == row - 1) {
+        		} else if (i == row - 1) {//即需满足res[i][j] + d[i][j] >= res[i][j + 1]；同时要满足res[i][j] >= 1;所以两者取交集，则res[i][j]等于两者中较大的 
         			res[i][j] = Math.max(res[i][j + 1] - dungeon[i][j], 1); 
         		} else if (j == col - 1) {
         			res[i][j] = Math.max(res[i + 1][j] - dungeon[i][j], 1);
         		} else {
-        			res[i][j] = Math.max(Math.min(res[i][j + 1], res[i + 1][j]) - dungeon[i][j], 1);
+        			res[i][j] = Math.max(Math.min(res[i][j + 1], res[i + 1][j]) - dungeon[i][j], 1); //res[i][j + 1] vs res[i + 1][j],即哪边需要的血少就走哪边
         		}
         	}
         }

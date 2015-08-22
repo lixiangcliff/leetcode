@@ -24,12 +24,12 @@ public class Question {
 	//【注】递归边界最好的办法是举例！
 	//http://www.cnblogs.com/yuzhangcmu/p/4146119.html
 	//http://blog.csdn.net/linhuanmars/article/details/19899259
-	public ListNode mergeKLists(ArrayList<ListNode> lists) {
-		if (lists == null || lists.size() == 0) {
+    public ListNode mergeKLists(ListNode[] lists) {
+        if (lists == null || lists.length == 0) {
 			return null;
 		}
-		return helper(lists, 0, lists.size() - 1);
-	}
+		return helper(lists, 0, lists.length- 1);
+    }
     
     //返回的是将left和right merge之后的新的head node
     //先把k个list分成两半，然后继续划分，直到剩下两个list就合并起来。
@@ -48,12 +48,12 @@ public class Question {
 	//
 	// 结论：当mid向下取整时，递归函数为helper(lists, left, mid) , helper(lists, mid + 1, right)
 	//则helper(lists, left, mid) , helper(lists, mid+1, right) 变为 helper(lists, 0, 1) , helper(lists, 2, 1)
-	private ListNode helper(ArrayList<ListNode> lists, int left, int right) {
+	private ListNode helper(ListNode[] lists, int left, int right) {
 		if (left < right) {
 			int mid = left + (right - left) / 2;// 向下取整，同时避免溢出
 			return mergeTwoLists(helper(lists, left, mid), helper(lists, mid + 1, right));
 		}
-		return lists.get(left);// or return lists.get(right) 最后的时候left == right;
+		return lists[left];// or return lists[right] 最后的时候left == right;
 	}
 
     //完全照搬 https://oj.leetcode.com/problems/merge-two-sorted-lists/

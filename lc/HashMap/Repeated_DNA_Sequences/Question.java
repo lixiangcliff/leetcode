@@ -32,6 +32,7 @@ public class Question {
 	 */
 	
 	//Zhe's method
+	//【注】中心思想：每一个字母都用一个2位的二进制表示，则每一种单独的排列（10个字母），都可以表示成数值都不同20位的二进制数
     public List<String> findRepeatedDnaSequences(String s) {
     	List<String> res = new ArrayList<String>();
     	if (s == null || s.length() <= 10) {
@@ -42,7 +43,7 @@ public class Question {
     	charMap.put('C', 1);
     	charMap.put('G', 2);
     	charMap.put('T', 3);
-    	int val = 0; //【注】中心思想：每一种单独的排列，表示成bin的数值都不同
+    	int val = 0; //
     	for (int i = 0; i < 10; i++) {
     		val = addValEnd(s, charMap, val, i);
     	}

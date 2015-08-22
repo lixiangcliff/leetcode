@@ -71,7 +71,7 @@ public class Question {
 				return false; // invalid char
 			}
 		}
-		return num; //【注】此处返回num，以防输入只有一个符号。
+		return num; //【注】此处返回num，以防输入只有一个符号（+ - .）。
 	}
 	
 	//http://blog.csdn.net/linhuanmars/article/details/23809661

@@ -25,7 +25,7 @@ public class Question {
 		boolean[] isComp = new boolean[n + 1];
 		isComp[0] = true;
 		isComp[1] = true;
-		int cur = 2;
+		int cur = 2; // cur表示当前一轮的prime
 		while (cur <= n / cur) { // 用除法防止越界
 			int times = 2;
 			while (cur <= n / times) {

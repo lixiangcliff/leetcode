@@ -222,3 +222,10 @@ useful links:
 	
 46. python 快速入门
 	http://blog.jobbole.com/43922/ 
+	
+	
+47. EMC（RSA） 准备：
+	Selenium, C I tool--Continuous integration(Jenkins)
+	http://www.glassdoor.com/GD/Interview/RSA-Security-Interview-Questions-E3838.htm?sort.sortType=RD&sort.ascending=false&filter.jobTitleFTS=software
+	(1).They asked questions focused on Test Automation, Agile methodology and QA process along with few technical questions. 
+	I talked to RSA Director the day after and they offered

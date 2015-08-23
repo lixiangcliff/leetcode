@@ -229,3 +229,14 @@ useful links:
 	http://www.glassdoor.com/GD/Interview/RSA-Security-Interview-Questions-E3838.htm?sort.sortType=RD&sort.ascending=false&filter.jobTitleFTS=software
 	(1).They asked questions focused on Test Automation, Agile methodology and QA process along with few technical questions. 
 	I talked to RSA Director the day after and they offered
+	
+	回忆电面：
+	1.git vs svn
+	2.sql vs nosql
+	3.selenium
+	4.ajax
+	5.find grep ps top 
+	6.vi sed
+	7.jira- priority vs severity
+	8.jenkins
+	9.security (testing) knowledge

@@ -193,6 +193,8 @@ useful links:
 	
 	http://www.quora.com/What-is-the-tech-stack-for-Houzz
 	
+	CSRF
+	https://en.wikipedia.org/wiki/Cross-site_request_forgery
 	
 	http://www.glassdoor.com/GD/Interview/Houzz-Interview-Questions-E716331.htm?filter.jobTitleFTS=software+engineer
 	
@@ -248,3 +250,16 @@ useful links:
 	7.jira- priority vs severity
 	8.jenkins
 	9.security (testing) knowledge
+	
+	Web Application Security Testing Cheat Sheet
+	https://www.owasp.org/index.php/Web_Application_Security_Testing_Cheat_Sheet
+	
+	http protocol questions
+	http://www.globalguideline.com/interview_questions/Questions.php?sc=Hypertext_Transfer_Protocol_(HTTP)
+	
+	user-agent
+	http://www.whatsmyua.com/
+	https://developer.chrome.com/multidevice/user-agent
+	
+	websocket vs long polling(persistent connection)
+	http://www.zhihu.com/question/20215561

@@ -185,6 +185,14 @@ useful links:
 	HTTP Request: GET vs. POST vs. PUT，能不能互相换着用。(http://jingxin.me/blog/blog/2013/01/30/get-post-put-delete-sha-sha-fen-bu-qing-chu/)
 	Java vs JavaScript. 以及各自如何实现OOP。
 	
+	与competitor的比较
+	http://blogs.wsj.com/venturecapital/2015/01/20/home-improvement-site-porch-com-lands-65m-to-build-out-its-services/
+	
+	流量统计
+	http://www.alexa.com/siteinfo/houzz.com#?
+	
+	http://www.quora.com/What-is-the-tech-stack-for-Houzz
+	
 	
 	http://www.glassdoor.com/GD/Interview/Houzz-Interview-Questions-E716331.htm?filter.jobTitleFTS=software+engineer
 	

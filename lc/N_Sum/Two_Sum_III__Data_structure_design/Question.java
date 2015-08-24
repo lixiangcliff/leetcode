@@ -76,17 +76,14 @@ public class Question {
 			for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
 				int num = entry.getKey();
 				int y = val - num;
-				//下面是原来的写法，感觉画蛇添足
-/*				if (y == num) {
+				if (y == num) {
 					// For duplicates, ensure there are at least two individual numbers.
 					if (entry.getValue() >= 2)
 						return true;
 				} else if (map.containsKey(y)) {
 					return true;
-				}*/
-				if (map.containsKey(y)) {
-					return true;
 				}
+				
 			}
 			return false;
 		}

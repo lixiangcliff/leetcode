@@ -61,9 +61,6 @@ public class Question {
         		r--;
         		i--; //【注】i需停留，因为换过来的有可能是0，所以i要停留来处理掉这个0
         	}
-        	if (i == r) {
-        		break;
-        	}
         }
         return;
     }

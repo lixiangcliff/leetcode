@@ -41,7 +41,7 @@ public class Question {
     	}
     	for (int val : num) {
     		int idx = (val - min) / bkSize;
-    		if (!bks.get(idx).isEmpty()) {
+    		if (!bks.get(idx).isEmpty()) {//【注】只需记录每个桶内的最小值和最大值即可
     			bks.get(idx).set(0, Math.min(val, bks.get(idx).get(0))); //local min
     			bks.get(idx).set(1, Math.max(val, bks.get(idx).get(1))); // local max
     		} else {

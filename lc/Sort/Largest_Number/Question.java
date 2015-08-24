@@ -65,7 +65,7 @@ public class Question {
         	}
         	strs.add(Integer.toString(d));
         }
-        if (allZero) { // corner case
+        if (allZero) { // corner case 如果没有这个验证，如果输入全是0，返回结果就是"000...000"
         	return "0";
         }
         Collections.sort(strs, comp);

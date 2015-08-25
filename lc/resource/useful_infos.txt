@@ -271,5 +271,8 @@ useful links:
 49. Shuffle a given array
 	http://www.geeksforgeeks.org/shuffle-a-given-array/
 	cracking code 5th 18.2
-	
+
+50  更多leetcode题目
+	http://bookshadow.com/leetcode/
+	http://sbzhouhao.net/LeetCode/	
 	

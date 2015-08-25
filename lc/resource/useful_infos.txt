@@ -267,3 +267,9 @@ useful links:
 	
 48. k largest(or smallest) elements in an array | added Min Heap method
 	http://www.geeksforgeeks.org/k-largestor-smallest-elements-in-an-array/	
+	
+49. Shuffle a given array
+	http://www.geeksforgeeks.org/shuffle-a-given-array/
+	cracking code 5th 18.2
+	
+	

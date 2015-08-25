@@ -263,3 +263,7 @@ useful links:
 	
 	websocket vs long polling(persistent connection)
 	http://www.zhihu.com/question/20215561
+	
+	
+48. k largest(or smallest) elements in an array | added Min Heap method
+	http://www.geeksforgeeks.org/k-largestor-smallest-elements-in-an-array/	

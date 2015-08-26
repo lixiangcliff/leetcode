@@ -277,3 +277,8 @@ useful links:
 	http://bookshadow.com/leetcode/
 	http://sbzhouhao.net/LeetCode/	
 	
+51. 电梯设计题：
+	http://thought-works.blogspot.com/2012/11/object-oriented-design-for-elevator-in.html
+	http://www.shuatiblog.com/blog/2014/08/26/Design-OOD-elevator/
+	http://www.careercup.com/question?id=1808669
+	

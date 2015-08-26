@@ -54,34 +54,34 @@ public class Question {
 	
 	
 	private void helper(List<List<Integer>> res, List<Integer> item, int board[][], int pos, boolean used[][], int len) {
-		if (item.size() > len) {
-			return;
-		}
-		if (item.size() == len) {
-			res.add(new ArrayList<Integer>(item));
-			return;
-		}
 		int m = board.length;
 		int n = board[0].length;
 		int i = pos / n;
 		int j = pos % n;
-		
-		used[i][j] = true;
 		item.add(board[i][j]);
-		if (i > 0 && !used[i - 1][j]) { // go up
-			helper(res, item, board, pos - n, used, len);
+		if (item.size() == len) {
+			res.add(new ArrayList<Integer>(item));
+			item.remove(item.size()-1);
+			return;
 		}
-		if (i < m - 1 && !used[i + 1][j]) { // go down
-			helper(res, item, board, pos + n, used, len);
-		}
-		if (j > 0 && !used[i][j - 1]) { // go left
-			helper(res, item, board, pos - 1, used, len);
-		}
-		if (j < n - 1 && !used[i][j + 1]) { // go right
-			helper(res, item, board, pos + 1, used, len);
-		}
-		item.remove(item.size() - 1);
-		used[i][j] = false;
+		
+		
+		//used[i][j] = true;
+		
+		if (i > 0 && !item.contains(board[i - 1][j])) { // go up
+            helper(res, item, board, pos - n, used, len);
+        }
+        if (i < m - 1 && !item.contains(board[i + 1][j])) { // go down
+            helper(res, item, board, pos + n, used, len);
+        }
+        if (j > 0 && !item.contains(board[i][j - 1])) { // go left
+            helper(res, item, board, pos - 1, used, len);
+        }
+        if (j < n - 1 && !item.contains(board[i][j + 1])) { // go right
+            helper(res, item, board, pos + 1, used, len);
+        }
+        item.remove(item.size()-1);
+		//used[i][j] = false;
 
 		
 		

@@ -62,22 +62,22 @@ public class Question {
 			runner = runner.next;
 			count++;
 		}
-		ListNode[] lnode = new ListNode[1];
-		lnode[0] = head;
-		return helper(lnode, 0, count - 1);
+		ListNode[] headNode = new ListNode[1];
+		headNode[0] = head;
+		return helper(headNode, 0, count - 1);
 	}
 
-	// lnode里只存一个元素，即待转化为tree的ListNode的头 
-	//返回值即为: 以当前lnode[0]的值作为新建tree中【注】最小值【注】，左边界为l，右边界为r，所构建的树的根
-	private TreeNode helper(ListNode[] lnode, int l, int r) {
+	// headNode里只存一个元素，即待转化为tree的ListNode的头 
+	//返回值即为: 以当前headNode[0]的值作为新建tree中【注】最小值【注】，左边界为l，右边界为r，所构建的树的根
+	private TreeNode helper(ListNode[] headNode, int l, int r) {
 		if (l > r) {
 			return null;
 		}
 		int m = (l + r) / 2;
-		TreeNode left = helper(lnode, l, m - 1); //【左】找到左半边的根left
-		TreeNode root = new TreeNode(lnode[0].val); // 【注】递归做完左子树之后，lnode[0].val最后变为原链表中第"m"个值。【根】用当前lnode[0]的值创造一个TreeNode作为根
-		lnode[0] = lnode[0].next; // 把lnode[0]的值置为，当前根值在原链表上 下一个位置（得到右子树的最小值）
-		TreeNode right = helper(lnode, m + 1, r); // 【右】找到右半边的根right
+		TreeNode left = helper(headNode, l, m - 1); //【左】找到左半边的根left
+		TreeNode root = new TreeNode(headNode[0].val); // 【注】递归做完左子树之后，headNode[0].val最后变为原链表中第"m"个值。【根】用当前headNode[0]的值创造一个TreeNode作为根
+		headNode[0] = headNode[0].next; // 把headNode[0]的值置为，当前根值在原链表上 下一个位置（得到右子树的最小值）
+		TreeNode right = helper(headNode, m + 1, r); // 【右】找到右半边的根right
 		root.left = left; // 当前根连上左子树的根
 		root.right = right; // 当前根连上右子树的根
 		return root;

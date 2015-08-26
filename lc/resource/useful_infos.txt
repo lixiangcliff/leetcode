@@ -250,6 +250,7 @@ useful links:
 	7.jira- priority vs severity
 	8.jenkins
 	9.security (testing) knowledge
+	10. REST(ful) is stateful or stateless
 	
 	Web Application Security Testing Cheat Sheet
 	https://www.owasp.org/index.php/Web_Application_Security_Testing_Cheat_Sheet
@@ -275,4 +276,9 @@ useful links:
 50  更多leetcode题目
 	http://bookshadow.com/leetcode/
 	http://sbzhouhao.net/LeetCode/	
+	
+51. 电梯设计题：
+	http://thought-works.blogspot.com/2012/11/object-oriented-design-for-elevator-in.html
+	http://www.shuatiblog.com/blog/2014/08/26/Design-OOD-elevator/
+	http://www.careercup.com/question?id=1808669
 	

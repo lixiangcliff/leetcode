@@ -42,35 +42,35 @@ public class Question {
 	 */
 	
 	//1.每次将当前root为根的树切成 root, root左子树(left), root右子树(right)三部分,（先取好left和right，然后把root.left和root.right置null）
-	//2.用tail标记root
-	//3.然后left接在tail.right,然后递归处理left
-	//4.然后right接在tail.right,然后递归处理right
-	//5.返回tail
+	//2.然后left接在root.right,然后递归处理left
+	//3.然后right接在root.right,然后递归处理right
+	//4.返回root
 	// http://www.cnblogs.com/yuzhangcmu/p/4186572.html
     public void flatten(TreeNode root) {
         dfs(root);
     }
     
-    // return : tail表示flatten之后的最右边的node
+    // return : 返回的root表示flatten之后的最右边的node
     private TreeNode dfs(TreeNode root) {
     	if (root == null) {
     		return null;
     	}
-    	TreeNode tail = root;
     	TreeNode left = root.left;
     	TreeNode right = root.right;
     	root.left = null; //【注】重要！这两行将root, root左子树 root右子树切成三部分
     	root.right = null;
     	if (left != null) {  // connect the left tree.
-    		tail.right = left;
-    		tail = dfs(left);
+    		root.right = left;
+    		root = dfs(left);
     	}
     	if (right != null) {  // connect the right tree.
-    		tail.right = right;
-    		tail = dfs(right);
+    		root.right = right;
+    		root = dfs(right);
     	}
-    	return tail;
+    	return root;
     }
+	
+
 }
 
  class TreeNode {

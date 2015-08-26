@@ -46,6 +46,7 @@ public class Solution {
 	//返回值即为最小公共祖先
 	//【注】返回值为四种情况之一： 
 	//(1)A和B的LCA (2)A (3)B (4)null
+	//【注】返回值定义：如果找到AB的LCA的node，则返回该node；如果遇到A或B，则返回A或B；若前两者都没遇到，则返回null
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode A, TreeNode B) {
     	if (root == null || root == A || root == B) { // base case。root已经 为null或者碰到了A，B其中某一个点
     		return root;
@@ -54,7 +55,7 @@ public class Solution {
     	TreeNode left = lowestCommonAncestor(root.left, A, B);
     	TreeNode right = lowestCommonAncestor(root.right, A, B);
     	//conquer
-    	if (left != null && right != null) { //【注】left和right都不为null，也不可能是left和right都是A和B的LCA。所以一定是left和right分别为A或B(B或A)
+    	if (left != null && right != null) { //【注】说明left和right分别遇到的是A和B(或者B和A)，则root即为LCA
     		return root;
     	}
     	if (left != null) { //即AB都在左子树（即right == null）

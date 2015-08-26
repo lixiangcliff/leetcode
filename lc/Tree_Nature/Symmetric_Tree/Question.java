@@ -42,6 +42,7 @@ public class Question {
 		return helper(root.left, root.right);
 	}
 
+	//这个helper和same tree那道题基本一致
 	private boolean helper(TreeNode l, TreeNode r) {
 		if (l == null && r == null) {
 			return true;

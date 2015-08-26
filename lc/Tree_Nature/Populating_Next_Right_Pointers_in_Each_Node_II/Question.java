@@ -35,7 +35,9 @@ public class Question {
 		    4-> 5 -> 7 -> NULL
 	 */
 	
-	//此题的技巧在于设置一个dummy node来标记当前行最左端的node，然后进入下一行时，只需将leftMost置为dummy即可。从左到右遍历当前行时，就把下面的一行“织”起来了。
+	//此题的技巧在于设置一个dummy(pre初值为dummy)，dummy.next来标记下一行最左端的node。
+	//当前cur从左到右遍历当前行时，就把下面的一行用pre“织”起来了。
+	//然后进入下一行时，只需将cur置为dummy.next即可。
 	//http://www.cnblogs.com/yuzhangcmu/p/4041345.html
 	public void connect(TreeLinkNode root) {
 		if (root == null){

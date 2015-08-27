@@ -195,6 +195,7 @@ useful links:
 	
 	CSRF
 	https://en.wikipedia.org/wiki/Cross-site_request_forgery
+	https://zh.wikipedia.org/wiki/%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0  (记住例子)
 	
 	http://www.glassdoor.com/GD/Interview/Houzz-Interview-Questions-E716331.htm?filter.jobTitleFTS=software+engineer
 	

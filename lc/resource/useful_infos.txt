@@ -282,3 +282,6 @@ useful links:
 	http://www.shuatiblog.com/blog/2014/08/26/Design-OOD-elevator/
 	http://www.careercup.com/question?id=1808669
 	
+52. 多线程安全。java 7 non-blocking
+	读时候不锁，写时候锁。
+	

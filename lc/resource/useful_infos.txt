@@ -182,7 +182,7 @@ useful links:
 	HashMap vs HashTable;(http://javahungry.blogspot.com/2014/03/hashmap-vs-hashtable-difference-with-example-java-interview-questions.html)
 	Design Database tabe;
 	简历随意走了一下;
-	HTTP Request: GET vs. POST vs. PUT，能不能互相换着用。(http://jingxin.me/blog/blog/2013/01/30/get-post-put-delete-sha-sha-fen-bu-qing-chu/)
+	HTTP Request: GET vs. POST vs. PUT，能不能互相换着用。( http://jingxin.me/blog/blog/2013/01/30/get-post-put-delete-sha-sha-fen-bu-qing-chu/ )
 	Java vs JavaScript. 以及各自如何实现OOP。
 	
 	与competitor的比较

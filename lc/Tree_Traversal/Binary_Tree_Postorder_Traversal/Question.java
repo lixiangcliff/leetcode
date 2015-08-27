@@ -1,6 +1,7 @@
 package Binary_Tree_Postorder_Traversal;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
@@ -60,11 +61,10 @@ public class Question {
         	return res;
         }
         Stack<TreeNode> stack = new Stack<TreeNode>();
-        Stack<TreeNode> stack2 = new Stack<TreeNode>();
         stack.push(root);
         while (!stack.isEmpty()) { // 【注】此处不是 while (root != null)
         	TreeNode node = stack.pop();
-        	stack2.push(node);
+        	res.add(node.val);
         	if (node.left != null) {
         		stack.push(node.left);
         	}
@@ -72,9 +72,7 @@ public class Question {
         		stack.push(node.right);
         	}
         }
-        while (!stack2.isEmpty()) {
-        	res.add(stack2.pop().val);
-        }
+        Collections.reverse(res);
         return res;
     }
     

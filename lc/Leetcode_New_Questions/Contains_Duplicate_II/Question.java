@@ -27,15 +27,15 @@ public class Question {
         for (int i = 0; i < nums.length; i++) {
         	int value = nums[i];
         	if (map.containsKey(value)) {
-        		ArrayList<Integer> indexes = map.get(value);
-        		if (i - indexes.get(indexes.size() - 1) <= k) {
+        		ArrayList<Integer> list = map.get(value);
+        		if (i - list.get(list.size() - 1) <= k) { //【注】只要看list里的最后一个就行了
     				return true;
     			} 
         		map.get(value).add(i);
         	} else {
-        		ArrayList<Integer> indexes = new ArrayList<Integer>();
-        		indexes.add(i);
-        		map.put(value, indexes);
+        		ArrayList<Integer> list = new ArrayList<Integer>();
+        		list.add(i);
+        		map.put(value, list);
         	}
         }
         return false;

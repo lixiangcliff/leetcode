@@ -53,7 +53,7 @@ public class Question {
     			while (s2.peek() != ')') {
     				cal(s1, s2);
     			}
-    			s2.pop(); // pop出s2里的'('
+    			s2.pop(); // pop出s2里的')'
     		}
     		
     	}

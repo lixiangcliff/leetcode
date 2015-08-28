@@ -73,7 +73,7 @@ public class Question {
 	    return result;
 	}
 
-	public void helper(List<List<Integer>> result, List<Integer> item, int n, int start){
+	private void helper(List<List<Integer>> result, List<Integer> item, int n, int start){
 	    if (n <= 1) {
 	        if (item.size() > 1) {
 	            result.add(new ArrayList<Integer>(item));
@@ -88,5 +88,31 @@ public class Question {
 	        }
 	    }
 	}
+	
+	//从大到小
+	//http://www.shuatiblog.com/blog/2015/02/13/combination-of-factors/
+/*	public List<List<Integer>> getFactors(int n) {
+	    List<List<Integer>> result = new ArrayList<List<Integer>>();
+	    List<Integer> item = new ArrayList<Integer>();
+	    int start = n / 2;
+	    helper(result, item , n, start);
+	    return result;
+	}
+
+	private void helper(List<List<Integer>> result, List<Integer> item, int n, int start){
+		if (n == 1) {
+			result.add(new ArrayList<Integer>(item));
+	        return;
+	    }
+	    for (int i = start; i > 1; i--) {
+	        if (n % i == 0) {
+				item.add(i);
+				helper(result, item, n / i, i);
+				item.remove(item.size() - 1);
+	        }
+	    }
+	}*/
+	
+
 
 }

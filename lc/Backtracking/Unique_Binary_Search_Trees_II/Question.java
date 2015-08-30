@@ -30,6 +30,7 @@ public class Question {
 		   2     1         2                 3
 	 */
 
+	//【注】此题只是DFS，没有backtracking！
 	//看图
 	//1. 先定义递归的参数的左边界和右边界，即1到n.
 	//2. 考虑从left, 到right 这n个数字中选取一个作为根，余下的使用递归来构造左右子树。 

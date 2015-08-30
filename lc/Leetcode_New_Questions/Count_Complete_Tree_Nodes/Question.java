@@ -19,7 +19,9 @@ public class Question {
 	 * In a complete binary tree every level, except possibly the last, is completely filled, 
 	 * and all nodes in the last level are as far left as possible. It can have between 1 and 2h nodes inclusive at the last level h.
 	 */
+	//http://www.programcreek.com/2014/06/leetcode-count-complete-tree-nodes-java/
 	
+	//LTE
     public int countNodes(TreeNode root) {
     	int res = 0;
     	if (root == null) {

@@ -55,7 +55,7 @@ public class Question {
     			return false;
     		}
     		int key = prerequisites[i][0]; // 一个node作为“下游” 出现的次数
-    		if (map.containsKey(key)) { // 将入度>0的course都放入map
+    		if (map.containsKey(key)) { // 【注】将入度>0的course都放入map
     			map.put(key, map.get(key) + 1);
     		} else {
     			map.put(key, 1);
@@ -64,7 +64,7 @@ public class Question {
     	if (map.size() == numCourses) { //没有任何一个course入度为0
     		return false;
     	}
-    	LinkedList<Integer> q = new LinkedList<Integer>(); // 但bfs凡遍历图，都要用到queue
+    	LinkedList<Integer> q = new LinkedList<Integer>(); // 但凡bfs遍历图，都要用到queue
     	int zeroInDegreeCount = 0;
     	for (int i = 0; i < numCourses; i++) { //遍历所有课程，把所有入度为0的，加入queue
     		if (!map.containsKey(i)) {

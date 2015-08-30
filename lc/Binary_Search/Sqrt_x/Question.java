@@ -8,7 +8,7 @@ public class Question {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Question q = new Question();
-		System.out.println(q.sqrt(2147395599));
+		System.out.println(q.mySqrt(2147395599));
 
 	}
 	
@@ -21,8 +21,8 @@ public class Question {
 	//【注】l <= sqrt(x) < (l+1),展开 即为下面的【注】
 	//using BS template
 	//http://www.cnblogs.com/yuzhangcmu/p/4198959.html
-	public int sqrt(int x) {
-		if (x < 0) {
+    public int mySqrt(int x) {
+        if (x < 0) {
 			return -1;
 		}
 		if (x <= 1) {
@@ -41,10 +41,10 @@ public class Question {
 				l = m;
 			}
 		}
-		if (l / x <= l && x / (l + 1) < l + 1) { //【注】
+		if (x / l >= l && x / (l + 1) < l + 1) { //【注】
 			return l;
 		} else {
 			return r;
 		}
-	}
+    }
 }

@@ -55,13 +55,11 @@ public class Question {
     	if (k == 1) {//A和B都只剩一个待处理的元素
     		return Math.min(A[startA], B[startB]);
     	}
-    	//得到A中第k/2的位置的值。看图！边界举例。(之所以后面补的是Integer.MAX_VALUE，是因为数组是递增的)
-        // -1是因为索引本身是从0开始的。而前k大元素含有k个元素。
-        int mid = k / 2 - 1;
-    	int halfKValueA = startA + mid < A.length ? A[startA + mid] : Integer.MAX_VALUE;
-    	int halfKValueB = startB + mid < B.length ? B[startB + mid] : Integer.MAX_VALUE;
-    	//因为丢弃了k / 2个元素
-        int kNew = k - k / 2;
+        int halfKSize = k / 2 - 1; // -1是因为索引本身是从0开始的。而前k大元素含有k个元素。
+        //得到A中第k/2的位置的值。看图！边界举例。(之所以后面补的是Integer.MAX_VALUE，是因为数组是递增的)
+    	int halfKValueA = startA + halfKSize < A.length ? A[startA + halfKSize] : Integer.MAX_VALUE;
+    	int halfKValueB = startB + halfKSize < B.length ? B[startB + halfKSize] : Integer.MAX_VALUE;
+        int kNew = k - k / 2; //因为丢弃了k / 2个元素
     	if (halfKValueA < halfKValueB){//说明A_halfK_value之前的全都比A和B长度和第k个位置的值小，所以剔除之（A_halfK_value左边的值并且包括A_halfK_value）
     		//A_start从A_halfK_value的下一位（A_start + k / 2 - 1　+ 1 == A_start + k / 2）开始，B start的位置不变 , k减去 剔除的A_start左边的那部分（即k/2）
     		return helper(A, startA + k / 2, B, startB, kNew);

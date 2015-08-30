@@ -53,6 +53,7 @@ public class Question {
 	
 	
 	
+	//yelong's method
 	private void helper(List<List<Integer>> res, List<Integer> item, int board[][], int pos, boolean used[][], int len) {
 		int m = board.length;
 		int n = board[0].length;
@@ -64,10 +65,6 @@ public class Question {
 			item.remove(item.size()-1);
 			return;
 		}
-		
-		
-		//used[i][j] = true;
-		
 		if (i > 0 && !item.contains(board[i - 1][j])) { // go up
             helper(res, item, board, pos - n, used, len);
         }
@@ -81,38 +78,6 @@ public class Question {
             helper(res, item, board, pos + 1, used, len);
         }
         item.remove(item.size()-1);
-		//used[i][j] = false;
-
-		
-		
-/*		if (i > 0 && !used[i - 1][j]) { // go up
-			used[i - 1][j] = true;
-			item.add(board[i][j]);
-			helper(res, item, board, pos - n, used, len);
-			item.remove(item.size() - 1);
-			used[i - 1][j] = false;
-		}
-		if (i < m - 1 && !used[i + 1][j]) { // go down
-			used[i + 1][j] = true;
-			item.add(board[i][j]);
-			helper(res, item, board, pos + n, used, len);
-			item.remove(item.size() - 1);
-			used[i + 1][j] = false;
-		}
-		if (j > 0 && !used[i][j - 1]) { // go left
-			used[i][j - 1] = true;
-			item.add(board[i][j]);
-			helper(res, item, board, pos - 1, used, len);
-			item.remove(item.size() - 1);
-			used[i][j - 1] = false;
-		}
-		if (j < n - 1 && !used[i][j + 1]) { // go right
-			used[i][j + 1] = true;
-			item.add(board[i][j]);
-			helper(res, item, board, pos + 1, used, len);
-			item.remove(item.size() - 1);
-			used[i][j + 1] = false;
-		}*/
 	}
 
 }

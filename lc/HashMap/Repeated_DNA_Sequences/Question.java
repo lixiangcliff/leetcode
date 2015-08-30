@@ -47,7 +47,7 @@ public class Question {
     	for (int i = 0; i < 10; i++) {
     		val = addValEnd(s, charMap, val, i);
     	}
-    	HashMap<Integer, Integer> dnaMap = new HashMap<Integer, Integer>();
+    	HashMap<Integer, Integer> dnaMap = new HashMap<Integer, Integer>(); // <10位dna的二进制表示值，该值出现过得次数>
     	dnaMap.put(val, 1);
     	for (int i = 10; i < s.length(); i++) {
     		val &= ((int)Math.pow(2, 18) - 1); //mask掉左边第一个字母表示的bin数值(留下右边九个)
@@ -70,10 +70,8 @@ public class Question {
     //add bin value from the end
 	private int addValEnd(String s, HashMap<Character, Integer> charMap, int val, int i) { 
 		int num = charMap.get(s.charAt(i));
-		val <<= 1;
-		val += (num / 2);
-		val <<= 1;
-		val += (num % 2);
+		val <<= 2;
+		val += num;
 		return val;
 	}
     

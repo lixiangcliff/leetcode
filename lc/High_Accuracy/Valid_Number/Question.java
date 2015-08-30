@@ -31,10 +31,10 @@ public class Question {
 	
 	//http://www.cnblogs.com/yuzhangcmu/p/4060348.html  此题trick很多。
 	//对每个字符串中的字符位，需要做两件事：
-	//1.根据当前位的值，以及必要的其左右两边值的联合起来是否非法。 
+	//1.根据当前位的值，以及其左边出现过的值的联合起来是否非法。 
 	//2.处理完本位后，更新因此产生的各个flag的变化。
 	//合法原则（反面即为非法）：
-	//(1). 当前为e，则前面要有digit,不能有e. 并且后面要有digit.
+	//(1). 当前为e，则前面要有digit,不能有e.
 	//(2). 当前为.  那么是一个小数，那么前面不可以有.和e
 	//(3). 当前为+, - 那么它必须是第一个，或者前一个是e，比如" 005047e+6"
 	public boolean isNumber(String s) {
@@ -55,7 +55,7 @@ public class Question {
 					return false;
 				}
 				exp = true;
-				num = false; //【注】因为number只要出现过大于1次，具体多少次都无所谓。但是对于e出现之后的字符，number相当于从未出现过，所以重置为false。
+				num = false; //【注】对于e出现之后的字符，number相当于从未出现过，所以重置为false。
 			} else if (c == '.') {
 				if (exp || dot) {
 					return false;

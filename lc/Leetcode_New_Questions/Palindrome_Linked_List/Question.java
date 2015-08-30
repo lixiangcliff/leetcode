@@ -17,6 +17,8 @@ public class Question {
 	 * Could you do it in O(n) time and O(1) space?
 	 */
 	
+	
+	// 一分两半，翻转后半，然后对比，再把后半翻转回来，两半接上
     public boolean isPalindrome(ListNode head) {
         return false;
     }

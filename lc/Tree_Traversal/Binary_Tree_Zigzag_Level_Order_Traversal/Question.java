@@ -53,14 +53,14 @@ public class Question {
 			for (int i = 0; i < size; i++) { 
 				TreeNode node = q.poll();
 				item.add(node.val);// 当前node值加入item
-				if (node.right != null) {
-					q.offer(node.right);
-				}
 				if (node.left != null) {
 					q.offer(node.left);
 				}
+				if (node.right != null) {
+					q.offer(node.right);
+				}
 			}
-			if (isEven) {
+			if (!isEven) {
 				Collections.reverse(item);
 			}
 			result.add(item);

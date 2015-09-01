@@ -16,7 +16,7 @@ public class Question {
 }
 
 
-
+//http://codereview.stackexchange.com/questions/62049/simple-implementation-of-hashmap
 class MyHashtable<K, V> {
     private final static int SIZE = 31; 
     private ArrayList<HashEntry<K, V>> table = new ArrayList<HashEntry<K, V>>();

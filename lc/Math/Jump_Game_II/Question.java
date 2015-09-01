@@ -27,6 +27,7 @@ public class Question {
 	 * to the last index.)
 	 */
 	
+	//其实是two pointer问题
 	//Greedy
 	//http://www.cnblogs.com/yuzhangcmu/p/4148858.html
 	//O(n^2)时间复杂度，O(1)空间复杂度。

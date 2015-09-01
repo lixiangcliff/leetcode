@@ -50,7 +50,7 @@ class MinStack {
 
 	public void push(int x) {
 		stack.push(x);
-		if (minStack.isEmpty() || minStack.peek() >= x) {
+		if (minStack.isEmpty() || x <= minStack.peek()) {
 			minStack.push(x);
 		}
 	}

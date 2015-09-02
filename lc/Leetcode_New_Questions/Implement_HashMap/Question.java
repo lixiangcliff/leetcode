@@ -34,6 +34,8 @@ class MyHashtable<K, V> {
     
     public void put(K key, V value) {
         // TODO implement
+    	//【注】也可以自己制造hash function 比如下面的方法
+    	//http://stackoverflow.com/questions/2624192/good-hash-function-for-strings
         int hash = key.hashCode() % SIZE;
         while(table.get(hash) != null && table.get(hash).getKey() != key) {
             hash = (hash + 1) % SIZE;

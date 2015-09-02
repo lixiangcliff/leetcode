@@ -19,6 +19,9 @@ public class Question {
 	 * Assume that the total area is never beyond the maximum possible value of int.
 	 */
 	
+	//http://www.cnblogs.com/grandyang/p/4563153.html
+	//http://blog.csdn.net/foreverling/article/details/46411069
+	//http://bookshadow.com/weblog/2015/06/08/leetcode-rectangle-area/
     public int computeArea(int A, int B, int C, int D, int E, int F, int G, int H) {
         //if ()
     	return 0;

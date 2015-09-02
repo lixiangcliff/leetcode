@@ -13,7 +13,7 @@ public class Question {
 	}
 	
 	/**
-	 * 
+	 * https://leetcode.com/problems/shortest-palindrome/
 	 * Given a string S, you are allowed to convert it to a palindrome by adding characters in front of it. 
 	 * Find and return the shortest palindrome you can find by performing this transformation.
 	 * 
@@ -22,6 +22,8 @@ public class Question {
 	 * Given "abcd", return "dcbabcd".
 	 */
 	
+	
+	//kmp is needed to pass the oj...
 	
 	//O(n^2) time complex. and will not pass large test case
     public String shortestPalindrome(String s) {

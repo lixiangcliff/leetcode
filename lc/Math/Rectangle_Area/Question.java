@@ -23,29 +23,11 @@ public class Question {
 	//http://blog.csdn.net/foreverling/article/details/46411069
 	//http://bookshadow.com/weblog/2015/06/08/leetcode-rectangle-area/
     public int computeArea(int A, int B, int C, int D, int E, int F, int G, int H) {
-        //if ()
-    	return 0;
+        int sum = (C - A) * (D - B) + (G - E) * (H - F);
+        if (B >= H || E >= C || F >= D || A >= G) { // no overlap
+        	return sum;
+        } else {
+        	return sum - (Math.min(C, G) - Math.max(A, E)) * (Math.min(D, H) - Math.max(B, F));
+        }
     }
-}
-
-class Point {
-	int x;
-	int y;
-	Pos p;
-	Pos op;
-	Point(int x, int y, Pos p) {
-		this.p = p;
-		//this.op = 3 - p;
-		this.x = x;
-		this.y = y;
-	}
-}
-
-
-//http://stackoverflow.com/questions/8811815/is-it-possible-to-assign-numeric-value-to-an-enum-in-java
-enum Pos {
-	UL,
-	UR,
-	BL,
-	BR;
 }

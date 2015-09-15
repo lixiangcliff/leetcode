@@ -1,13 +1,13 @@
 package Longest_Increasing_Continuous_subsequence_II;
 
-public class Question {
+public class Solution {
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Question q = new Question();
+		Solution q = new Solution();
 		int[][] A = {
 				  {1 ,2 ,3 ,4 ,5},
 				  {16,17,24,23,6},

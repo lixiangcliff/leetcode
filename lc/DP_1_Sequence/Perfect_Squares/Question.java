@@ -1,4 +1,4 @@
-package Find_Min_Count_of_Square_Number_toMmake_Sum;
+package Perfect_Squares;
 
 public class Question {
 
@@ -10,9 +10,15 @@ public class Question {
 		Question q = new Question();
 		int n = 25;
 		for (int i = 1; i <= n; i++) {
-			System.out.println("value: " + i + "; count:" + q.minNumber(i));
+			System.out.println("value: " + i + "; count:" + q.numSquares(i));
 		}
 	}
+	
+	/**
+	 * https://leetcode.com/problems/perfect-squares/
+	 * Given a positive integer n, find the least number of perfect square numbers (for example, 1, 4, 9, 16, ...) which sum to n.
+	 * For example, given n = 12, return 3 because 12 = 4 + 4 + 4; given n = 13, return 2 because 13 = 4 + 9.
+	 */
 	
 	/**
 	 * http://www.1point3acres.com/bbs/thread-109586-1-1.html
@@ -22,16 +28,16 @@ public class Question {
 		input:   50     ouput :  25, 25 return 2
 	 */
 	
-	//f[i]表示值为i个的数字最少需要用几个square number来表示
-	public int minNumber(int n) {
+	//f[i]表示值为i的数字最少需要用几个square number来表示
+	public int numSquares(int n) {
 		int[] f = new int[n + 1];
 		f[0] = 0;
 		f[1] = 1;
 		for (int i = 2; i <= n; i++) {
 			int j = 1;
-			int min = Integer.MAX_VALUE;
+			int min = i; // min表示i之前的数(设为k)，和i差值为square number的最小f[k]值
 			int pre = 0;
-			while (j * j <= i) {
+			while (j * j <= i) { //尝试所有pre + j^2可以使得i为square sum的可行组合
 				pre = f[i - j * j];
 				min = Math.min(min, pre);
 				j++;
@@ -40,22 +46,5 @@ public class Question {
 		}
 		return f[n];
 	}
-	
-/*	public int minNumber(int n) {
-		int[] f = new int[n + 1];
-		f[0] = 0;
-		f[1] = 1;
-		for (int i = 2; i <= n; i++) {
-			int j = 1;
-			int min = Integer.MAX_VALUE;
-			while (j * j <= i) {
-				int cur = 1 + f[i - j * j];
-				min = Math.min(min, cur);
-				j++;
-			}
-			f[i] = min;
-		}
-		return f[n];
-	}*/
 
 }

@@ -43,11 +43,7 @@ public class Question {
     }
     
     private void helper(List<String> result, List<String> item, String s, int start){
-		if (item.size() == 4) { 
-			if (start != s.length()) { //【注】如果start未到达s末尾，则item不是一组合法解
-                return;
-			}
-			//至此才真找到一组合法解
+    	if (item.size() == 4 && start == s.length()) {
 			StringBuilder sb = new StringBuilder();
 			for (String str : item) {
 				sb.append(str).append(".");

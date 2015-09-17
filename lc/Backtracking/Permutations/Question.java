@@ -1,6 +1,7 @@
 package Permutations;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Question {
 
@@ -13,9 +14,9 @@ public class Question {
 		
 		int [] num = {1,2,3};
 		Question q = new Question();
-		ArrayList<ArrayList<Integer>> result = q.permute(num);
+		List<List<Integer>> result = q.permute(num);
 		for (int i = 0; i < result.size(); i++) {
-			ArrayList<Integer> item = result.get(i);
+			ArrayList<Integer> item = (ArrayList<Integer>) result.get(i);
 			for (int j = 0; j < item.size(); j++) {
 				System.out.print(item.get(j)+ ",");
 			}
@@ -33,11 +34,39 @@ public class Question {
 	 * [1,2,3], [1,3,2],[2,1,3], [2,3,1], [3,1,2], and [3,2,1].
 	 */
 
+	//手写
+	public List<List<Integer>> permute(int[] num) {
+		List<List<Integer>> result = new ArrayList<List<Integer>>();
+		if (num == null || num.length == 0){
+			return result;
+		}
+		List<Integer> item = new ArrayList<Integer>();
+		boolean[] used = new boolean [num.length];
+		helper(result, item, num, used);
+		return result;
+	}
+	
+	private void helper(List<List<Integer>> result, List<Integer> item, int[] num, boolean[] used) {
+		if (item.size() == num.length) {
+			result.add(new ArrayList<Integer>(item)); 
+			return;
+		}
+		for (int i = 0; i < num.length; i++) { //【注】这个是重点，此题不需要start，因为对于item的每一位，都要在num的从头到尾来适配。（只要used[i]为false就适配）
+			if (!used[i]) {// 当前元素还没用过，所以可以加入item
+			    used[i] = true;
+				item.add(num[i]); 
+				helper(result, item, num, used); 
+				item.remove(item.size() - 1); 
+				used[i] = false;
+			}
+		}
+	}
+	
 	//【注】重点看递归的方法
 	//recursive
 	//递归函数必须保证在进入和离开函数的时候，变量的状态是一样的, 这样才能保证正确性.
 	//http://www.ninechapter.com/solutions/permutations/
-	public ArrayList<ArrayList<Integer>> permute(int[] num) {
+	public ArrayList<ArrayList<Integer>> permute2(int[] num) {
 		ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
 		if (num == null || num.length == 0){
 			return result;

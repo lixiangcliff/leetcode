@@ -45,23 +45,20 @@ public class Question {
     public List<List<Integer>> combinationSum3(int k, int n) {
     	List<List<Integer>> res = new ArrayList<List<Integer>>();
     	List<Integer> item = new ArrayList<Integer>();
-    	int left = k;
     	int start = 1;
-    	helper(res, item, k, n, left, start);
+    	helper(res, item, k, n, start);
     	return res;
     }
     
-    private void helper(List<List<Integer>> res, List<Integer> item, int k, int n, int left, int start) {
+    private void helper(List<List<Integer>> res, List<Integer> item, int k, int n, int start) {
     	if (n == 0 && item.size() == k) {
     		res.add(new ArrayList<Integer>(item));
     		return;
     	}
     	for (int i = start; i <= 9; i++) {
     		item.add(i);
-    		helper(res, item, k, n - i, left - 1, i + 1); //【注】不是n - start 不是start + 1
+    		helper(res, item, k, n - i, i + 1); //【注】勿忘n - i
     		item.remove(item.size() - 1);
     	}
     }
-
-
 }

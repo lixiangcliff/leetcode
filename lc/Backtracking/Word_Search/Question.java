@@ -52,18 +52,17 @@ public class Question {
 	}
     
     private boolean helper(char[][] board, String word, int start, int i, int j, boolean[][] used){
-    	if(start == word.length()){
+    	if (start == word.length()){
     		return true;
     	}
     	//如果i，j越界，或者[i][j]的位置已经访问过，或者board上[i][j]位置的字符和word上start位置上的字符不相等，则false
-		if (i < 0 || j < 0 || i >= board.length || j >= board[0].length
-				|| used[i][j] || board[i][j] != word.charAt(start)) {
+		if (i < 0 || j < 0 || i >= board.length || j >= board[0].length || used[i][j] || board[i][j] != word.charAt(start)) {
 			return false;
     	}
 		//进行到这里说明[i][j]位置上的字符符合可以继续搜索下去的条件
     	used[i][j] = true; // 把当前board位置纳入word中的一个位置，即标记[i][j]为访问过
-    	//继续递归：word向右走一位，board分别尝试上下左右四个可能的方向。其中有任何一个为true，则为true。
-		boolean result = helper(board, word, start + 1, i - 1, j, used)
+    	//继续递归：word向右走一位，board分别尝试上下左右四个可能的方向。其中有任何一个为true，则为true。【注】技巧是set一个result作为返回值
+		boolean result = helper(board, word, start + 1, i - 1, j, used) 
 				|| helper(board, word, start + 1, i + 1, j, used)
 				|| helper(board, word, start + 1, i, j - 1, used)
 				|| helper(board, word, start + 1, i, j + 1, used);

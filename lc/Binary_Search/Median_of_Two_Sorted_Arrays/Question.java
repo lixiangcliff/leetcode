@@ -45,7 +45,9 @@ public class Question {
     }
     
     //A_start为当前A中剩余待处理元素的起始位置(B_start类似)，k表示取在当前剩余A和B长度和中第k个元素
-    private double helper(int[] A, int startA, int[] B, int startB, int k){
+    private double helper(int[] A, int startA, int[] B, int startB, int k) {
+    	//【注】这个要先于k == 1操作。否则会fail corner case：
+    	// Runtime Error Message:Line 16: java.lang.ArrayIndexOutOfBoundsException: 0; Last executed input:[], [1]
     	if (startA >= A.length) {//如果A中元素已经全部处理完了，则返回B中第k个元素
     		return B[startB + k - 1];
     	}

@@ -31,16 +31,11 @@ public class Question {
 	//f[i]表示值为i的数字最少需要用几个square number来表示
 	public int numSquares(int n) {
 		int[] f = new int[n + 1];
-		f[0] = 0;
 		f[1] = 1;
 		for (int i = 2; i <= n; i++) {
-			int j = 1;
 			int min = i; // min表示i之前的数(设为k)，和i差值为square number的最小f[k]值
-			int pre = 0;
-			while (j * j <= i) { //尝试所有pre + j^2可以使得i为square sum的可行组合
-				pre = f[i - j * j];
-				min = Math.min(min, pre);
-				j++;
+			for (int j = 1; j <= i / j; i++) { //尝试所有pre + j^2可以使得i为square sum的可行组合
+				min = Math.min(min, f[i - j * j]);
 			}
 			f[i] = min + 1;
 		}

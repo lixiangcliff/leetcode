@@ -37,9 +37,9 @@ public class Question {
 		boolean[][] isPalindrome = getIsPalindrome(s);
 		int[] result = new int[len + 1];
 		result[0] = -1; // 初始化必须从result[0]开始，因为后面计算result[1]要用到result[0]
-		for (int i = 1; i <= len; i++) {
+		for (int i = 2; i <= len; i++) {
 			result[i] = i - 1;
-			for (int j = 0; j < i; j++) {
+			for (int j = i - 1; j >= 0; j--) {
 				if (isPalindrome[j][i - 1]) { //看图。位差导致：是isPalindrome[j][i - 1]，而不是isPalindrome[j + 1][i]
 					result[i] = Math.min(result[i], result[j] + 1);
 				}
@@ -67,5 +67,4 @@ public class Question {
 		}
 		return isPalindrome;
 	}
-
 }

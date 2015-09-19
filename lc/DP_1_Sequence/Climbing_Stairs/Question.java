@@ -52,13 +52,13 @@ public class Question {
 		}
 		int prepre = 1; //cur前第2个值
 		int pre = 2; //cur前第1个值
-		int cur; //当前值
+		int cur = pre + prepre; //当前值
 		for (int i = 3; i <= n; i++) {
 			cur = pre + prepre; //更新cur；
 			prepre = pre; // 【注】从远处开始更新。要先更新prepre
 			pre = cur; //然后更新 pre，因为上一步要用到pre的值来更新prepre，如果先更新pre，则之后给prepre的值就是错的。
 		}
-		return pre; // pre就是i最后一次在界内时的cur的值
+		return cur;
 	}
 	
 	//naive recursive way

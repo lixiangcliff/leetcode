@@ -34,8 +34,8 @@ public class Question {
 		int diff = k * (k - 1);
 		for (int i = 3; i <= n; i++) {
 			int tmp = same;
-			same = diff;
-			diff = (diff + tmp) * (k - 1);
+			same = diff; // 这一轮相邻的为same color，意味着上一轮相邻的肯定diff color
+			diff = (diff + tmp) * (k - 1); // (diff + tmp)即上一轮的所有可选ways, 当前轮和它diff，则乘以(k - 1)
 		}
 		return same + diff;
 	}

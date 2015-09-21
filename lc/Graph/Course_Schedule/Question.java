@@ -48,7 +48,7 @@ public class Question {
 	//http://www.meetqun.com/thread-9208-1-1.html
 	//check whether there is circle. similar to "Topological_Sorting" in lintcode
     public boolean canFinish(int numCourses, int[][] prerequisites) {
-    	HashMap<Integer, Integer> map = new HashMap<Integer, Integer>(); // <course #, 该course入度（即以它为prereq的course个数）>
+    	HashMap<Integer, Integer> map = new HashMap<Integer, Integer>(); // <course #, 该course入度（即该course的所有prerequisite（上游）的个数）>
     	//统计每个node的入度
     	for (int i = 0; i < prerequisites.length; i++) {
     		if (prerequisites[i][0] < 0 || prerequisites[i][0] >= numCourses || prerequisites[i][1] < 0 || prerequisites[i][1] >= numCourses) {

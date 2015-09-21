@@ -16,6 +16,7 @@ public class Question {
 		System.out.println(q.isMatch("ab", "?*"));
 		System.out.println(q.isMatch("aab", "c*a*b"));
 		System.out.println(q.isMatch("", "*"));
+		System.out.println(q.isMatch("acb", "a*"));
 	}
 	
 	/**
@@ -66,7 +67,9 @@ public class Question {
 					result[i][j] = false;
 				} else {
 					if (p.charAt(j - 1) == '*') { // 位差
-		    			result[i][j] = result[i - 1][j] || result[i][j - 1]; //举例画图
+						//result[i][j - 1]: '*'表示什么都不取
+						//result[i - 1][j]： 表示如果s的前i - 1个和p的前j个配起来如果都没有问题的话，s最后再加一个s[i]肯定也没问题('*'只需要多表示一位就可以了)
+		    			result[i][j] = result[i][j - 1] || result[i - 1][j]; 
 					} else {
 						result[i][j] = result[i - 1][j - 1] && (s.charAt(i - 1) == p.charAt(j - 1) || p.charAt(j - 1) == '?');
 					}

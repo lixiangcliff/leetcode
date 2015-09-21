@@ -51,16 +51,16 @@ public class Question {
     	int res = 0;
     	for (int i = 0; i < m; i++) {
     		for (int j = 0; j < n; j++) {
-    			if (!used[i][j] && grid[i][j] == '1') {
+    			if (!used[i][j] && grid[i][j] == '1') { // 【注】每找到一个“陆地”，就开始做bfs穷尽和其相邻的陆地
     				used[i][j] = true;
-    				int pos = i * n + j;
+    				int pos = i * n + j; //【注】技巧：用一个int表示x，y的坐标
     				LinkedList<Integer> queue = new LinkedList<Integer>();
     				queue.offer(pos);
     				while (!queue.isEmpty()) {
 						pos = queue.poll(); // 每次拿到一个位置pos, 然后根据pos 恢复出row和col，然后上下左右分别试探。
 						int row = pos / n;
 						int col = pos % n;
-						if (row > 0 && !used[row - 1][col] && grid[row - 1][col] == '1') { //往上走
+						if (row > 0 && !used[row - 1][col] && grid[row - 1][col] == '1') { //可以往上走的三个条件：1往上走不越界；2上面一个没用过；3上面一个是陆地
 							queue.offer(pos - n); //【注】要减去“列数”
 							used[row - 1][col] = true; //该位置标记为访问过
 						}
@@ -77,7 +77,7 @@ public class Question {
 							used[row][col + 1] = true;
 						}
     				}
-    				res++; // 找到一块“陆地”，就把跟这个陆地相邻的所有陆地处理完毕。
+    				res++; // 完成该块陆地的遍历。
     			}
     		}
     	}

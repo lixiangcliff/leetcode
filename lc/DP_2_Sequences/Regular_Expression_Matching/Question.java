@@ -65,8 +65,11 @@ public class Question {
 	        		result[i][j] = false;
 	        	} else {
 	        		if (p.charAt(j - 1) == '*') { 
-	        			// j > 1: 避免数组越界 	result[i][j - 2]:表示*前一个数取0次 ;	||后面的：表示*前一个数取n次 	result[i - 1][j]：反例e.g. s = "abcd", t = "d*"
-						result[i][j] = j > 1 && (result[i][j - 2] || (s.charAt(i - 1) == p.charAt(j - 2) || p .charAt(j - 2) == '.') && result[i - 1][j]);
+	        			// j > 1: 避免数组越界 	result[i][j - 2]:表示*前一个数取0次 ;	
+	        			// ||后面的：表示*前一个数取n次 【注】result[i - 1][j]：反例e.g. s = "abcd", t = "d*",
+	        			// 如果要取p[j-1]，必须同时满足s[i]==p[j-1]和result[i - 1][j]==true。
+						result[i][j] = j > 1 && result[i][j - 2] || 
+								j > 1 && result[i - 1][j] && (p.charAt(j - 2)  == s.charAt(i - 1) || p .charAt(j - 2) == '.');
 	        		} else { 
 	        			result[i][j] = result[i - 1][j - 1] && (s.charAt(i - 1) == p.charAt(j - 1) || p.charAt(j - 1) == '.'); //位差
 		        	}

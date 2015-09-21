@@ -1,8 +1,10 @@
-package Anagrams;
+package Group_Anagrams;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Question {
@@ -24,18 +26,25 @@ public class Question {
 		//ArrayList<String> result = new ArrayList<String>();
 		String[] strs = {s1,s2,s3,s4,s5,s6,s7,s8};
 
-		q.anagrams(strs);
+		q.groupAnagrams(strs);
 		char[] charArray = {'h','e','l','l','o'};
 		//System.out.println(new String(charArray));
 		System.out.println(charArray.toString());
 	}
 	
 	/**
-	 * https://oj.leetcode.com/problems/anagrams/
-	 * Given an array of strings, return all groups of strings that are
-	 * anagrams.
-	 * 
-	 * Note: All inputs will be in lower-case.
+	 * https://leetcode.com/problems/anagrams/
+	 * Given an array of strings, group anagrams together.
+		For example, given: ["eat", "tea", "tan", "ate", "nat", "bat"], 
+		Return:
+		[
+		  ["ate", "eat","tea"],
+		  ["nat","tan"],
+		  ["bat"]
+		]
+		Note:
+		For the return value, each inner list's elements must follow the lexicographic order.
+		All inputs will be in lower-case.
 	 */
 	
 	//要把题意理清：就是说返回结果里，可能有若干组，每组都是anagrams。但是这些组都放在一个ArrayList<String>返回
@@ -43,8 +52,8 @@ public class Question {
 	//	      Output:	["and","dan","tea","ate","eat"] （即前两个和后三个分别是anagrams）
 	// http://www.cnblogs.com/yuzhangcmu/p/4067507.html
 	// http://blog.csdn.net/linhuanmars/article/details/21664747
-	public ArrayList<String> anagrams(String[] strs) {
-		ArrayList<String> result = new ArrayList<String>();
+	public List<List<String>> groupAnagrams(String[] strs) {
+        List<List<String>> result = new ArrayList<List<String>>();
 		if (strs == null || strs.length == 0) {
 			return result;
 		}
@@ -67,11 +76,9 @@ public class Question {
 		// 【注】要记住遍历map的方法
 		for (Map.Entry<String, ArrayList<String>> entry: map.entrySet()) {
 			ArrayList<String> list = entry.getValue();
-            if (list.size() > 1) { // 只要anagram个数大于1，就加入结果的ArrayList中
-                result.addAll(list);
-            }
+            Collections.sort(list);
+            result.add(list);
         }
 		return result;
 	}
-
 }

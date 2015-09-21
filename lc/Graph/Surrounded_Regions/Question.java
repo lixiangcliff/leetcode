@@ -64,7 +64,7 @@ public class Question {
 	 */
 	
 	//思想：
-	//1.对上下左右边缘做Flood fill算法，把所有边缘上的'O'都替换成另一个字符，比如'#'。
+	//1.对上下左右边缘做Flood fill算法（即对四周的每一个'O'做以此bfs），把所有边缘上的'O'都替换成另一个字符，比如'#'。
 	//2.将剩下的所有'O'都应该被替换成'X'，并且将所有'#'都还原成'O'
 	//http://blog.csdn.net/linhuanmars/article/details/22904855
 	public void solve(char[][] board) {

@@ -60,7 +60,7 @@ public class Question {
     	if (numCourses <= 0 || prerequisites == null) {
     		return empty;
     	}
-    	HashMap<Integer, Integer> inDegreeMap = new HashMap<Integer, Integer>(); // <course #, 该course入度（即以它为prereq的course个数）>
+    	HashMap<Integer, Integer> inDegreeMap = new HashMap<Integer, Integer>(); // <course #, 该course入度（即该course的所有prerequisite（上游）的个数）>
     	HashMap<Integer, ArrayList<Integer>> nbrMap = new HashMap<Integer, ArrayList<Integer>>(); // <course #, 该course的所有下游course>
     	//统计每个node的入度
     	for (int i = 0; i < prerequisites.length; i++) {

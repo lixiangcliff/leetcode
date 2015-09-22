@@ -289,3 +289,7 @@ useful links:
 53. Find the largest BST subtree in a given Binary Tree
 	http://www.geeksforgeeks.org/find-the-largest-subtree-in-a-tree-that-is-also-a-bst/
 	
+54. 如何使用LeetCode
+	http://blog.iamtao.me/2015/02/13/How-to-Use-LeetCode/
+	http://www.1point3acres.com/bbs/thread-79646-1-1.html
+	

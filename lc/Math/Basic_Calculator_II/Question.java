@@ -36,8 +36,8 @@ public class Question {
 	public int calculate(String s) {
 		int sign = 1;
 		int res = 0;
-		int[] idx = {0};
-		int num = getNum(s, idx); // 累积到当前的计算结果
+		int[] idx = {0}; //用一个数组，这样调用getNum()之后，idx[0]的值也会随之改变。
+		int num = getNum(s, idx); // 先拿到第一个操作数。累积到当前的计算结果
 		while (idx[0] < s.length()) {
 			char c = s.charAt(idx[0]);
 			idx[0]++;
@@ -45,7 +45,7 @@ public class Question {
 				res += num * sign;
 				num = getNum(s, idx); //之前的已经结算完了，现在重置num
 				sign = c == '+' ? 1 : -1; //重置sign
-			} else if (c == '*') {
+			} else if (c == '*') { // 遇到乘除法就“当场”计算，重新获得最新的num
 				num *= getNum(s, idx);
 			} else if (c == '/') {
 				num /= getNum(s, idx);

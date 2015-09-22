@@ -11,7 +11,7 @@ public class Question {
 		// TODO Auto-generated method stub
 		//System.out.println(longestValidParentheses("(()"));
 		Question q = new Question();
-		System.out.println(q.longestValidParentheses(")()())"));
+		System.out.println(q.longestValidParentheses("())"));
 	}
 	
 	/**
@@ -25,6 +25,37 @@ public class Question {
 	 * Another example is ")()())", where the longest valid parentheses
 	 * substring is "()()", which has length = 4.
 	 */
+	
+	//易于理解 https://leetcode.com/discuss/7609/my-o-n-solution-using-a-stack
+	public int longestValidParentheses(String s) {
+		if (s == null || s.length() == 0) {
+			return 0;
+		}
+		LinkedList<Integer> stack = new LinkedList<Integer>(); // <index>
+		for (int i = 0; i < s.length(); i++) { 
+			if (s.charAt(i) == '(') { // all "left" push into stack
+				stack.push(i);
+			} else { // then it is "right"
+				if (!stack.isEmpty() && s.charAt(stack.peek()) == '(') { // find matched "left" on top of the stack；【错！】stack.peek()【错！】
+					stack.pop();
+				} else { // there is no match in the stack
+					stack.push(i); // push this "right" in the stack(this is an un-matched one) 
+				}
+			}
+		}
+		if (stack.isEmpty()) { // mean all are matched
+			return s.length();
+		}
+		int cur = s.length() - 1;
+		int max = 0;
+		while (cur >= 0) { // 计算stack里un-matched的index的间隔，来确定max
+			int top = !stack.isEmpty() ? stack.pop() : -1; // 如果stack已经为空，则相当于stack的所谓栈顶元素top，取-1
+			max = Math.max(max, cur - top); // max和cur的更新值边界，举例子
+			cur = top - 1;
+		}
+		return max;
+	}
+	
 	
 	//http://www.cnblogs.com/yuzhangcmu/p/4113654.html
 	//基本思想：遇到"("就入栈，遇到")"就出栈，栈中存的是index。统计合法长度的细节实现如下：
@@ -43,7 +74,7 @@ public class Question {
 	//		例如		0 1 2 3 4  -> 处理完0~3之后栈内元素为 0 3 ->此时处理4，弹出3，但是合法长度应为从1~4而不是从3~4
 	//				( ( ) ( ) 						  ( (					即tmp = 4 -0 	
  	//5. 栈为空时，出现一个')'，就将sum置0.
-    public int longestValidParentheses(String s) {
+    public int longestValidParentheses2(String s) {
 		if (s == null || s.length() == 0) {
 			return 0;
 		}

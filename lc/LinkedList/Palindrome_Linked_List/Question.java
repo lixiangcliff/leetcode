@@ -44,7 +44,7 @@ public class Question {
     	}
     	ListNode h1 = head;
     	ListNode h2 = walk.next;
-    	if (count % 2 == 1) {
+    	if (count % 2 == 1) { //如果有奇数个node，则在后半段的头，补一个前半段的尾
     		ListNode node = new ListNode(walk.val);
     		node.next = walk.next;
     		h2 = node;

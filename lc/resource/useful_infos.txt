@@ -293,3 +293,8 @@ useful links:
 	http://blog.iamtao.me/2015/02/13/How-to-Use-LeetCode/
 	http://www.1point3acres.com/bbs/thread-79646-1-1.html
 	
+55. web testing
+	http://www.tutorialspoint.com/software_testing_dictionary/web_application_testing.htm
+	
+56. OO design 经典例子：停车场，扑克牌，电梯
+	

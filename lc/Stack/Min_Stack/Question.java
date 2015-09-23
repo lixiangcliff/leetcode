@@ -43,6 +43,9 @@ public class Question {
  *
  */
 
+//原则：1. minStack从栈顶到栈底是递增的(相邻元素壳相等)
+//2.入栈时，当x <= min栈顶时，则入min栈
+//3.出栈时，当stack栈顶 == min栈顶时，则从min出栈
 //http://blog.csdn.net/linhuanmars/article/details/41008731
 class MinStack {
 	LinkedList<Integer> stack = new LinkedList<Integer>();

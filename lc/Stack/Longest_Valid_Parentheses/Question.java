@@ -1,5 +1,6 @@
 package Longest_Valid_Parentheses;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 
 public class Question {
@@ -11,7 +12,13 @@ public class Question {
 		// TODO Auto-generated method stub
 		//System.out.println(longestValidParentheses("(()"));
 		Question q = new Question();
-		System.out.println(q.longestValidParentheses("())"));
+		//System.out.println(q.longestValidParentheses("())"));
+		
+	        char[] chars = new char[] {'\u0097'};
+	        String str = new String(chars);
+	        byte[] bytes = str.getBytes();
+	        System.out.println(str);
+	        System.out.println(Arrays.toString(bytes));
 	}
 	
 	/**

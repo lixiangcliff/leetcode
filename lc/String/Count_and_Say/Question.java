@@ -23,8 +23,29 @@ public class Question {
 	 * Note: The sequence of integers will be represented as a string.
 	 */
 	
-	// 手写
+	//	
 	public String countAndSay(int n) {
+		if (n == 1) { // 终止条件
+			return "1";
+		}
+		if (n == 2) { // 【注】这个必须要写！否则for循环里i == 1会越界
+			return "11";
+		}
+		String str = countAndSay(n - 1); // 【注】拿到上一轮的res，只需将其读出，就可以得到这一轮的res
+		StringBuilder sb = new StringBuilder();
+		int pre = 0;
+		for (int i = 1; i <= str.length(); i++) {
+			if (i == str.length() || str.charAt(i) != str.charAt(pre)) {
+				sb.append(i - pre); // 值为str.charAt(pre)的个数
+				sb.append(str.charAt(pre)); // str.charAt(pre)值
+				pre = i;
+			}
+		}
+		return sb.toString();
+	}
+	
+	// 手写
+	public String countAndSay2(int n) {
 		if (n <= 0) { // corner case
 			return "";
 		}
@@ -53,7 +74,7 @@ public class Question {
 	
 	//  把第n个string读出来就得到了第n + 1个string，以此类推。重点在如何“读”一个string
 	// http://www.cnblogs.com/yuzhangcmu/p/4118146.html
-	public String countAndSay2(int n) {
+	public String countAndSay3(int n) {
 		if (n <= 0) { // corner case
 			return null;
 		}

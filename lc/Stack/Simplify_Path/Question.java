@@ -10,7 +10,7 @@ public class Question {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Question q = new Question(); 
-		System.out.println(q.simplifyPath("/abc/..."));
+		System.out.println(q.simplifyPath("/a/./b/../../c/"));
 	}
 	
 	/**
@@ -29,8 +29,38 @@ public class Question {
 	 * case, you should ignore redundant slashes and return "/home/foo".
 	 */
 	
-	//手写
 	public String simplifyPath(String path) {
+		if (path == null || path.length() == 0) {
+			return "";
+		}
+		LinkedList<String> s = new LinkedList<String>();
+		StringBuilder sb = new StringBuilder();
+		String[] strs = path.split("/"); // no need to excape
+		for (int i = 0; i < strs.length; i++) {
+			if (strs[i].equals(".") || strs[i].equals("")) { //【注】split出来的str有可能有""
+				continue;
+			} else if (strs[i].equals("..")) {
+				if (!s.isEmpty()) { // 但凡出栈都要检查是否为空
+					s.pop();
+				}
+			} else {
+				s.push(strs[i]);
+				System.out.println(strs[i]);
+			}
+		}
+		if (s.isEmpty()) {
+			return "/";
+		}
+		while (!s.isEmpty()) { 
+			sb.insert(0, s.pop()); //stack里弹出来的是逆序的，所以要insert
+			sb.insert(0, "/");
+		}
+		return sb.toString();
+	}
+	
+	
+	//手写
+	public String simplifyPath2(String path) {
 		if (path == null || path.length() == 0) {
 			return "";
 		}
@@ -65,7 +95,7 @@ public class Question {
 	}
 	
 	// http://blog.csdn.net/linhuanmars/article/details/23972563
-	public String simplifyPath2(String path) {
+	public String simplifyPath3(String path) {
 		if (path == null || path.length() == 0) {
 			return "";
 		}

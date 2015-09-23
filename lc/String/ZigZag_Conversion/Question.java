@@ -40,11 +40,10 @@ public class Question {
 		}
 		int size = 2 * nRows - 2; // 每一个"下"+"上"一共多少字符.举例：PAYP, ALIS, HIRI, etc
 		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < nRows; i++) { // 以行为单位来处理
-			for (int j = i; j < s.length(); j += size) { // 【注】 j在s中每次递进size个位置
-				sb.append(s.charAt(j));// going down （从第i - 1 行到第i行）
-				// 不在第一行，且不在最后一行，且当前j仍在s长度内
-				if (i != 0 && i != nRows - 1 && j + size - 2 * i < s.length()) {// going up （从第i + 1行到第i行）
+		for (int i = 0; i < nRows; i++) { // 以行为单位来处理,i表示row
+			for (int j = i; j < s.length(); j += size) { // 【注】 j在s中每次递进size个位置，j表示真正在s中的index
+				sb.append(s.charAt(j));
+				if (i != 0 && i != nRows - 1 && j + size - 2 * i < s.length()) {// 不在第一行，且不在最后一行，且当前j仍在s长度内
 					sb.append(s.charAt(j + size - 2 * i)); // s.charAt(x) 求x的表示方式的最好办法就是，画图举例。(j和他右边一个的差值，随着i的增加而递减)
 				}
 			}

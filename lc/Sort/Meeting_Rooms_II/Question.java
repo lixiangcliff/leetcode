@@ -18,9 +18,9 @@ public class Question {
 		Interval i3 = new Interval(4, 14);
 		Interval i4 = new Interval(8, 11);
 		Interval[] intervals = {i1, i2, i3, i4};*/
-		Interval i1 = new Interval(0, 30);
+		Interval i1 = new Interval(0, 5);
 		Interval i2 = new Interval(5, 10);
-		Interval i3 = new Interval(15, 20);
+		Interval i3 = new Interval(10, 20);
 		Interval[] intervals = {i1, i2, i3};
 		System.out.println(q.minMeetingRooms(intervals));
 
@@ -54,7 +54,7 @@ public class Question {
 					if (p1.isStart) {
 						return 1;
 					} else {
-						return -1;
+						return -1; //值相同的node，end在前，start在后
 					}
 				} else {
 					return p1.val - p2.val;

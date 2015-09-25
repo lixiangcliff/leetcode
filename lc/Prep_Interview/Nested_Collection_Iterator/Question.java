@@ -11,13 +11,14 @@ public class Question {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
+		ArrayList<Integer> l0 = new ArrayList<Integer>();
 		ArrayList<Integer> l1 = new ArrayList<Integer>(Arrays.asList(1, 2, 3));
 		ArrayList<Integer> l2 = new ArrayList<Integer>(Arrays.asList(4));
 		ArrayList<Integer> l3 = new ArrayList<Integer>(Arrays.asList(5, 6));
 		ArrayList<Integer> l4 = new ArrayList<Integer>();
 		ArrayList<Integer> l5 = new ArrayList<Integer>(Arrays.asList(7, 8, 9));
 		ArrayList<ArrayList<Integer>> lists = new ArrayList<ArrayList<Integer>>();
+		lists.add(l0);
 		lists.add(l1);
 		lists.add(l2);
 		lists.add(l3);
@@ -61,10 +62,9 @@ public class Question {
 
 class NestedIterator{
 	private ArrayList<ArrayList<Integer>> lists;
-	//Iterator<Iterator<Integer>> out = null;
-	//Iterator<Integer> in =null;
 	private int out;
 	private Iterator<Integer> in;
+	
 	public NestedIterator( ArrayList<ArrayList<Integer>> lists){
 		this.lists = lists;
 		this.out = 0;

@@ -8,7 +8,7 @@ public class Question {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Question q = new Question();
-		System.out.println(q.gcf(20, 7));
+		System.out.println(q.gcf(20, 15));
 		System.out.println(q.lcm(30, 40));
 	}
 
@@ -19,12 +19,14 @@ public class Question {
 	//greatest common factor
 	//思想：“大” % “小”，直到 “小” == 0，返回当时的“大”
 	public int gcf(int a, int b) { //即使期初a < b，经过一轮循环之后 就可以a > b了
-		while (b > 0) {
-			int tmp = b;
-			b = a % b;
-			a = tmp;
+		int min = Math.min(a, b);
+		int max = Math.max(a, b);
+		while (min > 0) {
+			int tmp = min;
+			min = max % min;
+			max = tmp;
 		}
-		return a;
+		return max;
 	}
 	
 	//least common multiple

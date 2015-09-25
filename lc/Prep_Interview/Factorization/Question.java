@@ -10,15 +10,31 @@ public class Question {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Question q = new Question();
-		q.factor(100);
-        /*for(int i = 0; i < f.length; i++) {
-            System.out.print(f[i] + " ");
+		ArrayList<Integer> res = q.factor(1234);
+        for(int i = 0; i < res.size(); i++) {
+            System.out.print(res.get(i) + ",");
         }
-        System.out.println();*/
+
+		
 	}
 	
 	//http://bbs.bccn.net/thread-339401-1-1.html
-	public void factor(int num) {
+	ArrayList<Integer> factor(int n) {
+		ArrayList<Integer> res = new ArrayList<Integer>();
+		if (n <= 1) {
+			return res;
+		}
+		for (int i = 2; i <= n; i++) {
+			while (n % i == 0) {
+				res.add(i);
+				n /= i;
+			}
+		}
+		return res;
+	}
+	
+	
+/*	public void factor(int num) {
 		int i;
 		boolean flag = false;
 		for (i = 2; i <= num; i++) {
@@ -43,6 +59,6 @@ public class Question {
 
 		}
 
-	}
+	}*/
 
 }

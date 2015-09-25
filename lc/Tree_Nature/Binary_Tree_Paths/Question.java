@@ -40,15 +40,15 @@ public class Question {
     	if (root == null) {
     		return;
     	}
-    	if (root.left == null && root.right == null) {
-    		item.add(root.val);
+    	if (root.left == null && root.right == null) { // 【注】判断叶子节点的条件
+    		item.add(root.val); // 【注】当前的叶子node尚未加入item，所以要加入
     		StringBuilder sb = new StringBuilder();
     		sb.append(item.get(0));
     		for (int i = 1; i < item.size(); i++) {
     			sb.append("->").append(item.get(i));
     		}
     		res.add(sb.toString());
-    		item.remove(item.size() - 1);
+    		item.remove(item.size() - 1); // 【注】因为item是被反复使用的，所以要backtrack
     	}
     	item.add(root.val);
     	helper(res, item, root.left);

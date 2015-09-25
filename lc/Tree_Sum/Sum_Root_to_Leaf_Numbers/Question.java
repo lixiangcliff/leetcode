@@ -28,9 +28,31 @@ public class Question {
 	 * 
 	 */
 	
+	//用backtrack手写：
+	public int sumNumbers(TreeNode root) {
+	    int[] res = {0}; // 必须为数组，这样在helper里加工之后，才能返回处理之后的值。
+	    int item = 0;
+		helper(res, item, root);
+		return res[0];
+	}
+
+	private void helper(int[] res, int item, TreeNode root) { 
+		if (root == null) {
+			return;
+		}
+		if (root.left == null && root.right == null) {
+			res[0] = res[0] + item * 10 + root.val;
+		}
+		item = item * 10 + root.val;
+		helper(res, item, root.left);
+		helper(res, item, root.right);
+		item = (item - root.val) / 10;
+	}
+	
+	
 	//递归条件即是把当前的sum乘以10并且加上当前节点传入下一层递归函数
 	//http://blog.csdn.net/linhuanmars/article/details/22913699
-	public int sumNumbers(TreeNode root) {
+	public int sumNumbers2(TreeNode root) {
 		return helper(root, 0);
 	}
 

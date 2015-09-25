@@ -42,27 +42,16 @@ public class Question {
             return true;
         }
         //【根】：三个方面判断root是否符合条件(3点可以可以写在同一行，但是这样看着更清晰):
-        // 1.根在上下界外
-        if (root.val < min || root.val > max ) {
+        if (root.val < min || root.val > max ) { // 1.根在上下界外
             return false;
         }
-        // 2.如果根已经为最小值，且有左孩子
-        if (root.val == min && root.left != null) {
+        if (root.val == min && root.left != null) { // 2.如果根已经为最小值，且有左孩子
             return false;
         }
-        // 3.如果根已经为最大值，且有右孩子
-        if (root.val == max && root.right != null) {
+        if (root.val == max && root.right != null) { // 3.如果根已经为最大值，且有右孩子
             return false;
         }
-        //【左】：如果左子树非法，则false
-        if (!helper(root.left, min, root.val - 1)) {
-        	return false;
-        }
-        //【右】：如果右子树非法，则false
-        if (!helper(root.right, root.val + 1, max))  {
-        	return false;
-        }
-        return true;
+        return helper(root.left, min, root.val - 1) && helper(root.right, root.val + 1, max); // 【左】&【右】
     }	
    
     //【注】leetcode增加了之后MAX_VALUE和MIN_VALUE的corner case，下面的code不会pass

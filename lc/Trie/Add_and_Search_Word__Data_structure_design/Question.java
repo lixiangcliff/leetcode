@@ -1,5 +1,6 @@
 package Add_and_Search_Word__Data_structure_design;
 
+
 public class Question {
 
 	/**
@@ -65,16 +66,13 @@ class WordDictionary {
         TrieNode pre = root;
         for (int i = 0; i < word.length(); i++) {
         	char c = word.charAt(i);
-        	boolean flag = i == word.length() - 1 ? true : false;
         	int pos = c - 'a';
         	if (pre.next[pos] == null) {
-        		TrieNode cur = new TrieNode(c, flag);
-        		pre.next[pos] = cur;
-        	} else if (!pre.next[pos].isEnd && flag) {
-        		pre.next[pos].isEnd = flag;
-        	}
+        		pre.next[pos] = new TrieNode(c);
+        	} 
         	pre = pre.next[pos];
         }
+        pre.isEnd = true;
     }
 
     // Returns if the word is in the data structure. A word could
@@ -103,7 +101,7 @@ class WordDictionary {
 	    			return false;
 	    		}
 			}	
-			if (pre.next[i] != null) { // 当前c == '.'， 则下面任何一个分支true，整个情况就是true了
+			if (pre.next[i] != null) { // 说明当前c == '.'， 则pre.next[]里任何一个分支true，整个情况就是true了
 				res |= dfs(word, idx + 1, pre.next[i]);
 	    	}
 		}
@@ -118,6 +116,12 @@ class TrieNode {
 	TrieNode[] next;
     public TrieNode() {
         this.c = ' ';
+        this.isEnd = false;
+        next = new TrieNode[26];
+    }
+    
+    public TrieNode(char c) {
+        this.c = c;
         this.isEnd = false;
         next = new TrieNode[26];
     }

@@ -45,6 +45,72 @@ public class Question {
 	 * convert it to a height balanced BST.
 	 */
 	
+	//Divide and Conquer
+	public TreeNode sortedListToBST(ListNode head) {
+		int len = getLen(head);
+		ListNode[] curHead = new ListNode[1];
+		curHead[0] = head;
+		return helper(curHead, len);
+	}
+	
+	private TreeNode helper(ListNode[] curHead, int len) { //返回以curHead[0]的node作为起始位置，直到长度为len的一组node，所组成的BST的root
+		if (len <= 0) {
+			return null;
+		}
+		TreeNode left = helper(curHead, len / 2);//【左】
+		TreeNode root = new TreeNode(curHead[0].val);//【根】【注】计算完左子树之后，curHead[0]值已经变为在len /2 + 1位置上的node了
+		curHead[0] = curHead[0].next;
+		TreeNode right = helper(curHead, len - len / 2 - 1);//【右】
+		root.left = left;
+		root.right = right;
+		return root;
+	}
+	
+	private int getLen(ListNode head) {
+		int len = 0;
+		while (head != null) {
+			len++;
+			head = head.next;
+		}
+		return len;
+	}
+	
+	//try myself...not working correctly
+/*	public TreeNode sortedListToBST(ListNode head) {
+		if (head == null) {
+			return null;
+		}
+		int count = 0;
+		ListNode runner = head;
+		while (runner != null) {
+			runner = runner.next;
+			count++;
+		}
+		return helper(head, 0, count - 1);
+	}
+	
+	private TreeNode helper(ListNode head, int l, int r) {
+		if (l > r) {
+			return null;
+		}
+		int m = (l + r) / 2;
+		ListNode cur = head;
+		int count = 0;
+		while (count < m && cur != null) {
+			cur = cur.next;
+			count++;
+		}
+		if (cur == null) {
+			return null;
+		}
+		TreeNode root = new TreeNode(cur.val);
+		TreeNode left = helper(head, l, m - 1);
+		cur = cur.next;
+		TreeNode right = helper(cur, m + 1, r);
+		root.left = left;
+		root.right = right;
+		return root;
+	}*/
 	//bottom to top:
 	// 	1. construct the left tree 
 	//	2. construct the root node, list pointer +1.
@@ -52,7 +118,7 @@ public class Question {
 	//http://blog.csdn.net/linhuanmars/article/details/23904937
 	//http://joycelearning.blogspot.com/2013/09/leetcode-convert-sorted-list-to-binary.html
 	//http://yucoding.blogspot.com/2012/12/leetcode-question-24-convert-sorted.html
-	public TreeNode sortedListToBST(ListNode head) {
+/*	public TreeNode sortedListToBST(ListNode head) {
 		if (head == null) {
 			return null;
 		}
@@ -65,11 +131,11 @@ public class Question {
 		ListNode[] headNode = new ListNode[1];
 		headNode[0] = head;
 		return helper(headNode, 0, count - 1);
-	}
+	}*/
 
 	// headNode里只存一个元素，即待转化为tree的ListNode的头 
 	//返回值即为: 以当前headNode[0]的值作为新建tree中【注】最小值【注】，左边界为l，右边界为r，所构建的树的根
-	private TreeNode helper(ListNode[] headNode, int l, int r) {
+	/*private TreeNode helper(ListNode[] headNode, int l, int r) {
 		if (l > r) {
 			return null;
 		}
@@ -81,38 +147,9 @@ public class Question {
 		root.left = left; // 当前根连上左子树的根
 		root.right = right; // 当前根连上右子树的根
 		return root;
-	}
-	
-	//Divide and Conquer
-/*	public TreeNode sortedListToBST(ListNode head) {
-		int size = getSize(head);
-		ArrayList<ListNode> lists = new ArrayList<ListNode>();
-		lists.add(head);
-		return helper(size, lists);
-	}
-	
-	private int getSize(ListNode head) {
-		int size = 0;
-		while (head != null) {
-			size++;
-			head = head.next;
-		}
-		return size;
-	}
-	
-	private TreeNode helper(int size, ArrayList<ListNode> lists) {
-		if (size <= 0) {
-			return null;
-		}
-		TreeNode left = helper(size / 2, lists);//【左】
-		TreeNode root = new TreeNode(lists.get(0).val);//【根】
-		lists.set(0, lists.get(0).next);
-		TreeNode right = helper(size - 1 - size / 2, lists);//【右】
-		
-		root.left = left;
-		root.right = right;
-		return root;
 	}*/
+	
+
 	
 
 }

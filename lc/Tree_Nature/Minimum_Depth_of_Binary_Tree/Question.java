@@ -30,11 +30,11 @@ public class Question {
 		if (root == null) {
 			return 0;
 		}
-		if (root.left == null) {
+		if (root.left == null) { // 如果左子树为空，则去右子树找最短
 			return minDepth(root.right) + 1;
 		}
 		if (root.right == null) {
-			return minDepth(root.left) + 1;
+			return minDepth(root.left) + 1; // 如果右子树为空，则去左子树找最短
 		}
 		return Math.min(minDepth(root.left), minDepth(root.right)) + 1;
 	}

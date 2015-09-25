@@ -1,9 +1,9 @@
 package Word_Search_II;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
-
+import java.util.Set;
 
 
 public class Question {
@@ -43,104 +43,48 @@ public class Question {
 		What kind of data structure could answer such query efficiently? Does a hash table work? Why or why not? 
 		How about a Trie? If you would like to learn how to implement a basic trie, please work on this problem: Implement Trie (Prefix Tree) first.
 	 */
+	
+	//https://leetcode.com/discuss/36337/my-simple-and-clean-java-code-using-dfs-and-trie
 	public List<String> findWords(char[][] board, String[] words) {
-		List<String> res = new ArrayList<String>();
+		Set<String> res = new HashSet<String>();//【注】res里的内容不能重复
     	if (board == null || words == null || board.length == 0 || board[0].length == 0 || words.length == 0) {
-    		return res;
+    		return new ArrayList<String>();
     	}
-    	Arrays.sort(words);
     	Trie trie = new Trie();
 		for (String word : words) {
 			trie.insert(word);
 		}
-    	for (int idx = 1; idx < words.length; idx++) {
-    		if (words[idx].equals(words[idx - 1])) {
-    			continue;
+		int row = board.length;
+    	int col = board[0].length;
+    	boolean used[][] = new boolean[row][col];
+    	for (int i = 0; i < row; i++) {
+    		for (int j = 0; j < col; j++) {
+    			String str = "";
+    			helper(res, board, used, str, i, j, trie);
     		}
-    		String word = words[idx];
-    		int row = words.length;
-        	int col = words[0].length();
-        	for (int i = 0; i < row; i++) {
-        		for (int j = 0; j < col; j++) {
-        			int pos = 0;
-        			/*if (helper(board, used, i, j, word, pos)) {
-        				res.add(word);
-        			}*/
-        		}
-        	}
     	}
-    	return res;
-		
-		
+    	return new ArrayList<String>(res); //cast HashSet into ArrayList	
 	}
 	
-    private boolean helper(char[][] board, boolean used[][], int i, int j, String word, int pos) {
-    	if (pos == word.length()) {
-    		return true;
-    	}
-    	//如果i，j越界，或者[i][j]的位置已经访问过，或者board上[i][j]位置的字符和word上start位置上的字符不相等，则false
-		if (i < 0 || j < 0 || i >= board.length || j >= board[0].length || used[i][j] || board[i][j] != word.charAt(pos)) {
-			return false;
-    	}
-		boolean res = false;
-    	used[i][j] = true;
-		res = helper(board, used, i - 1, j, word, pos + 1)
-				|| helper(board, used, i + 1, j, word, pos + 1)
-				|| helper(board, used, i, j - 1, word, pos + 1)
-				|| helper(board, used, i, j + 1, word, pos + 1);
-    	used[i][j] = false;
-    	return res;
-    }
-	
-	
-	
-	
-	//will not pass large test cases
-    public List<String> findWords2(char[][] board, String[] words) {
-    	List<String> res = new ArrayList<String>();
-    	if (board == null || words == null || board.length == 0 || board[0].length == 0 || words.length == 0) {
-    		return res;
-    	}
-    	Arrays.sort(words);
-    	boolean used[][] = new boolean[board.length][board[0].length];
-    	for (int idx = 1; idx < words.length; idx++) {
-    		if (words[idx].equals(words[idx - 1])) {
-    			continue;
-    		}
-    		String word = words[idx];
-    		int row = words.length;
-        	int col = words[0].length();
-        	for (int i = 0; i < row; i++) {
-        		for (int j = 0; j < col; j++) {
-        			int pos = 0;
-        			if (helper(board, used, i, j, word, pos)) {
-        				res.add(word);
-        			}
-        		}
-        	}
-    	}
-    	return res;
-    }
-    
-    //参考 "Word_Search"
-/*    private boolean helper(char[][] board, boolean used[][], int i, int j, String word, int pos) {
-    	if (pos == word.length()) {
-    		return true;
-    	}
-    	//如果i，j越界，或者[i][j]的位置已经访问过，或者board上[i][j]位置的字符和word上start位置上的字符不相等，则false
-		if (i < 0 || j < 0 || i >= board.length || j >= board[0].length || used[i][j] || board[i][j] != word.charAt(pos)) {
-			return false;
-    	}
-		boolean res = false;
-    	used[i][j] = true;
-		res = helper(board, used, i - 1, j, word, pos + 1)
-				|| helper(board, used, i + 1, j, word, pos + 1)
-				|| helper(board, used, i, j - 1, word, pos + 1)
-				|| helper(board, used, i, j + 1, word, pos + 1);
-    	used[i][j] = false;
-    	return res;
-    }*/
-
+	private void helper(Set<String> res, char[][] board, boolean used[][], String str, int i, int j, Trie trie) {
+		if (i < 0 || i >= board.length || j < 0 || j >= board[0].length || used[i][j]) {
+			return;
+		}
+		str += board[i][j];
+		if (!trie.startsWith(str)) { // tire 里不包含当前的str
+			return;
+		}
+		if (trie.search(str)) {
+			res.add(str);
+		}
+		//四个方向继续试
+		used[i][j] = true;
+		helper(res, board, used, str, i - 1, j, trie);
+		helper(res, board, used, str, i + 1, j, trie);
+		helper(res, board, used, str, i, j - 1 , trie);
+		helper(res, board, used, str, i, j + 1, trie);
+		used[i][j] = false;//backtrack
+	}
 }
 
 class Trie {
@@ -158,16 +102,13 @@ class Trie {
         TrieNode pre = root;
         for (int i = 0; i < word.length(); i++) {
         	char c = word.charAt(i);
-        	boolean flag = i == word.length() - 1 ? true : false;
         	int pos = c - 'a';
         	if (pre.next[pos] == null) {
-        		TrieNode cur = new TrieNode(c, flag);
-        		pre.next[pos] = cur;
-        	} else if (!pre.next[pos].isEnd && flag) {
-        		pre.next[pos].isEnd = flag;
-        	}
+        		pre.next[pos] = new TrieNode(c);
+        	} 
         	pre = pre.next[pos];
         }
+        pre.isEnd = true;
     }
 
     // Returns if the word is in the trie.
@@ -181,7 +122,7 @@ class Trie {
         	int pos = c - 'a';
         	if (pre.next[pos] == null || pre.next[pos].c != c) {
         		return false;
-        	} else if (i == word.length() - 1 && pre.next[pos].isEnd) {
+        	} else if (i == word.length() - 1 && pre.next[pos].isEnd) { //已经走到word最后一位，并且该位确实是word的结尾
         		return true;
         	}
         	pre = pre.next[pos];
@@ -215,6 +156,12 @@ class TrieNode {
 	TrieNode[] next;
     public TrieNode() {
         this.c = ' ';
+        this.isEnd = false;
+        next = new TrieNode[26];
+    }
+    
+    public TrieNode(char c) {
+        this.c = c;
         this.isEnd = false;
         next = new TrieNode[26];
     }

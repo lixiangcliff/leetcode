@@ -21,6 +21,7 @@ public class Question {
 
 }
 
+//部分参考了 https://leetcode.com/discuss/46959/ac-java-solution-simple-using-single-array
 class Trie {
     private TrieNode root;
 
@@ -36,16 +37,13 @@ class Trie {
         TrieNode pre = root;
         for (int i = 0; i < word.length(); i++) {
         	char c = word.charAt(i);
-        	boolean flag = i == word.length() - 1 ? true : false;
         	int pos = c - 'a';
         	if (pre.next[pos] == null) {
-        		TrieNode cur = new TrieNode(c, flag);
-        		pre.next[pos] = cur;
-        	} else if (!pre.next[pos].isEnd && flag) {
-        		pre.next[pos].isEnd = flag;
-        	}
+        		pre.next[pos] = new TrieNode(c);
+        	} 
         	pre = pre.next[pos];
         }
+        pre.isEnd = true;
     }
 
     // Returns if the word is in the trie.
@@ -59,7 +57,7 @@ class Trie {
         	int pos = c - 'a';
         	if (pre.next[pos] == null || pre.next[pos].c != c) {
         		return false;
-        	} else if (i == word.length() - 1 && pre.next[pos].isEnd) {
+        	} else if (i == word.length() - 1 && pre.next[pos].isEnd) { //已经走到word最后一位，并且该位确实是word的结尾
         		return true;
         	}
         	pre = pre.next[pos];
@@ -93,6 +91,12 @@ class TrieNode {
 	TrieNode[] next;
     public TrieNode() {
         this.c = ' ';
+        this.isEnd = false;
+        next = new TrieNode[26];
+    }
+    
+    public TrieNode(char c) {
+        this.c = c;
         this.isEnd = false;
         next = new TrieNode[26];
     }

@@ -44,9 +44,8 @@ class BSTIterator {
             stack.push(cur);
         	cur = cur.left;
         }
-        cur = stack.pop();
-        TreeNode node = cur;
-        cur = cur.right;
+        TreeNode node = stack.pop();
+        cur = node.right;
         return node.val;
     }
 }

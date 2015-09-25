@@ -52,14 +52,17 @@ public class Question {
 		if (root == null) {
 			return;
 		}
-		TreeLinkNode leftMost = root;
-		while (leftMost != null && leftMost.left != null) { // 要连接的是下一层，所以如果下一层最左边已经为null，则可直接跳出循环了。
-			TreeLinkNode cur = leftMost;
+		TreeLinkNode leftMost = root.left;
+		TreeLinkNode cur = root;
+		while (leftMost != null) { // 要连接的是下一层，所以如果下一层最左边已经为null，则可直接跳出循环了。
 			while (cur != null) {
 				cur.left.next = cur.right;
-				cur.right.next = cur.next == null ? null : cur.next.left;
+				if (cur.next != null) {
+					cur.right.next = cur.next.left;
+				}
 				cur = cur.next;
 			}
+			cur = leftMost;
 			leftMost = leftMost.left;
 		}
 	}

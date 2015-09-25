@@ -41,6 +41,10 @@ public class Question {
 		each node's right child points to the next node of a pre-order traversal.
 	 */
 	
+	//https://leetcode.com/discuss/30719/my-short-post-order-traversal-java-solution-for-share
+	//上面这个，还没想懂。。。
+	
+	
 	//1.每次将当前root为根的树切成 root, root左子树(left), root右子树(right)三部分,（先取好left和right，然后把root.left和root.right置null）
 	//2.然后left接在root.right,然后递归处理left
 	//3.然后right接在root.right,然后递归处理right

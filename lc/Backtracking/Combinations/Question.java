@@ -2,6 +2,7 @@ package Combinations;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 public class Question {
 
@@ -11,8 +12,8 @@ public class Question {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Question q = new Question();
-		ArrayList<ArrayList<Integer>> result = q.combine(4,2);
-		for (ArrayList<Integer> item : result) {
+		List<List<Integer>> result = q.combine(4,2);
+		for (List<Integer> item : result) {
 			for (int i : item) {
 				System.out.print(i + ",");
 			}
@@ -40,15 +41,15 @@ public class Question {
 	
 	//DFS; recursive
 	//http://answer.ninechapter.com/solutions/combinations/
-	public ArrayList<ArrayList<Integer>> combine(int n, int k) {
-		ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
-		ArrayList<Integer> item = new ArrayList<Integer>();
+	public List<List<Integer>> combine(int n, int k) {
+		List<List<Integer>> result = new ArrayList<List<Integer>>();
+		List<Integer> item = new ArrayList<Integer>();
 		int start = 1; // 元素的可选起始值【注】start初值并不是0
 		helper(result, item, n, k, start);
 		return result;
 	}
 	
-	private void helper(ArrayList<ArrayList<Integer>> result, ArrayList<Integer> item, int n, int k, int start){
+	private void helper(List<List<Integer>> result, List<Integer> item, int n, int k, int start){
 		if (item.size() == k) {
 			result.add(new ArrayList<Integer>(item));
 		} 

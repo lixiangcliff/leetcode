@@ -298,5 +298,5 @@ useful links:
 	
 56. OO design 经典例子：停车场，扑克牌，电梯
 
-mac test~~
+mac test~~!!~~
 	

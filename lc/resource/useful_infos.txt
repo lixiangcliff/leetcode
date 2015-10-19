@@ -297,4 +297,6 @@ useful links:
 	http://www.tutorialspoint.com/software_testing_dictionary/web_application_testing.htm
 	
 56. OO design 经典例子：停车场，扑克牌，电梯
+
+mac test~~
 	

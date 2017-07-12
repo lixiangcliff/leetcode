@@ -47,6 +47,45 @@ public class Question {
 	 * Given target = 3, return true.
 	 */
 	
+	// this is a better solution by using only one loop of BST. but time complexity is the same
+	public int findNumbers(int matrix[][],int key){
+	    
+	    if(matrix==null){
+	        return -1;
+	    }
+
+	    int m=matrix.length;
+	    int n=matrix[0].length;
+	      
+	    if(key<matrix[0][0]||key>matrix[m-1][n-1])
+	        return -1;
+	    
+	    int low=0;
+	    int high=m*n-1;
+	    
+	    while(low<=high){
+	        int middle=low+(high-low)/2;
+	        
+	        //translate
+	        int row=(middle)/n;
+	        int col=(middle)%n;
+
+	        
+	        if(key<matrix[row][col]){
+	            high=middle-1;
+	        }else if (key>matrix[row][col]){
+	            low=middle+1;
+	        }else{
+	            return middle;
+	        }
+
+	    }
+	    
+	    return -1;
+	    
+	    
+	  }
+	
 	//BS模板。看【注】！
     public boolean searchMatrix(int[][] matrix, int target) {
     	if(matrix == null || matrix.length == 0 || matrix[0].length == 0) { 
